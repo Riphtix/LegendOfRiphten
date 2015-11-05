@@ -1,6 +1,7 @@
 package com.riphtix.vgmad;
 
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.handler.Keyboard;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,12 +19,16 @@ public class Game extends Canvas implements Runnable {
 
 	private Thread thread;
 	private JFrame frame;
-	private boolean running = false;
-
 	private Screen screen;
+	private Keyboard key;
+
+	private boolean running = false;
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+	int x = 0;
+	int y = 0;
 
 	public Game() {
 		Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -31,6 +36,9 @@ public class Game extends Canvas implements Runnable {
 
 		screen = new Screen(WIDTH, HEIGHT);
 		frame = new JFrame();
+		key = new Keyboard();
+
+		addKeyListener(key);
 	}
 
 	public synchronized void start() {
@@ -77,8 +85,21 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	public void tick() {//update
+	public void tick() {//public void update()
+		key.tick();
 
+		if(key.UP){
+			y--;
+		}
+		if(key.DOWN){
+			y++;
+		}
+		if(key.LEFT){
+			x--;
+		}
+		if(key.RIGHT){
+			x++;
+		}
 	}
 
 	public void render() {
@@ -89,7 +110,7 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-		screen.render();
+		screen.render(x, y);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
