@@ -7,11 +7,13 @@ public class Screen {
 	private int width;
 	private int height;
 
-	private final int MAP_WIDTH = 8;
-	private final int MAP_HEIGHT = 8;
+	private final int MAP_WIDTH = 64;
+	private final int MAP_HEIGHT = 64;
 	private final int MAP_SIZE = MAP_WIDTH * MAP_HEIGHT;
 	private final int TILE_WIDTH = 16;
+	private final int TILE_WIDTH_SHIFT = 4;
 	private final int TILE_HEIGHT = 16;
+	private final int TILE_HEIGHT_SHIFT = 4;
 	private final int TILE_SIZE = TILE_WIDTH * TILE_HEIGHT;
 
 	public int[] pixels;
@@ -40,11 +42,9 @@ public class Screen {
 	public void render(int xOffset, int yOffset) {
 		for (int y = 0; y < height; y++) {
 			int yy = y + yOffset;
-			//if (yy < 0 || yy >= height) break;
 			for (int x = 0; x < width; x++) {
 				int xx = x + xOffset;
-				//if (xx < 0 || xx >= width) break;
-				int tileIndex = ((xx / TILE_WIDTH) & (MAP_WIDTH - 1)) + ((yy / TILE_HEIGHT) & (MAP_HEIGHT - 1)) * MAP_WIDTH;
+				int tileIndex = ((xx >> TILE_WIDTH_SHIFT) & (MAP_WIDTH - 1)) + ((yy >> TILE_HEIGHT_SHIFT) & (MAP_HEIGHT - 1)) * MAP_WIDTH;
 				pixels[x + y * width] = tiles[tileIndex];
 
 			}
