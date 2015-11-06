@@ -31,6 +31,7 @@ public class Screen {
 			//use tiles[i] = 0x(hex code) to set a specific color
 			tiles[i] = random.nextInt(0xffffff);
 		}
+		//tiles[0] = 0x000000;
 	}
 
 	public void clear() {
