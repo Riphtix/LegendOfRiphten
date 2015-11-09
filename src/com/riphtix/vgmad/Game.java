@@ -2,6 +2,8 @@ package com.riphtix.vgmad;
 
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
+import com.riphtix.vgmad.level.Level;
+import com.riphtix.vgmad.level.RandomLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -21,6 +23,7 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private Screen screen;
 	private Keyboard key;
+	private Level level;
 
 	private boolean running = false;
 
@@ -37,6 +40,7 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(WIDTH, HEIGHT);
 		frame = new JFrame();
 		key = new Keyboard();
+		level = new RandomLevel(64,64);
 
 		addKeyListener(key);
 	}
@@ -111,7 +115,7 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-		screen.render(x, y);
+		level.render(x, y, screen);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

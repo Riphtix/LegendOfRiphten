@@ -3,10 +3,9 @@ package com.riphtix.vgmad.level.tile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 
-public class GrassTile extends Tile {
+public class VoidTile extends Tile {
 
-
-	public GrassTile(Sprite sprite) {
+	public VoidTile(Sprite sprite) {
 		super(sprite);
 	}
 

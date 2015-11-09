@@ -1,11 +1,12 @@
 package com.riphtix.vgmad.gfx;
 
-import java.awt.*;
+import com.riphtix.vgmad.level.tile.Tile;
+
 import java.util.Random;
 
 public class Screen {
-	private int width;
-	private int height;
+	public int width;
+	public int height;
 
 	private final int MAP_WIDTH = 64;
 	private final int MAP_HEIGHT = 64;
@@ -15,6 +16,9 @@ public class Screen {
 	private final int TILE_HEIGHT = 16;
 	private final int TILE_HEIGHT_SHIFT = 4;
 	private final int TILE_SIZE = TILE_WIDTH * TILE_HEIGHT;
+
+	public int xOffset;
+	public int yOffset;
 
 	public int[] pixels;
 	public int[] tiles = new int[MAP_SIZE];
@@ -40,15 +44,21 @@ public class Screen {
 		}
 	}
 
-	public void render(int xOffset, int yOffset) {
-		for (int y = 0; y < height; y++) {
-			int yp = y + yOffset;
-			if(yp < 0 || yp >= height) continue;
-			for (int x = 0; x < width; x++) {
-				int xp = x + xOffset;
-				if(xp < 0 || xp >= width) continue;
-				pixels[xp + yp * width] = Sprite.grass.pixels[(x & 15) + (y & 15) * 16];
+	public void renderTile(int xp, int yp, Tile tile) {
+		xp -= xOffset;
+		yp -= yOffset;
+		for (int y = 0; y < tile.sprite.SIZE; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < tile.sprite.SIZE; x++) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height) break;
+				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 			}
 		}
+	}
+
+	public void setOffset(int xOffset, int yOffset){
+		this.xOffset = xOffset;
+		this.yOffset = yOffset;
 	}
 }
