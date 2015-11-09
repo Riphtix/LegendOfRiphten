@@ -89,16 +89,16 @@ public class Game extends Canvas implements Runnable {
 		key.tick();
 
 		if(key.UP){
-			y--;
-		}
-		if(key.DOWN){
 			y++;
 		}
+		if(key.DOWN){
+			y--;
+		}
 		if(key.LEFT){
-			x--;
+			x++;
 		}
 		if(key.RIGHT){
-			x++;
+			x--;
 		}
 	}
 

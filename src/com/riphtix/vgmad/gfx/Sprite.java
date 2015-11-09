@@ -2,11 +2,13 @@ package com.riphtix.vgmad.gfx;
 
 public class Sprite {
 
-	private final int SIZE;
+	public final int SIZE;
 	private int x;
 	private int y;
 	public int[] pixels;
 	private SpriteSheet sheet;
+
+	public static Sprite grass = new Sprite(16, 0,0, SpriteSheet.tiles);
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
