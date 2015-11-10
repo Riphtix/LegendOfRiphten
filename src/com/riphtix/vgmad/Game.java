@@ -5,6 +5,7 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.RandomLevel;
+import com.riphtix.vgmad.level.SpawnLevel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -39,7 +40,7 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(WIDTH, HEIGHT);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new RandomLevel(64, 64);
+		level = new SpawnLevel("/levels/fakeLevel.png");
 		player = new Player(key);
 
 		addKeyListener(key);

@@ -9,12 +9,25 @@ public class Sprite {
 	private SpriteSheet sheet;
 
 	public static Sprite grassSprite = new Sprite(16, 0, 0, SpriteSheet.tiles);
+	public static Sprite dirtSprite = new Sprite(16, 1, 0, SpriteSheet.tiles);
+	public static Sprite stoneSprite = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
-	public static Sprite player0 = new Sprite(16, 0, 8, SpriteSheet.tiles);
-	public static Sprite player1 = new Sprite(16, 1, 8, SpriteSheet.tiles);
-	public static Sprite player2 = new Sprite(16, 0, 9, SpriteSheet.tiles);
-	public static Sprite player3 = new Sprite(16, 1, 9, SpriteSheet.tiles);
+	public static Sprite playerUp0 = new Sprite(32, 1, 3, SpriteSheet.mobs);
+	public static Sprite playerUp1 = new Sprite(32, 0, 3, SpriteSheet.mobs);
+	public static Sprite playerUp2 = new Sprite(32, 2, 3, SpriteSheet.mobs);
+
+	public static Sprite playerDown0 = new Sprite(32, 1, 0, SpriteSheet.mobs);
+	public static Sprite playerDown1 = new Sprite(32, 0, 0, SpriteSheet.mobs);
+	public static Sprite playerDown2 = new Sprite(32, 2, 0, SpriteSheet.mobs);
+
+	public static Sprite playerLeft0 = new Sprite(32, 1, 1, SpriteSheet.mobs);
+	public static Sprite playerLeft1 = new Sprite(32, 0, 1, SpriteSheet.mobs);
+	public static Sprite playerLeft2 = new Sprite(32, 2, 1, SpriteSheet.mobs);
+
+	public static Sprite playerRight0 = new Sprite(32, 1, 2, SpriteSheet.mobs);
+	public static Sprite playerRight1 = new Sprite(32, 0, 2, SpriteSheet.mobs);
+	public static Sprite playerRight2 = new Sprite(32, 2, 2, SpriteSheet.mobs);
 
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {

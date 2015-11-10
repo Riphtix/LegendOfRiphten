@@ -33,10 +33,10 @@ public class Screen {
 		pixels = new int[width * height];
 
 		for (int i = 0; i < MAP_SIZE; i++) {
-			//use tiles[i] = 0x(hex code) to set a specific color
+			//use tileInt[i] = 0x(hex code) to set a specific color
 			tiles[i] = random.nextInt(0xffffff);
 		}
-		//tiles[0] = 0x000000;
+		//tileInt[0] = 0x000000;
 	}
 
 	public void clear() {
@@ -63,14 +63,17 @@ public class Screen {
 	public void renderPlayer(int xp, int yp, Sprite sprite) {
 		xp -= xOffset;
 		yp -= yOffset;
-		for (int y = 0; y < 16; y++) {
+		for (int y = 0; y < 32; y++) {
 			int ya = y + yp;
-			for (int x = 0; x < 16; x++) {
+			for (int x = 0; x < 32; x++) {
 				int xa = x + xp;
-				if (xa < -16 || xa >= width || ya < -16 || ya >= height) break;
+				if (xa < -32 || xa >= width || ya < -32 || ya >= height) break;
 				if (xa < 0) xa = 0;
 				if (ya < 0) ya = 0;
-				pixels[xa + ya * width] = sprite.pixels[x + y * 16];
+				int col = sprite.pixels[x + y * 32];
+				if (col != 0xffff00ff && col != 0xff7f007f)
+					pixels[xa + ya * width] = col;
+
 			}
 		}
 	}
