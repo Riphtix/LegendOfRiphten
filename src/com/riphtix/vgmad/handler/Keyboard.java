@@ -11,7 +11,7 @@ public class Keyboard implements KeyListener {
 	public boolean LEFT;
 	public boolean RIGHT;
 
-	public void tick(){//public void update()
+	public void tick() {//public void update()
 		UP = keys[KeyEvent.VK_UP] || keys[KeyEvent.VK_W];
 		LEFT = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
 		DOWN = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];

@@ -1,5 +1,6 @@
 package com.riphtix.vgmad;
 
+import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.Level;
@@ -24,14 +25,12 @@ public class Game extends Canvas implements Runnable {
 	private Screen screen;
 	private Keyboard key;
 	private Level level;
+	private Player player;
 
 	private boolean running = false;
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
-
-	int x = 0;
-	int y = 0;
 
 	public Game() {
 		Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
@@ -40,7 +39,8 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(WIDTH, HEIGHT);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new RandomLevel(64,64);
+		level = new RandomLevel(64, 64);
+		player = new Player(key);
 
 		addKeyListener(key);
 	}
@@ -71,7 +71,7 @@ public class Game extends Canvas implements Runnable {
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
 			lastTime = now;
-			while(delta >= 1){
+			while (delta >= 1) {
 				tick();
 				ticks++;
 				delta--;
@@ -79,7 +79,7 @@ public class Game extends Canvas implements Runnable {
 			render();
 			frames++;
 
-			if(System.currentTimeMillis() - timer > 1000){
+			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println(ticks + " tps, " + frames + " fps");
 				frame.setTitle(title + " | " + ticks + " tps | " + frames + " fps");
@@ -91,19 +91,7 @@ public class Game extends Canvas implements Runnable {
 
 	public void tick() {//public void update()
 		key.tick();
-
-		if(key.UP){
-			y++;
-		}
-		if(key.DOWN){
-			y--;
-		}
-		if(key.LEFT){
-			x++;
-		}
-		if(key.RIGHT){
-			x--;
-		}
+		player.tick();
 	}
 
 	public void render() {
@@ -115,7 +103,10 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		screen.clear();
-		level.render(x, y, screen);
+		int xScroll = player.x - screen.width / 2;
+		int yScroll = player.y - screen.height / 2;
+		level.render(xScroll, yScroll, screen);
+		player.render(screen);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

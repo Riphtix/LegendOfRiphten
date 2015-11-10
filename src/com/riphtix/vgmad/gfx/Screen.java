@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.gfx;
 
+import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.level.tile.Tile;
 
 import java.util.Random;
@@ -51,13 +52,30 @@ public class Screen {
 			int ya = y + yp;
 			for (int x = 0; x < tile.sprite.SIZE; x++) {
 				int xa = x + xp;
-				if (xa < 0 || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < -tile.sprite.SIZE || xa >= width || ya < -tile.sprite.SIZE || ya >= height) break;
+				if (xa < 0) xa = 0;
+				if (ya < 0) ya = 0;
 				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 			}
 		}
 	}
 
-	public void setOffset(int xOffset, int yOffset){
+	public void renderPlayer(int xp, int yp, Sprite sprite) {
+		xp -= xOffset;
+		yp -= yOffset;
+		for (int y = 0; y < 16; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < 16; x++) {
+				int xa = x + xp;
+				if (xa < -16 || xa >= width || ya < -16 || ya >= height) break;
+				if (xa < 0) xa = 0;
+				if (ya < 0) ya = 0;
+				pixels[xa + ya * width] = sprite.pixels[x + y * 16];
+			}
+		}
+	}
+
+	public void setOffset(int xOffset, int yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;
 	}
