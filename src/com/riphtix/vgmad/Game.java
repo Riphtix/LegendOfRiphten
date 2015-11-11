@@ -28,6 +28,8 @@ public class Game extends Canvas implements Runnable {
 	private Level level;
 	private Player player;
 
+	private static final int PLAYER_LOC = 32;
+
 	private boolean running = false;
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -41,7 +43,7 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = new SpawnLevel("/levels/fakeLevel.png");
-		player = new Player(key);
+		player = new Player(PLAYER_LOC*16, PLAYER_LOC*16, key);
 
 		addKeyListener(key);
 	}

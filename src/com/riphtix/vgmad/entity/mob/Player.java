@@ -19,6 +19,7 @@ public class Player extends Mob {
 	public Player(int x, int y, Keyboard input) {
 		this.x = x;
 		this.y = y;
+		this.input = input;
 		dir = 2;
 	}
 

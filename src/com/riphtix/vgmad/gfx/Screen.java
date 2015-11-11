@@ -33,10 +33,10 @@ public class Screen {
 		pixels = new int[width * height];
 
 		for (int i = 0; i < MAP_SIZE; i++) {
-			//use tileInt[i] = 0x(hex code) to set a specific color
+			//use tilesInt[i] = 0x(hex code) to set a specific color
 			tiles[i] = random.nextInt(0xffffff);
 		}
-		//tileInt[0] = 0x000000;
+		//tilesInt[0] = 0x000000;
 	}
 
 	public void clear() {
