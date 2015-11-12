@@ -11,6 +11,9 @@ public class Sprite {
 	public static Sprite grassSprite = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite dirtSprite = new Sprite(16, 1, 0, SpriteSheet.tiles);
 	public static Sprite stoneSprite = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite stoneBrickSprite = new Sprite(16, 3, 0, SpriteSheet.tiles);
+	public static Sprite woodenPlankSprite = new Sprite(16, 4, 0, SpriteSheet.tiles);
+
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
 	public static Sprite playerUp0 = new Sprite(32, 1, 3, SpriteSheet.mobs);

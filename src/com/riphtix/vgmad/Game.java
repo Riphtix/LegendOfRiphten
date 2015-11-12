@@ -6,6 +6,7 @@ import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.RandomLevel;
 import com.riphtix.vgmad.level.SpawnLevel;
+import com.riphtix.vgmad.level.TileCoordinate;
 
 import javax.swing.*;
 import java.awt.*;
@@ -42,8 +43,10 @@ public class Game extends Canvas implements Runnable {
 		screen = new Screen(WIDTH, HEIGHT);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = new SpawnLevel("/levels/fakeLevel.png");
-		player = new Player(PLAYER_LOC*16, PLAYER_LOC*16, key);
+		level = Level.spawn;
+		TileCoordinate playerSpawn = new TileCoordinate(32, 31);
+		player = new Player(playerSpawn.x(), playerSpawn.y(), key);
+		player.init(level);
 
 		addKeyListener(key);
 	}

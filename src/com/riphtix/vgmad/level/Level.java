@@ -10,6 +10,8 @@ public class Level {
 	protected int[] tilesInt;
 	protected int[] tiles;
 
+	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png");
+
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -52,16 +54,13 @@ public class Level {
 		}
 	}
 
-	//Grass = 0xff267f00
-	//Dirt = 0xff7F3300
-	//Stone = 0xff808080
-	//Stone Brick Wall = 0xff404040
-	//Wooden Planks = 0xffd3783b
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
-		if (tiles[x + y * width] == 0xff267f00) return Tile.grassTile;
-		if (tiles[x + y * width] == 0xff7f3300) return Tile.dirtTile;
-		if (tiles[x + y * width] == 0xff808080) return Tile.stoneTile;
+		if (tiles[x + y * width] == Tile.colorGrass) return Tile.grassTile;
+		if (tiles[x + y * width] == Tile.colorDirt) return Tile.dirtTile;
+		if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
+		if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
+		if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
 		return Tile.voidTile;
 	}
 }
