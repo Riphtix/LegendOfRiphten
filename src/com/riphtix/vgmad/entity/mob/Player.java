@@ -1,8 +1,10 @@
 package com.riphtix.vgmad.entity.mob;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.handler.Keyboard;
+import com.riphtix.vgmad.handler.Mouse;
 
 public class Player extends Mob {
 
@@ -37,8 +39,19 @@ public class Player extends Mob {
 			move(xa, ya);
 			walking = true;
 		} else walking = false;
+
+		tickShooting();
 	}
 
+	private void tickShooting(){
+		if(Mouse.getButton() == 1) {
+			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+			double dir = Math.atan2(dy, dx);
+
+			shoot(x, y, dir);
+		}
+	}
 	public void render(Screen screen) {
 		if(dir == 0) {
 			sprite = Sprite.playerUp0;

@@ -1,7 +1,11 @@
 package com.riphtix.vgmad.level;
 
+import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.level.tile.Tile;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Level {
 
@@ -9,6 +13,8 @@ public class Level {
 	protected int height;
 	protected int[] tilesInt;
 	protected int[] tiles;
+
+	private List<Entity> entities = new ArrayList<Entity>();
 
 	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png");
 
@@ -33,7 +39,9 @@ public class Level {
 	}
 
 	public void tick() {//public void update()
-
+		for(int i = 0; i < entities.size(); i++){
+			entities.get(i).tick();
+		}
 	}
 
 	private void time() {
@@ -52,6 +60,10 @@ public class Level {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
+	}
+
+	public void add(Entity entity){
+
 	}
 
 	public Tile getTile(int x, int y) {

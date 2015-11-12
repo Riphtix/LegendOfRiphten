@@ -3,6 +3,7 @@ package com.riphtix.vgmad;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
+import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.RandomLevel;
 import com.riphtix.vgmad.level.SpawnLevel;
@@ -29,8 +30,6 @@ public class Game extends Canvas implements Runnable {
 	private Level level;
 	private Player player;
 
-	private static final int PLAYER_LOC = 32;
-
 	private boolean running = false;
 
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
@@ -48,7 +47,18 @@ public class Game extends Canvas implements Runnable {
 		player = new Player(playerSpawn.x(), playerSpawn.y(), key);
 		player.init(level);
 
+		Mouse mouse = new Mouse();
 		addKeyListener(key);
+		addMouseListener(mouse);
+		addMouseMotionListener(mouse);
+	}
+
+	public static int getWindowWidth(){
+		return WIDTH * SCALE;
+	}
+
+	public static int getWindowHeight(){
+		return WIDTH * SCALE;
 	}
 
 	public synchronized void start() {
@@ -119,9 +129,12 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.BLACK);
+		g.setColor(Color.WHITE);
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.setFont(new Font("Verdana", 0, 24));
+		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64);
+		//if (Mouse.getButton() != -1) g.drawString("Button: " + Mouse.getButton(), 50, 50);
 		g.dispose();
 		bs.show();
 	}
