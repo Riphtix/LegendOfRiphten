@@ -14,7 +14,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-
+//1006 lines of code Date: 11/12/15
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
