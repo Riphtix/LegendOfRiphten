@@ -60,10 +60,14 @@ public class Level {
 				getTile(x, y).render(x, y, screen);
 			}
 		}
+
+		for(int i = 0; i < entities.size(); i++){
+			entities.get(i).render(screen);
+		}
 	}
 
-	public void add(Entity entity){
-
+	public void add(Entity e){
+		entities.add(e);
 	}
 
 	public Tile getTile(int x, int y) {

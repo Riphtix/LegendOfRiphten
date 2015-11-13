@@ -108,6 +108,7 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {//public void update()
 		key.tick();
 		player.tick();
+		level.tick();
 	}
 
 	public void render() {

@@ -8,14 +8,16 @@ public class Sprite {
 	public int[] pixels;
 	private SpriteSheet sheet;
 
+	//Tiles
 	public static Sprite grassSprite = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite dirtSprite = new Sprite(16, 1, 0, SpriteSheet.tiles);
 	public static Sprite stoneSprite = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite stoneBrickSprite = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite woodenPlankSprite = new Sprite(16, 4, 0, SpriteSheet.tiles);
-
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
+	//Entities
+	//Player
 	public static Sprite playerUp0 = new Sprite(32, 1, 3, SpriteSheet.mobs);
 	public static Sprite playerUp1 = new Sprite(32, 0, 3, SpriteSheet.mobs);
 	public static Sprite playerUp2 = new Sprite(32, 2, 3, SpriteSheet.mobs);
@@ -32,6 +34,8 @@ public class Sprite {
 	public static Sprite playerRight1 = new Sprite(32, 0, 2, SpriteSheet.mobs);
 	public static Sprite playerRight2 = new Sprite(32, 2, 2, SpriteSheet.mobs);
 
+	//Projectile
+	public static Sprite fireBolt = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;

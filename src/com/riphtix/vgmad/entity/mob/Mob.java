@@ -39,9 +39,9 @@ public abstract class Mob extends Entity {
 	public void tick() {//public void update()
 	}
 
-	protected void shoot(int xp, int yp, double dir){
+	protected void shoot(int x, int y, double dir){
 		//dir *= 180 / Math.PI;
-		Projectile p = new MageProjectile(x, y, (int) dir);
+		Projectile p = new MageProjectile(x, y, dir);
 		projectiles.add(p);
 		level.add(p);
 	}
@@ -49,7 +49,7 @@ public abstract class Mob extends Entity {
 	private boolean collision(int xa, int ya) {
 		boolean solid = false;
 		for(int c = 0; c < 4; c++){
-			int xt = ((x + xa) + c % 2 * 12 - 7) / 16;
+			int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
 			int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
 			if(level.getTile(xt, yt).isSolid()) solid = true;
 		}
