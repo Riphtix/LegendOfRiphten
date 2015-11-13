@@ -1,8 +1,10 @@
 package com.riphtix.vgmad.entity.mob;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
+import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.handler.Keyboard;
 

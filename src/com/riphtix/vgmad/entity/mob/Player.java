@@ -1,10 +1,12 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
+import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
+import com.riphtix.vgmad.level.Level;
 
 public class Player extends Mob {
 
@@ -26,6 +28,7 @@ public class Player extends Mob {
 	}
 
 	public void tick() {//public void update()
+
 		int xa = 0;
 		int ya = 0;
 		if (anim < 7500) anim++;
@@ -40,7 +43,17 @@ public class Player extends Mob {
 			walking = true;
 		} else walking = false;
 
+		clear();
 		tickShooting();
+	}
+
+	private void clear(){
+		for(int i = 0; i < projectiles.size(); i++){
+			Projectile p = projectiles.get(i);
+			if(p.isRemoved()){
+				projectiles.remove(i);
+			}
+		}
 	}
 
 	private void tickShooting() {

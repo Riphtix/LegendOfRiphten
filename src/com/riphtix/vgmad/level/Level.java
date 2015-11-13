@@ -1,7 +1,12 @@
 package com.riphtix.vgmad.level;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.handler.Keyboard;
+import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.Tile;
 
 import java.util.ArrayList;
@@ -15,6 +20,7 @@ public class Level {
 	protected int[] tiles;
 
 	private List<Entity> entities = new ArrayList<Entity>();
+	private List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png");
 
@@ -42,6 +48,9 @@ public class Level {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
 		}
+		for(int i = 0; i < projectiles.size(); i++){
+			projectiles.get(i).tick();
+		}
 	}
 
 	private void time() {
@@ -64,10 +73,20 @@ public class Level {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			projectiles.get(i).render(screen);
+		}
+		//if(){
+		//	screen.renderSprite(Mouse.getX() + 56, Mouse.getY() + 128 * 2, Sprite.aimBox);
+		//}
+
 	}
 
 	public void add(Entity e) {
 		entities.add(e);
+	}
+	public void addProjectile(Projectile p){
+		projectiles.add(p);
 	}
 
 	public Tile getTile(int x, int y) {

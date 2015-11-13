@@ -2,6 +2,7 @@ package com.riphtix.vgmad;
 
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.Level;
@@ -21,7 +22,7 @@ public class Game extends Canvas implements Runnable {
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = WIDTH / 16 * 9;
 	public static final int SCALE = 3;
-	public static String title = "VGMaD: No Name";
+	public static String title = "VGMaD: The Legends of Riphten";
 
 	private Thread thread;
 	private JFrame frame;
@@ -58,7 +59,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static int getWindowHeight() {
-		return WIDTH * SCALE;
+		return HEIGHT * SCALE;
 	}
 
 	public synchronized void start() {
@@ -125,6 +126,7 @@ public class Game extends Canvas implements Runnable {
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
 
+
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
@@ -134,8 +136,9 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.setFont(new Font("Verdana", 0, 24));
-		//g.fillRect(Mouse.getX() - 32, Mouse.getY() - 32, 64, 64);
-		//if (Mouse.getButton() != -1) g.drawString("Button: " + Mouse.getButton(), 50, 50);
+		//g.fillRect(Mouse.getX() - 24, Mouse.getY() - 24, 16 * 3, 16 * 3);
+		g.drawString("x: " + Mouse.getX() + " y: " + Mouse.getY(), 50, 50);
+		g.drawString("x: " + (Mouse.getX() - getWindowWidth() / 2) + " y: " + (Mouse.getY() - getWindowHeight() / 2), 50, 75);
 		g.dispose();
 		bs.show();
 	}

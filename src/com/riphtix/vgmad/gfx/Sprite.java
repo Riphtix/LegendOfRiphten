@@ -37,6 +37,9 @@ public class Sprite {
 	//Projectile
 	public static Sprite fireBoltSprite = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
+	//Debug
+	public static Sprite aimBox = new Sprite(16, 0, 0, SpriteSheet.debug);
+
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
 		pixels = new int[SIZE * SIZE];

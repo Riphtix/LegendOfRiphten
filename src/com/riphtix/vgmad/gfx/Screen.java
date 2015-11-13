@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.gfx;
 
 import com.riphtix.vgmad.entity.mob.Player;
+import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.Tile;
 
 import java.util.Random;
@@ -31,7 +32,7 @@ public class Screen {
 		this.height = height;
 
 		pixels = new int[width * height];
-
+		
 		for (int i = 0; i < MAP_SIZE; i++) {
 			//use tiles[i] = 0x(hex code) to set a specific color
 			tiles[i] = random.nextInt(0xffffff);
