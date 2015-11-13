@@ -11,7 +11,7 @@ public class MageProjectile extends Projectile {
 		speed = 4;
 		damage = 20;
 		rateOfFire = 15;
-		sprite = Sprite.grassSprite;
+		sprite = Sprite.fireBoltSprite;
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);

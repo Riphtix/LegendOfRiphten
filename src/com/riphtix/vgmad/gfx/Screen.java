@@ -55,7 +55,10 @@ public class Screen {
 				if (xa < -sprite.SIZE || xa >= width || ya < -sprite.SIZE || ya >= height) break;
 				if (xa < 0) xa = 0;
 				if (ya < 0) ya = 0;
-				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.SIZE];
+				int col = sprite.pixels[x + y * 16];
+				if (col != 0xffff00ff && col != 0xff7f007f) {
+					pixels[xa + ya * width] = sprite.pixels[x + y * sprite.SIZE];
+				}
 			}
 		}
 	}

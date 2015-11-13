@@ -35,7 +35,7 @@ public class Sprite {
 	public static Sprite playerRight2 = new Sprite(32, 2, 2, SpriteSheet.mobs);
 
 	//Projectile
-	public static Sprite fireBolt = new Sprite(16, 0, 0, SpriteSheet.projectiles);
+	public static Sprite fireBoltSprite = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
