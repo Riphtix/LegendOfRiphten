@@ -15,7 +15,7 @@ public abstract class Projectile extends Entity {
 	protected double range;
 	protected double damage;
 
-	public Projectile(int x, int y, double dir){
+	public Projectile(int x, int y, double dir) {
 		xOrigin = x;
 		yOrigin = y;
 		angle = dir;
@@ -23,7 +23,7 @@ public abstract class Projectile extends Entity {
 		this.y = y;
 	}
 
-	protected void move(){
+	protected void move() {
 
 	}
 }

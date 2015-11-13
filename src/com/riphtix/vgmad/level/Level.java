@@ -39,7 +39,7 @@ public class Level {
 	}
 
 	public void tick() {//public void update()
-		for(int i = 0; i < entities.size(); i++){
+		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
 		}
 	}
@@ -61,12 +61,12 @@ public class Level {
 			}
 		}
 
-		for(int i = 0; i < entities.size(); i++){
+		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}
 	}
 
-	public void add(Entity e){
+	public void add(Entity e) {
 		entities.add(e);
 	}
 

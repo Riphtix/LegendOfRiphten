@@ -17,16 +17,16 @@ public class MageProjectile extends Projectile {
 		ny = speed * Math.sin(angle);
 	}
 
-	public void tick(){//public void update()
+	public void tick() {//public void update()
 		move();
 	}
 
-	protected void move(){
+	protected void move() {
 		x += nx;
 		y += ny;
 	}
 
-	public void render(Screen screen){
+	public void render(Screen screen) {
 		screen.renderSprite(x, y, sprite);
 	}
 }

@@ -53,11 +53,11 @@ public class Game extends Canvas implements Runnable {
 		addMouseMotionListener(mouse);
 	}
 
-	public static int getWindowWidth(){
+	public static int getWindowWidth() {
 		return WIDTH * SCALE;
 	}
 
-	public static int getWindowHeight(){
+	public static int getWindowHeight() {
 		return WIDTH * SCALE;
 	}
 
