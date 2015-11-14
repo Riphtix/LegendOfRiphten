@@ -7,7 +7,7 @@ import com.riphtix.vgmad.gfx.Sprite;
 
 public class MageProjectile extends Projectile {
 
-	public static final int FIRE_RATE = 15; //Higher = slower
+	public static final int FIRE_RATE = 1; //Higher = slower
 
 	public MageProjectile(int x, int y, double dir) {
 		super(x, y, dir);
