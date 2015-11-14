@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.gfx;
 
 import com.riphtix.vgmad.entity.mob.Player;
+import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.Tile;
 
@@ -46,17 +47,33 @@ public class Screen {
 		}
 	}
 
-	public void renderSprite(int xp, int yp, Sprite sprite) {
+	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed){
+		if(fixed) {
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+
+		for(int y = 0; y < sprite.getHeight(); y++){
+			int ya = y + yp;
+			for(int x = 0; x < sprite.getWidth(); x++){
+				int xa = x + xp;
+				if(xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getWidth()];
+			}
+		}
+	}
+
+	public void renderProjectile(int xp, int yp, Projectile p) {
 		xp -= xOffset;
 		yp -= yOffset;
-		for (int y = 0; y < sprite.SIZE; y++) {
+		for (int y = 0; y < p.getSpriteSize(); y++) {
 			int ya = y + yp;
-			for (int x = 0; x < sprite.SIZE; x++) {
+			for (int x = 0; x < p.getSpriteSize(); x++) {
 				int xa = x + xp;
-				if (xa < -sprite.SIZE || xa >= width || ya < -sprite.SIZE || ya >= height) break;
+				if (xa < -p.getSpriteSize() || xa >= width || ya < -p.getSpriteSize() || ya >= height) break;
 				if (xa < 0) xa = 0;
 				if (ya < 0) ya = 0;
-				int col = sprite.pixels[x + y * sprite.SIZE];
+				int col = p.getSprite().pixels[x + y * p.getSpriteSize()];
 				if (col != 0xffff00ff && col != 0xff7f007f) {
 					pixels[xa + ya * width] = col;
 				}

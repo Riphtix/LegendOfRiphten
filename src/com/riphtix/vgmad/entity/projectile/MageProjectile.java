@@ -7,12 +7,13 @@ import com.riphtix.vgmad.gfx.Sprite;
 
 public class MageProjectile extends Projectile {
 
+	public static final int FIRE_RATE = 15; //Higher = slower
+
 	public MageProjectile(int x, int y, double dir) {
 		super(x, y, dir);
-		range = .1;
+		range = 200;
 		speed = 4;
 		damage = 20;
-		rateOfFire = 15;
 		sprite = Sprite.fireBoltSprite;
 
 		nx = speed * Math.cos(angle);
@@ -20,14 +21,19 @@ public class MageProjectile extends Projectile {
 	}
 
 	public void tick() {//public void update()
+		if (level.tileCollision(x, y, nx, ny, 16)) {
+			remove();
+		}
 		move();
 	}
 
 	protected void move() {
-		x += nx;
-		y += ny;
-		if (distance() > range){
-			remove();
+		if (!level.tileCollision(x, y, nx, ny, 16)) {
+			x += nx;
+			y += ny;
+			if (distance() > range) {
+				remove();
+			}
 		}
 	}
 
@@ -38,6 +44,6 @@ public class MageProjectile extends Projectile {
 	}
 
 	public void render(Screen screen) {
-		screen.renderSprite((int) x - 8, (int) y - 4, sprite);
+		screen.renderProjectile((int) x - 8, (int) y - 4, this);
 	}
 }

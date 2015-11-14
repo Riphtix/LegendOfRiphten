@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
+import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
@@ -15,6 +16,8 @@ public class Player extends Mob {
 	private int anim = 0;
 	private boolean walking;
 
+	private int fireRate = 0;
+
 	public Player(Keyboard input) {
 		this.input = input;
 		dir = 2;
@@ -25,10 +28,12 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		dir = 2;
+		fireRate = MageProjectile.FIRE_RATE;
 	}
 
 	public void tick() {//public void update()
 
+		if(fireRate > 0) fireRate--;
 		int xa = 0;
 		int ya = 0;
 		if (anim < 7500) anim++;
@@ -48,21 +53,21 @@ public class Player extends Mob {
 	}
 
 	private void clear(){
-		for(int i = 0; i < projectiles.size(); i++){
-			Projectile p = projectiles.get(i);
+		for(int i = 0; i < level.getProjectiles().size(); i++){
+			Projectile p = level.getProjectiles().get(i);
 			if(p.isRemoved()){
-				projectiles.remove(i);
+				level.getProjectiles().remove(i);
 			}
 		}
 	}
 
 	private void tickShooting() {
-		if (Mouse.getButton() == 1) {
+		if (Mouse.getButton() == 1 && fireRate <= 0) {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
-
 			shoot(x, y, dir);
+			fireRate = MageProjectile.FIRE_RATE;
 		}
 	}
 
