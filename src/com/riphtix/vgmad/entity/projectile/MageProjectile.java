@@ -1,13 +1,13 @@
 package com.riphtix.vgmad.entity.projectile;
 
-import com.riphtix.vgmad.entity.mob.Mob;
-import com.riphtix.vgmad.entity.mob.Player;
+import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
+import com.riphtix.vgmad.entity.spawner.Spawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 
 public class MageProjectile extends Projectile {
 
-	public static final int FIRE_RATE = 1; //Higher = slower
+	public static final int FIRE_RATE = 15; //Higher = slower
 
 	public MageProjectile(int x, int y, double dir) {
 		super(x, y, dir);
@@ -22,6 +22,7 @@ public class MageProjectile extends Projectile {
 
 	public void tick() {//public void update()
 		if (level.tileCollision(x, y, nx, ny, 16)) {
+			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
 			remove();
 		}
 		move();

@@ -1,15 +1,12 @@
 package com.riphtix.vgmad.level;
 
-import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
-import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.handler.Keyboard;
-import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.Tile;
 
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,6 +21,7 @@ public class Level {
 
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
+	private List<Particle> particles = new ArrayList<Particle>();
 
 	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png");
 
@@ -53,6 +51,24 @@ public class Level {
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).tick();
+		}
+
+		for(int i = 0; i < particles.size(); i++){
+			particles.get(i).tick();
+		}
+		remove();
+	}
+
+	private void remove(){
+		for (int i = 0; i < entities.size(); i++) {
+			if(entities.get(i).isRemoved()) entities.remove(i);
+		}
+		for (int i = 0; i < projectiles.size(); i++) {
+			if(projectiles.get(i).isRemoved()) projectiles.remove(i);
+		}
+
+		for(int i = 0; i < particles.size(); i++){
+			if(particles.get(i).isRemoved()) particles.remove(i);
 		}
 	}
 
@@ -98,16 +114,21 @@ public class Level {
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).render(screen);
 		}
+		for (int i = 0; i < particles.size(); i++) {
+			particles.get(i).render(screen);
+		}
 		//screen.renderSprite(Mouse.getX() + 56, Mouse.getY() + 128 * 2, Sprite.aimBox);
 	}
 
 	public void add(Entity e) {
-		entities.add(e);
-	}
-
-	public void addProjectile(Projectile p) {
-		p.init(this);
-		projectiles.add(p);
+		e.init(this);
+		if(e instanceof Particle){
+			particles.add((Particle) e);
+		} else if (e instanceof Projectile) {
+			projectiles.add((Projectile) e);
+		} else {
+			entities.add(e);
+		}
 	}
 
 	public Tile getTile(int x, int y) {

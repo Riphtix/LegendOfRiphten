@@ -39,6 +39,9 @@ public class Sprite {
 	//Projectile
 	public static Sprite fireBoltSprite = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
+	//Particle
+	public static Sprite defaultParticle = new Sprite(3, 0xffaaaaaa);
+
 	//Debug
 	public static Sprite aimBox = new Sprite(16, 0, 0, SpriteSheet.debug);
 
