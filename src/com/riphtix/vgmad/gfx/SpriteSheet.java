@@ -17,10 +17,16 @@ public class SpriteSheet {
 
 	//Mobs
 	public static SpriteSheet mobs = new SpriteSheet("/entities/mobs/mobs.png", 1024);
-	public static SpriteSheet player_down = new SpriteSheet(mobs, 0, 0, 3, 1, 32);
+
 	public static SpriteSheet player_up = new SpriteSheet(mobs, 0, 3, 3, 1, 32);
-	public static SpriteSheet player_left = new SpriteSheet(mobs, 0, 2, 3, 1, 32);
-	public static SpriteSheet player_right = new SpriteSheet(mobs, 0, 1, 3, 1, 32);
+	public static SpriteSheet player_down = new SpriteSheet(mobs, 0, 0, 3, 1, 32);
+	public static SpriteSheet player_left = new SpriteSheet(mobs, 0, 1, 3, 1, 32);
+	public static SpriteSheet player_right = new SpriteSheet(mobs, 0, 2, 3, 1, 32);
+
+	public static SpriteSheet dummy_up = new SpriteSheet(mobs, 3, 3, 3, 1, 32);
+	public static SpriteSheet dummy_down = new SpriteSheet(mobs, 3, 0, 3, 1, 32);
+	public static SpriteSheet dummy_left = new SpriteSheet(mobs, 3, 1, 3, 1, 32);
+	public static SpriteSheet dummy_right = new SpriteSheet(mobs, 3, 2, 3, 1, 32);
 
 	//Other Entities
 	public static SpriteSheet projectiles = new SpriteSheet("/entities/projectiles/projectiles.png", 256);
@@ -41,11 +47,11 @@ public class SpriteSheet {
 		HEIGHT = h;
 		pixels = new int[w * h];
 
-		for(int y0 = 0; y0 < h; y0++){
+		for(int y0 = 0; y0 < height; y0++){
 			int yp = yy + y0;
-			for(int x0 = 0; x0 < w; x0++){
+			for(int x0 = 0; x0 < width; x0++){
 				int xp = xx + x0;
-				pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.WIDTH];
+				pixels[x0 + y0 * width] = sheet.pixels[xp + yp * sheet.WIDTH];
 			}
 		}
 		int frame = 0;
