@@ -34,9 +34,6 @@ public abstract class Mob extends Entity {
 		if (!collision(xa, ya)) {
 			x += xa;
 			y += ya;
-		} else {
-			Particle p = new Particle(x, y, 50);
-			level.add(p);
 		}
 	}
 

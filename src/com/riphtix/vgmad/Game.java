@@ -3,6 +3,7 @@ package com.riphtix.vgmad;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.Level;
@@ -125,6 +126,7 @@ public class Game extends Canvas implements Runnable {
 		int yScroll = player.y - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
 		player.render(screen);
+		//screen.renderSheet(40, 40, SpriteSheet.player_down, false);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

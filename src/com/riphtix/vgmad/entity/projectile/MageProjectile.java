@@ -21,7 +21,7 @@ public class MageProjectile extends Projectile {
 	}
 
 	public void tick() {//public void update()
-		if (level.tileCollision(x, y, nx, ny, 16)) {
+		if (level.tileCollision((int) (x + nx), (int) (y + ny), 8, 7, 7)) {
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
 			remove();
 		}
@@ -29,13 +29,12 @@ public class MageProjectile extends Projectile {
 	}
 
 	protected void move() {
-		if (!level.tileCollision(x, y, nx, ny, 16)) {
-			x += nx;
-			y += ny;
-			if (distance() > range) {
-				remove();
-			}
+		x += nx;
+		y += ny;
+		if (distance() > range) {
+			remove();
 		}
+
 	}
 
 	private double distance() {

@@ -8,7 +8,7 @@ public class Sprite {
 	private int width;
 	private int height;
 	public int[] pixels;
-	private SpriteSheet sheet;
+	protected SpriteSheet sheet;
 
 	//Tiles
 	public static Sprite grassSprite = new Sprite(16, 0, 0, SpriteSheet.tiles);
@@ -37,13 +37,20 @@ public class Sprite {
 	public static Sprite playerRight2 = new Sprite(32, 2, 2, SpriteSheet.mobs);
 
 	//Projectile
-	public static Sprite fireBoltSprite = new Sprite(16, 0, 0, SpriteSheet.projectiles);
+	public static Sprite fireBoltSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);
 
 	//Particle
 	public static Sprite defaultParticle = new Sprite(3, 0xffaaaaaa);
 
 	//Debug
 	public static Sprite aimBox = new Sprite(16, 0, 0, SpriteSheet.debug);
+
+	protected Sprite(SpriteSheet sheet, int width, int height) {
+		SIZE = (width == height) ? width : -1; //trick
+		this.width = width;
+		this.height = height;
+		this.sheet = sheet;
+	}
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
 		SIZE = size;
@@ -70,6 +77,13 @@ public class Sprite {
 		this.height = size;
 		pixels = new int[SIZE * SIZE];
 		setColor(color);
+	}
+
+	public Sprite(int[] pixels, int width, int height){
+		SIZE = (width == height) ? width : -1;
+		this.width = width;
+		this.height = height;
+		this.pixels = pixels;
 	}
 
 	public int getWidth(){
