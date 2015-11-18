@@ -1,22 +1,23 @@
 package com.riphtix.vgmad.entity.mob;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.handler.Keyboard;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
+	protected int dir = 0;
 	protected boolean moving = false;
-	protected boolean walking = false;
-
-	protected enum Direction {
-		UP, DOWN, LEFT, RIGHT
-	}
-
-	protected Direction dir;
+	protected Keyboard key;
 
 	public void move(int xa, int ya) {
 		if (xa != 0 && ya != 0) {
@@ -25,10 +26,10 @@ public abstract class Mob extends Entity {
 			return;
 		}
 
-		if (ya < 0) dir = Direction.UP;
-		if (xa > 0) dir = Direction.RIGHT;
-		if (ya > 0) dir = Direction.DOWN;
-		if (xa < 0) dir = Direction.LEFT;
+		if (ya < 0) dir = 0;
+		if (xa > 0) dir = 1;
+		if (ya > 0) dir = 2;
+		if (xa < 0) dir = 3;
 
 		if (!collision(xa, ya)) {
 			x += xa;
@@ -36,9 +37,8 @@ public abstract class Mob extends Entity {
 		}
 	}
 
-	public abstract void tick();//public abstract void update()
-
-	public abstract void render(Screen screen);
+	public void tick() {//public void update()
+	}
 
 	protected void shoot(int x, int y, double dir) {
 		//dir *= 180 / Math.PI;
@@ -55,4 +55,9 @@ public abstract class Mob extends Entity {
 		}
 		return solid;
 	}
+
+	public void render() {
+
+	}
+
 }

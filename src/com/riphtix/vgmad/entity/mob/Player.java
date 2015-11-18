@@ -9,6 +9,7 @@ import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
+import com.riphtix.vgmad.level.Level;
 
 public class Player extends Mob {
 
@@ -16,10 +17,10 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking;
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
 
 	private AnimatedSprite animSprite = down;
 
@@ -27,14 +28,14 @@ public class Player extends Mob {
 
 	public Player(Keyboard input) {
 		this.input = input;
-		sprite = Sprite.playerDefault;
+		dir = 2;
 	}
 
 	public Player(int x, int y, Keyboard input) {
-		this.input = input;
 		this.x = x;
 		this.y = y;
-		sprite = Sprite.playerDefault;
+		this.input = input;
+		dir = 2;
 		fireRate = MageProjectile.FIRE_RATE;
 	}
 
@@ -47,17 +48,16 @@ public class Player extends Mob {
 		if (anim < 7500) anim++;
 		else anim = 0;
 
-		if (input.UP) {
+		if (input.UP){
 			ya--;
 			animSprite = up;
-		}
-		if (input.DOWN){
+		} else if (input.DOWN){
 			ya++;
 			animSprite = down;
-		} if (input.LEFT){
+		} else if (input.LEFT){
 			xa--;
 			animSprite = left;
-		} if (input.RIGHT){
+		} else if (input.RIGHT){
 			xa++;
 			animSprite = right;
 		}
@@ -90,8 +90,49 @@ public class Player extends Mob {
 	}
 
 	public void render(Screen screen) {
+		/*if (dir == 0) {
+			sprite = Sprite.playerUp0;
+			if (walking) {
+				if (anim % 20 > 10) {
+					sprite = Sprite.playerUp1;
+				} else {
+					sprite = Sprite.playerUp2;
+				}
+			}
+		}
+		if (dir == 1) {
+			sprite = Sprite.playerRight0;
+			if (walking) {
+				if (anim % 20 > 10) {
+					sprite = Sprite.playerRight1;
+				} else {
+					sprite = Sprite.playerRight2;
+				}
+			}
+		}
+		if (dir == 2) {
+			sprite = Sprite.playerDown0;
+			if (walking) {
+				if (anim % 20 > 10) {
+					sprite = Sprite.playerDown1;
+				} else {
+					sprite = Sprite.playerDown2;
+				}
+			}
+		}
+		if (dir == 3) {
+			sprite = Sprite.playerLeft0;
+			if (walking) {
+				if (anim % 20 > 10) {
+					sprite = Sprite.playerLeft1;
+				} else {
+					sprite = Sprite.playerLeft2;
+				}
+			}
+		}*/
+
 		sprite = animSprite.getSprite();
-		screen.renderMob(x - 16, y - 16, sprite);
+		screen.renderPlayer(x - 16, y - 16, sprite);
 	}
 
 }

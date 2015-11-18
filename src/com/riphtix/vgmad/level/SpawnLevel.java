@@ -1,7 +1,5 @@
 package com.riphtix.vgmad.level;
 
-import com.riphtix.vgmad.entity.mob.Dummy;
-
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -23,14 +21,9 @@ public class SpawnLevel extends Level {
 			e.printStackTrace();
 			System.out.println("Could not load level file!!!");
 		}
-		add(new Dummy(32, 26));
 	}
 
 	protected void generateLevel() {
-		for(int y = 0; y < 64; y++){
-			for(int x = 0; x < 64; x++){
-				getTile(x, y);
-			}
-		}
+
 	}
 }
