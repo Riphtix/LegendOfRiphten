@@ -19,22 +19,9 @@ public class Sprite {
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
 	//Entities
-	//Player
-	public static Sprite playerUp0 = new Sprite(32, 1, 3, SpriteSheet.mobs);
-	public static Sprite playerUp1 = new Sprite(32, 0, 3, SpriteSheet.mobs);
-	public static Sprite playerUp2 = new Sprite(32, 2, 3, SpriteSheet.mobs);
-
-	public static Sprite playerDown0 = new Sprite(32, 1, 0, SpriteSheet.mobs);
-	public static Sprite playerDown1 = new Sprite(32, 0, 0, SpriteSheet.mobs);
-	public static Sprite playerDown2 = new Sprite(32, 2, 0, SpriteSheet.mobs);
-
-	public static Sprite playerLeft0 = new Sprite(32, 1, 1, SpriteSheet.mobs);
-	public static Sprite playerLeft1 = new Sprite(32, 0, 1, SpriteSheet.mobs);
-	public static Sprite playerLeft2 = new Sprite(32, 2, 1, SpriteSheet.mobs);
-
-	public static Sprite playerRight0 = new Sprite(32, 1, 2, SpriteSheet.mobs);
-	public static Sprite playerRight1 = new Sprite(32, 0, 2, SpriteSheet.mobs);
-	public static Sprite playerRight2 = new Sprite(32, 2, 2, SpriteSheet.mobs);
+	//Mobs
+	public static Sprite playerDefault = new Sprite(32, 0, 0, SpriteSheet.player_down);
+	public static Sprite dummyDefault = new Sprite(32, 3, 0, SpriteSheet.mobs);
 
 	//Projectile
 	public static Sprite fireBoltSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);
@@ -101,9 +88,9 @@ public class Sprite {
 	}
 
 	private void load() {
-		for (int y = 0; y < SIZE; y++) {
-			for (int x = 0; x < SIZE; x++) {
-				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
+				pixels[x + y * width] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.WIDTH];
 			}
 		}
 	}

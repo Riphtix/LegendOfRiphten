@@ -112,7 +112,7 @@ public class Screen {
 		}
 	}
 
-	public void renderPlayer(int xp, int yp, Sprite sprite) {
+	public void renderMob(int xp, int yp, Sprite sprite) {
 		xp -= xOffset;
 		yp -= yOffset;
 		for (int y = 0; y < 32; y++) {

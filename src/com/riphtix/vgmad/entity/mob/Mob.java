@@ -15,9 +15,15 @@ import java.util.List;
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
-	protected int dir = 0;
-	protected boolean moving = false;
+	private boolean moving = false;
+	public boolean walking = false;
 	protected Keyboard key;
+
+	public enum Direction {
+		UP, DOWN, LEFT, RIGHT
+	}
+
+	public Direction dir;
 
 	public void move(int xa, int ya) {
 		if (xa != 0 && ya != 0) {
@@ -26,10 +32,10 @@ public abstract class Mob extends Entity {
 			return;
 		}
 
-		if (ya < 0) dir = 0;
-		if (xa > 0) dir = 1;
-		if (ya > 0) dir = 2;
-		if (xa < 0) dir = 3;
+		if (ya < 0) dir = Direction.UP;
+		if (ya > 0) dir = Direction.DOWN;
+		if (xa < 0) dir = Direction.LEFT;
+		if (xa > 0) dir = Direction.RIGHT;
 
 		if (!collision(xa, ya)) {
 			x += xa;
@@ -37,8 +43,9 @@ public abstract class Mob extends Entity {
 		}
 	}
 
-	public void tick() {//public void update()
-	}
+	public abstract void tick();//public abstract void update()
+
+	public abstract void render(Screen screen);
 
 	protected void shoot(int x, int y, double dir) {
 		//dir *= 180 / Math.PI;
@@ -54,10 +61,6 @@ public abstract class Mob extends Entity {
 			if (level.getTile(xt, yt).isSolid()) solid = true;
 		}
 		return solid;
-	}
-
-	public void render() {
-
 	}
 
 }

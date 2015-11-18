@@ -4,7 +4,7 @@ import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.level.Level;
 
-public class Spawner extends Entity {
+public abstract class Spawner extends Entity {
 
 	public enum Type {
 		MOB, PARTICLE
