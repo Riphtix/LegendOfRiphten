@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.level;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
@@ -22,6 +23,9 @@ public class Level {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
+	public List<Entity> topLayer = new ArrayList<Entity>();
+
+	private List<Player> players = new ArrayList<Player>();
 
 	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png");
 
@@ -56,6 +60,10 @@ public class Level {
 		for(int i = 0; i < particles.size(); i++){
 			particles.get(i).tick();
 		}
+
+		for(int i = 0; i < players.size(); i++){
+			players.get(i).tick();
+		}
 		remove();
 	}
 
@@ -69,6 +77,10 @@ public class Level {
 
 		for(int i = 0; i < particles.size(); i++){
 			if(particles.get(i).isRemoved()) particles.remove(i);
+		}
+
+		for(int i = 0; i < players.size(); i++){
+			if(players.get(i).isRemoved()) players.remove(i);
 		}
 	}
 
@@ -127,6 +139,9 @@ public class Level {
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).render(screen);
 		}
+		for (int i = 0; i < players.size(); i++) {
+			players.get(i).render(screen);
+		}
 		//screen.renderSprite(Mouse.getX() + 56, Mouse.getY() + 128 * 2, Sprite.aimBox);
 	}
 
@@ -136,9 +151,23 @@ public class Level {
 			particles.add((Particle) e);
 		} else if (e instanceof Projectile) {
 			projectiles.add((Projectile) e);
-		} else {
+		} else if(e instanceof Player) {
+			players.add((Player) e);
+		}else {
 			entities.add(e);
 		}
+	}
+
+	public List<Player> getPlayer(){
+		return players;
+	}
+
+	public Player getPlayerAt(int i){
+		return players.get(i);
+	}
+
+	public Player getClientPlayer(){
+		return players.get(0);
 	}
 
 	public Tile getTile(int x, int y) {

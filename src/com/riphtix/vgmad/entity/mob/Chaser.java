@@ -16,32 +16,46 @@ public class Chaser extends Mob {
 	private int xa = 0;
 	private int ya = 0;
 
-	public Chaser(int x, int y){
+	public Chaser(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
 	}
 
-	public void tick() {
-		if(walking) animSprite.tick();
-		else animSprite.setFrame(0);
-		if (ya < 0){
-			animSprite = up;
-			dir = Direction.UP;
-		} else if (ya > 0){
-			animSprite = down;
-			dir = Direction.DOWN;
-		} if (xa < 0){
-			animSprite = left;
-			dir = Direction.LEFT;
-		} else if (xa > 0){
-			animSprite = right;
-			dir = Direction.RIGHT;
-		}
+	private void move() {
+		xa = 0;
+		ya = 0;
+		Player player = level.getClientPlayer();
+		if (x < player.getX()) xa++;
+		if (x > player.getX()) xa--;
+		if (y < player.getY()) ya++;
+		if (y > player.getY()) ya--;
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);
 			walking = true;
-		} else walking = false;
+		} else {
+			walking = false;
+		}
+	}
+
+	public void tick() {
+		move();
+		if (walking) animSprite.tick();
+		else animSprite.setFrame(0);
+		if (ya < 0) {
+			animSprite = up;
+			dir = Direction.UP;
+		} else if (ya > 0) {
+			animSprite = down;
+			dir = Direction.DOWN;
+		}
+		if (xa < 0) {
+			animSprite = left;
+			dir = Direction.LEFT;
+		} else if (xa > 0) {
+			animSprite = right;
+			dir = Direction.RIGHT;
+		}
 
 	}
 
