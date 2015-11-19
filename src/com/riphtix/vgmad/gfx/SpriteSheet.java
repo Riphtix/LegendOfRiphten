@@ -17,15 +17,18 @@ public class SpriteSheet {
 
 	//Mobs
 	public static SpriteSheet mobs = new SpriteSheet("/entities/mobs/mobs.png", 1024);
-	public static SpriteSheet player_down = new SpriteSheet(mobs, 0, 0, 3, 1, 32);
-	public static SpriteSheet player_up = new SpriteSheet(mobs, 0, 3, 3, 1, 32);
-	public static SpriteSheet player_left = new SpriteSheet(mobs, 0, 1, 3, 1, 32);
-	public static SpriteSheet player_right = new SpriteSheet(mobs, 0, 2, 3, 1, 32);
 
-	public static SpriteSheet dummy_down = new SpriteSheet(mobs, 3, 0, 3, 1, 32);
-	public static SpriteSheet dummy_up = new SpriteSheet(mobs, 3, 3, 3, 1, 32);
-	public static SpriteSheet dummy_left = new SpriteSheet(mobs, 3, 1, 3, 1, 32);
-	public static SpriteSheet dummy_right = new SpriteSheet(mobs, 3, 2, 3, 1, 32);
+	public static SpriteSheet player = new SpriteSheet("/entities/mobs/player.png", 96, 128);
+	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 3, 1, 32);
+	public static SpriteSheet player_up = new SpriteSheet(player, 0, 3, 3, 1, 32);
+	public static SpriteSheet player_left = new SpriteSheet(player, 0, 1, 3, 1, 32);
+	public static SpriteSheet player_right = new SpriteSheet(player, 0, 2, 3, 1, 32);
+
+	public static SpriteSheet dummy = new SpriteSheet("/entities/mobs/dummy.png", 96, 128);
+	public static SpriteSheet dummy_down = new SpriteSheet(dummy, 0, 0, 3, 1, 32);
+	public static SpriteSheet dummy_up = new SpriteSheet(dummy, 0, 3, 3, 1, 32);
+	public static SpriteSheet dummy_left = new SpriteSheet(dummy, 0, 1, 3, 1, 32);
+	public static SpriteSheet dummy_right = new SpriteSheet(dummy, 0, 2, 3, 1, 32);
 	//Other Entities
 	public static SpriteSheet projectiles = new SpriteSheet("/entities/projectiles/projectiles.png", 256);
 
@@ -78,9 +81,11 @@ public class SpriteSheet {
 
 	public SpriteSheet(String path, int width, int height) {
 		this.path = path;
-		SIZE = -1;
+		SIZE = (width == height) ? width : -1;
 		WIDTH = width;
 		HEIGHT = height;
+		pixels = new int[WIDTH * HEIGHT];
+		load();
 	}
 
 	public Sprite[] getSprites(){
