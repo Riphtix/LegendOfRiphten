@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.level;
 
+import com.riphtix.vgmad.entity.mob.Chaser;
 import com.riphtix.vgmad.entity.mob.Dummy;
 
 import javax.imageio.ImageIO;
@@ -25,6 +26,7 @@ public class SpawnLevel extends Level {
 		}
 		for (int i = 0; i < 1; i++){
 			add(new Dummy(32, 31));
+			add(new Chaser(25, 31));
 		}
 	}
 
