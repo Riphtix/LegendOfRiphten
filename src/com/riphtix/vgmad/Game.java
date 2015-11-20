@@ -109,7 +109,6 @@ public class Game extends Canvas implements Runnable {
 
 	public void tick() {//public void update()
 		key.tick();
-		player.tick();
 		level.tick();
 	}
 
@@ -125,7 +124,6 @@ public class Game extends Canvas implements Runnable {
 		int xScroll = player.getX() - screen.width / 2;
 		int yScroll = player.getY() - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
-		player.render(screen);
 		//screen.renderSheet(40, 40, SpriteSheet.player_down, false);
 
 		for (int i = 0; i < pixels.length; i++) {

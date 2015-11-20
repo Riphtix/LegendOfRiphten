@@ -23,7 +23,6 @@ public class Level {
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
-	public List<Entity> topLayer = new ArrayList<Entity>();
 
 	private List<Player> players = new ArrayList<Player>();
 
@@ -56,39 +55,37 @@ public class Level {
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).tick();
 		}
-
-		for(int i = 0; i < particles.size(); i++){
+		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).tick();
 		}
-
-		for(int i = 0; i < players.size(); i++){
+		for (int i = 0; i < players.size(); i++) {
 			players.get(i).tick();
 		}
 		remove();
 	}
 
-	private void remove(){
+	private void remove() {
 		for (int i = 0; i < entities.size(); i++) {
-			if(entities.get(i).isRemoved()) entities.remove(i);
+			if (entities.get(i).isRemoved()) entities.remove(i);
 		}
 		for (int i = 0; i < projectiles.size(); i++) {
-			if(projectiles.get(i).isRemoved()) projectiles.remove(i);
+			if (projectiles.get(i).isRemoved()) projectiles.remove(i);
 		}
 
-		for(int i = 0; i < particles.size(); i++){
-			if(particles.get(i).isRemoved()) particles.remove(i);
+		for (int i = 0; i < particles.size(); i++) {
+			if (particles.get(i).isRemoved()) particles.remove(i);
 		}
 
-		for(int i = 0; i < players.size(); i++){
-			if(players.get(i).isRemoved()) players.remove(i);
+		for (int i = 0; i < players.size(); i++) {
+			if (players.get(i).isRemoved()) players.remove(i);
 		}
 	}
 
-	public List<Projectile> getProjectiles(){
+	public List<Projectile> getProjectiles() {
 		return projectiles;
 	}
 
-	public List<Entity> getEntities(){
+	public List<Entity> getEntities() {
 		return entities;
 	}
 
@@ -147,27 +144,60 @@ public class Level {
 
 	public void add(Entity e) {
 		e.init(this);
-		if(e instanceof Particle){
+		if (e instanceof Particle) {
 			particles.add((Particle) e);
 		} else if (e instanceof Projectile) {
 			projectiles.add((Projectile) e);
-		} else if(e instanceof Player) {
+		} else if (e instanceof Player) {
 			players.add((Player) e);
-		}else {
+		} else {
 			entities.add(e);
 		}
 	}
 
-	public List<Player> getPlayer(){
+	public List<Player> getPlayer() {
 		return players;
 	}
 
-	public Player getPlayerAt(int i){
+	public Player getPlayerAt(int i) {
 		return players.get(i);
 	}
 
-	public Player getClientPlayer(){
+	public Player getClientPlayer() {
 		return players.get(0);
+	}
+
+	public List<Entity> getEntities(Entity e, int radius) {
+		List<Entity> result = new ArrayList<Entity>();
+		int ex = e.getX();
+		int ey = e.getY();
+		for (int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			int x = entity.getX();
+			int y = entity.getY();
+			int dx = Math.abs(x - ex);
+			int dy = Math.abs(y - ey);
+			double distance = Math.sqrt((dx * dx) + (dy * dy));
+			if (distance <= radius) result.add(entity);
+		}
+
+		return result;
+	}
+
+	public List<Player> getPlayers(Entity e, int radius){
+		List<Player> result = new ArrayList<Player>();
+		int ex = e.getX();
+		int ey = e.getY();
+		for(int i = 0; i < players.size(); i++){
+			Player player = players.get(i);
+			int x = player.getX();
+			int y = player.getY();
+			int dx = Math.abs(x - ex);
+			int dy = Math.abs(y - ey);
+			double distance = Math.sqrt((dx * dx) + (dy * dy));
+			if (distance <= radius) result.add(player);
+		}
+		return result;
 	}
 
 	public Tile getTile(int x, int y) {
