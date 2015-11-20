@@ -9,7 +9,7 @@ public class MageProjectile extends Projectile {
 
 	public static final int FIRE_RATE = 15; //Higher = slower
 
-	public MageProjectile(int x, int y, double dir) {
+	public MageProjectile(double x, double y, double dir) {
 		super(x, y, dir);
 		range = 200;
 		speed = 4;

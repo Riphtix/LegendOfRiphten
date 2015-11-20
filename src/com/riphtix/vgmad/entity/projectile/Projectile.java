@@ -5,19 +5,15 @@ import com.riphtix.vgmad.gfx.Sprite;
 
 public abstract class Projectile extends Entity {
 
-	protected final int xOrigin;
-	protected final int yOrigin;
+	protected final double xOrigin, yOrigin;
 	protected double angle;
 	protected Sprite sprite;
-	protected double x;
-	protected double y;
-	protected double distance;
+	protected double x, y;
 	protected double nx, ny;
-	protected double speed;
-	protected double range;
-	protected double damage;
+	protected double distance;
+	protected double speed, range, damage;
 
-	public Projectile(int x, int y, double dir) {
+	public Projectile(double x, double y, double dir) {
 		xOrigin = x;
 		yOrigin = y;
 		angle = dir;
@@ -25,11 +21,11 @@ public abstract class Projectile extends Entity {
 		this.y = y;
 	}
 
-	public Sprite getSprite(){
+	public Sprite getSprite() {
 		return sprite;
 	}
 
-	public int getSpriteSize(){
+	public int getSpriteSize() {
 		return sprite.SIZE;
 	}
 

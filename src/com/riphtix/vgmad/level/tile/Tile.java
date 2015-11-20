@@ -5,8 +5,6 @@ import com.riphtix.vgmad.gfx.Sprite;
 
 public class Tile {
 
-	public int x;
-	public int y;
 	public Sprite sprite;
 
 	public static Tile grassTile = new GrassTile(Sprite.grassSprite);
