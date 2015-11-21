@@ -54,20 +54,20 @@ public class SpriteSheet {
 		HEIGHT = h;
 		pixels = new int[w * h];
 
-		for(int y0 = 0; y0 < h; y0++){
+		for (int y0 = 0; y0 < h; y0++) {
 			int yp = yy + y0;
-			for(int x0 = 0; x0 < w; x0++){
+			for (int x0 = 0; x0 < w; x0++) {
 				int xp = xx + x0;
 				pixels[x0 + y0 * w] = sheet.pixels[xp + yp * sheet.WIDTH];
 			}
 		}
 		int frame = 0;
 		sprites = new Sprite[width * height];
-		for(int ya = 0; ya < height; ya++){
-			for(int xa = 0; xa < width; xa++){
+		for (int ya = 0; ya < height; ya++) {
+			for (int xa = 0; xa < width; xa++) {
 				int[] spritePixels = new int[spriteSize * spriteSize];
-				for(int y0 = 0; y0 < spriteSize; y0++){
-					for(int x0 = 0; x0 < spriteSize; x0++){
+				for (int y0 = 0; y0 < spriteSize; y0++) {
+					for (int x0 = 0; x0 < spriteSize; x0++) {
 						spritePixels[x0 + y0 * spriteSize] = pixels[(x0 + xa * spriteSize) + (y0 + ya * spriteSize) * WIDTH];
 					}
 				}
@@ -95,7 +95,7 @@ public class SpriteSheet {
 		load();
 	}
 
-	public Sprite[] getSprites(){
+	public Sprite[] getSprites() {
 		return sprites;
 	}
 

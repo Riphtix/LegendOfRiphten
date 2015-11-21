@@ -37,8 +37,8 @@ public abstract class Mob extends Entity {
 		if (xa < 0) dir = Direction.LEFT;
 		if (xa > 0) dir = Direction.RIGHT;
 
-		while (xa != 0){
-			if(Math.abs(xa) > 1){
+		while (xa != 0) {
+			if (Math.abs(xa) > 1) {
 				if (!collision(abs(xa), ya)) {
 					this.x += abs(xa);
 				}
@@ -50,8 +50,8 @@ public abstract class Mob extends Entity {
 				xa = 0;
 			}
 		}
-		while (ya != 0){
-			if(Math.abs(ya) > 1){
+		while (ya != 0) {
+			if (Math.abs(ya) > 1) {
 				if (!collision(xa, abs(ya))) {
 					this.y += abs(ya);
 				}
@@ -66,8 +66,8 @@ public abstract class Mob extends Entity {
 
 	}
 
-	private int abs(double value){
-		if(value < 0) return -1;
+	private int abs(double value) {
+		if (value < 0) return -1;
 		return 1;
 	}
 
@@ -88,8 +88,8 @@ public abstract class Mob extends Entity {
 			double yt = ((y + ya) - c / 2 * 16) / 16;
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
-			if(c % 2 == 0) ix = (int) Math.floor(xt);
-			if(c / 2 == 0) iy = (int) Math.floor(yt);
+			if (c % 2 == 0) ix = (int) Math.floor(xt);
+			if (c / 2 == 0) iy = (int) Math.floor(yt);
 			if (level.getTile(ix, iy).isSolid()) solid = true;
 		}
 		return solid;

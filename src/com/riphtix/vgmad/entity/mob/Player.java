@@ -39,21 +39,22 @@ public class Player extends Mob {
 	}
 
 	public void tick() {//public void update()
-		if(walking) animSprite.tick();
+		if (walking) animSprite.tick();
 		else animSprite.setFrame(0);
-		if(fireRate > 0) fireRate--;
+		if (fireRate > 0) fireRate--;
 		double xa = 0, ya = 0;
 		double speed = 1;
-		if (input.UP){
+		if (input.UP) {
 			animSprite = up;
 			ya -= speed;
-		} else if (input.DOWN){
+		} else if (input.DOWN) {
 			animSprite = down;
 			ya += speed;
-		} if (input.LEFT){
+		}
+		if (input.LEFT) {
 			animSprite = left;
 			xa -= speed;
-		} else if (input.RIGHT){
+		} else if (input.RIGHT) {
 			animSprite = right;
 			xa += speed;
 		}
@@ -66,10 +67,10 @@ public class Player extends Mob {
 		tickShooting();
 	}
 
-	private void clear(){
-		for(int i = 0; i < level.getProjectiles().size(); i++){
+	private void clear() {
+		for (int i = 0; i < level.getProjectiles().size(); i++) {
 			Projectile p = level.getProjectiles().get(i);
-			if(p.isRemoved()){
+			if (p.isRemoved()) {
 				level.getProjectiles().remove(i);
 			}
 		}
@@ -87,7 +88,7 @@ public class Player extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		screen.renderMob((int)(x - 16), (int)(y - 16), sprite);
+		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
 	}
 
 }

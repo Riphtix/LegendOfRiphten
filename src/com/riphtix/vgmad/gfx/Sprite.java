@@ -50,7 +50,7 @@ public class Sprite {
 		load();
 	}
 
-	public Sprite(int width, int height, int color){
+	public Sprite(int width, int height, int color) {
 		SIZE = -1;
 		this.width = width;
 		this.height = height;
@@ -66,18 +66,18 @@ public class Sprite {
 		setColor(color);
 	}
 
-	public Sprite(int[] pixels, int width, int height){
+	public Sprite(int[] pixels, int width, int height) {
 		SIZE = (width == height) ? width : -1;
 		this.width = width;
 		this.height = height;
 		this.pixels = pixels;
 	}
 
-	public int getWidth(){
+	public int getWidth() {
 		return width;
 	}
 
-	public int getHeight(){
+	public int getHeight() {
 		return height;
 	}
 

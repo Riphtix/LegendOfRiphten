@@ -5,7 +5,7 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 
-public class Dummy extends Mob{
+public class Dummy extends Mob {
 
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 3);
@@ -18,7 +18,7 @@ public class Dummy extends Mob{
 	private int xa = 0;
 	private int ya = 0;
 
-	public Dummy(int x, int y){
+	public Dummy(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
@@ -26,26 +26,27 @@ public class Dummy extends Mob{
 
 	public void tick() {//public void update()
 		time++; //time % 60 == 0 is 1 second
-		if(time % (random.nextInt(50) + 30) == 0){
+		if (time % (random.nextInt(50) + 30) == 0) {
 			xa = random.nextInt(3) - 1;
 			ya = random.nextInt(3) - 1;
-			if(random.nextInt(4) == 0){
+			if (random.nextInt(4) == 0) {
 				xa = 0;
 				ya = 0;
 			}
 		}
-		if(walking) animSprite.tick();
+		if (walking) animSprite.tick();
 		else animSprite.setFrame(0);
-		if (ya < 0){
+		if (ya < 0) {
 			animSprite = up;
 			dir = Direction.UP;
-		} else if (ya > 0){
+		} else if (ya > 0) {
 			animSprite = down;
 			dir = Direction.DOWN;
-		} if (xa < 0){
+		}
+		if (xa < 0) {
 			animSprite = left;
 			dir = Direction.LEFT;
-		} else if (xa > 0){
+		} else if (xa > 0) {
 			animSprite = right;
 			dir = Direction.RIGHT;
 		}
@@ -58,6 +59,6 @@ public class Dummy extends Mob{
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		screen.renderMob((int)(x - 16), (int)(y - 16), sprite);
+		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
 	}
 }

@@ -31,8 +31,8 @@ public class Level {
 
 	private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
-			if(n1.fCost < n0.fCost) return +1;
-			if(n1.fCost > n0.fCost) return -1;
+			if (n1.fCost < n0.fCost) return +1;
+			if (n1.fCost > n0.fCost) return -1;
 			return 0;
 		}
 	};
@@ -178,36 +178,55 @@ public class Level {
 		return players.get(0);
 	}
 
-	public List<Node> findPath(Vector2i start, Vector2i goal){
+	public List<Node> findPath(Vector2i start, Vector2i goal) {
 		List<Node> openList = new ArrayList<Node>();
 		List<Node> closedList = new ArrayList<Node>();
 		Node current = new Node(start, null, 0, getDistance(start, goal));
 		openList.add(current);
-		while(openList.size() > 0){
+		while (openList.size() > 0) {
 			Collections.sort(openList, nodeSorter);
 			current = openList.get(0);
-			if(current.tile.equals(goal)){
-
+			if (current.tile.equals(goal)) {
+				List<Node> path = new ArrayList<Node>();
+				while (current.parent != null) {
+					path.add(current);
+					current = current.parent;
+				}
+				openList.clear();
+				closedList.clear();
+				return path;
 			}
 			openList.remove(current);
 			closedList.add(current);
-			for(int i = 0; i < 9; i++){
-				if(i == 4) continue;
+			for (int i = 0; i < 9; i++) {
+				if (i == 4) continue;
 				int x = current.tile.getX();
 				int y = current.tile.getY();
 				int xi = (i % 3) - 1;
 				int yi = (i / 3) - 1;
 				Tile at = getTile(x + xi, y + yi);
-				if(at == null) continue;
-				if(at.isSolid()) continue;
+				if (at == null) continue;
+				if (at.isSolid()) continue;
 				Vector2i a = new Vector2i(x + xi, y + yi);
 				double gCost = current.gCost + getDistance(current.tile, a);
-
+				double hCost = getDistance(a, goal);
+				Node node = new Node(a, current, gCost, hCost);
+				if (vecInList(closedList, a) && gCost >= node.gCost) continue;
+				if (!vecInList(openList, a) || gCost < node.gCost) openList.add(node);
 			}
 		}
+		closedList.clear();
+		return null;
 	}
 
-	private double getDistance(Vector2i tile, Vector2i goal){
+	private boolean vecInList(List<Node> list, Vector2i vector) {
+		for (Node n : list) {
+			if (n.tile.equals(vector)) return true;
+		}
+		return false;
+	}
+
+	private double getDistance(Vector2i tile, Vector2i goal) {
 		double dx = tile.getX() - goal.getX();
 		double dy = tile.getY() - goal.getY();
 		return Math.sqrt((dx * dx) + (dy * dy));
@@ -215,12 +234,12 @@ public class Level {
 
 	public List<Entity> getEntities(Entity e, int radius) {
 		List<Entity> result = new ArrayList<Entity>();
-		int ex = (int)e.getX();
-		int ey = (int)e.getY();
+		int ex = (int) e.getX();
+		int ey = (int) e.getY();
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			int x = (int)entity.getX();
-			int y = (int)entity.getY();
+			int x = (int) entity.getX();
+			int y = (int) entity.getY();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
@@ -230,14 +249,14 @@ public class Level {
 		return result;
 	}
 
-	public List<Player> getPlayers(Entity e, int radius){
+	public List<Player> getPlayers(Entity e, int radius) {
 		List<Player> result = new ArrayList<Player>();
-		int ex = (int)e.getX();
-		int ey = (int)e.getY();
-		for(int i = 0; i < players.size(); i++){
+		int ex = (int) e.getX();
+		int ey = (int) e.getY();
+		for (int i = 0; i < players.size(); i++) {
 			Player player = players.get(i);
-			int x = (int)player.getX();
-			int y = (int)player.getY();
+			int x = (int) player.getX();
+			int y = (int) player.getY();
 			int dx = Math.abs(x - ex);
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));

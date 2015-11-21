@@ -47,33 +47,33 @@ public class Screen {
 		}
 	}
 
-	public void renderSheet(int xp, int yp, SpriteSheet sheet, boolean fixed){
-		if(fixed) {
+	public void renderSheet(int xp, int yp, SpriteSheet sheet, boolean fixed) {
+		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
 		}
 
-		for(int y = 0; y < sheet.HEIGHT; y++){
+		for (int y = 0; y < sheet.HEIGHT; y++) {
 			int ya = y + yp;
-			for(int x = 0; x < sheet.WIDTH; x++){
+			for (int x = 0; x < sheet.WIDTH; x++) {
 				int xa = x + xp;
-				if(xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
 				pixels[xa + ya * width] = sheet.pixels[x + y * sheet.WIDTH];
 			}
 		}
 	}
 
-	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed){
-		if(fixed) {
+	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) {
+		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
 		}
 
-		for(int y = 0; y < sprite.getHeight(); y++){
+		for (int y = 0; y < sprite.getHeight(); y++) {
 			int ya = y + yp;
-			for(int x = 0; x < sprite.getWidth(); x++){
+			for (int x = 0; x < sprite.getWidth(); x++) {
 				int xa = x + xp;
-				if(xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
 				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getWidth()];
 			}
 		}

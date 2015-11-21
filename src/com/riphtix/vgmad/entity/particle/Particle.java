@@ -40,7 +40,7 @@ public class Particle extends Entity {
 		if (time > life) remove();
 		za -= 0.1;
 
-		if(zz < 0){
+		if (zz < 0) {
 			zz = 0;
 			za *= -0.55;
 			xa *= 0.4;
@@ -50,8 +50,8 @@ public class Particle extends Entity {
 		move(xx + xa, (yy + ya) + (zz + za));
 	}
 
-	private void move(double x, double y){
-		if(collision(x, y)){
+	private void move(double x, double y) {
+		if (collision(x, y)) {
 			this.xa *= -0.5;
 			this.ya *= -0.5;
 			this.za *= -0.5;
@@ -68,8 +68,8 @@ public class Particle extends Entity {
 			double yt = (y - c / 2 * 16) / 16;
 			int ix = (int) Math.ceil(xt);
 			int iy = (int) Math.ceil(yt);
-			if(c % 2 == 0) ix = (int) Math.floor(xt);
-			if(c / 2 == 0) iy = (int) Math.floor(yt);
+			if (c % 2 == 0) ix = (int) Math.floor(xt);
+			if (c / 2 == 0) iy = (int) Math.floor(yt);
 			if (level.getTile(ix, iy).isSolid()) solid = true;
 		}
 		return solid;
