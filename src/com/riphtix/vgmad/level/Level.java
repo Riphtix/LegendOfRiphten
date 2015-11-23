@@ -226,7 +226,7 @@ public class Level {
 				if (at == null) continue;
 				if (at.isSolid()) continue;
 				Vector2i a = new Vector2i(x + xi, y + yi);
-				double gCost = current.gCost + getDistance(current.tile, a);
+				double gCost = current.gCost + (getDistance(current.tile, a) == 1 ? 1 : 0.95);
 				double hCost = getDistance(a, goal);
 				Node node = new Node(a, current, gCost, hCost);
 				if (vecInList(closedList, a) && gCost >= node.gCost) continue;
@@ -247,7 +247,8 @@ public class Level {
 	private double getDistance(Vector2i tile, Vector2i goal) {
 		double dx = tile.getX() - goal.getX();
 		double dy = tile.getY() - goal.getY();
-		return Math.sqrt((dx * dx) + (dy * dy));
+		double distance = Math.sqrt(dx * dx + dy * dy);
+		return distance == 1 ? 1 : 0.95;
 	}
 
 	public List<Entity> getEntities(Entity e, int radius) {

@@ -3,6 +3,7 @@ package com.riphtix.vgmad.level;
 import com.riphtix.vgmad.entity.mob.AStar;
 import com.riphtix.vgmad.entity.mob.Chaser;
 import com.riphtix.vgmad.entity.mob.Dummy;
+import com.riphtix.vgmad.entity.mob.Shooter;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -29,6 +30,7 @@ public class SpawnLevel extends Level {
 		add(new Dummy(32, 31));
 		add(new Chaser(25, 31));
 		add(new AStar(37, 31));
+		add(new Shooter(20, 31));
 	}
 
 	protected void generateLevel() {
