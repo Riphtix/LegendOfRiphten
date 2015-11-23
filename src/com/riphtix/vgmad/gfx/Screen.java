@@ -11,29 +11,36 @@ public class Screen {
 	public int width;
 	public int height;
 
+	//Map size in tiles
 	private final int MAP_WIDTH = 64;
 	private final int MAP_HEIGHT = 64;
 	private final int MAP_SIZE = MAP_WIDTH * MAP_HEIGHT;
+	//Tile size in pixels
 	private final int TILE_WIDTH = 16;
 	private final int TILE_WIDTH_SHIFT = 4;
 	private final int TILE_HEIGHT = 16;
 	private final int TILE_HEIGHT_SHIFT = 4;
 	private final int TILE_SIZE = TILE_WIDTH * TILE_HEIGHT;
 
+	//Screen offsets
 	public int xOffset;
 	public int yOffset;
 
+	//color control
 	public int[] pixels;
+	//# of tiles in the map
 	public int[] tiles = new int[MAP_SIZE];
 
 	private Random random = new Random();
 
+	//Screen Constructor
 	public Screen(int width, int height) {
 		this.width = width;
 		this.height = height;
 
 		pixels = new int[width * height];
-		
+
+		//random colors
 		for (int i = 0; i < MAP_SIZE; i++) {
 			//use tiles[i] = 0x(hex code) to set a specific color
 			tiles[i] = random.nextInt(0xffffff);
@@ -41,18 +48,21 @@ public class Screen {
 		//tiles[0] = 0x000000;
 	}
 
+	//clears the screen
 	public void clear() {
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = 0;
 		}
 	}
 
+	//draws a SpriteSheet to the screen
 	public void renderSheet(int xp, int yp, SpriteSheet sheet, boolean fixed) {
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
 		}
 
+		//sets the color for every x and y value
 		for (int y = 0; y < sheet.HEIGHT; y++) {
 			int ya = y + yp;
 			for (int x = 0; x < sheet.WIDTH; x++) {
@@ -63,12 +73,15 @@ public class Screen {
 		}
 	}
 
+	//draws a sprite to the screen
 	public void renderSprite(int xp, int yp, Sprite sprite, boolean fixed) {
+		//if fixed is true then the sprite doesn't move but if it is false it does
 		if (fixed) {
 			xp -= xOffset;
 			yp -= yOffset;
 		}
 
+		//sets the color for every x and y value
 		for (int y = 0; y < sprite.getHeight(); y++) {
 			int ya = y + yp;
 			for (int x = 0; x < sprite.getWidth(); x++) {
@@ -79,9 +92,12 @@ public class Screen {
 		}
 	}
 
+	//draws a projectile to the screen
 	public void renderProjectile(int xp, int yp, Projectile p) {
 		xp -= xOffset;
 		yp -= yOffset;
+
+		//sets the color for every x and y value
 		for (int y = 0; y < p.getSpriteSize(); y++) {
 			int ya = y + yp;
 			for (int x = 0; x < p.getSpriteSize(); x++) {
@@ -90,6 +106,8 @@ public class Screen {
 				if (xa < 0) xa = 0;
 				if (ya < 0) ya = 0;
 				int col = p.getSprite().pixels[x + y * p.getSpriteSize()];
+				//this allows me to use "True Pink" (ff00ff) and a sort of purple (7f007f) color as a grid on my sprites
+				//and it will only render if the pixels' colors are not pink or purple
 				if (col != 0xffff00ff && col != 0xff7f007f) {
 					pixels[xa + ya * width] = col;
 				}
@@ -97,9 +115,12 @@ public class Screen {
 		}
 	}
 
+	//draws a tile to the screen
 	public void renderTile(int xp, int yp, Tile tile) {
 		xp -= xOffset;
 		yp -= yOffset;
+
+		//sets the color for every x and y value
 		for (int y = 0; y < tile.sprite.SIZE; y++) {
 			int ya = y + yp;
 			for (int x = 0; x < tile.sprite.SIZE; x++) {
@@ -112,6 +133,7 @@ public class Screen {
 		}
 	}
 
+	//draws a mob to the screen (including players)
 	public void renderMob(int xp, int yp, Sprite sprite) {
 		xp -= xOffset;
 		yp -= yOffset;
@@ -130,6 +152,7 @@ public class Screen {
 		}
 	}
 
+	//sets the x and y offsets if needed
 	public void setOffset(int xOffset, int yOffset) {
 		this.xOffset = xOffset;
 		this.yOffset = yOffset;

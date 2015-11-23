@@ -18,23 +18,29 @@ public class SpriteSheet {
 	//Mobs
 	public static SpriteSheet mobs = new SpriteSheet("/entities/mobs/mobs.png", 1024);
 
-	public static SpriteSheet player = new SpriteSheet("/entities/mobs/player/maleElf.png", 96, 128);
-	public static SpriteSheet player_down = new SpriteSheet(player, 0, 0, 3, 1, 32);
-	public static SpriteSheet player_up = new SpriteSheet(player, 0, 3, 3, 1, 32);
-	public static SpriteSheet player_left = new SpriteSheet(player, 0, 1, 3, 1, 32);
-	public static SpriteSheet player_right = new SpriteSheet(player, 0, 2, 3, 1, 32);
+	public static SpriteSheet maleElf = new SpriteSheet("/entities/mobs/player/maleElf.png", 96, 128);
+	public static SpriteSheet maleElf_down = new SpriteSheet(maleElf, 0, 0, 3, 1, 32);
+	public static SpriteSheet maleElf_up = new SpriteSheet(maleElf, 0, 3, 3, 1, 32);
+	public static SpriteSheet maleElf_left = new SpriteSheet(maleElf, 0, 1, 3, 1, 32);
+	public static SpriteSheet maleElf_right = new SpriteSheet(maleElf, 0, 2, 3, 1, 32);
 
-	public static SpriteSheet dummy = new SpriteSheet("/entities/mobs/player/femaleElf.png", 96, 128);
-	public static SpriteSheet dummy_down = new SpriteSheet(dummy, 0, 0, 3, 1, 32);
-	public static SpriteSheet dummy_up = new SpriteSheet(dummy, 0, 3, 3, 1, 32);
-	public static SpriteSheet dummy_left = new SpriteSheet(dummy, 0, 1, 3, 1, 32);
-	public static SpriteSheet dummy_right = new SpriteSheet(dummy, 0, 2, 3, 1, 32);
+	public static SpriteSheet femaleElf = new SpriteSheet("/entities/mobs/player/femaleElf.png", 96, 128);
+	public static SpriteSheet femaleElf_down = new SpriteSheet(femaleElf, 0, 0, 3, 1, 32);
+	public static SpriteSheet femaleElf_up = new SpriteSheet(femaleElf, 0, 3, 3, 1, 32);
+	public static SpriteSheet femaleElf_left = new SpriteSheet(femaleElf, 0, 1, 3, 1, 32);
+	public static SpriteSheet femaleElf_right = new SpriteSheet(femaleElf, 0, 2, 3, 1, 32);
 
-	public static SpriteSheet chaser = new SpriteSheet("/entities/mobs/player/femaleFighter.png", 96, 128);
-	public static SpriteSheet chaser_down = new SpriteSheet(chaser, 0, 0, 3, 1, 32);
-	public static SpriteSheet chaser_up = new SpriteSheet(chaser, 0, 3, 3, 1, 32);
-	public static SpriteSheet chaser_left = new SpriteSheet(chaser, 0, 1, 3, 1, 32);
-	public static SpriteSheet chaser_right = new SpriteSheet(chaser, 0, 2, 3, 1, 32);
+	public static SpriteSheet femaleFighter = new SpriteSheet("/entities/mobs/player/femaleFighter.png", 96, 128);
+	public static SpriteSheet femaleFighter_down = new SpriteSheet(femaleFighter, 0, 0, 3, 1, 32);
+	public static SpriteSheet femaleFighter_up = new SpriteSheet(femaleFighter, 0, 3, 3, 1, 32);
+	public static SpriteSheet femaleFighter_left = new SpriteSheet(femaleFighter, 0, 1, 3, 1, 32);
+	public static SpriteSheet femaleFighter_right = new SpriteSheet(femaleFighter, 0, 2, 3, 1, 32);
+
+	public static SpriteSheet ghost = new SpriteSheet("/entities/mobs/ai/ghost.png", 96, 128);
+	public static SpriteSheet ghost_down = new SpriteSheet(ghost, 0, 0, 3, 1, 32);
+	public static SpriteSheet ghost_up = new SpriteSheet(ghost, 0, 3, 3, 1, 32);
+	public static SpriteSheet ghost_left = new SpriteSheet(ghost, 0, 1, 3, 1, 32);
+	public static SpriteSheet ghost_right = new SpriteSheet(ghost, 0, 2, 3, 1, 32);
 
 	//Other Entities
 	public static SpriteSheet projectiles = new SpriteSheet("/entities/projectiles/projectiles.png", 256);

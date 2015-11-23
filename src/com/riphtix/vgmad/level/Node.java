@@ -4,6 +4,7 @@ import com.riphtix.vgmad.util.Vector2i;
 
 public class Node {
 
+	//variables
 	public Vector2i tile;
 	public Node parent;
 	public double fCost, gCost, hCost;

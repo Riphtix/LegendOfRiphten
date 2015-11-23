@@ -8,10 +8,10 @@ import java.util.List;
 
 public class Chaser extends Mob {
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.chaser_down, 32, 32, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.chaser_up, 32, 32, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.chaser_left, 32, 32, 3);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.chaser_right, 32, 32, 3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.femaleFighter_down, 32, 32, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.femaleFighter_up, 32, 32, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.femaleFighter_left, 32, 32, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.femaleFighter_right, 32, 32, 3);
 
 	private AnimatedSprite animSprite = down;
 
@@ -32,9 +32,9 @@ public class Chaser extends Mob {
 		if (players.size() > 0) {
 			Player player = players.get(0);
 			if (x < player.getX()) xa += speed;
-			if (x > player.getX()) xa -= speed;
+			else if (x > player.getX()) xa -= speed;
 			if (y < player.getY()) ya += speed;
-			if (y > player.getY()) ya -= speed;
+			else if (y > player.getY()) ya -= speed;
 		}
 		if (xa != 0 || ya != 0) {
 			move(xa, ya);

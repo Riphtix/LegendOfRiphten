@@ -20,8 +20,8 @@ public class Sprite {
 
 	//Entities
 	//Mobs
-	public static Sprite playerDefault = new Sprite(32, 0, 0, SpriteSheet.player_down);
-	public static Sprite dummyDefault = new Sprite(32, 0, 0, SpriteSheet.dummy_down);
+	public static Sprite playerDefault = new Sprite(32, 0, 0, SpriteSheet.maleElf_down);
+	public static Sprite dummyDefault = new Sprite(32, 0, 0, SpriteSheet.femaleElf_down);
 
 	//Projectile
 	public static Sprite fireBoltSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);

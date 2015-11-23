@@ -16,18 +16,37 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-
-//1006 lines of code Date: 11/12/15
+//"" is a string
+//int 1
+//double 1.0
+//float 1.0F
+//long 1L
+//boolean true/false
+//&& is if(a and b)
+//|| is if(a or b)
+//== is if(a equals b)
+//++ adds one
+//-- subtracts one
+//! is not
+//<< is bit-shifting left and a faster way to multiply
+//>> is bit-shifting right and a faster way to divide
 public class Game extends Canvas implements Runnable {
+	//default stuff don't touch
 	private static final long serialVersionUID = 1L;
 
+	//screen size stuff
+	//width * scale = screen width
+	//height * scale = screen height
 	public static final int WIDTH = 300;
 	public static final int HEIGHT = WIDTH / 16 * 9;
 	public static final int SCALE = 3;
 	public static String title = "VGMaD: The Legends of Riphten";
 
+	//Variables
+	//Built in
 	private Thread thread;
 	private JFrame frame;
+	//Custom Made
 	private Screen screen;
 	private Keyboard key;
 	private Level level;
@@ -35,13 +54,17 @@ public class Game extends Canvas implements Runnable {
 
 	private boolean running = false;
 
+	//Image storage
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
+	//Game constructor
 	public Game() {
+		//Sets the screen size
 		Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
 		setPreferredSize(size);
 
+		//Initializing variables
 		screen = new Screen(WIDTH, HEIGHT);
 		frame = new JFrame();
 		key = new Keyboard();
@@ -125,7 +148,6 @@ public class Game extends Canvas implements Runnable {
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
 		level.render((int) xScroll, (int) yScroll, screen);
-		//screen.renderSheet(40, 40, SpriteSheet.player_down, false);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];

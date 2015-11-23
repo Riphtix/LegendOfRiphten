@@ -16,10 +16,10 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking;
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.player_down, 32, 32, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.player_up, 32, 32, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.player_left, 32, 32, 3);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.player_right, 32, 32, 3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.maleElf_down, 32, 32, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.maleElf_up, 32, 32, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.maleElf_left, 32, 32, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.maleElf_right, 32, 32, 3);
 
 	private AnimatedSprite animSprite = down;
 
@@ -43,7 +43,7 @@ public class Player extends Mob {
 		else animSprite.setFrame(0);
 		if (fireRate > 0) fireRate--;
 		double xa = 0, ya = 0;
-		double speed = 1;
+		double speed = 1.5;
 		if (input.UP) {
 			animSprite = up;
 			ya -= speed;

@@ -2,15 +2,14 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
-import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 
 public class Dummy extends Mob {
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.dummy_down, 32, 32, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.dummy_up, 32, 32, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.dummy_left, 32, 32, 3);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.dummy_right, 32, 32, 3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.femaleElf_down, 32, 32, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.femaleElf_up, 32, 32, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.femaleElf_left, 32, 32, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.femaleElf_right, 32, 32, 3);
 
 	private AnimatedSprite animSprite = down;
 

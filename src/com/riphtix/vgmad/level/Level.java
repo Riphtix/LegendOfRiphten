@@ -16,19 +16,19 @@ import java.util.List;
 
 public class Level {
 
-	protected int width;
-	protected int height;
-	protected int[] tilesInt;
-	protected int[] tiles;
+	//Variables
+	protected int width, height;
+	protected int[] tilesInt, tiles;
 	private static Screen screen;
 	public Keyboard key;
 
+	//lists of entities for rendering and tracking
 	private List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
-
 	private List<Player> players = new ArrayList<Player>();
 
+	//used to compare 2 nodes for mob ai navigation
 	private Comparator<Node> nodeSorter = new Comparator<Node>() {
 		public int compare(Node n0, Node n1) {
 			if (n1.fCost < n0.fCost) return +1;
@@ -37,8 +37,10 @@ public class Level {
 		}
 	};
 
+	//creates a new level
 	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png");
 
+	//Level Constructor
 	public Level(int width, int height) {
 		this.width = width;
 		this.height = height;
@@ -46,19 +48,23 @@ public class Level {
 		generateLevel();
 	}
 
+	//Level Constructor
 	public Level(String path) {
 		loadLevel(path);
 		generateLevel();
 	}
 
+	//generates a level (overridden by other classes)
 	protected void generateLevel() {
 
 	}
 
+	//loads a level from a file (overridden by other classes
 	protected void loadLevel(String path) {
 
 	}
 
+	//updates the entities
 	public void tick() {//public void update()
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
@@ -75,6 +81,7 @@ public class Level {
 		remove();
 	}
 
+	//removes the entities from the map
 	private void remove() {
 		for (int i = 0; i < entities.size(); i++) {
 			if (entities.get(i).isRemoved()) entities.remove(i);
@@ -92,18 +99,22 @@ public class Level {
 		}
 	}
 
+	//returns the projectile list
 	public List<Projectile> getProjectiles() {
 		return projectiles;
 	}
 
+	//returns the entity list
 	public List<Entity> getEntities() {
 		return entities;
 	}
 
+	//keeps track of the timer
 	private void time() {
 
 	}
 
+	//collision with square objects
 	public boolean tileCollision(int x, int y, int size, int xOffset, int yOffset) {
 		boolean solid = false;
 		for (int c = 0; c < 4; c++) {
@@ -114,6 +125,7 @@ public class Level {
 		return solid;
 	}
 
+	//collision with uneven objects (width 2 height 3)
 	public boolean tileCollision(int x, int y, int width, int height, int xOffset, int yOffset) {
 		boolean solid = false;
 		for (int c = 0; c < 4; c++) {
@@ -124,6 +136,7 @@ public class Level {
 		return solid;
 	}
 
+	//renders all of the lists to the screen
 	public void render(int xScroll, int yScroll, Screen screen) {
 		this.screen = screen;
 		screen.setOffset(xScroll, yScroll);
@@ -153,6 +166,7 @@ public class Level {
 		//screen.renderSprite(Mouse.getX() + 56, Mouse.getY() + 128 * 2, Sprite.aimBox);
 	}
 
+	//adds an entity to its respective list
 	public void add(Entity e) {
 		e.init(this);
 		if (e instanceof Particle) {
@@ -166,18 +180,22 @@ public class Level {
 		}
 	}
 
+	//returns a list of players
 	public List<Player> getPlayer() {
 		return players;
 	}
 
+	//returns a specific player at the index given (i)
 	public Player getPlayerAt(int i) {
 		return players.get(i);
 	}
 
+	//gets the player on your machine
 	public Player getClientPlayer() {
 		return players.get(0);
 	}
 
+	//pathfinder method break apart in depth later
 	public List<Node> findPath(Vector2i start, Vector2i goal) {
 		List<Node> openList = new ArrayList<Node>();
 		List<Node> closedList = new ArrayList<Node>();
