@@ -42,6 +42,12 @@ public class SpriteSheet {
 	public static SpriteSheet ghost_left = new SpriteSheet(ghost, 0, 1, 3, 1, 32);
 	public static SpriteSheet ghost_right = new SpriteSheet(ghost, 0, 2, 3, 1, 32);
 
+	public static SpriteSheet sorceress = new SpriteSheet("/entities/mobs/ai/sorceress.png", 96, 128);
+	public static SpriteSheet sorceress_down = new SpriteSheet(sorceress, 0, 0, 3, 1, 32);
+	public static SpriteSheet sorceress_up = new SpriteSheet(sorceress, 0, 3, 3, 1, 32);
+	public static SpriteSheet sorceress_left = new SpriteSheet(sorceress, 0, 1, 3, 1, 32);
+	public static SpriteSheet sorceress_right = new SpriteSheet(sorceress, 0, 2, 3, 1, 32);
+
 	//Other Entities
 	public static SpriteSheet projectiles = new SpriteSheet("/entities/projectiles/projectiles.png", 256);
 

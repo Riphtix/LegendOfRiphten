@@ -20,8 +20,11 @@ public class Sprite {
 
 	//Entities
 	//Mobs
-	public static Sprite playerDefault = new Sprite(32, 0, 0, SpriteSheet.maleElf_down);
-	public static Sprite dummyDefault = new Sprite(32, 0, 0, SpriteSheet.femaleElf_down);
+	public static Sprite maleElfDefault = new Sprite(32, 0, 0, SpriteSheet.maleElf_down);
+	public static Sprite femaleElfDefault = new Sprite(32, 0, 0, SpriteSheet.femaleElf_down);
+	public static Sprite femaleFighterDefault = new Sprite(32, 0, 0, SpriteSheet.femaleFighter_down);
+	public static Sprite ghostDefault = new Sprite(32, 0, 0, SpriteSheet.ghost_down);
+	public static Sprite sorceressDefault = new Sprite(32, 0, 0, SpriteSheet.sorceress_down);
 
 	//Projectile
 	public static Sprite fireBoltSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);

@@ -81,7 +81,7 @@ public class Player extends Mob {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
-			shoot(x, y, dir);
+			shoot(x, y, dir, this);
 			fireRate = MageProjectile.FIRE_RATE;
 		}
 	}

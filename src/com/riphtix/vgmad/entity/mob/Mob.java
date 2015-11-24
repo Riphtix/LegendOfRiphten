@@ -75,9 +75,11 @@ public abstract class Mob extends Entity {
 
 	public abstract void render(Screen screen);
 
-	protected void shoot(double x, double y, double dir) {
-		//dir *= 180 / Math.PI;
-		Projectile p = new MageProjectile(x, y, dir);
+	protected void shoot(double x, double y, double dir, Entity entity) {
+		Projectile p = null;
+		if(entity instanceof Shooter || entity instanceof Player) {
+			p = new MageProjectile(x, y, dir);
+		}
 		level.add(p);
 	}
 
