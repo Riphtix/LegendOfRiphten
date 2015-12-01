@@ -7,6 +7,7 @@ import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.util.Debug;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
@@ -113,6 +114,7 @@ public class Shooter extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
+		Debug.drawRect(screen, 25 * 16, 32 * 16, 31, 31, true);
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
 	}
 }
