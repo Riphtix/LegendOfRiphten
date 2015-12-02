@@ -1,14 +1,11 @@
 package com.riphtix.vgmad;
 
 import com.riphtix.vgmad.entity.mob.Player;
-import com.riphtix.vgmad.gfx.Screen;
-import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.gfx.*;
+import com.riphtix.vgmad.gfx.Font;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.Level;
-import com.riphtix.vgmad.level.RandomLevel;
-import com.riphtix.vgmad.level.SpawnLevel;
 import com.riphtix.vgmad.level.TileCoordinate;
 
 import javax.swing.*;
@@ -16,6 +13,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+
 //"" is a string
 //int 1
 //double 1.0
@@ -48,6 +46,7 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	//Custom Made
 	private Screen screen;
+	private Font font;
 	private Keyboard key;
 	private Level level;
 	private Player player;
@@ -72,6 +71,7 @@ public class Game extends Canvas implements Runnable {
 		TileCoordinate playerSpawn = new TileCoordinate(32, 28);
 		player = new Player(playerSpawn.x(), playerSpawn.y(), key);
 		level.add(player);
+		font = new Font();
 
 		Mouse mouse = new Mouse();
 		addKeyListener(key);
@@ -148,16 +148,14 @@ public class Game extends Canvas implements Runnable {
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
 		level.render((int) xScroll, (int) yScroll, screen);
+		font.render(screen);
 
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.setColor(Color.BLUE);
-		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		g.setFont(new Font("Verdana", 0, 24));
 		//g.fillRect(Mouse.getX() - 24, Mouse.getY() - 24, 16 * 3, 16 * 3);
 		//g.drawString("x: " + Mouse.getX() + " y: " + Mouse.getY(), 50, 50);
 		//g.drawString("x: " + (Mouse.getX() - getWindowWidth() / 2) + " y: " + (Mouse.getY() - getWindowHeight() / 2), 50, 75);

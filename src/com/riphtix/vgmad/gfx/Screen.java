@@ -63,12 +63,12 @@ public class Screen {
 		}
 
 		//sets the color for every x and y value
-		for (int y = 0; y < sheet.HEIGHT; y++) {
+		for (int y = 0; y < sheet.getHeight(); y++) {
 			int ya = y + yp;
-			for (int x = 0; x < sheet.WIDTH; x++) {
+			for (int x = 0; x < sheet.getWidth(); x++) {
 				int xa = x + xp;
 				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-				pixels[xa + ya * width] = sheet.pixels[x + y * sheet.WIDTH];
+				pixels[xa + ya * width] = sheet.getPixels()[x + y * sheet.getWidth()];
 			}
 		}
 	}
