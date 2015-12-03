@@ -28,6 +28,7 @@ public class Player extends Mob {
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = animSprite.getSprite();
+		fireRate = MageProjectile.FIRE_RATE;
 	}
 
 	public Player(int x, int y, Keyboard input) {

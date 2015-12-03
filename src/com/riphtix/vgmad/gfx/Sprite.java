@@ -27,7 +27,8 @@ public class Sprite {
 	public static Sprite sorceressDefault = new Sprite(32, 0, 0, SpriteSheet.sorceress_down);
 
 	//Projectile
-	public static Sprite fireBoltSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);
+	public static Sprite cannonBallSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);
+	public static Sprite fireBoltSprite = new Sprite(16, 0, 0, SpriteSheet.projectiles);
 
 	//Particle
 	public static Sprite defaultParticle = new Sprite(3, 0xffaaaaaa);

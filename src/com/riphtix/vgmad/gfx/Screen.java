@@ -87,7 +87,27 @@ public class Screen {
 			for (int x = 0; x < sprite.getWidth(); x++) {
 				int xa = x + xp;
 				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
-				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getWidth()];
+				int col = sprite.pixels[x + y * sprite.getWidth()];
+				if(col != 0xffff00ff && col != 0xff7f007f) pixels[xa + ya * width] = col;
+			}
+		}
+	}
+
+	public void renderTextCharacter(int xp, int yp, Sprite sprite, int color, boolean fixed) {
+		//if fixed is true then the sprite doesn't move but if it is false it does
+		if (fixed) {
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+
+		//sets the color for every x and y value
+		for (int y = 0; y < sprite.getHeight(); y++) {
+			int ya = y + yp;
+			for (int x = 0; x < sprite.getWidth(); x++) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height) continue;
+				int col = sprite.pixels[x + y * sprite.getWidth()];
+				if(col != 0xffff00ff && col != 0xff7f007f) pixels[xa + ya * width] = color;
 			}
 		}
 	}
@@ -113,6 +133,71 @@ public class Screen {
 				}
 			}
 		}
+	}
+
+	public void renderProjectile(int xp, int yp, Projectile p, double angle) {
+		xp -= xOffset;
+		yp -= yOffset;
+
+		//sets the color for every x and y value
+		for (int y = 0; y < p.getSpriteSize(); y++) {
+			int ya = y + yp;
+			for (int x = 0; x < p.getSpriteSize(); x++) {
+				int xa = x + xp;
+				if (xa < -p.getSpriteSize() || xa >= width || ya < 0 || ya >= height) break;
+				if (xa < 0) xa = 0;
+				int[] rpixels = rotate(p.getSprite().pixels, p.getSpriteSize(), p.getSpriteSize(), angle);
+				int col = rpixels[x + y * p.getSpriteSize()];
+				//this allows me to use "True Pink" (ff00ff) and a sort of purple (7f007f) color as a grid on my sprites
+				//and it will only render if the pixels' colors are not pink or purple
+				if (col != 0xffff00ff && col != 0xff7f007f) {
+					pixels[xa + ya * width] = col;
+				}
+			}
+		}
+	}
+
+	private int[] rotate(int[] pixels, int width, int height, double angle){
+		int[] result = new int[width * height];
+
+		double nxx = rotateX(-angle, 1.0, 0.0);
+		double nxy = rotateY(-angle, 1.0, 0.0);
+		double nyx = rotateX(-angle, 0.0, 1.0);
+		double nyy = rotateY(-angle, 0.0, 1.0);
+
+		double x0 = rotateX(-angle, -width / 2.0, -height / 2.0) + width / 2.0;
+		double y0 = rotateY(-angle, -width / 2.0, -height / 2.0) + height / 2.0;
+
+		for(int y = 0; y < height; y++){
+			double x1 = x0;
+			double y1 = y0;
+			for(int x = 0; x < width; x++){
+				int xx = (int) x1;
+				int yy = (int) y1;
+				int col = 0;
+				if(xx < 0 || xx >= width || yy < 0 || yy >= height) col = 0xffff00ff;
+				else col = pixels[xx + yy * width];
+				result[x + y * width] = col;
+				x1 += nxx;
+				y1 += nxy;
+			}
+			x0 += nyx;
+			y0 += nyy;
+		}
+
+		return result;
+	}
+
+	private double rotateX(double angle, double x, double y){
+		double cos = Math.cos(angle);
+		double sin = Math.sin(angle);
+		return x * cos + y * -sin;
+	}
+
+	private double rotateY(double angle, double x, double y){
+		double cos = Math.cos(angle);
+		double sin = Math.sin(angle);
+		return x * sin + y * cos;
 	}
 
 	//draws a tile to the screen

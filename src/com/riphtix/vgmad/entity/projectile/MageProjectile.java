@@ -11,7 +11,7 @@ public class MageProjectile extends Projectile {
 
 	public MageProjectile(double x, double y, double dir) {
 		super(x, y, dir);
-		range = 200;
+		range = 336;
 		speed = 4;
 		damage = 20;
 		sprite = Sprite.fireBoltSprite;
@@ -44,6 +44,6 @@ public class MageProjectile extends Projectile {
 	}
 
 	public void render(Screen screen) {
-		screen.renderProjectile((int) x - 8, (int) y - 4, this);
+		screen.renderProjectile((int) x - 8, (int) y - 4, this, angle);
 	}
 }

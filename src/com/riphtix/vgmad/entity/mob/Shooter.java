@@ -2,6 +2,7 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.particle.Particle;
+import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -27,10 +28,13 @@ public class Shooter extends Mob {
 
 	private Entity rand = null;
 
+	private int firerate = 0;
+
 	public Shooter(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
+		firerate = MageProjectile.FIRE_RATE;
 	}
 
 	public void tick() {
@@ -45,6 +49,7 @@ public class Shooter extends Mob {
 		}
 		if (walking) animSprite.tick();
 		else animSprite.setFrame(0);
+		if(firerate > 0) firerate--;
 		if (ya < 0) {
 			animSprite = up;
 			dir = Direction.UP;
@@ -78,11 +83,12 @@ public class Shooter extends Mob {
 		}
 
 		if (rand != null) {
-			if (!(rand instanceof Particle) && !(rand instanceof ParticleSpawner)) {
+			if (!(rand instanceof Particle) && !(rand instanceof ParticleSpawner) && firerate <= 0) {
 				double dx = rand.getX() - x;
 				double dy = rand.getY() - y;
 				double dir = Math.atan2(dy, dx);
 				shoot(x, y, dir, this);
+				firerate = MageProjectile.FIRE_RATE;
 			}
 		}
 	}
@@ -103,11 +109,12 @@ public class Shooter extends Mob {
 		}
 
 		if (closest != null) {
-			if (!(closest instanceof Particle) && !(closest instanceof ParticleSpawner)) {
+			if (!(closest instanceof Particle) && !(closest instanceof ParticleSpawner) && firerate <= 0) {
 				double dx = closest.getX() - x;
 				double dy = closest.getY() - y;
 				double dir = Math.atan2(dy, dx);
 				shoot(x, y, dir, this);
+				firerate = MageProjectile.FIRE_RATE;
 			}
 		}
 	}
