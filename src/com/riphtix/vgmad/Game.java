@@ -160,7 +160,6 @@ public class Game extends Canvas implements Runnable {
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
 		level.render((int) xScroll, (int) yScroll, screen);
-		uiManager.render(screen);
 		//font.render(0, 0, -2, 0xff000000, "I have won!!!", screen);
 
 		for (int i = 0; i < pixels.length; i++) {
@@ -169,6 +168,7 @@ public class Game extends Canvas implements Runnable {
 
 		Graphics g = bs.getDrawGraphics();
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		uiManager.render(g);
 		//g.fillRect(Mouse.getX() - 24, Mouse.getY() - 24, 16 * 3, 16 * 3);
 		//g.drawString("x: " + Mouse.getX() + " y: " + Mouse.getY(), 50, 50);
 		//g.drawString("x: " + (Mouse.getX() - getWindowWidth() / 2) + " y: " + (Mouse.getY() - getWindowHeight() / 2), 50, 75);

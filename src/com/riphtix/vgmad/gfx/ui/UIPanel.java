@@ -5,18 +5,19 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.util.Vector2i;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
 public class UIPanel {
 	private List<UIComponent> components = new ArrayList<UIComponent>();
-	private Vector2i position;
+	private Vector2i position, size;
+	private Color color;
 
-	private Sprite sprite;
-
-	public UIPanel(Vector2i position) {
+	public UIPanel(Vector2i position, Vector2i size) {
 		this.position = position;
-		sprite = new Sprite(80, Game.getWindowHeight(), 0xcacaca);
+		this.size = size;
+		color = new Color(0xff606060);
 	}
 
 	public void addComponent(UIComponent component){
@@ -30,10 +31,11 @@ public class UIPanel {
 		}
 	}
 
-	public void render(Screen screen) {
-		screen.renderSprite(position.x, position.y, sprite, false);
+	public void render(Graphics g) {
+		g.setColor(color);
+		g.fillRect(position.x, position.y, size.x, size.y);
 		for (UIComponent component : components) {
-			component.render(screen);
+			component.render(g);
 		}
 	}
 }

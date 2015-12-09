@@ -136,7 +136,7 @@ public class SpriteSheet {
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (Exception e){
-			System.err.println(" failed!");
+			System.err.println("Trying to load: " + path + "..." + " failed!");
 		}
 
 	}

@@ -2,6 +2,7 @@ package com.riphtix.vgmad.gfx.ui;
 
 import com.riphtix.vgmad.gfx.Screen;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,9 +24,9 @@ public class UIManager {
 		}
 	}
 
-	public void render(Screen screen){
+	public void render(Graphics g){
 		for(UIPanel panel: panels){
-			panel.render(screen);
+			panel.render(g);
 		}
 	}
 }

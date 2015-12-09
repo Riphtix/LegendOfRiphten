@@ -38,9 +38,9 @@ public class Player extends Mob {
 		fireRate = MageProjectile.FIRE_RATE;
 
 		ui = Game.getUIManager();
-		UIPanel panel = new UIPanel(new Vector2i(300 - 80, 0));
+		UIPanel panel = new UIPanel(new Vector2i((300 - 100) * 3, 0), new Vector2i(100 * 3, 168 * 3));
 		ui.addPanel(panel);
-		panel.addComponent(new UILabel(new Vector2i(0,0), "Hello"));
+		panel.addComponent(new UILabel(new Vector2i(10, 24), "Hello"));
 	}
 
 	public Player(int x, int y, Keyboard input) {
@@ -51,9 +51,9 @@ public class Player extends Mob {
 		fireRate = MageProjectile.FIRE_RATE;
 
 		ui = Game.getUIManager();
-		UIPanel panel = new UIPanel(new Vector2i(300 - 80, 0));
+		UIPanel panel = new UIPanel(new Vector2i((300 - 100) * 3, 0), new Vector2i(100 * 3, 300 *3));
 		ui.addPanel(panel);
-		panel.addComponent(new UILabel(new Vector2i(-10, 2), "Hello"));
+		panel.addComponent(new UILabel(new Vector2i(10, 24), "Label PlayerTag").setColor(0xff000000));
 	}
 
 	public void tick() {//public void update()
