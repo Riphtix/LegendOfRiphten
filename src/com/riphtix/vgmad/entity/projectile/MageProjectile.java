@@ -12,9 +12,9 @@ public class MageProjectile extends Projectile {
 	public MageProjectile(double x, double y, double dir) {
 		super(x, y, dir);
 		range = 336;
-		speed = 4;
+		speed = NORMAL_SPEED;
 		damage = 20;
-		sprite = Sprite.fireBoltSprite;
+		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
@@ -44,6 +44,6 @@ public class MageProjectile extends Projectile {
 	}
 
 	public void render(Screen screen) {
-		screen.renderProjectile((int) x - 8, (int) y - 4, this, angle);
+		screen.renderProjectile((int) x - 8, (int) y - 4, this);
 	}
 }

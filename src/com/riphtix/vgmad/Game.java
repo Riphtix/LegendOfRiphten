@@ -3,6 +3,8 @@ package com.riphtix.vgmad;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.gfx.*;
 import com.riphtix.vgmad.gfx.Font;
+import com.riphtix.vgmad.gfx.ui.*;
+import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.Level;
@@ -32,6 +34,8 @@ public class Game extends Canvas implements Runnable {
 	//default stuff don't touch
 	private static final long serialVersionUID = 1L;
 
+	//TODO: CREATE COMMENTS EXPLAINING CODE
+
 	//screen size stuff
 	//width * scale = screen width
 	//height * scale = screen height
@@ -51,6 +55,8 @@ public class Game extends Canvas implements Runnable {
 	private Level level;
 	private Player player;
 
+	private static UIManager uiManager;
+
 	private boolean running = false;
 
 	//Image storage
@@ -65,6 +71,7 @@ public class Game extends Canvas implements Runnable {
 
 		//Initializing variables
 		screen = new Screen(WIDTH, HEIGHT);
+		uiManager = new UIManager();
 		frame = new JFrame();
 		key = new Keyboard();
 		level = Level.spawn;
@@ -85,6 +92,10 @@ public class Game extends Canvas implements Runnable {
 
 	public static int getWindowHeight() {
 		return HEIGHT * SCALE;
+	}
+
+	public static UIManager getUIManager(){
+		return uiManager;
 	}
 
 	public synchronized void start() {
@@ -134,6 +145,7 @@ public class Game extends Canvas implements Runnable {
 	public void tick() {//public void update()
 		key.tick();
 		level.tick();
+		uiManager.tick();
 	}
 
 	public void render() {
@@ -148,6 +160,7 @@ public class Game extends Canvas implements Runnable {
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
 		level.render((int) xScroll, (int) yScroll, screen);
+		uiManager.render(screen);
 		//font.render(0, 0, -2, 0xff000000, "I have won!!!", screen);
 
 		for (int i = 0; i < pixels.length; i++) {

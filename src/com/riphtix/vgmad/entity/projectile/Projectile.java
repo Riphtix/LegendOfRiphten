@@ -12,6 +12,9 @@ public abstract class Projectile extends Entity {
 	protected double nx, ny;
 	protected double distance;
 	protected double speed, range, damage;
+	public final double NORMAL_SPEED = 4;
+	public final double TEST_SPEED = 1;
+	public final double FAST_SPEED = 8;
 
 	public Projectile(double x, double y, double dir) {
 		xOrigin = x;

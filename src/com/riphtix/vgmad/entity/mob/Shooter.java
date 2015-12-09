@@ -121,7 +121,7 @@ public class Shooter extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		Debug.drawRect(screen, 25 * 16, 32 * 16, 31, 31, true);
+		//Debug.drawRect(screen, 25 * 16, 32 * 16, 31, 31, true);
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
 	}
 }

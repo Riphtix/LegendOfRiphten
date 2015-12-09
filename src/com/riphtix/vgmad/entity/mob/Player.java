@@ -7,8 +7,13 @@ import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.gfx.ui.UIComponent;
+import com.riphtix.vgmad.gfx.ui.UILabel;
+import com.riphtix.vgmad.gfx.ui.UIManager;
+import com.riphtix.vgmad.gfx.ui.UIPanel;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
+import com.riphtix.vgmad.util.Vector2i;
 
 public class Player extends Mob {
 
@@ -25,10 +30,17 @@ public class Player extends Mob {
 
 	private int fireRate = 0;
 
+	private UIManager ui;
+
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = animSprite.getSprite();
 		fireRate = MageProjectile.FIRE_RATE;
+
+		ui = Game.getUIManager();
+		UIPanel panel = new UIPanel(new Vector2i(300 - 80, 0));
+		ui.addPanel(panel);
+		panel.addComponent(new UILabel(new Vector2i(0,0), "Hello"));
 	}
 
 	public Player(int x, int y, Keyboard input) {
@@ -37,6 +49,11 @@ public class Player extends Mob {
 		this.input = input;
 		sprite = animSprite.getSprite();
 		fireRate = MageProjectile.FIRE_RATE;
+
+		ui = Game.getUIManager();
+		UIPanel panel = new UIPanel(new Vector2i(300 - 80, 0));
+		ui.addPanel(panel);
+		panel.addComponent(new UILabel(new Vector2i(-10, 2), "Hello"));
 	}
 
 	public void tick() {//public void update()

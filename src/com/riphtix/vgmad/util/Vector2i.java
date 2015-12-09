@@ -2,7 +2,7 @@ package com.riphtix.vgmad.util;
 
 public class Vector2i {
 	//this is more like a path than a vector
-	private int x, y;
+	public int x, y;
 
 	//creates a basic vector
 	public Vector2i() {

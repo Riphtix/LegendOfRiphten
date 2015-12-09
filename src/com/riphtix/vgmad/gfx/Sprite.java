@@ -27,8 +27,9 @@ public class Sprite {
 	public static Sprite sorceressDefault = new Sprite(32, 0, 0, SpriteSheet.sorceress_down);
 
 	//Projectile
-	public static Sprite cannonBallSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);
 	public static Sprite fireBoltSprite = new Sprite(16, 0, 0, SpriteSheet.projectiles);
+	public static Sprite arrowSprite = new Sprite(16, 1, 0, SpriteSheet.projectiles);
+	public static Sprite cannonBallSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);
 
 	//Particle
 	public static Sprite defaultParticle = new Sprite(3, 0xffaaaaaa);
@@ -78,6 +79,53 @@ public class Sprite {
 		for(int i = 0; i < pixels.length; i++){
 			this.pixels[i] = pixels[i];
 		}
+	}
+
+	public static Sprite rotate(Sprite sprite, double angle){
+		return new Sprite(rotate(sprite.pixels, sprite.width, sprite.height, angle), sprite.width, sprite.height);
+	}
+
+	private static int[] rotate(int[] pixels, int width, int height, double angle){
+		int[] result = new int[width * height];
+
+		double nxx = rotateX(-angle, 1.0, 0.0);
+		double nxy = rotateY(-angle, 1.0, 0.0);
+		double nyx = rotateX(-angle, 0.0, 1.0);
+		double nyy = rotateY(-angle, 0.0, 1.0);
+
+		double x0 = rotateX(-angle, -width / 2.0, -height / 2.0) + width / 2.0;
+		double y0 = rotateY(-angle, -width / 2.0, -height / 2.0) + height / 2.0;
+
+		for(int y = 0; y < height; y++){
+			double x1 = x0;
+			double y1 = y0;
+			for(int x = 0; x < width; x++){
+				int xx = (int) x1;
+				int yy = (int) y1;
+				int col = 0;
+				if(xx < 0 || xx >= width || yy < 0 || yy >= height) col = 0xffff00ff;
+				else col = pixels[xx + yy * width];
+				result[x + y * width] = col;
+				x1 += nxx;
+				y1 += nxy;
+			}
+			x0 += nyx;
+			y0 += nyy;
+		}
+
+		return result;
+	}
+
+	private static double rotateX(double angle, double x, double y){
+		double cos = Math.cos(angle);
+		double sin = Math.sin(angle);
+		return x * cos + y * -sin;
+	}
+
+	private static double rotateY(double angle, double x, double y){
+		double cos = Math.cos(angle);
+		double sin = Math.sin(angle);
+		return x * sin + y * cos;
 	}
 
 	public static Sprite[] split(SpriteSheet sheet){
