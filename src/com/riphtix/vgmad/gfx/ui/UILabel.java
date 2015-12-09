@@ -8,6 +8,8 @@ public class UILabel extends UIComponent {
 
 	public String text;
 	private Font font;
+	public boolean dropShadow = false;
+	public int dropShadowOffset = 2;
 
 	public UILabel(Vector2i position, String text) {
 		super(position);
@@ -22,6 +24,11 @@ public class UILabel extends UIComponent {
 	}
 
 	public void render(Graphics g) {
+		if(dropShadow) {
+			g.setColor(Color.BLACK);
+			g.setFont(font);
+			g.drawString(text, position.x + offset.x + dropShadowOffset, position.y + offset.y + dropShadowOffset);
+		}
 		g.setColor(color);
 		g.setFont(font);
 		g.drawString(text, position.x + offset.x, position.y + offset.y);

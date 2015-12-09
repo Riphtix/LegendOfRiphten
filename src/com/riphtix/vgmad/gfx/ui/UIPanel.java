@@ -9,12 +9,12 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class UIPanel {
+public class UIPanel extends UIComponent{
 	private List<UIComponent> components = new ArrayList<UIComponent>();
-	private Vector2i position, size;
-	private Color color;
+	private Vector2i size;
 
 	public UIPanel(Vector2i position, Vector2i size) {
+		super(position);
 		this.position = position;
 		this.size = size;
 		color = new Color(0xff606060);

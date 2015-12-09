@@ -39,8 +39,8 @@ public class Game extends Canvas implements Runnable {
 	//screen size stuff
 	//width * scale = screen width
 	//height * scale = screen height
-	public static final int WIDTH = 300;
-	public static final int HEIGHT = WIDTH / 16 * 9;
+	public static final int WIDTH = 300 - 80;
+	public static final int HEIGHT = 168;
 	public static final int SCALE = 3;
 	public static String title = "VGMaD: The Legends of Riphten";
 
@@ -66,7 +66,7 @@ public class Game extends Canvas implements Runnable {
 	//Game constructor
 	public Game() {
 		//Sets the screen size
-		Dimension size = new Dimension(WIDTH * SCALE, HEIGHT * SCALE);
+		Dimension size = new Dimension(WIDTH * SCALE + 80 * 3, HEIGHT * SCALE);
 		setPreferredSize(size);
 
 		//Initializing variables
@@ -76,7 +76,7 @@ public class Game extends Canvas implements Runnable {
 		key = new Keyboard();
 		level = Level.spawn;
 		TileCoordinate playerSpawn = new TileCoordinate(32, 28);
-		player = new Player(playerSpawn.x(), playerSpawn.y(), key);
+		player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
 		level.add(player);
 		font = new Font();
 
@@ -167,7 +167,9 @@ public class Game extends Canvas implements Runnable {
 		}
 
 		Graphics g = bs.getDrawGraphics();
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+		g.setColor(new Color(0xff0000ff));
+		g.fillRect(0,0, getWidth(), getHeight());
+		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		uiManager.render(g);
 		//g.fillRect(Mouse.getX() - 24, Mouse.getY() - 24, 16 * 3, 16 * 3);
 		//g.drawString("x: " + Mouse.getX() + " y: " + Mouse.getY(), 50, 50);

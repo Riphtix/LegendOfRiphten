@@ -15,12 +15,16 @@ import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.util.Vector2i;
 
+import java.awt.*;
+
 public class Player extends Mob {
 
+	private String name;
 	private Keyboard input;
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking;
+
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.maleElf_down, 32, 32, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.maleElf_up, 32, 32, 3);
 	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.maleElf_left, 32, 32, 3);
@@ -32,18 +36,20 @@ public class Player extends Mob {
 
 	private UIManager ui;
 
-	public Player(Keyboard input) {
+	public Player(String name, Keyboard input) {
+		this.name = name;
 		this.input = input;
 		sprite = animSprite.getSprite();
 		fireRate = MageProjectile.FIRE_RATE;
 
 		ui = Game.getUIManager();
-		UIPanel panel = new UIPanel(new Vector2i((300 - 100) * 3, 0), new Vector2i(100 * 3, 168 * 3));
+		UIPanel panel = new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 168 * 3));
 		ui.addPanel(panel);
-		panel.addComponent(new UILabel(new Vector2i(10, 24), "Hello"));
+		panel.addComponent(new UILabel(new Vector2i(10, 150), "Hello"));
 	}
 
-	public Player(int x, int y, Keyboard input) {
+	public Player(String name, int x, int y, Keyboard input) {
+		this.name = name;
 		this.x = x;
 		this.y = y;
 		this.input = input;
@@ -51,9 +57,17 @@ public class Player extends Mob {
 		fireRate = MageProjectile.FIRE_RATE;
 
 		ui = Game.getUIManager();
-		UIPanel panel = new UIPanel(new Vector2i((300 - 100) * 3, 0), new Vector2i(100 * 3, 300 *3));
+		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 *3)).setColor(0xff505050);
 		ui.addPanel(panel);
-		panel.addComponent(new UILabel(new Vector2i(10, 24), "Label PlayerTag").setColor(0xff000000));
+		UILabel nameLabel = new UILabel(new Vector2i(40, 200), name);
+		nameLabel.setColor(0xffa0a0a0);
+		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
+		nameLabel.dropShadow = true;
+		panel.addComponent(nameLabel);
+	}
+
+	public String getName(){
+		return name;
 	}
 
 	public void tick() {//public void update()
