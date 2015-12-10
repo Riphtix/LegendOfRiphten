@@ -1,23 +1,18 @@
 package com.riphtix.vgmad.entity.mob;
 
-import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
-import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.handler.Keyboard;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
-	private boolean moving = false;
 	public boolean walking = false;
-	protected Keyboard key;
+
+	protected int health;
 
 	public enum Direction {
 		UP, DOWN, LEFT, RIGHT

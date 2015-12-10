@@ -1,9 +1,5 @@
 package com.riphtix.vgmad.handler;
 
-import com.riphtix.vgmad.gfx.Screen;
-import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.level.Level;
-
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 

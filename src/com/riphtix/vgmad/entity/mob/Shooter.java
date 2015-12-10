@@ -6,9 +6,7 @@ import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
-import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
-import com.riphtix.vgmad.util.Debug;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;

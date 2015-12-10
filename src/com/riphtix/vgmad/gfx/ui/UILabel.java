@@ -1,8 +1,8 @@
 package com.riphtix.vgmad.gfx.ui;
 
-import java.awt.*;
-
 import com.riphtix.vgmad.util.Vector2i;
+
+import java.awt.*;
 
 public class UILabel extends UIComponent {
 

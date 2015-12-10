@@ -1,14 +1,13 @@
 package com.riphtix.vgmad.gfx.ui;
 
-import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.awt.*;
 
 public class UIComponent {
 
-	public int backgroundColor;
-	public Vector2i position, offset;
+	public Vector2i position;
+	protected Vector2i offset;
 	public Color color;
 
 	public UIComponent(Vector2i position) {

@@ -36,16 +36,16 @@ public class Vector2i {
 	}
 
 	//adds the x and y values of a new vector to those of an old one
-	public Vector2i add(Vector2i vector) {
-		this.x += vector.x;
-		this.y += vector.y;
+	public Vector2i add(int x, int y) {
+		this.x += x;
+		this.y += y;
 		return this;
 	}
 
 	//subtracts the x and y values of a new vector from those of an old one
-	public Vector2i subtract(Vector2i vector) {
-		this.x -= vector.x;
-		this.y -= vector.y;
+	public Vector2i subtract(int x, int y) {
+		this.x -= x;
+		this.y -= y;
 		return this;
 	}
 

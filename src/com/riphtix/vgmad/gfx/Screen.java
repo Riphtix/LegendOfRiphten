@@ -1,8 +1,6 @@
 package com.riphtix.vgmad.gfx;
 
-import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.entity.projectile.Projectile;
-import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.Tile;
 
 import java.util.Random;

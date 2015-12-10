@@ -1,9 +1,8 @@
 package com.riphtix.vgmad;
 
 import com.riphtix.vgmad.entity.mob.Player;
-import com.riphtix.vgmad.gfx.*;
 import com.riphtix.vgmad.gfx.Font;
-import com.riphtix.vgmad.gfx.ui.*;
+import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;

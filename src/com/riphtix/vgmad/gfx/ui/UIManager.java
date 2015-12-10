@@ -1,7 +1,5 @@
 package com.riphtix.vgmad.gfx.ui;
 
-import com.riphtix.vgmad.gfx.Screen;
-
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;

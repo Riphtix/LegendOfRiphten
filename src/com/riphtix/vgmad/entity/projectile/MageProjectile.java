@@ -1,7 +1,6 @@
 package com.riphtix.vgmad.entity.projectile;
 
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
-import com.riphtix.vgmad.entity.spawner.Spawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 

@@ -7,10 +7,10 @@ import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
-import com.riphtix.vgmad.gfx.ui.UIComponent;
 import com.riphtix.vgmad.gfx.ui.UILabel;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.gfx.ui.UIPanel;
+import com.riphtix.vgmad.gfx.ui.UIProgressBar;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.util.Vector2i;
@@ -22,7 +22,6 @@ public class Player extends Mob {
 	private String name;
 	private Keyboard input;
 	private Sprite sprite;
-	private int anim = 0;
 	private boolean walking;
 
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.maleElf_down, 32, 32, 3);
@@ -35,7 +34,9 @@ public class Player extends Mob {
 	private int fireRate = 0;
 
 	private UIManager ui;
+	private UIProgressBar uiHealthBar;
 
+	@Deprecated
 	public Player(String name, Keyboard input) {
 		this.name = name;
 		this.input = input;
@@ -43,9 +44,19 @@ public class Player extends Mob {
 		fireRate = MageProjectile.FIRE_RATE;
 
 		ui = Game.getUIManager();
-		UIPanel panel = new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 168 * 3));
+		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 *3)).setColor(0xff505050);
 		ui.addPanel(panel);
-		panel.addComponent(new UILabel(new Vector2i(10, 150), "Hello"));
+		UILabel nameLabel = new UILabel(new Vector2i(40, 200), name);
+		nameLabel.setColor(0xffa0a0a0);
+		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
+		nameLabel.dropShadow = true;
+		panel.addComponent(nameLabel);
+
+
+		uiHealthBar = new UIProgressBar(new Vector2i(30, 210), new Vector2i(180, 15));
+		uiHealthBar.setColor(0xff5f5f5f);
+		uiHealthBar.setForgroundColor(new Color(0xff00ad00));
+		panel.addComponent(uiHealthBar);
 	}
 
 	public Player(String name, int x, int y, Keyboard input) {
@@ -64,6 +75,20 @@ public class Player extends Mob {
 		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
 		nameLabel.dropShadow = true;
 		panel.addComponent(nameLabel);
+
+		uiHealthBar = new UIProgressBar(new Vector2i(30, 210), new Vector2i(180, 15));
+		uiHealthBar.setColor(0xff5f5f5f);
+		uiHealthBar.setForgroundColor(new Color(0xff00ad00));
+		panel.addComponent(uiHealthBar);
+
+		UILabel hpLabel = new UILabel(new Vector2i(uiHealthBar.position.x - 28, uiHealthBar.position.y + 12), "HP:");
+		hpLabel.setColor(0xffa0a0a0);
+		hpLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+		hpLabel.dropShadow = true;
+		hpLabel.dropShadowOffset = 1;
+		panel.addComponent(hpLabel);
+		//player default attributes
+		health = 100;
 	}
 
 	public String getName(){
@@ -97,6 +122,8 @@ public class Player extends Mob {
 
 		clear();
 		tickShooting();
+
+		uiHealthBar.setProgress(health / 100.0);
 	}
 
 	private void clear() {

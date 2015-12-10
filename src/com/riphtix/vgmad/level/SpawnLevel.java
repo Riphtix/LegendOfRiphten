@@ -1,7 +1,5 @@
 package com.riphtix.vgmad.level;
 
-import com.riphtix.vgmad.entity.mob.AStar;
-import com.riphtix.vgmad.entity.mob.Chaser;
 import com.riphtix.vgmad.entity.mob.Dummy;
 import com.riphtix.vgmad.entity.mob.Shooter;
 
