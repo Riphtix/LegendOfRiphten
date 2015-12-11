@@ -6,12 +6,20 @@ import java.awt.*;
 
 public class UIComponent {
 
-	public Vector2i position;
+	public Vector2i position, size;
 	protected Vector2i offset;
 	public Color color;
 
+	public boolean active = true;
+
 	public UIComponent(Vector2i position) {
 		this.position = position;
+		offset = new Vector2i(0, 0);
+	}
+
+	public UIComponent(Vector2i position, Vector2i size) {
+		this.position = position;
+		this.size = size;
 		offset = new Vector2i(0, 0);
 	}
 

@@ -12,7 +12,10 @@ public abstract class Mob extends Entity {
 	protected Sprite sprite;
 	public boolean walking = false;
 
+	//TODO: Damage from projectiles and npc health
 	protected int health;
+	protected int mana;
+	protected int xp;
 
 	public enum Direction {
 		UP, DOWN, LEFT, RIGHT
@@ -32,6 +35,7 @@ public abstract class Mob extends Entity {
 		if (xa < 0) dir = Direction.LEFT;
 		if (xa > 0) dir = Direction.RIGHT;
 
+		//collision handling
 		while (xa != 0) {
 			if (Math.abs(xa) > 1) {
 				if (!collision(abs(xa), ya)) {
@@ -72,7 +76,7 @@ public abstract class Mob extends Entity {
 
 	protected void shoot(double x, double y, double dir, Entity entity) {
 		Projectile p = null;
-		if(entity instanceof Shooter || entity instanceof Player) {
+		if (entity instanceof Shooter || entity instanceof Player) {
 			p = new MageProjectile(x, y, dir);
 		}
 		level.add(p);

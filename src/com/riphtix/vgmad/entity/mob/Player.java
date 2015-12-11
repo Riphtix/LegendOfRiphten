@@ -7,10 +7,7 @@ import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
-import com.riphtix.vgmad.gfx.ui.UILabel;
-import com.riphtix.vgmad.gfx.ui.UIManager;
-import com.riphtix.vgmad.gfx.ui.UIPanel;
-import com.riphtix.vgmad.gfx.ui.UIProgressBar;
+import com.riphtix.vgmad.gfx.ui.*;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.util.Vector2i;
@@ -35,29 +32,18 @@ public class Player extends Mob {
 
 	private UIManager ui;
 	private UIProgressBar uiHealthBar;
-
-	@Deprecated
-	public Player(String name, Keyboard input) {
-		this.name = name;
-		this.input = input;
-		sprite = animSprite.getSprite();
-		fireRate = MageProjectile.FIRE_RATE;
-
-		ui = Game.getUIManager();
-		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 *3)).setColor(0xff505050);
-		ui.addPanel(panel);
-		UILabel nameLabel = new UILabel(new Vector2i(40, 200), name);
-		nameLabel.setColor(0xffa0a0a0);
-		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
-		nameLabel.dropShadow = true;
-		panel.addComponent(nameLabel);
-
-
-		uiHealthBar = new UIProgressBar(new Vector2i(30, 210), new Vector2i(180, 15));
-		uiHealthBar.setColor(0xff5f5f5f);
-		uiHealthBar.setForgroundColor(new Color(0xff00ad00));
-		panel.addComponent(uiHealthBar);
-	}
+	private UIProgressBar uiManaBar;
+	private UIProgressBar uiExperienceBar;
+	UIProgressMark uiHP25percent;
+	UIProgressMark uiHP50percent;
+	UIProgressMark uiHP75percent;
+	UIProgressMark uiMP25percent;
+	UIProgressMark uiMP50percent;
+	UIProgressMark uiMP75percent;
+	UIProgressMark uiXP25percent;
+	UIProgressMark uiXP50percent;
+	UIProgressMark uiXP75percent;
+	private UIButton uiButton;
 
 	public Player(String name, int x, int y, Keyboard input) {
 		this.name = name;
@@ -70,25 +56,79 @@ public class Player extends Mob {
 		ui = Game.getUIManager();
 		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 *3)).setColor(0xff505050);
 		ui.addPanel(panel);
+
 		UILabel nameLabel = new UILabel(new Vector2i(40, 200), name);
 		nameLabel.setColor(0xffa0a0a0);
 		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
 		nameLabel.dropShadow = true;
 		panel.addComponent(nameLabel);
 
-		uiHealthBar = new UIProgressBar(new Vector2i(30, 210), new Vector2i(180, 15));
+		uiHealthBar = new UIProgressBar(new Vector2i(35, 210), new Vector2i(180, 15));
 		uiHealthBar.setColor(0xff5f5f5f);
-		uiHealthBar.setForgroundColor(new Color(0xff00ad00));
+		uiHealthBar.setForegroundColor(new Color(0xffc70000));
+		uiHealthBar.dropShadow = true;
+		uiHealthBar.dropShadowOffset = 1;
 		panel.addComponent(uiHealthBar);
-
 		UILabel hpLabel = new UILabel(new Vector2i(uiHealthBar.position.x - 28, uiHealthBar.position.y + 12), "HP:");
 		hpLabel.setColor(0xffa0a0a0);
-		hpLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+		hpLabel.setFont(new Font("Verdana", Font.BOLD, 15));
 		hpLabel.dropShadow = true;
 		hpLabel.dropShadowOffset = 1;
 		panel.addComponent(hpLabel);
+
+		uiManaBar = new UIProgressBar(new Vector2i(35, 235), new Vector2i(180, 15));
+		uiManaBar.setColor(0xff5f5f5f);
+		uiManaBar.setForegroundColor(new Color(0xff009696));
+		uiManaBar.dropShadow = true;
+		uiManaBar.dropShadowOffset = 1;
+		panel.addComponent(uiManaBar);
+		UILabel mpLabel = new UILabel(new Vector2i(uiManaBar.position.x - 30, uiManaBar.position.y + 12), "MP:");
+		mpLabel.setColor(0xffa0a0a0);
+		mpLabel.setFont(new Font("Verdana", Font.BOLD, 15));
+		mpLabel.dropShadow = true;
+		mpLabel.dropShadowOffset = 1;
+		panel.addComponent(mpLabel);
+
+		uiExperienceBar = new UIProgressBar(new Vector2i(35, 260), new Vector2i(180, 15));
+		uiExperienceBar.setColor(0xff5f5f5f);
+		uiExperienceBar.setForegroundColor(new Color(0xffff7700));
+		uiExperienceBar.dropShadow = true;
+		uiExperienceBar.dropShadowOffset = 1;
+		panel.addComponent(uiExperienceBar);
+		UILabel xpLabel = new UILabel(new Vector2i(uiExperienceBar.position.x - 28, uiExperienceBar.position.y + 12), "XP:");
+		xpLabel.setColor(0xffa0a0a0);
+		xpLabel.setFont(new Font("Verdana", Font.BOLD, 15));
+		xpLabel.dropShadow = true;
+		xpLabel.dropShadowOffset = 1;
+		panel.addComponent(xpLabel);
+
+		uiHP25percent = new UIProgressMark(new Vector2i(80, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP25percent);
+		uiHP50percent = new UIProgressMark(new Vector2i(125, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP50percent);
+		uiHP75percent = new UIProgressMark(new Vector2i(170, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP75percent);
+		uiMP25percent = new UIProgressMark(new Vector2i(80, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP25percent);
+		uiMP50percent = new UIProgressMark(new Vector2i(125, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP50percent);
+		uiMP75percent = new UIProgressMark(new Vector2i(170, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP75percent);
+		uiXP25percent = new UIProgressMark(new Vector2i(80, 260), new Vector2i(1, 15));
+		panel.addComponent(uiXP25percent);
+		uiXP50percent = new UIProgressMark(new Vector2i(125, 260), new Vector2i(1, 15));
+		panel.addComponent(uiXP50percent);
+		uiXP75percent = new UIProgressMark(new Vector2i(170, 260), new Vector2i(1, 15));
+		panel.addComponent(uiXP75percent);
+
 		//player default attributes
 		health = 100;
+		mana = 100;
+		xp = 0;
+
+		uiButton = new UIButton(new Vector2i(10, 260), new Vector2i(70,30));
+		uiButton.setText("Hello");
+		//panel.addComponent(uiButton);
 	}
 
 	public String getName(){
@@ -124,6 +164,8 @@ public class Player extends Mob {
 		tickShooting();
 
 		uiHealthBar.setProgress(health / 100.0);
+		uiManaBar.setProgress(mana / 100.0);
+		uiExperienceBar.setProgress(xp / 100.0);
 	}
 
 	private void clear() {
@@ -149,5 +191,4 @@ public class Player extends Mob {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
 	}
-
 }

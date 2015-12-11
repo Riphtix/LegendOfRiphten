@@ -8,14 +8,15 @@ import java.awt.*;
 public class UIProgressBar extends UIComponent {
 
 	private double progress; //0.0 - 1.0
-	private Vector2i size;
-	private Color forgroundColor;
+	private Color foregroundColor;
+	public boolean dropShadow = false;
+	public int dropShadowOffset = 2;
 
 	public UIProgressBar(Vector2i position, Vector2i size) {
 		super(position);
 		this.size = size;
 
-		forgroundColor = new Color(0xffff00ff);
+		foregroundColor = new Color(0xff5f5f5f);
 	}
 
 	public void setProgress(double progress){
@@ -24,8 +25,8 @@ public class UIProgressBar extends UIComponent {
 		this.progress = progress;
 	}
 
-	public void setForgroundColor(Color color){
-		this.forgroundColor = color;
+	public void setForegroundColor(Color color){
+		this.foregroundColor = color;
 	}
 
 	public double getProgress(){
@@ -37,10 +38,14 @@ public class UIProgressBar extends UIComponent {
 	}
 
 	public void render(Graphics g){
+		if(dropShadow){
+			g.setColor(Color.BLACK);
+			g.fillRect(position.x + offset.x + dropShadowOffset, position.y + offset.y + dropShadowOffset, size.x, size.y);
+		}
 		g.setColor(color);
 		g.fillRect(position.x + offset.x, position.y + offset.y, size.x, size.y);
 
-		g.setColor(forgroundColor);
+		g.setColor(foregroundColor);
 		g.fillRect(position.x + offset.x, position.y + offset.y, (int)(progress * size.x), size.y);
 
 	}
