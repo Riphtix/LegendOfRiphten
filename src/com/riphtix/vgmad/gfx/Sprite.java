@@ -1,5 +1,14 @@
 package com.riphtix.vgmad.gfx;
 
+import com.riphtix.vgmad.Game;
+import com.riphtix.vgmad.util.AffineTransform;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.ImageConsumer;
+import java.awt.image.ImageObserver;
+import java.awt.image.ImageProducer;
+
 public class Sprite {
 
 	public final int SIZE;
@@ -37,11 +46,19 @@ public class Sprite {
 	//Debug
 	public static Sprite aimBox = new Sprite(16, 0, 0, SpriteSheet.debug);
 
+	//PlayerHitbox
+	public static Sprite hitbox32x32 = new Sprite(SpriteSheet.mobHitbox, 19, 16);
+	public static Sprite hitbox16x16 = new Sprite(SpriteSheet.projectileHitbox, 15, 8);
+
 	protected Sprite(SpriteSheet sheet, int width, int height) {
 		SIZE = (width == height) ? width : -1; //trick
 		this.width = width;
 		this.height = height;
+		pixels = new int[width * height];
+		this.x = x * width;
+		this.y = y * height;
 		this.sheet = sheet;
+		load();
 	}
 
 	public Sprite(int size, int x, int y, SpriteSheet sheet) {
@@ -76,16 +93,16 @@ public class Sprite {
 		this.width = width;
 		this.height = height;
 		this.pixels = new int[pixels.length];
-		for(int i = 0; i < pixels.length; i++){
+		for (int i = 0; i < pixels.length; i++) {
 			this.pixels[i] = pixels[i];
 		}
 	}
 
-	public static Sprite rotate(Sprite sprite, double angle){
+	public static Sprite rotate(Sprite sprite, double angle) {
 		return new Sprite(rotate(sprite.pixels, sprite.width, sprite.height, angle), sprite.width, sprite.height);
 	}
 
-	private static int[] rotate(int[] pixels, int width, int height, double angle){
+	private static int[] rotate(int[] pixels, int width, int height, double angle) {
 		int[] result = new int[width * height];
 
 		double nxx = rotateX(-angle, 1.0, 0.0);
@@ -96,14 +113,14 @@ public class Sprite {
 		double x0 = rotateX(-angle, -width / 2.0, -height / 2.0) + width / 2.0;
 		double y0 = rotateY(-angle, -width / 2.0, -height / 2.0) + height / 2.0;
 
-		for(int y = 0; y < height; y++){
+		for (int y = 0; y < height; y++) {
 			double x1 = x0;
 			double y1 = y0;
-			for(int x = 0; x < width; x++){
+			for (int x = 0; x < width; x++) {
 				int xx = (int) x1;
 				int yy = (int) y1;
 				int col = 0;
-				if(xx < 0 || xx >= width || yy < 0 || yy >= height) col = 0xffff00ff;
+				if (xx < 0 || xx >= width || yy < 0 || yy >= height) col = 0xffff00ff;
 				else col = pixels[xx + yy * width];
 				result[x + y * width] = col;
 				x1 += nxx;
@@ -116,29 +133,29 @@ public class Sprite {
 		return result;
 	}
 
-	private static double rotateX(double angle, double x, double y){
+	private static double rotateX(double angle, double x, double y) {
 		double cos = Math.cos(angle);
 		double sin = Math.sin(angle);
 		return x * cos + y * -sin;
 	}
 
-	private static double rotateY(double angle, double x, double y){
+	private static double rotateY(double angle, double x, double y) {
 		double cos = Math.cos(angle);
 		double sin = Math.sin(angle);
 		return x * sin + y * cos;
 	}
 
-	public static Sprite[] split(SpriteSheet sheet){
-		int amount = (sheet.getWidth() * sheet.getHeight()) / (sheet.SPRITE_WIDTH *sheet.SPRITE_HEIGHT);
+	public static Sprite[] split(SpriteSheet sheet) {
+		int amount = (sheet.getWidth() * sheet.getHeight()) / (sheet.SPRITE_WIDTH * sheet.SPRITE_HEIGHT);
 		Sprite[] sprites = new Sprite[amount];
 		int current = 0;
 		int[] pixels = new int[sheet.SPRITE_WIDTH * sheet.SPRITE_HEIGHT];
 
-		for(int yp = 0; yp < sheet.getHeight() / sheet.SPRITE_HEIGHT; yp++){
-			for(int xp = 0; xp < sheet.getWidth() / sheet.SPRITE_WIDTH; xp++){
+		for (int yp = 0; yp < sheet.getHeight() / sheet.SPRITE_HEIGHT; yp++) {
+			for (int xp = 0; xp < sheet.getWidth() / sheet.SPRITE_WIDTH; xp++) {
 
-				for(int y = 0; y < sheet.SPRITE_HEIGHT; y++){
-					for(int x = 0; x < sheet.SPRITE_WIDTH; x++){
+				for (int y = 0; y < sheet.SPRITE_HEIGHT; y++) {
+					for (int x = 0; x < sheet.SPRITE_WIDTH; x++) {
 						int xo = x + xp * sheet.SPRITE_WIDTH;
 						int yo = y + yp * sheet.SPRITE_HEIGHT;
 						pixels[x + y * sheet.SPRITE_WIDTH] = sheet.getPixels()[xo + yo * sheet.getWidth()];
