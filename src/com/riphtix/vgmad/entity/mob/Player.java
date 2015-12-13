@@ -10,6 +10,7 @@ import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.gfx.ui.*;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
+import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.awt.*;
@@ -34,16 +35,12 @@ public class Player extends Mob {
 	private UIProgressBar uiHealthBar;
 	private UIProgressBar uiManaBar;
 	private UIProgressBar uiExperienceBar;
-	UIProgressMark uiHP25percent;
-	UIProgressMark uiHP50percent;
-	UIProgressMark uiHP75percent;
-	UIProgressMark uiMP25percent;
-	UIProgressMark uiMP50percent;
-	UIProgressMark uiMP75percent;
-	UIProgressMark uiXP25percent;
-	UIProgressMark uiXP50percent;
-	UIProgressMark uiXP75percent;
+	UIProgressMark uiHP25percent, uiHP50percent, uiHP75percent;
+	UIProgressMark uiMP25percent, uiMP50percent, uiMP75percent;
+	UIProgressMark uiXP25percent, uiXP50percent, uiXP75percent;
 	private UIButton uiButton;
+
+	public PlayerHitbox hitbox;
 
 	public Player(String name, int x, int y, Keyboard input) {
 		this.name = name;
@@ -52,6 +49,12 @@ public class Player extends Mob {
 		this.input = input;
 		sprite = animSprite.getSprite();
 		fireRate = MageProjectile.FIRE_RATE;
+		hitbox = new PlayerHitbox(Sprite.hitbox32x32);
+
+		rightXOffset = 8;
+		leftXOffset = -10;
+		topYOffset = 0;
+		bottomYOffset = 14;
 
 		ui = Game.getUIManager();
 		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 *3)).setColor(0xff505050);
@@ -156,7 +159,7 @@ public class Player extends Mob {
 			xa += speed;
 		}
 		if (xa != 0 || ya != 0) {
-			move(xa, ya);
+			move(xa, rightXOffset, leftXOffset, ya, topYOffset, bottomYOffset);
 			walking = true;
 		} else walking = false;
 
@@ -190,5 +193,6 @@ public class Player extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
+		hitbox.render((int) x - 10, (int) y, screen);
 	}
 }

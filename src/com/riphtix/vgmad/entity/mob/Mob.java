@@ -5,17 +5,22 @@ import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.handler.Keyboard;
 
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
 	public boolean walking = false;
 
+
 	//TODO: Damage from projectiles and npc health
 	protected int health;
 	protected int mana;
 	protected int xp;
+
+	public int rightXOffset;
+	public int leftXOffset;
+	public int topYOffset;
+	public int bottomYOffset;
 
 	public enum Direction {
 		UP, DOWN, LEFT, RIGHT
@@ -23,10 +28,10 @@ public abstract class Mob extends Entity {
 
 	public Direction dir;
 
-	public void move(double xa, double ya) {
+	public void move(double xa, int leftXWidth, int rightXWidth, double ya, int topYHeight, int bottomYHeight) {
 		if (xa != 0 && ya != 0) {
-			move(xa, 0);
-			move(0, ya);
+			move(xa, leftXWidth, rightXWidth, 0, topYHeight, bottomYHeight);
+			move(0, leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight);
 			return;
 		}
 
@@ -35,15 +40,15 @@ public abstract class Mob extends Entity {
 		if (xa < 0) dir = Direction.LEFT;
 		if (xa > 0) dir = Direction.RIGHT;
 
-		//collision handling
+		// Collision handling
 		while (xa != 0) {
 			if (Math.abs(xa) > 1) {
-				if (!collision(abs(xa), ya)) {
+				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += abs(xa);
 				}
 				xa -= abs(xa);
 			} else {
-				if (!collision(abs(xa), ya)) {
+				if (!isCollision(abs(xa),leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += xa;
 				}
 				xa = 0;
@@ -51,12 +56,12 @@ public abstract class Mob extends Entity {
 		}
 		while (ya != 0) {
 			if (Math.abs(ya) > 1) {
-				if (!collision(xa, abs(ya))) {
+				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += abs(ya);
 				}
 				ya -= abs(ya);
 			} else {
-				if (!collision(xa, abs(ya))) {
+				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += ya;
 				}
 				ya = 0;
@@ -81,19 +86,4 @@ public abstract class Mob extends Entity {
 		}
 		level.add(p);
 	}
-
-	private boolean collision(double xa, double ya) {
-		boolean solid = false;
-		for (int c = 0; c < 4; c++) {
-			double xt = ((x + xa) - c % 2 * 15) / 16;
-			double yt = ((y + ya) - c / 2 * 15) / 16;
-			int ix = (int) Math.ceil(xt);
-			int iy = (int) Math.ceil(yt);
-			if (c % 2 == 0) ix = (int) Math.floor(xt);
-			if (c / 2 == 0) iy = (int) Math.floor(yt);
-			if (level.getTile(ix, iy).isSolid()) solid = true;
-		}
-		return solid;
-	}
-
 }

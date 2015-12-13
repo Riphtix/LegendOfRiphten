@@ -37,7 +37,7 @@ public class Chaser extends Mob {
 			else if (y > player.getY()) ya -= speed;
 		}
 		if (xa != 0 || ya != 0) {
-			move(xa, ya);
+			move(xa, 8, -10, ya, 0, 14);
 			walking = true;
 		} else {
 			walking = false;

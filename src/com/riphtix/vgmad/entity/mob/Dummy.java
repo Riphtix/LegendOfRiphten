@@ -50,7 +50,7 @@ public class Dummy extends Mob {
 			dir = Direction.RIGHT;
 		}
 		if (xa != 0 || ya != 0) {
-			move(xa, ya);
+			move(xa, 8, -10, ya, 0, 14);
 			walking = true;
 		} else walking = false;
 
@@ -59,5 +59,6 @@ public class Dummy extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
+
 	}
 }

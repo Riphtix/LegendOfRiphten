@@ -47,6 +47,7 @@ public class Game extends Canvas implements Runnable {
 	//Built in
 	private Thread thread;
 	private JFrame frame;
+	public static Graphics g;
 	//Custom Made
 	private Screen screen;
 	private Font font;
@@ -61,6 +62,8 @@ public class Game extends Canvas implements Runnable {
 	//Image storage
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+
+	private int[] hitboxCorners = new int[4];
 
 	//Game constructor
 	public Game() {
@@ -165,16 +168,13 @@ public class Game extends Canvas implements Runnable {
 			pixels[i] = screen.pixels[i];
 		}
 
-		Graphics g = bs.getDrawGraphics();
+		g = bs.getDrawGraphics();
 		g.setColor(new Color(0xff0000ff));
 		g.fillRect(0,0, getWidth(), getHeight());
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		uiManager.render(g);
-		g.setColor(new Color(0xffff0000));
-		g.fillRect(getWindowWidth() / 2 + 6, 0, 1, getWindowHeight());
-		g.fillRect(getWindowWidth() / 2, 0, 1, getWindowHeight());
-		g.fillRect(0, getWindowHeight() / 2, getWindowWidth(), 1);
-		g.fillRect(0, getWindowHeight() / 2 + 6, getWindowWidth(), 1);
+		//g.setColor(new Color(0xffff0000));
+		//g.drawRect(getWindowWidth() / 2 - 33, getWindowHeight() / 2, 60, 48);
 		//g.fillRect(Mouse.getX() - 24, Mouse.getY() - 24, 16 * 3, 16 * 3);
 		//g.drawString("x: " + Mouse.getX() + " y: " + Mouse.getY(), 50, 50);
 		//g.drawString("x: " + (Mouse.getX() - getWindowWidth() / 2) + " y: " + (Mouse.getY() - getWindowHeight() / 2), 50, 75);

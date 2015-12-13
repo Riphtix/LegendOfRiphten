@@ -1,7 +1,10 @@
 package com.riphtix.vgmad.gfx;
 
 import com.riphtix.vgmad.entity.projectile.Projectile;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
+import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
 import java.util.Random;
 
@@ -26,6 +29,7 @@ public class Screen {
 
 	//color control
 	public int[] pixels;
+
 	//# of tiles in the map
 	public int[] tiles = new int[MAP_SIZE];
 
@@ -146,7 +150,70 @@ public class Screen {
 				if (xa < -tile.sprite.SIZE || xa >= width || ya < -tile.sprite.SIZE || ya >= height) break;
 				if (xa < 0) xa = 0;
 				if (ya < 0) ya = 0;
-				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+				int col = tile.sprite.pixels[x + y * tile.sprite.SIZE];
+				if(col != 0xffff00ff && col != 0xff7f007f){
+					pixels[xa + ya * width] = col;
+				}
+			}
+		}
+	}
+
+	public void renderPlayerHitbox(int xp, int yp, PlayerHitbox hitbox) {
+		xp -= xOffset;
+		yp -= yOffset;
+
+		//sets the color for every x and y value
+		for (int y = 0; y < hitbox.sprite.getHeight(); y++) {
+			int ya = y + yp;
+			for (int x = 0; x < hitbox.sprite.getWidth(); x++) {
+				int xa = x + xp;
+				if (xa < -hitbox.sprite.getWidth() || xa >= width || ya < -hitbox.sprite.getHeight() || ya >= height) break;
+				if (xa < 0) xa = 0;
+				if (ya < 0) ya = 0;
+				int col = hitbox.sprite.pixels[x + y * hitbox.sprite.getWidth()];
+				if(col != 0xffff00ff && col != 0xff7f007f){
+					pixels[xa + ya * width] = col;
+				}
+			}
+		}
+	}
+
+	public void renderMobHitbox(int xp, int yp, MobHitbox hitbox) {
+		xp -= xOffset;
+		yp -= yOffset;
+
+		//sets the color for every x and y value
+		for (int y = 0; y < hitbox.sprite.getHeight(); y++) {
+			int ya = y + yp;
+			for (int x = 0; x < hitbox.sprite.getWidth(); x++) {
+				int xa = x + xp;
+				if (xa < -hitbox.sprite.getWidth() || xa >= width || ya < -hitbox.sprite.getHeight() || ya >= height) break;
+				if (xa < 0) xa = 0;
+				if (ya < 0) ya = 0;
+				int col = hitbox.sprite.pixels[x + y * hitbox.sprite.getWidth()];
+				if(col != 0xffff00ff && col != 0xff7f007f){
+					pixels[xa + ya * width] = col;
+				}
+			}
+		}
+	}
+
+	public void renderProjectileHitbox(int xp, int yp, ProjectileHitbox hitbox) {
+		xp -= xOffset;
+		yp -= yOffset;
+
+		//sets the color for every x and y value
+		for (int y = 0; y < hitbox.sprite.getHeight(); y++) {
+			int ya = y + yp;
+			for (int x = 0; x < hitbox.sprite.getWidth(); x++) {
+				int xa = x + xp;
+				if (xa < -hitbox.sprite.getWidth() || xa >= width || ya < -hitbox.sprite.getHeight() || ya >= height) break;
+				if (xa < 0) xa = 0;
+				if (ya < 0) ya = 0;
+				int col = hitbox.sprite.pixels[x + y * hitbox.sprite.getWidth()];
+				if(col != 0xffff00ff && col != 0xff7f007f){
+					pixels[xa + ya * width] = col;
+				}
 			}
 		}
 	}

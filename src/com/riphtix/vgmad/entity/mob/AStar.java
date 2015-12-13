@@ -47,7 +47,7 @@ public class AStar extends Mob{
 			}
 		}
 		if (xa != 0 || ya != 0) {
-			move(xa, ya);
+			move(xa, 8, -10, ya, 0, 14);
 			walking = true;
 		} else {
 			walking = false;

@@ -55,6 +55,10 @@ public class SpriteSheet {
 	//Debug
 	public static SpriteSheet debug = new SpriteSheet("/debug/debug.png", 256);
 
+	//Hitbox
+	public static SpriteSheet mobHitbox = new SpriteSheet("/textures/mobHitbox.png", 32);
+	public static SpriteSheet projectileHitbox = new SpriteSheet("/textures/projectileHitbox.png", 16);
+
 	private Sprite[] sprites;
 
 	public SpriteSheet(SpriteSheet sheet, int x, int y, int width, int height, int spriteSize) {
@@ -106,6 +110,10 @@ public class SpriteSheet {
 		SPRITE_HEIGHT = height;
 		pixels = new int[SPRITE_WIDTH * SPRITE_HEIGHT];
 		load();
+	}
+
+	public String getPath(){
+		return path;
 	}
 
 	public Sprite[] getSprites() {

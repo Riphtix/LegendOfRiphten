@@ -6,6 +6,8 @@ import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
 import com.riphtix.vgmad.util.Vector2i;
 
@@ -27,6 +29,8 @@ public class Level {
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
 	private List<Player> players = new ArrayList<Player>();
+
+	private int time = 0;
 
 	//used to compare 2 nodes for mob ai navigation
 	private Comparator<Node> nodeSorter = new Comparator<Node>() {
@@ -66,6 +70,7 @@ public class Level {
 
 	//updates the entities
 	public void tick() {//public void update()
+		time++;
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
 		}
@@ -121,6 +126,27 @@ public class Level {
 			int xt = (x - c % 2 * size + xOffset) >> 4;
 			int yt = (y - c / 2 * size + yOffset) >> 4;
 			if (getTile(xt, yt).isSolid()) solid = true;
+		}
+		return solid;
+	}
+
+	public boolean mobCollision(int x, int y, int size, int xOffset, int yOffset) {
+		boolean solid = false;
+		for (int c = 0; c < 4; c++) {
+			int xt = (x - c % 2 * size + xOffset) >> 4;
+			int yt = (y - c / 2 * size + yOffset) >> 4;
+			if (!(getTile(xt, yt) instanceof PlayerHitbox) && (getTile(xt, yt).isSolid())) solid = true;
+		}
+		return solid;
+	}
+
+	public boolean playerCollision(int x, int y, int size, int xOffset, int yOffset) {
+		boolean solid = false;
+		for (int c = 0; c < 4; c++) {
+			int xt = (x - c % 2 * size + xOffset) >> 4;
+			int yt = (y - c / 2 * size + yOffset) >> 4;
+			//System.out.println(!(getTile(xt, yt) instanceof MobHitbox));
+			if (!(getTile(xt, yt) instanceof MobHitbox) && (getTile(xt, yt) instanceof PlayerHitbox) && (getTile(xt, yt).isSolid())) solid = true;
 		}
 		return solid;
 	}
@@ -257,7 +283,7 @@ public class Level {
 		int ey = (int) e.getY();
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
-			if(entity.equals(e)) continue;
+			if (entity.equals(e)) continue;
 			int x = (int) entity.getX();
 			int y = (int) entity.getY();
 			int dx = Math.abs(x - ex);
@@ -266,6 +292,23 @@ public class Level {
 			if (distance <= radius) result.add(entity);
 		}
 
+		return result;
+	}
+
+	public List<Entity> getEntities(Entity e, int width, int height) {
+		List<Entity> result = new ArrayList<Entity>();
+		int ex = (int) e.getX();
+		int ey = (int) e.getY();
+		for (int i = 0; i < entities.size(); i++) {
+			Entity entity = entities.get(i);
+			if (entity.equals(e)) continue;
+			int x = (int) entity.getX();
+			int y = (int) entity.getY();
+			int dx = Math.abs(x - ex);
+			int dy = Math.abs(y - ey);
+			double distance = Math.sqrt((dx * dx) + (dy * dy));
+			if (distance <= width || distance <= height) result.add(entity);
+		}
 		return result;
 	}
 
@@ -281,6 +324,22 @@ public class Level {
 			int dy = Math.abs(y - ey);
 			double distance = Math.sqrt((dx * dx) + (dy * dy));
 			if (distance <= radius) result.add(player);
+		}
+		return result;
+	}
+
+	public List<Player> getPlayers(Entity e, int width, int height) {
+		List<Player> result = new ArrayList<Player>();
+		int ex = (int) e.getX();
+		int ey = (int) e.getY();
+		for (int i = 0; i < players.size(); i++) {
+			Player player = players.get(i);
+			int x = (int) player.getX();
+			int y = (int) player.getY();
+			int dx = Math.abs(x - ex);
+			int dy = Math.abs(y - ey);
+			double distance = Math.sqrt((dx * dx) + (dy * dy));
+			if (distance <= width || distance <= height) result.add(player);
 		}
 		return result;
 	}
