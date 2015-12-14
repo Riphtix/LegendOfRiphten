@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.gfx.ui;
 
+import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.awt.*;
@@ -39,6 +40,10 @@ public class UIComponent {
 
 	public void render(Graphics g) {
 
+	}
+
+	public Vector2i getAbsolutePosition(){
+		return new Vector2i(position).add(offset);
 	}
 
 	void setOffset(Vector2i offset) {

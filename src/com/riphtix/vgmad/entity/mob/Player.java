@@ -13,7 +13,10 @@ import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.util.Vector2i;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 public class Player extends Mob {
 
@@ -129,12 +132,33 @@ public class Player extends Mob {
 		mana = 100;
 		xp = 0;
 
-		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24));
+		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24), new UIActionListener() {
+			public void performAction() {
+				System.out.println("action performed");
+			}
+		});
+		uiButtonOptions.setButtonListener(new UIButtonListener(){
+			public void buttonPressed(UIButton button){
+				super.buttonPressed(button);
+				button.performAction();
+				button.ignoreNextPress();
+			}
+		});
 		uiButtonOptions.setText("Settings");
 		uiButtonOptions.setFont(new Font("Verdana", Font.BOLD, 15));
 		uiButtonOptions.setDropShadow(true, 1);
 		uiButtonOptions.dropShadow = true;
 		panel.addComponent(uiButtonOptions);
+
+		try {
+			UIButton uiButtonImageTest = new UIButton(new Vector2i(4, 200), ImageIO.read(new File("res/entities/mobs/player/maleElf.png")), new UIActionListener() {
+				public void performAction() {
+					System.out.println("action performed");
+				}
+			});
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public String getName(){
