@@ -38,7 +38,7 @@ public class Player extends Mob {
 	UIProgressMark uiHP25percent, uiHP50percent, uiHP75percent;
 	UIProgressMark uiMP25percent, uiMP50percent, uiMP75percent;
 	UIProgressMark uiXP25percent, uiXP50percent, uiXP75percent;
-	private UIButton uiButton;
+	private UIButton uiButtonOptions;
 
 	public PlayerHitbox hitbox;
 
@@ -129,9 +129,12 @@ public class Player extends Mob {
 		mana = 100;
 		xp = 0;
 
-		uiButton = new UIButton(new Vector2i(10, 260), new Vector2i(70,30));
-		uiButton.setText("Hello");
-		//panel.addComponent(uiButton);
+		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24));
+		uiButtonOptions.setText("Settings");
+		uiButtonOptions.setFont(new Font("Verdana", Font.BOLD, 15));
+		uiButtonOptions.setDropShadow(true, 1);
+		uiButtonOptions.dropShadow = true;
+		panel.addComponent(uiButtonOptions);
 	}
 
 	public String getName(){

@@ -9,6 +9,7 @@ public class UIComponent {
 	public Vector2i position, size;
 	protected Vector2i offset;
 	public Color color;
+	protected UIPanel panel;
 
 	public boolean active = true;
 
@@ -21,6 +22,10 @@ public class UIComponent {
 		this.position = position;
 		this.size = size;
 		offset = new Vector2i(0, 0);
+	}
+
+	void init(UIPanel panel){
+		this.panel = panel;
 	}
 
 	public UIComponent setColor(int color){
