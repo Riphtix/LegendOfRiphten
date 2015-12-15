@@ -11,10 +11,12 @@ import com.riphtix.vgmad.gfx.ui.*;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
+import com.riphtix.vgmad.util.ImageUtils;
 import com.riphtix.vgmad.util.Vector2i;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
@@ -41,9 +43,13 @@ public class Player extends Mob {
 	UIProgressMark uiHP25percent, uiHP50percent, uiHP75percent;
 	UIProgressMark uiMP25percent, uiMP50percent, uiMP75percent;
 	UIProgressMark uiXP25percent, uiXP50percent, uiXP75percent;
+
 	private UIButton uiButtonOptions;
+	private UIButton uiButtonImageTest;
 
 	public PlayerHitbox hitbox;
+
+	private BufferedImage image;
 
 	public Player(String name, int x, int y, Keyboard input) {
 		this.name = name;
@@ -60,7 +66,7 @@ public class Player extends Mob {
 		bottomYOffset = 14;
 
 		ui = Game.getUIManager();
-		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 *3)).setColor(0xff505050);
+		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 * 3)).setColor(0xff505050);
 		ui.addPanel(panel);
 
 		UILabel nameLabel = new UILabel(new Vector2i(40, 200), name);
@@ -137,8 +143,8 @@ public class Player extends Mob {
 				System.out.println("action performed");
 			}
 		});
-		uiButtonOptions.setButtonListener(new UIButtonListener(){
-			public void buttonPressed(UIButton button){
+		uiButtonOptions.setButtonListener(new UIButtonListener() {
+			public void buttonPressed(UIButton button) {
 				super.buttonPressed(button);
 				button.performAction();
 				button.ignoreNextPress();
@@ -150,18 +156,46 @@ public class Player extends Mob {
 		uiButtonOptions.dropShadow = true;
 		panel.addComponent(uiButtonOptions);
 
+		/*to use changeBrightness method in ImageUtils class type:
+		BufferedImage imageHover = ImageUtils.changeBrightness(image, amount);
+		positive amount is brighter
+		negative amount is darker
+		*/
+
 		try {
-			UIButton uiButtonImageTest = new UIButton(new Vector2i(4, 200), ImageIO.read(new File("res/entities/mobs/player/maleElf.png")), new UIActionListener() {
-				public void performAction() {
-					System.out.println("action performed");
-				}
-			});
+			image = ImageIO.read(new File("res/ui/home.png"));
+			System.out.println(image.getType());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		uiButtonImageTest = new UIButton(new Vector2i(206, 468), image, new UIActionListener() {
+				public void performAction() {
+					System.exit(0);
+				}
+			});
+		uiButtonImageTest.setButtonListener(new UIButtonListener(){
+			public void mouseEnteredButtonBounds(UIButton button){
+				button.setImage(ImageUtils.changeBrightness(image, 50));
+			}
+
+			public void mouseExitedButtonBounds(UIButton button){
+				button.setImage(image);
+			}
+
+			public void buttonPressed(UIButton button){
+				button.setImage(ImageUtils.changeBrightness(image, 75));
+			}
+
+			public void buttonReleased(UIButton button){
+				button.setImage(image);
+			}
+		});
+		uiButtonImageTest.dropShadow = true;
+		panel.addComponent(uiButtonImageTest);
 	}
 
-	public String getName(){
+	public String getName() {
 		return name;
 	}
 
@@ -208,6 +242,9 @@ public class Player extends Mob {
 	}
 
 	private void tickShooting() {
+		if(Mouse.getX() > 660)
+			return;
+
 		if (Mouse.getButton() == 1 && fireRate <= 0) {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;

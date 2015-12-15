@@ -36,7 +36,8 @@ public class UIButton extends UIComponent {
 	}
 
 	public UIButton(Vector2i position, Image image, UIActionListener actionListener){
-		super(position);
+		super(position, new Vector2i(image.getWidth(null), image.getHeight(null)));
+		this.actionListener = actionListener;
 		setImage(image);
 		init();
 	}
@@ -48,7 +49,9 @@ public class UIButton extends UIComponent {
 
 	void init(UIPanel panel) {
 		super.init(panel);
-		panel.addComponent(label);
+		if(label != null) {
+			panel.addComponent(label);
+		}
 	}
 
 	public void setImage(Image image){
@@ -113,7 +116,7 @@ public class UIButton extends UIComponent {
 			}
 		} else {
 			if (mouseInButtonBounds) {
-				buttonListener.mouseExitedButtonRange(this);
+				buttonListener.mouseExitedButtonBounds(this);
 				buttonPressed = false;
 			}
 			mouseInButtonBounds = false;
@@ -124,14 +127,17 @@ public class UIButton extends UIComponent {
 		int x = position.x + offset.x;
 		int y = position.y + offset.y;
 
-		if (dropShadow) {
-			g.setColor(Color.BLACK);
-			g.fillRect(x + dropShadowOffset, y + dropShadowOffset, size.x, size.y);
-		}
-
 		if(image != null){
+			if (dropShadow) {
+				g.setColor(Color.BLACK);
+				g.fillRect(x + dropShadowOffset, y + dropShadowOffset, size.x, size.y);
+			}
 			g.drawImage(image, x, y, null);
 		}else {
+			if (dropShadow) {
+				g.setColor(Color.BLACK);
+				g.fillRect(x + dropShadowOffset, y + dropShadowOffset, size.x, size.y);
+			}
 			g.setColor(color);
 			g.fillRect(x, y, size.x, size.y);
 

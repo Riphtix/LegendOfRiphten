@@ -19,8 +19,7 @@ public class MageProjectile extends Projectile {
 	public MageProjectile(double x, double y, double dir) {
 		super(x, y, dir);
 		range = 336;
-		speed = 0;
-		//speed = NORMAL_SPEED;
+		speed = NORMAL_SPEED;
 		damage = 20;
 		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
 		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x16, angle));
