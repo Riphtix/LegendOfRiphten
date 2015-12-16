@@ -101,13 +101,4 @@ public class Entity {
 		}
 		return vert;
 	}
-
-	public int[] getHitboxCorners(double xa, int rightXOffset, int leftXOffset, double ya, int topYOffset, int bottomYOffset){
-		int[] hitboxCorners = new int[4];
-		hitboxCorners[0] = hitboxX(xa, leftXOffset);
-		hitboxCorners[1] = hitboxX(xa, rightXOffset);
-		hitboxCorners[2] = hitboxY(ya, topYOffset);
-		hitboxCorners[3] = hitboxY(ya, bottomYOffset);
-		return hitboxCorners;
-	}
 }
