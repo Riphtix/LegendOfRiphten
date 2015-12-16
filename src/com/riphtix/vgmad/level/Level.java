@@ -6,7 +6,6 @@ import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
-import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
 import com.riphtix.vgmad.util.Vector2i;
@@ -136,17 +135,6 @@ public class Level {
 			int xt = (x - c % 2 * size + xOffset) >> 4;
 			int yt = (y - c / 2 * size + yOffset) >> 4;
 			if (!(getTile(xt, yt) instanceof PlayerHitbox) && (getTile(xt, yt).isSolid())) solid = true;
-		}
-		return solid;
-	}
-
-	public boolean playerCollision(int x, int y, int size, int xOffset, int yOffset) {
-		boolean solid = false;
-		for (int c = 0; c < 4; c++) {
-			int xt = (x - c % 2 * size + xOffset) >> 4;
-			int yt = (y - c / 2 * size + yOffset) >> 4;
-			//System.out.println(!(getTile(xt, yt) instanceof MobHitbox));
-			if (!(getTile(xt, yt) instanceof MobHitbox) && (getTile(xt, yt) instanceof PlayerHitbox) && (getTile(xt, yt).isSolid())) solid = true;
 		}
 		return solid;
 	}

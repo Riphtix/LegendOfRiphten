@@ -1,16 +1,12 @@
 package com.riphtix.vgmad.entity.mob;
 
-import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
-import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
-import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
-import com.riphtix.vgmad.util.Debug;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.awt.*;

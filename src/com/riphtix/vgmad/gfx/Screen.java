@@ -1,13 +1,8 @@
 package com.riphtix.vgmad.gfx;
 
-import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.projectile.Projectile;
-import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
-import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
-import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
-import java.awt.*;
 import java.util.Random;
 
 public class Screen {

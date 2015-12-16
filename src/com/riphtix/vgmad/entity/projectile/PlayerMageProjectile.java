@@ -1,19 +1,12 @@
 package com.riphtix.vgmad.entity.projectile;
 
-import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
-
-import javax.swing.*;
-import java.awt.*;
 
 public class PlayerMageProjectile extends Projectile {
 
 	public static final int FIRE_RATE = 15; //Higher = slower
-
-	public ProjectileHitbox hitbox;
 
 	public PlayerMageProjectile(double x, double y, double dir) {
 		super(x, y, dir);
@@ -21,7 +14,6 @@ public class PlayerMageProjectile extends Projectile {
 		speed = NORMAL_SPEED;
 		damage = 20;
 		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
-		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x16, angle));
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
@@ -56,6 +48,5 @@ public class PlayerMageProjectile extends Projectile {
 
 	public void render(Screen screen) {
 		screen.renderProjectile((int) x - 8, (int) y - 4, this);
-		hitbox.render((int) x - 7, (int) y - 1, screen);
 	}
 }

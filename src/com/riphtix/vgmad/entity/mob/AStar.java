@@ -4,7 +4,6 @@ import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.level.Node;
-import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
@@ -23,8 +22,6 @@ public class AStar extends Mob{
 	private List<Node> path = null;
 	private int time = 0;
 	private double speed = 1.0;
-
-	public MobHitbox hitbox;
 
 	public AStar(int x, int y) {
 		this.x = x << 4;
