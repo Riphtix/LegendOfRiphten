@@ -58,7 +58,7 @@ public class Player extends Mob {
 		this.input = input;
 		sprite = animSprite.getSprite();
 		fireRate = MageProjectile.FIRE_RATE;
-		hitbox = new Rectangle(Game.getWindowWidth() / 2 - 31, Game.getWindowHeight() / 2, 19 * 3, 16 * 3);
+		hitbox = new Rectangle(Game.getWindowWidth() / 2 - 31, Game.getWindowHeight() / 2 - 16 * 3, 19 * 3, 32 * 3);
 		range = 336;
 
 		rightXOffset = 8;

@@ -57,9 +57,9 @@ public class Entity {
 		this.level = level;
 	}
 
-	protected boolean hitboxCollision(Mob mob, Projectile projectile){
+	protected boolean hitboxCollision(Mob mob, Projectile projectile, int xOffset, int yOffset){
 		Rectangle mobHitbox = new Rectangle(mob.hitbox.x, mob.hitbox.y, mob.hitbox.width, mob.hitbox.height);
-		Rectangle projectileHitbox = new Rectangle(projectile.hitbox.x,projectile.hitbox.y,projectile.hitbox.width,projectile.hitbox.height);
+		Rectangle projectileHitbox = new Rectangle(projectile.hitbox.x + xOffset, projectile.hitbox.y + yOffset, projectile.hitbox.width, projectile.hitbox.height);
 		return mobHitbox.intersects(projectileHitbox);
 	}
 

@@ -1,9 +1,11 @@
 package com.riphtix.vgmad.entity.projectile;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.util.AffineTransform;
 
 import java.awt.*;
 
@@ -14,11 +16,10 @@ public class MageProjectile extends Projectile {
 	public MageProjectile(double x, double y, double dir, Entity entity) {
 		super(x, y, dir);
 		range = entity.range;
-		speed = TEST_SPEED;
+		speed = NORMAL_SPEED;
 		damage = 20;
 		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
-		hitbox = new Rectangle((int) x, (int) y, 15 * 3, 8 * 3);
-
+		hitbox = new Rectangle((int) x, (int) y, 15 * 3, 15 * 3);
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
@@ -29,7 +30,7 @@ public class MageProjectile extends Projectile {
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
 			remove();
 		}*/
-		if(hitboxCollision(level.getClientPlayer(), this)){
+		if(hitboxCollision(level.getClientPlayer(), this, -8, -8)){
 			System.out.println("player hitbox hit!!!");
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
 			remove();
@@ -45,8 +46,8 @@ public class MageProjectile extends Projectile {
 	protected void move() {
 		x += nx;
 		y += ny;
-		hitbox.x = (int) x;
-		hitbox.y = (int) y;
+		hitbox.x += (int) nx * 3;
+		hitbox.y += (int) ny * 3;
 		if (distance() > range) {
 			remove();
 		}
