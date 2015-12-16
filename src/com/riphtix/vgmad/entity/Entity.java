@@ -1,9 +1,12 @@
 package com.riphtix.vgmad.entity;
 
+import com.riphtix.vgmad.entity.mob.Mob;
+import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.Level;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Entity {
@@ -12,6 +15,8 @@ public class Entity {
 	private boolean removed = false;
 	protected Level level;
 	protected final Random random = new Random();
+	public int range;
+	public Rectangle hitbox;
 
 	public Entity() {
 
@@ -50,6 +55,12 @@ public class Entity {
 
 	public void init(Level level) {
 		this.level = level;
+	}
+
+	protected boolean hitboxCollision(Mob mob, Projectile projectile){
+		Rectangle mobHitbox = new Rectangle(mob.hitbox.x, mob.hitbox.y, mob.hitbox.width, mob.hitbox.height);
+		Rectangle projectileHitbox = new Rectangle(projectile.hitbox.x,projectile.hitbox.y,projectile.hitbox.width,projectile.hitbox.height);
+		return mobHitbox.intersects(projectileHitbox);
 	}
 
 	protected boolean isCollision(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {

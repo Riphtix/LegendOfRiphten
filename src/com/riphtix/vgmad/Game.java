@@ -1,6 +1,7 @@
 package com.riphtix.vgmad;
 
 import com.riphtix.vgmad.entity.mob.Player;
+import com.riphtix.vgmad.entity.projectile.MageProjectile;
 import com.riphtix.vgmad.gfx.Font;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.ui.UIManager;
@@ -63,8 +64,6 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
-	private int[] hitboxCorners = new int[4];
-
 	//Game constructor
 	public Game() {
 		//Sets the screen size
@@ -96,7 +95,7 @@ public class Game extends Canvas implements Runnable {
 		return HEIGHT * SCALE;
 	}
 
-	public static UIManager getUIManager(){
+	public static UIManager getUIManager() {
 		return uiManager;
 	}
 
@@ -170,9 +169,16 @@ public class Game extends Canvas implements Runnable {
 
 		g = bs.getDrawGraphics();
 		g.setColor(new Color(0xff0000ff));
-		g.fillRect(0,0, getWidth(), getHeight());
+		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		uiManager.render(g);
+		g.setColor(Color.GREEN);
+		g.drawRect(player.hitbox.x, player.hitbox.y, player.hitbox.width, player.hitbox.height);
+		if(level.getProjectiles().size() > 0){
+			for(int i = 0; i < level.getProjectiles().size(); i++){
+				g.drawRect(level.getProjectiles().get(i).hitbox.x, level.getProjectiles().get(i).hitbox.y, level.getProjectiles().get(i).hitbox.width, level.getProjectiles().get(i).hitbox.height);
+			}
+		}
 		//g.setColor(new Color(0xffff0000));
 		//g.drawRect(getWindowWidth() / 2 - 33, getWindowHeight() / 2, 60, 48);
 		//g.fillRect(Mouse.getX() - 24, Mouse.getY() - 24, 16 * 3, 16 * 3);

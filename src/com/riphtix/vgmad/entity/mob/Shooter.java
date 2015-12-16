@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.entity.mob;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.MageProjectile;
@@ -9,8 +10,10 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.util.Debug;
 import com.riphtix.vgmad.util.Vector2i;
 
+import java.awt.*;
 import java.util.List;
 
 public class Shooter extends Mob {
@@ -30,15 +33,14 @@ public class Shooter extends Mob {
 
 	private int firerate = 0;
 
-	public MobHitbox hitbox;
-
 	public Shooter(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
 		firerate = MageProjectile.FIRE_RATE;
+		range = 336;
 
-		hitbox = new MobHitbox(Sprite.hitbox32x32);
+		hitbox = new Rectangle(x, y, 19, 16);
 	}
 
 	public void tick() {
@@ -125,8 +127,6 @@ public class Shooter extends Mob {
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
-		//Debug.drawRect(screen, 25 * 16, 32 * 16, 31, 31, true);
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
-		hitbox.render((int) x - 10, (int) y, screen);
 	}
 }

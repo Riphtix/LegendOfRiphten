@@ -3,6 +3,7 @@ package com.riphtix.vgmad.entity.mob;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
 public class Dummy extends Mob {
 
@@ -16,6 +17,8 @@ public class Dummy extends Mob {
 	private int time = 0;
 	private int xa = 0;
 	private int ya = 0;
+
+	public MobHitbox hitbox;
 
 	public Dummy(int x, int y) {
 		this.x = x << 4;
@@ -59,6 +62,6 @@ public class Dummy extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
-
+		//hitbox.render((int) x - 10, (int) y, screen);
 	}
 }

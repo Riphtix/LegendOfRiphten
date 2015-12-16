@@ -2,18 +2,35 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="62a9819a-5dc6-478d-aea4-3dc18ef8c119" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/AStar.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/AStar.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Chaser.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Chaser.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Dummy.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Dummy.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/Entity.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/Entity.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/Game.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/Game.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/projectile/MageProjectile.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/projectile/MageProjectile.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Mob.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Mob.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$1.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$1.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$2.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$2.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$3.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$3.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$4.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player$4.class" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Player.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/projectile/MageProjectile.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/projectile/MageProjectile.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/gfx/ui/UIButton.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/gfx/ui/UIButton.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/gfx/ui/UIButtonListener.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/gfx/ui/UIButtonListener.class" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Player.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/level/tile/hitbox/PlayerHitbox.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/level/tile/hitbox/PlayerHitbox.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/projectile/Projectile.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/projectile/Projectile.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/gfx/Screen.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/gfx/Screen.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Shooter.class" afterPath="$PROJECT_DIR$/out/production/VideoGameMarketingAndDesignFinal/com/riphtix/vgmad/entity/mob/Shooter.class" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/AStar.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/AStar.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Chaser.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Chaser.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Dummy.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Dummy.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/Game.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/Game.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/MageProjectile.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/MageProjectile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButton.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButton.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButtonListener.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButtonListener.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Mob.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Mob.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Player.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Player.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/hitbox/PlayerHitbox.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/hitbox/PlayerHitbox.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/Projectile.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/Projectile.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Shooter.java" afterPath="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Shooter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="VideoGameMarketingAndDesignFinal.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -39,97 +56,32 @@
     <favorites_list name="VideoGameMarketingAndDesignFinal" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="Event.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/Event.java">
+    <leaf>
+      <file leaf-file-name="Game.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/Game.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-              <folding>
-                <element signature="e#208#209#0" expanded="true" />
-                <element signature="e#231#232#0" expanded="true" />
-                <element signature="e#256#257#0" expanded="true" />
-                <element signature="e#274#275#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MouseMovedEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseMovedEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-              <folding>
-                <element signature="e#340#341#0" expanded="true" />
-                <element signature="e#355#356#0" expanded="true" />
-                <element signature="e#376#377#0" expanded="true" />
-                <element signature="e#391#392#0" expanded="true" />
-                <element signature="e#422#423#0" expanded="true" />
-                <element signature="e#443#444#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MouseButtonEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseButtonEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-              <folding>
-                <element signature="e#333#334#0" expanded="true" />
-                <element signature="e#353#354#0" expanded="true" />
-                <element signature="e#375#376#0" expanded="true" />
-                <element signature="e#390#391#0" expanded="true" />
-                <element signature="e#412#413#0" expanded="true" />
-                <element signature="e#427#428#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MousePressedEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MousePressedEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
-              <folding>
-                <element signature="e#155#156#0" expanded="true" />
-                <element signature="e#201#202#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MouseReleasedEvent.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseReleasedEvent.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
-              <folding>
-                <element signature="e#156#157#0" expanded="true" />
-                <element signature="e#203#204#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="EventDispatcher.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventDispatcher.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.24285714">
-              <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+              <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="EventHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventHandler.java">
+      <file leaf-file-name="Screen.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Entity.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.122522525">
+              <caret line="59" column="70" selection-start-line="59" selection-start-column="70" selection-end-line="59" selection-end-column="70" />
               <folding />
             </state>
           </provider>
@@ -140,8 +92,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="Interface" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -161,29 +113,18 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/handler/Keyboard.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIProgressMarks.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIProgressMark.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIProgressBar.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/AStar.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Chaser.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/Hitbox.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Dummy.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/PlayerHitbox.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/SpawnLevel.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/Level.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Mob.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/MobHitbox.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/hitbox/ProjectileHitbox.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/hitbox/PlayerHitbox.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/hitbox/MobHitbox.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Shooter.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/Game.java" />
         <option value="E:/Utility/Java/jdk1.8.0_60/src.zip!/java/awt/geom/AffineTransform.java" />
         <option value="E:/Utility/Java/jdk1.8.0_60/src.zip!/java/awt/geom/Path2D.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/util/AffineTransform.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java" />
         <option value="E:/Utility/Java/jdk1.8.0_60/src.zip!/java/awt/image/ImageProducer.java" />
         <option value="E:/Utility/Java/jdk1.8.0_60/src.zip!/java/awt/Image.java" />
         <option value="E:/Utility/Java/jdk1.8.0_60/src.zip!/java/awt/Graphics2D.java" />
@@ -198,12 +139,9 @@
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/handler/Mouse.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIActionListener.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/util/MathUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/MageProjectile.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButtonListener.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButton.java" />
         <option value="E:/Utility/Java/jdk1.8.0_60/src.zip!/java/awt/image/BufferedImage.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/util/ImageUtils.java" />
-        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Player.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseMovedEvent.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseButtonEvent.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MousePressedEvent.java" />
@@ -212,6 +150,20 @@
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventDispatcher.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventHandler.java" />
         <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventListener.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Dummy.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Chaser.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/AStar.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/hitbox/PlayerHitbox.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/Projectile.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButton.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Rectangle.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Mob.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Player.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Shooter.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/MageProjectile.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/Game.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java" />
+        <option value="$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java" />
       </list>
     </option>
   </component>
@@ -225,11 +177,14 @@
   <component name="MavenProjectNavigator">
     <treeState />
   </component>
+  <component name="NamedScopeManager">
+    <order />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-8" />
-    <option name="y" value="-8" />
-    <option name="width" value="1936" />
-    <option name="height" value="1096" />
+    <option name="x" value="-7" />
+    <option name="y" value="2" />
+    <option name="width" value="780" />
+    <option name="height" value="766" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -482,8 +437,6 @@
       <autoscrollToSource />
       <autoscrollFromSource />
       <sortByType />
-      <manualOrder />
-      <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
       <pane id="Scope" />
@@ -527,6 +480,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="util" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.riphtix.vgmad" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="gfx" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
@@ -549,9 +520,70 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.riphtix.vgmad" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.riphtix.vgmad" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="projectile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="VideoGameMarketingAndDesignFinal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.riphtix.vgmad" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="entity" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mob" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -644,15 +676,17 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="settings.editor.selected.configurable" value="preferences.general" />
+    <property name="settings.editor.selected.configurable" value="reference.settingsdialog.IDE.editor.colors.Java" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="dynamic.classpath" value="false" />
     <property name="SearchEverywhereHistoryKey" value="sprite&#9;FILE&#9;file://E:/Coding/Workspace/VideoGameMarketingAndDesignFinal/src/com/riphtix/vgmad/gfx/Sprite.java&#10;spr&#9;FILE&#9;file://E:/Coding/Workspace/VideoGameMarketingAndDesignFinal/src/com/riphtix/vgmad/gfx/SpriteSheet.java&#10;Level&#9;FILE&#9;file://C:/Users/Kaito/workspace/VideoGameMarketingAndDesignFinal/src/com/riphtix/vgmad/level/Level.java&#10;shoot&#9;PSI&#9;JAVA://com.riphtix.vgmad.entity.mob.Player#tickShooting" />
+    <property name="FullScreen" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -722,15 +756,6 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
@@ -752,15 +777,6 @@
       <option name="CLEAR_LOGCAT" value="false" />
       <option name="SHOW_LOGCAT_AUTOMATICALLY" value="true" />
       <option name="FILTER_LOGCAT_AUTOMATICALLY" value="true" />
-      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
-      <option name="SELECTED_CLOUD_DEVICE_CONFIGURATION_ID" value="0" />
-      <option name="SELECTED_CLOUD_DEVICE_PROJECT_ID" value="" />
-      <option name="IS_VALID_CLOUD_MATRIX_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_MATRIX_SELECTION_ERROR" value="" />
-      <option name="IS_VALID_CLOUD_DEVICE_SELECTION" value="false" />
-      <option name="INVALID_CLOUD_DEVICE_SELECTION_ERROR" value="" />
-      <option name="CLOUD_DEVICE_SERIAL_NUMBER" value="" />
       <method />
     </configuration>
     <configuration default="true" type="Applet" factoryName="Applet">
@@ -822,58 +838,8 @@
       <patterns />
       <method />
     </configuration>
-    <configuration default="true" type="JUnitTestDiscovery" factoryName="JUnit Test Discovery" changeList="All">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="TEST_OBJECT" value="class" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <envs />
-      <patterns />
-      <method />
-    </configuration>
     <configuration default="true" type="JarApplication" factoryName="JAR Application">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="Java Scratch" factoryName="Java Scratch">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="SCRATCH_FILE_ID" value="0" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="" />
-      <envs />
-      <method />
-    </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="VideoGameMarketingAndDesignFinal" />
       <envs />
       <method />
     </configuration>
@@ -883,6 +849,38 @@
       <option name="SHMEM_ADDRESS" value="javadebug" />
       <option name="HOST" value="localhost" />
       <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="ScalaTestRunConfiguration" factoryName="ScalaTest">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="Specs2RunConfiguration" factoryName="Specs2">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
+      <module name="" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
@@ -913,32 +911,20 @@
       <listeners />
       <method />
     </configuration>
-    <configuration default="true" type="TestNGTestDiscovery" factoryName="TestNG Test Discovery" changeList="All">
+    <configuration default="true" type="uTestRunConfiguration" factoryName="utest">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <extension name="scalaCoverage" />
       <module name="" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="SUITE_NAME" />
-      <option name="PACKAGE_NAME" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="METHOD_NAME" />
-      <option name="GROUP_NAME" />
-      <option name="TEST_OBJECT" value="CLASS" />
-      <option name="VM_PARAMETERS" />
-      <option name="PARAMETERS" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="OUTPUT_DIRECTORY" />
-      <option name="ANNOTATION_TYPE" />
-      <option name="ENV_VARIABLES" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="TEST_SEARCH_SCOPE">
-        <value defaultName="singleModule" />
-      </option>
-      <option name="USE_DEFAULT_REPORTERS" value="false" />
-      <option name="PROPERTIES_FILE" />
+      <setting name="path" value="" />
+      <setting name="package" value="" />
+      <setting name="vmparams" value="" />
+      <setting name="params" value="" />
+      <setting name="workingDirectory" value="" />
+      <setting name="searchForTest" value="Across module dependencies" />
+      <setting name="testName" value="" />
+      <setting name="testKind" value="Class" />
+      <setting name="showProgressMessages" value="true" />
       <envs />
-      <properties />
-      <listeners />
       <method />
     </configuration>
     <list size="1">
@@ -980,33 +966,33 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1096" extended-state="6" />
-    <editor active="false" />
+    <frame x="-7" y="2" width="780" height="766" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293919" sideWeight="0.4945055" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3293919" sideWeight="0.50549453" order="11" side_tool="true" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32942432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32971016" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.29317698" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.24886535" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3329776" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.38313767" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32967034" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32657418" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39167556" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293919" sideWeight="0.4945055" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33067092" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293919" sideWeight="0.50549453" order="11" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32942432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971016" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.38593483" sideWeight="0.4969743" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.4027778" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24886535" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24962178" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39167556" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32967034" sideWeight="0.5" order="0" side_tool="true" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32657418" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1031,6 +1017,54 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/Game.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="44" column="65" selection-start-line="44" selection-start-column="65" selection-end-line="44" selection-end-column="65" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="138" column="9" selection-start-line="138" selection-start-column="9" selection-end-line="138" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="32" column="5" selection-start-line="32" selection-start-column="5" selection-end-line="32" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/MageProjectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/Projectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Font.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1094,31 +1128,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/util/Debug.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6165413">
-          <caret line="15" column="8" selection-start-line="15" selection-start-column="8" selection-end-line="15" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIProgressMark.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/AStar.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="49" column="38" selection-start-line="49" selection-start-column="38" selection-end-line="49" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Chaser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="30" column="55" selection-start-line="30" selection-start-column="55" selection-end-line="30" selection-end-column="55" />
         </state>
       </provider>
     </entry>
@@ -1136,13 +1149,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Dummy.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7642981">
-          <caret line="61" column="8" selection-start-line="61" selection-start-column="8" selection-end-line="61" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/Tile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1157,45 +1163,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/Projectile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="26" column="29" selection-start-line="26" selection-start-column="29" selection-end-line="26" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/level/Level.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="145" column="27" selection-start-line="145" selection-start-column="27" selection-end-line="145" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/StoneBrickTile.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="12" column="22" selection-start-line="12" selection-start-column="22" selection-end-line="12" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Mob.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="45" column="23" selection-start-line="45" selection-start-column="23" selection-end-line="45" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Shooter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="129" column="34" selection-start-line="129" selection-start-column="34" selection-end-line="129" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
         </state>
       </provider>
     </entry>
@@ -1248,66 +1219,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/util/MathUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="13" column="41" selection-start-line="13" selection-start-column="41" selection-end-line="13" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="117" column="16" selection-start-line="117" selection-start-column="16" selection-end-line="117" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Sprite.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="38" column="35" selection-start-line="38" selection-start-column="35" selection-end-line="38" selection-end-column="35" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButtonListener.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/res/ui/home.png">
-      <provider selected="true" editor-type-id="images">
-        <state />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/MageProjectile.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.23880596">
-          <caret line="21" column="8" selection-start-line="21" selection-start-column="8" selection-end-line="21" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://E:/Utility/Java/jdk1.8.0_60/src.zip!/java/awt/image/BufferedImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.7380074">
-          <caret line="70" column="16" selection-start-line="70" selection-start-column="16" selection-end-line="70" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/util/ImageUtils.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="23" column="44" selection-start-line="23" selection-start-column="44" selection-end-line="23" selection-end-column="44" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButton.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="133" column="13" selection-start-line="133" selection-start-column="13" selection-end-line="133" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1318,106 +1233,183 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Dummy.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="64" column="10" selection-start-line="64" selection-start-column="10" selection-end-line="64" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Chaser.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="28" selection-start-line="22" selection-start-column="28" selection-end-line="22" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/AStar.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.89972144">
+          <caret line="26" column="28" selection-start-line="26" selection-start-column="28" selection-end-line="26" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/level/tile/hitbox/PlayerHitbox.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47910863">
+          <caret line="19" column="62" selection-start-line="19" selection-start-column="62" selection-end-line="19" selection-end-column="62" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/ui/UIButton.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="127" column="38" selection-start-line="127" selection-start-column="38" selection-end-line="127" selection-end-column="38" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Font.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/res/entities/projectiles/projectiles.png">
+      <provider selected="true" editor-type-id="images">
+        <state />
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.8.0_45/src.zip!/java/awt/Rectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-4.465181">
+          <caret line="683" column="51" selection-start-line="683" selection-start-column="51" selection-end-line="683" selection-end-column="51" />
+          <folding>
+            <element signature="e#24378#24379#0" expanded="false" />
+            <element signature="e#24438#24439#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/Projectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="39" column="5" selection-start-line="39" selection-start-column="5" selection-end-line="39" selection-end-column="5" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Sprite.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="47" column="0" selection-start-line="47" selection-start-column="0" selection-end-line="47" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Rectangle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7362069">
+          <caret line="56" column="5" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
+          <folding>
+            <element signature="e#194#195#0" expanded="false" />
+            <element signature="e#217#218#0" expanded="false" />
+            <element signature="e#250#251#0" expanded="false" />
+            <element signature="e#290#291#0" expanded="false" />
+            <element signature="e#467#468#0" expanded="false" />
+            <element signature="e#499#500#0" expanded="false" />
+            <element signature="e#541#542#0" expanded="false" />
+            <element signature="e#581#582#0" expanded="false" />
+            <element signature="e#610#611#0" expanded="false" />
+            <element signature="e#637#638#0" expanded="false" />
+            <element signature="e#670#671#0" expanded="false" />
+            <element signature="e#706#707#0" expanded="false" />
+            <element signature="e#730#731#0" expanded="false" />
+            <element signature="e#745#746#0" expanded="false" />
+            <element signature="e#769#770#0" expanded="false" />
+            <element signature="e#784#785#0" expanded="false" />
+            <element signature="e#812#813#0" expanded="false" />
+            <element signature="e#831#832#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/util/Debug.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="23" selection-start-line="10" selection-start-column="23" selection-end-line="10" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/level/Level.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="189" column="0" selection-start-line="189" selection-start-column="0" selection-end-line="189" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Shooter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Mob.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="84" column="52" selection-start-line="84" selection-start-column="52" selection-end-line="84" selection-end-column="52" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/mob/Player.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.46363637">
-          <caret line="245" column="19" selection-start-line="245" selection-start-column="19" selection-end-line="245" selection-end-column="19" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="49" column="39" selection-start-line="49" selection-start-column="39" selection-end-line="49" selection-end-column="39" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/projectile/MageProjectile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.80217785">
+          <caret line="31" column="56" selection-start-line="31" selection-start-column="56" selection-end-line="31" selection-end-column="56" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/Game.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="80" column="0" selection-start-line="80" selection-start-column="0" selection-end-line="80" selection-end-column="0" />
+          <caret line="176" column="46" selection-start-line="176" selection-start-column="46" selection-end-line="176" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseMovedEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/util/ImageUtils.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="18" selection-start-line="24" selection-start-column="18" selection-end-line="24" selection-end-column="18" />
-          <folding>
-            <element signature="e#340#341#0" expanded="true" />
-            <element signature="e#355#356#0" expanded="true" />
-            <element signature="e#376#377#0" expanded="true" />
-            <element signature="e#391#392#0" expanded="true" />
-            <element signature="e#422#423#0" expanded="true" />
-            <element signature="e#443#444#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseButtonEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="21" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="21" />
-          <folding>
-            <element signature="e#333#334#0" expanded="true" />
-            <element signature="e#353#354#0" expanded="true" />
-            <element signature="e#375#376#0" expanded="true" />
-            <element signature="e#390#391#0" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-            <element signature="e#427#428#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MousePressedEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="0" column="39" selection-start-line="0" selection-start-column="39" selection-end-line="0" selection-end-column="39" />
-          <folding>
-            <element signature="e#155#156#0" expanded="true" />
-            <element signature="e#201#202#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/Event.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="11" column="20" selection-start-line="11" selection-start-column="20" selection-end-line="11" selection-end-column="20" />
-          <folding>
-            <element signature="e#208#209#0" expanded="true" />
-            <element signature="e#231#232#0" expanded="true" />
-            <element signature="e#256#257#0" expanded="true" />
-            <element signature="e#274#275#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventListener.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.123636365">
-          <caret line="4" column="37" selection-start-line="4" selection-start-column="37" selection-end-line="4" selection-end-column="37" />
+        <state vertical-scroll-proportion="0.048275862">
+          <caret line="8" column="13" selection-start-line="8" selection-start-column="13" selection-end-line="8" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/types/MouseReleasedEvent.java">
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/gfx/Screen.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="5" column="47" selection-start-line="5" selection-start-column="47" selection-end-line="5" selection-end-column="47" />
-          <folding>
-            <element signature="e#156#157#0" expanded="true" />
-            <element signature="e#203#204#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventDispatcher.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24285714">
-          <caret line="15" column="35" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/events/EventHandler.java">
+    <entry file="file://$PROJECT_DIR$/src/com/riphtix/vgmad/entity/Entity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="2" column="29" selection-start-line="2" selection-start-column="29" selection-end-line="2" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.122522525">
+          <caret line="59" column="70" selection-start-line="59" selection-start-column="70" selection-end-line="59" selection-end-column="70" />
           <folding />
         </state>
       </provider>

@@ -2,6 +2,7 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.projectile.MageProjectile;
+import com.riphtix.vgmad.entity.projectile.PlayerMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -11,6 +12,7 @@ import com.riphtix.vgmad.gfx.ui.*;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
+import com.riphtix.vgmad.util.Debug;
 import com.riphtix.vgmad.util.ImageUtils;
 import com.riphtix.vgmad.util.Vector2i;
 
@@ -47,8 +49,6 @@ public class Player extends Mob {
 	private UIButton uiButtonOptions;
 	private UIButton uiButtonImageTest;
 
-	public PlayerHitbox hitbox;
-
 	private BufferedImage image;
 
 	public Player(String name, int x, int y, Keyboard input) {
@@ -58,7 +58,8 @@ public class Player extends Mob {
 		this.input = input;
 		sprite = animSprite.getSprite();
 		fireRate = MageProjectile.FIRE_RATE;
-		hitbox = new PlayerHitbox(Sprite.hitbox32x32);
+		hitbox = new Rectangle(Game.getWindowWidth() / 2 - 31, Game.getWindowHeight() / 2, 19 * 3, 16 * 3);
+		range = 336;
 
 		rightXOffset = 8;
 		leftXOffset = -10;
@@ -257,6 +258,5 @@ public class Player extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
-		hitbox.render((int) x - 10, (int) y, screen);
 	}
 }

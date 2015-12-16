@@ -1,11 +1,13 @@
 package com.riphtix.vgmad.gfx;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
+import java.awt.*;
 import java.util.Random;
 
 public class Screen {
@@ -158,66 +160,6 @@ public class Screen {
 		}
 	}
 
-	public void renderPlayerHitbox(int xp, int yp, PlayerHitbox hitbox) {
-		xp -= xOffset;
-		yp -= yOffset;
-
-		//sets the color for every x and y value
-		for (int y = 0; y < hitbox.sprite.getHeight(); y++) {
-			int ya = y + yp;
-			for (int x = 0; x < hitbox.sprite.getWidth(); x++) {
-				int xa = x + xp;
-				if (xa < -hitbox.sprite.getWidth() || xa >= width || ya < -hitbox.sprite.getHeight() || ya >= height) break;
-				if (xa < 0) xa = 0;
-				if (ya < 0) ya = 0;
-				int col = hitbox.sprite.pixels[x + y * hitbox.sprite.getWidth()];
-				if(col != 0xffff00ff && col != 0xff7f007f){
-					pixels[xa + ya * width] = col;
-				}
-			}
-		}
-	}
-
-	public void renderMobHitbox(int xp, int yp, MobHitbox hitbox) {
-		xp -= xOffset;
-		yp -= yOffset;
-
-		//sets the color for every x and y value
-		for (int y = 0; y < hitbox.sprite.getHeight(); y++) {
-			int ya = y + yp;
-			for (int x = 0; x < hitbox.sprite.getWidth(); x++) {
-				int xa = x + xp;
-				if (xa < -hitbox.sprite.getWidth() || xa >= width || ya < -hitbox.sprite.getHeight() || ya >= height) break;
-				if (xa < 0) xa = 0;
-				if (ya < 0) ya = 0;
-				int col = hitbox.sprite.pixels[x + y * hitbox.sprite.getWidth()];
-				if(col != 0xffff00ff && col != 0xff7f007f){
-					pixels[xa + ya * width] = col;
-				}
-			}
-		}
-	}
-
-	public void renderProjectileHitbox(int xp, int yp, ProjectileHitbox hitbox) {
-		xp -= xOffset;
-		yp -= yOffset;
-
-		//sets the color for every x and y value
-		for (int y = 0; y < hitbox.sprite.getHeight(); y++) {
-			int ya = y + yp;
-			for (int x = 0; x < hitbox.sprite.getWidth(); x++) {
-				int xa = x + xp;
-				if (xa < -hitbox.sprite.getWidth() || xa >= width || ya < -hitbox.sprite.getHeight() || ya >= height) break;
-				if (xa < 0) xa = 0;
-				if (ya < 0) ya = 0;
-				int col = hitbox.sprite.pixels[x + y * hitbox.sprite.getWidth()];
-				if(col != 0xffff00ff && col != 0xff7f007f){
-					pixels[xa + ya * width] = col;
-				}
-			}
-		}
-	}
-
 	//draws a mob to the screen (including players)
 	public void renderMob(int xp, int yp, Sprite sprite) {
 		xp -= xOffset;
@@ -243,6 +185,22 @@ public class Screen {
 			yp -= yOffset;
 		}
 
+		for(int x = xp; x < xp + width; x++){
+			if(x < 0 || x >= this.width || yp >= this.height) continue;
+			if(yp > 0) pixels[x + yp * this.width] = color;
+			if(yp + height >= this.height) continue;
+			if(yp + height > 0 ) pixels[x + (yp + height) * this.width] = color;
+		}
+		for(int y = yp; y <= yp + height; y++){
+			if(xp >= this.width || y < 0 || y >= this.height) continue;
+			if(xp > 0) pixels[xp + y * this.width] = color;
+			if(xp + width >= this.width) continue;
+			if(xp + width > 0) pixels[(xp + width) + y * this.width] = color;
+		}
+
+	}
+
+	public void drawRect(int xp, int yp, int width, int height, int color) {
 		for(int x = xp; x < xp + width; x++){
 			if(x < 0 || x >= this.width || yp >= this.height) continue;
 			if(yp > 0) pixels[x + yp * this.width] = color;

@@ -3,6 +3,7 @@ package com.riphtix.vgmad.entity.mob;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public class Chaser extends Mob {
 	private double xa = 0.0;
 	private double ya = 0.0;
 	private double speed = 1.0;
+
+	public MobHitbox hitbox;
 
 	public Chaser(int x, int y) {
 		this.x = x << 4;
@@ -68,5 +71,6 @@ public class Chaser extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
+		//hitbox.render((int) x - 10, (int) y, screen);
 	}
 }
