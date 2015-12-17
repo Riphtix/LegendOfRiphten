@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="VideoGameMarketingAndDesignFinal:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/VideoGameMarketingAndDesignFinal_jar</output-path>
+    <root id="archive" name="VideoGameMarketingAndDesignFinal.jar">
+      <element id="module-output" name="VideoGameMarketingAndDesignFinal" />
+    </root>
+  </artifact>
+</component>

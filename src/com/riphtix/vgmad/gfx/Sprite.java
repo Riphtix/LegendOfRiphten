@@ -47,7 +47,7 @@ public class Sprite {
 	public static Sprite aimBox = new Sprite(16, 0, 0, SpriteSheet.debug);
 
 	//PlayerHitbox
-	public static Sprite hitbox32x32 = new Sprite(SpriteSheet.mobHitbox, 19, 16);
+	public static Sprite hitbox32x32 = new Sprite(SpriteSheet.mobHitbox, 21, 32);
 	public static Sprite hitbox16x16 = new Sprite(SpriteSheet.projectileHitbox, 15, 8);
 
 	protected Sprite(SpriteSheet sheet, int width, int height) {
@@ -182,6 +182,29 @@ public class Sprite {
 		for (int i = 0; i < width * height; i++) {
 			pixels[i] = color;
 		}
+	}
+
+	public boolean intersects(Sprite sprite) {
+		int thisWidth = this.width;
+		int thisHeight = this.height;
+		int spriteWidth = sprite.width;
+		int spriteHeight = sprite.height;
+		if (spriteWidth <= 0 || spriteHeight <= 0 || thisWidth <= 0 || thisHeight <= 0) {
+			return false;
+		}
+		int thisX = this.x;
+		int thisY = this.y;
+		int spriteX = sprite.x;
+		int spriteY = sprite.y;
+		spriteWidth += spriteX;
+		spriteHeight += spriteY;
+		thisWidth += thisX;
+		thisHeight += thisY;
+		//      overflow || intersect
+		return ((spriteWidth < spriteX || spriteWidth > thisX) &&
+				(spriteHeight < spriteY || spriteHeight > thisY) &&
+				(thisWidth < thisX || thisWidth > spriteX) &&
+				(thisHeight < thisY || thisHeight > spriteY));
 	}
 
 	private void load() {

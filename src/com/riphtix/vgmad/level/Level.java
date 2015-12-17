@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.level;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
@@ -137,6 +138,30 @@ public class Level {
 			if (!(getTile(xt, yt) instanceof PlayerHitbox) && (getTile(xt, yt).isSolid())) solid = true;
 		}
 		return solid;
+	}
+
+	public Mob getClosestMob(Projectile projectile, int x, int y, int width, int height){
+		List<Entity> entities = getEntities(projectile, width, height);
+		entities.remove(getClientPlayer());
+
+		double min = 0;
+		Entity closest = null;
+		for (int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			if(e.equals(projectile))continue;
+			double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) e.getX(), (int) e.getY()));
+			if (i == 0 || distance < min) {
+				min = distance;
+				closest = e;
+			}
+		}
+		Mob mob = null;
+		if(closest != null) {
+			if (closest instanceof Mob && !(closest instanceof Player)) {
+				mob = (Mob) closest;
+			}
+		}
+		return mob;
 	}
 
 	//collision with uneven objects (width 2 height 3)

@@ -6,9 +6,9 @@ import com.riphtix.vgmad.level.tile.Tile;
 
 import java.awt.*;
 
-public class PlayerHitbox extends Tile {
-	
-	public PlayerHitbox(Sprite sprite) {
+public class ProjectileHitbox extends Tile {
+
+	public ProjectileHitbox(Sprite sprite) {
 		super(sprite);
 	}
 

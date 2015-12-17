@@ -2,14 +2,15 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.particle.Particle;
-import com.riphtix.vgmad.entity.projectile.MageProjectile;
+import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.util.Vector2i;
 
-import java.awt.*;
 import java.util.List;
 
 public class Shooter extends Mob {
@@ -33,10 +34,10 @@ public class Shooter extends Mob {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
-		firerate = MageProjectile.FIRE_RATE;
+		firerate = FireMageProjectile.FIRE_RATE;
 		range = 336;
 
-		hitbox = new Rectangle(x, y, 19, 16);
+		hitbox = new MobHitbox(Sprite.hitbox32x32);
 	}
 
 	public void tick() {
@@ -90,7 +91,7 @@ public class Shooter extends Mob {
 				double dy = rand.getY() - y;
 				double dir = Math.atan2(dy, dx);
 				shoot(x, y, dir, this);
-				firerate = MageProjectile.FIRE_RATE;
+				firerate = FireMageProjectile.FIRE_RATE;
 			}
 		}
 	}
@@ -116,7 +117,7 @@ public class Shooter extends Mob {
 				double dy = closest.getY() - y;
 				double dir = Math.atan2(dy, dx);
 				shoot(x, y, dir, this);
-				firerate = MageProjectile.FIRE_RATE;
+				firerate = FireMageProjectile.FIRE_RATE;
 			}
 		}
 	}
@@ -124,5 +125,6 @@ public class Shooter extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
+		hitbox.render((int) x - 10, (int) y - 16, screen);
 	}
 }

@@ -1,8 +1,7 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
-import com.riphtix.vgmad.entity.projectile.MageProjectile;
-import com.riphtix.vgmad.entity.projectile.PlayerMageProjectile;
+import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -12,7 +11,6 @@ import com.riphtix.vgmad.gfx.ui.*;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
-import com.riphtix.vgmad.util.Debug;
 import com.riphtix.vgmad.util.ImageUtils;
 import com.riphtix.vgmad.util.Vector2i;
 
@@ -57,8 +55,8 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = animSprite.getSprite();
-		fireRate = MageProjectile.FIRE_RATE;
-		hitbox = new Rectangle(Game.getWindowWidth() / 2 - 31, Game.getWindowHeight() / 2 - 16 * 3, 19 * 3, 32 * 3);
+		fireRate = PlayerFireMageProjectile.FIRE_RATE;
+		hitbox = new PlayerHitbox(Sprite.hitbox32x32);
 		range = 336;
 
 		rightXOffset = 8;
@@ -251,12 +249,13 @@ public class Player extends Mob {
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
 			shoot(x, y, dir, this);
-			fireRate = MageProjectile.FIRE_RATE;
+			fireRate = PlayerFireMageProjectile.FIRE_RATE;
 		}
 	}
 
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
+		hitbox.render((int) (x - 11), (int) (y - 16), screen);
 	}
 }

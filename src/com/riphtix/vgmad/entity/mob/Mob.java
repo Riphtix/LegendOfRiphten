@@ -1,7 +1,8 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.Entity;
-import com.riphtix.vgmad.entity.projectile.MageProjectile;
+import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
+import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
@@ -81,8 +82,10 @@ public abstract class Mob extends Entity {
 
 	protected void shoot(double x, double y, double dir, Entity entity) {
 		Projectile p = null;
-		if (entity instanceof Shooter || entity instanceof Player) {
-			p = new MageProjectile(x, y, dir, entity);
+		if (entity instanceof Shooter) {
+			p = new FireMageProjectile(x, y, dir, entity);
+		} else if (entity instanceof Player){
+			p = new PlayerFireMageProjectile(x, y, dir, entity);
 		}
 		level.add(p);
 	}

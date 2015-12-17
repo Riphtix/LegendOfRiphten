@@ -1,10 +1,12 @@
 package com.riphtix.vgmad.entity;
 
-import com.riphtix.vgmad.entity.mob.Mob;
+import com.riphtix.vgmad.entity.mob.*;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.Level;
+import com.riphtix.vgmad.level.tile.Tile;
+import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 
 import java.awt.*;
 import java.util.Random;
@@ -16,7 +18,7 @@ public class Entity {
 	protected Level level;
 	protected final Random random = new Random();
 	public int range;
-	public Rectangle hitbox;
+	public Tile hitbox;
 
 	public Entity() {
 
@@ -57,10 +59,20 @@ public class Entity {
 		this.level = level;
 	}
 
-	protected boolean hitboxCollision(Mob mob, Projectile projectile, int xOffset, int yOffset){
-		Rectangle mobHitbox = new Rectangle(mob.hitbox.x, mob.hitbox.y, mob.hitbox.width, mob.hitbox.height);
-		Rectangle projectileHitbox = new Rectangle(projectile.hitbox.x + xOffset, projectile.hitbox.y + yOffset, projectile.hitbox.width, projectile.hitbox.height);
-		return mobHitbox.intersects(projectileHitbox);
+	protected boolean mobHitboxCollision(Mob mob, Projectile projectile) {
+		boolean result;
+		Sprite mobHitbox = mob.hitbox.sprite;
+		Sprite projectileHitbox = projectile.hitbox.sprite;
+		if (!(mob instanceof Player)) {
+			result = mobHitbox.intersects(projectileHitbox);
+		} else result = false;
+		return result;
+	}
+
+	protected boolean playerHitboxCollision(Player player, Projectile projectile) {
+		Sprite playerHitbox = player.hitbox.sprite;
+		Sprite projectileHitbox = projectile.hitbox.sprite;
+		return playerHitbox.intersects(projectileHitbox);
 	}
 
 	protected boolean isCollision(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {
@@ -70,19 +82,19 @@ public class Entity {
 		int yt0 = hitboxY(ya, topYOffset);
 		int yt1 = hitboxY(ya, bottomYOffset);
 		for (int c = 0; c < 4; c++) {
-			if (level.getTile(xt0, yt0).isSolid() || level.getTile(xt1, yt1).isSolid() || level.getTile(xt0, yt1).isSolid() || level.getTile(xt1, yt0).isSolid()){
+			if (level.getTile(xt0, yt0).isSolid() || level.getTile(xt1, yt1).isSolid() || level.getTile(xt0, yt1).isSolid() || level.getTile(xt1, yt0).isSolid()) {
 				solid = true;
 			}
 		}
 		return solid;
 	}
 
-	protected int hitboxX(double xa, int width){
+	protected int hitboxX(double xa, int width) {
 		int hor = 0;
-		for(int c = 0; c < 4; c++){
+		for (int c = 0; c < 4; c++) {
 			double xt = ((x + xa) - c % 2 * 15 + width) / 16;
 			hor = (int) Math.ceil(xt);
-			if(c % 2 == 0){
+			if (c % 2 == 0) {
 				hor = (int) Math.floor(xt);
 			}
 		}
@@ -90,9 +102,9 @@ public class Entity {
 	}
 
 
-	protected int hitboxY(double ya, int height){
+	protected int hitboxY(double ya, int height) {
 		int vert = 0;
-		for (int c = 0; c < 4; c++){
+		for (int c = 0; c < 4; c++) {
 			double yt = ((y + ya) - c / 2 * 15 + height) / 16;
 			vert = (int) Math.ceil(yt);
 			if (c / 2 == 0) {

@@ -4,11 +4,9 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.tile.Tile;
 
-import java.awt.*;
+public class MobHitbox extends Tile {
 
-public class PlayerHitbox extends Tile {
-	
-	public PlayerHitbox(Sprite sprite) {
+	public MobHitbox(Sprite sprite) {
 		super(sprite);
 	}
 
