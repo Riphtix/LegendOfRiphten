@@ -1,8 +1,11 @@
 package com.riphtix.vgmad;
 
 import com.riphtix.vgmad.entity.mob.Player;
+import com.riphtix.vgmad.events.*;
+import com.riphtix.vgmad.events.Event;
 import com.riphtix.vgmad.gfx.Font;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.layers.Layer;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
@@ -14,6 +17,8 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.List;
+import java.util.ArrayList;
 
 //"" is a string
 //int 1
@@ -29,7 +34,7 @@ import java.awt.image.DataBufferInt;
 //! is not
 //<< is bit-shifting left and a faster way to multiply
 //>> is bit-shifting right and a faster way to divide
-public class Game extends Canvas implements Runnable {
+public class Game extends Canvas implements Runnable, EventListener {
 	//default stuff don't touch
 	private static final long serialVersionUID = 1L;
 
@@ -63,6 +68,8 @@ public class Game extends Canvas implements Runnable {
 	private BufferedImage image = new BufferedImage(WIDTH, HEIGHT, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 
+	private List<Layer> layerStack = new ArrayList<Layer>();
+
 	//Game constructor
 	public Game() {
 		//Sets the screen size
@@ -75,12 +82,13 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		level = Level.spawn;
+		addLayer(level);
 		TileCoordinate playerSpawn = new TileCoordinate(32, 28);
 		player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
 		level.add(player);
 		font = new Font();
 
-		Mouse mouse = new Mouse();
+		Mouse mouse = new Mouse(this);
 		addKeyListener(key);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
@@ -96,6 +104,10 @@ public class Game extends Canvas implements Runnable {
 
 	public static UIManager getUIManager() {
 		return uiManager;
+	}
+
+	public void addLayer(Layer layer){
+		layerStack.add(layer);
 	}
 
 	public synchronized void start() {
@@ -142,10 +154,21 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	public void onEvent(Event event){
+		for(int i = layerStack.size() - 1; i >= 0; i--){
+			layerStack.get(i).onEvent(event);
+		}
+	}
+
 	public void tick() {//public void update()
 		key.tick();
 		level.tick();
 		uiManager.tick();
+
+		//Tick Layers
+		for(int i = 0; i < layerStack.size(); i++){
+			layerStack.get(i).tick();
+		}
 	}
 
 	public void render() {
@@ -159,7 +182,13 @@ public class Game extends Canvas implements Runnable {
 		screen.clear();
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
-		level.render((int) xScroll, (int) yScroll, screen);
+		level.setScroll((int) xScroll, (int) yScroll);
+
+		//Render Layers
+		for(int i = 0; i < layerStack.size(); i++){
+			layerStack.get(i).render(screen);
+		}
+
 		//font.render(0, 0, -2, 0xff000000, "I have won!!!", screen);
 
 		for (int i = 0; i < pixels.length; i++) {

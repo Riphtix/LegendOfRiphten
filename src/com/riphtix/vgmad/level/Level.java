@@ -4,13 +4,13 @@ import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.entity.particle.Particle;
-import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
-import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
+import com.riphtix.vgmad.events.Event;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.layers.Layer;
 import com.riphtix.vgmad.handler.Keyboard;
-import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
+import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.ArrayList;
@@ -18,13 +18,15 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-public class Level {
+public class Level extends Layer {
 
 	//Variables
 	protected int width, height;
 	protected int[] tilesInt, tiles;
 	private static Screen screen;
 	public Keyboard key;
+
+	private int xScroll, yScroll;
 
 	//lists of entities for rendering and tracking
 	private List<Entity> entities = new ArrayList<Entity>();
@@ -90,6 +92,10 @@ public class Level {
 			mobs.get(i).tick();
 		}
 		remove();
+	}
+
+	public void onEvent(Event event){
+		getClientPlayer().onEvent(event);
 	}
 
 	//removes the entities from the map
@@ -197,32 +203,6 @@ public class Level {
 		return distance == 1 ? 1 : 0.95;
 	}
 
-	/*private void shootClosest() {
-		List<Entity> entities = level.getEntities(this, 336);
-		entities.add(level.getClientPlayer());
-
-		double min = 0;
-		Entity closest = null;
-		for (int i = 0; i < entities.size(); i++) {
-			Entity e = entities.get(i);
-			double distance = Vector2i.getDistance(new Vector2i((int) x, (int) y), new Vector2i((int) e.getX(), (int) e.getY()));
-			if (i == 0 || distance < min) {
-				min = distance;
-				closest = e;
-			}
-		}
-
-		if (closest != null) {
-			if (!(closest instanceof Particle) && !(closest instanceof ParticleSpawner) && firerate <= 0) {
-				double dx = closest.getX() - x;
-				double dy = closest.getY() - y;
-				double dir = Math.atan2(dy, dx);
-				shoot(x, y, dir, this);
-				firerate = FireMageProjectile.FIRE_RATE;
-			}
-		}
-	}*/
-
 	//collision with uneven objects (width 2 height 3)
 	public boolean tileCollision(int x, int y, int width, int height, int xOffset, int yOffset) {
 		boolean solid = false;
@@ -234,8 +214,13 @@ public class Level {
 		return solid;
 	}
 
+	public void setScroll(int xScroll, int yScroll) {
+		this.xScroll = xScroll;
+		this.yScroll = yScroll;
+	}
+
 	//renders all of the lists to the screen
-	public void render(int xScroll, int yScroll, Screen screen) {
+	public void render(Screen screen) {
 		this.screen = screen;
 		screen.setOffset(xScroll, yScroll);
 		int x0 = xScroll >> 4;
@@ -284,7 +269,7 @@ public class Level {
 	}
 
 	//returns a list of players
-	public List<Player> getPlayer() {
+	public List<Player> getPlayers() {
 		return players;
 	}
 
