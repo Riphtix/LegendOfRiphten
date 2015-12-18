@@ -2,6 +2,9 @@ package com.riphtix.vgmad.entity.projectile;
 
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.level.tile.Tile;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
 import java.awt.*;
@@ -19,6 +22,7 @@ public abstract class Projectile extends Entity {
 	public final double TEST_SPEED = 1;
 	public final double NORMAL_SPEED = 4;
 	public final double FAST_SPEED = 8;
+	public ProjectileHitbox hitbox;
 
 	public Projectile(double x, double y, double dir) {
 		xOrigin = x;
@@ -26,6 +30,7 @@ public abstract class Projectile extends Entity {
 		angle = dir;
 		this.x = x;
 		this.y = y;
+		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x16, angle));
 	}
 
 	public Sprite getSprite() {

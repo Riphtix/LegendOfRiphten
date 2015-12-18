@@ -34,7 +34,7 @@ public class Player extends Mob {
 
 	private AnimatedSprite animSprite = down;
 
-	private int fireRate = 0;
+	private int firerate = 0;
 
 	private UIManager ui;
 	private UIProgressBar uiHealthBar;
@@ -42,12 +42,14 @@ public class Player extends Mob {
 	private UIProgressBar uiExperienceBar;
 	UIProgressMark uiHP25percent, uiHP50percent, uiHP75percent;
 	UIProgressMark uiMP25percent, uiMP50percent, uiMP75percent;
-	UIProgressMark uiXP25percent, uiXP50percent, uiXP75percent;
+	UIProgressMark uiXP25percent, uiXP50percent,  uiXP75percent;
 
 	private UIButton uiButtonOptions;
 	private UIButton uiButtonImageTest;
 
 	private BufferedImage image;
+
+	public PlayerHitbox hitbox;
 
 	public Player(String name, int x, int y, Keyboard input) {
 		this.name = name;
@@ -55,7 +57,7 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = animSprite.getSprite();
-		fireRate = PlayerFireMageProjectile.FIRE_RATE;
+		firerate = PlayerFireMageProjectile.FIRE_RATE;
 		hitbox = new PlayerHitbox(Sprite.hitbox32x32);
 		range = 336;
 
@@ -201,7 +203,7 @@ public class Player extends Mob {
 	public void tick() {//public void update()
 		if (walking) animSprite.tick();
 		else animSprite.setFrame(0);
-		if (fireRate > 0) fireRate--;
+		if (firerate > 0) firerate--;
 		double xa = 0, ya = 0;
 		double speed = 1.5;
 		if (input.UP) {
@@ -244,12 +246,12 @@ public class Player extends Mob {
 		if(Mouse.getX() > 660)
 			return;
 
-		if (Mouse.getButton() == 1 && fireRate <= 0) {
+		if (Mouse.getButton() == 1 && firerate <= 0) {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
 			shoot(x, y, dir, this);
-			fireRate = PlayerFireMageProjectile.FIRE_RATE;
+			firerate = PlayerFireMageProjectile.FIRE_RATE;
 		}
 	}
 

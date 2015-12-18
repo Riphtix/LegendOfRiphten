@@ -30,14 +30,16 @@ public class Shooter extends Mob {
 
 	private int firerate = 0;
 
+	public MobHitbox hitbox;
+
 	public Shooter(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
 		firerate = FireMageProjectile.FIRE_RATE;
+		hitbox = new MobHitbox(Sprite.hitbox32x32);
 		range = 336;
 
-		hitbox = new MobHitbox(Sprite.hitbox32x32);
 	}
 
 	public void tick() {
@@ -52,7 +54,7 @@ public class Shooter extends Mob {
 		}
 		if (walking) animSprite.tick();
 		else animSprite.setFrame(0);
-		if(firerate > 0) firerate--;
+		if (firerate > 0) firerate--;
 		if (ya < 0) {
 			animSprite = up;
 			dir = Direction.UP;
@@ -68,7 +70,7 @@ public class Shooter extends Mob {
 			dir = Direction.RIGHT;
 		}
 		if (xa != 0 || ya != 0) {
-			//move(xa, 8, -10, ya, 0, 14);
+			move(xa, 8, -10, ya, 0, 14);
 			walking = true;
 		} else {
 			walking = false;

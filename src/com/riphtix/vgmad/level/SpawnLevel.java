@@ -1,6 +1,5 @@
 package com.riphtix.vgmad.level;
 
-import com.riphtix.vgmad.entity.mob.Dummy;
 import com.riphtix.vgmad.entity.mob.Shooter;
 
 import javax.imageio.ImageIO;

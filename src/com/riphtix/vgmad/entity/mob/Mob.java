@@ -6,6 +6,7 @@ import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
 public abstract class Mob extends Entity {
 
@@ -28,6 +29,8 @@ public abstract class Mob extends Entity {
 	}
 
 	public Direction dir;
+
+	public MobHitbox hitbox;
 
 	public void move(double xa, int leftXWidth, int rightXWidth, double ya, int topYHeight, int bottomYHeight) {
 		if (xa != 0 && ya != 0) {
@@ -84,7 +87,8 @@ public abstract class Mob extends Entity {
 		Projectile p = null;
 		if (entity instanceof Shooter) {
 			p = new FireMageProjectile(x, y, dir, entity);
-		} else if (entity instanceof Player){
+		}
+		if (entity instanceof Player){
 			p = new PlayerFireMageProjectile(x, y, dir, entity);
 		}
 		level.add(p);

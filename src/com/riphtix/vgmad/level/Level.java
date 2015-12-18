@@ -4,7 +4,9 @@ import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.entity.particle.Particle;
+import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
+import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
@@ -29,6 +31,7 @@ public class Level {
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 	private List<Particle> particles = new ArrayList<Particle>();
 	private List<Player> players = new ArrayList<Player>();
+	private List<Mob> mobs = new ArrayList<Mob>();
 
 	private int time = 0;
 
@@ -83,6 +86,9 @@ public class Level {
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).tick();
 		}
+		for (int i = 0; i < mobs.size(); i++) {
+			mobs.get(i).tick();
+		}
 		remove();
 	}
 
@@ -102,6 +108,10 @@ public class Level {
 		for (int i = 0; i < players.size(); i++) {
 			if (players.get(i).isRemoved()) players.remove(i);
 		}
+
+		for (int i = 0; i < mobs.size(); i++) {
+			if (mobs.get(i).isRemoved()) mobs.remove(i);
+		}
 	}
 
 	//returns the projectile list
@@ -112,6 +122,11 @@ public class Level {
 	//returns the entity list
 	public List<Entity> getEntities() {
 		return entities;
+	}
+
+	//returns the mob list
+	public List<Mob> getMobs() {
+		return mobs;
 	}
 
 	//keeps track of the timer
@@ -140,29 +155,73 @@ public class Level {
 		return solid;
 	}
 
-	public Mob getClosestMob(Projectile projectile, int x, int y, int width, int height){
+	public Mob getClosestMob(Projectile projectile, int x, int y, int width, int height) {
+		//System.out.println("projectile: " + projectile + " | x: " + x + " | y: " + y + " | width: " + width + " | height: " + height);
 		List<Entity> entities = getEntities(projectile, width, height);
-		entities.remove(getClientPlayer());
+		for (int i = 0; i < mobs.size(); i++) {
+			if (/*mobs.get(i) instanceof Mob && */mobs.get(i) instanceof Player) {
+				players.add((Player) mobs.get(i));
+				mobs.remove(mobs.get(i));
+			} else entities.add(mobs.get(i));
+		}
+		//System.out.println("entities.size(): " + entities.size());
+
+		double min = 0;
+		//System.out.println("min: " + min);
+		Entity closest = null;
+		for (int i = 0; i < entities.size(); i++) {
+			Entity e = entities.get(i);
+			if (e instanceof Player) continue;
+			//System.out.println("Entity: " + e);
+			double distance = getDistance(x, y, (int) e.getX(), (int) e.getY());
+			//System.out.println("distance: " + distance);
+			if (i == 0 || distance < min) {
+				min = distance;
+				//System.out.println("min: " + min);
+				closest = e;
+				//System.out.println("closest: " + closest);
+			}
+		}
+		Mob closestMob = null;
+		if (closest != null) {
+			closestMob = (Mob) closest;
+		}
+
+		return closestMob;
+	}
+
+	private double getDistance(int projectileX, int projectileY, int mobX, int mobY) {
+		double dx = projectileX - mobX;
+		double dy = projectileY - mobY;
+		double distance = Math.sqrt(dx * dx + dy * dy);
+		return distance == 1 ? 1 : 0.95;
+	}
+
+	/*private void shootClosest() {
+		List<Entity> entities = level.getEntities(this, 336);
+		entities.add(level.getClientPlayer());
 
 		double min = 0;
 		Entity closest = null;
 		for (int i = 0; i < entities.size(); i++) {
 			Entity e = entities.get(i);
-			if(e.equals(projectile))continue;
-			double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) e.getX(), (int) e.getY()));
+			double distance = Vector2i.getDistance(new Vector2i((int) x, (int) y), new Vector2i((int) e.getX(), (int) e.getY()));
 			if (i == 0 || distance < min) {
 				min = distance;
 				closest = e;
 			}
 		}
-		Mob mob = null;
-		if(closest != null) {
-			if (closest instanceof Mob && !(closest instanceof Player)) {
-				mob = (Mob) closest;
+
+		if (closest != null) {
+			if (!(closest instanceof Particle) && !(closest instanceof ParticleSpawner) && firerate <= 0) {
+				double dx = closest.getX() - x;
+				double dy = closest.getY() - y;
+				double dir = Math.atan2(dy, dx);
+				shoot(x, y, dir, this);
+				firerate = FireMageProjectile.FIRE_RATE;
 			}
 		}
-		return mob;
-	}
+	}*/
 
 	//collision with uneven objects (width 2 height 3)
 	public boolean tileCollision(int x, int y, int width, int height, int xOffset, int yOffset) {
@@ -202,6 +261,9 @@ public class Level {
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).render(screen);
 		}
+		for (int i = 0; i < mobs.size(); i++) {
+			mobs.get(i).render(screen);
+		}
 		//screen.renderSprite(Mouse.getX() + 56, Mouse.getY() + 128 * 2, Sprite.aimBox);
 	}
 
@@ -212,6 +274,8 @@ public class Level {
 			particles.add((Particle) e);
 		} else if (e instanceof Projectile) {
 			projectiles.add((Projectile) e);
+		} else if (!(e instanceof Player) && e instanceof Mob) {
+			mobs.add((Mob) e);
 		} else if (e instanceof Player) {
 			players.add((Player) e);
 		} else {
@@ -310,8 +374,8 @@ public class Level {
 
 	public List<Entity> getEntities(Entity e, int width, int height) {
 		List<Entity> result = new ArrayList<Entity>();
-		int ex = (int) e.getX();
-		int ey = (int) e.getY();
+		int ex = (int) e.getX() - 2;
+		int ey = (int) e.getY() - 2;
 		for (int i = 0; i < entities.size(); i++) {
 			Entity entity = entities.get(i);
 			if (entity.equals(e)) continue;

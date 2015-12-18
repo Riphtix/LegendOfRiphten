@@ -6,7 +6,9 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.tile.Tile;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
+import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
 import java.awt.*;
 import java.util.Random;
@@ -18,7 +20,7 @@ public class Entity {
 	protected Level level;
 	protected final Random random = new Random();
 	public int range;
-	public Tile hitbox;
+	public MobHitbox hitbox;
 
 	public Entity() {
 
@@ -59,20 +61,12 @@ public class Entity {
 		this.level = level;
 	}
 
-	protected boolean mobHitboxCollision(Mob mob, Projectile projectile) {
-		boolean result;
-		Sprite mobHitbox = mob.hitbox.sprite;
-		Sprite projectileHitbox = projectile.hitbox.sprite;
-		if (!(mob instanceof Player)) {
-			result = mobHitbox.intersects(projectileHitbox);
-		} else result = false;
-		return result;
+	protected boolean mobHitboxCollision(MobHitbox mobHitbox, ProjectileHitbox projectileHitbox) {
+		return projectileHitbox.intersects(mobHitbox);
 	}
 
-	protected boolean playerHitboxCollision(Player player, Projectile projectile) {
-		Sprite playerHitbox = player.hitbox.sprite;
-		Sprite projectileHitbox = projectile.hitbox.sprite;
-		return playerHitbox.intersects(projectileHitbox);
+	protected boolean playerHitboxCollision(PlayerHitbox playerHitbox, ProjectileHitbox projectileHitbox) {
+		return projectileHitbox.intersects(playerHitbox);
 	}
 
 	protected boolean isCollision(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {
