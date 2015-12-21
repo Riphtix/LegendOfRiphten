@@ -23,8 +23,8 @@ public class Shooter extends Mob {
 	private AnimatedSprite animSprite = down;
 
 	private int time = 0;
-	private double xa = 0;
-	private double ya = 0;
+	private int xa = 0;
+	private int ya = 0;
 
 	private Entity rand = null;
 
@@ -43,7 +43,6 @@ public class Shooter extends Mob {
 	}
 
 	public void tick() {
-		double speed = .5;
 		time++; //time % 60 == 0 is 1 second
 		if (time % (random.nextInt(50) + 30) == 0) {
 			xa = random.nextInt(3) - 1;
@@ -70,14 +69,12 @@ public class Shooter extends Mob {
 			animSprite = right;
 			dir = Direction.RIGHT;
 		}
-		if (xa != 0 || ya != 0){
-			if(xa > 0) {
-				if(ya > 0) {
-					move(xa + speed, 8, -10, ya + speed, 0, 14);
-				}
-			}
+		if (xa != 0 || ya != 0) {
+			move(xa, 8, -10, ya, 0, 14);
 			walking = true;
-		} else walking = false;
+		} else {
+			walking = false;
+		}
 		shootClosest();
 		//shootRandom();
 	}

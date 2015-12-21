@@ -2,7 +2,7 @@ package com.riphtix.vgmad.events;
 
 public abstract class Event {
 
-	public enum Type {
+	protected enum Type {
 		MOUSE_PRESSED,
 		MOUSE_RELEASED,
 		MOUSE_MOVED

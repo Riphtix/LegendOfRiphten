@@ -11,7 +11,7 @@ import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
 public class PlayerFireMageProjectile extends Projectile {
 
-	public static final int FIRE_RATE = 30; //Higher = slower
+	public static final int FIRE_RATE = 15; //Higher = slower
 
 	public ProjectileHitbox hitbox;
 

@@ -3,10 +3,6 @@ package com.riphtix.vgmad.entity.mob;
 import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
-import com.riphtix.vgmad.events.*;
-import com.riphtix.vgmad.events.Event;
-import com.riphtix.vgmad.events.types.MousePressedEvent;
-import com.riphtix.vgmad.events.types.MouseReleasedEvent;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
@@ -20,12 +16,11 @@ import com.riphtix.vgmad.util.Vector2i;
 
 import javax.imageio.ImageIO;
 import java.awt.*;
-import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
-public class Player extends Mob implements EventListener {
+public class Player extends Mob {
 
 	private String name;
 	private Keyboard input;
@@ -47,14 +42,12 @@ public class Player extends Mob implements EventListener {
 	private UIProgressBar uiExperienceBar;
 	UIProgressMark uiHP25percent, uiHP50percent, uiHP75percent;
 	UIProgressMark uiMP25percent, uiMP50percent, uiMP75percent;
-	UIProgressMark uiXP25percent, uiXP50percent, uiXP75percent;
+	UIProgressMark uiXP25percent, uiXP50percent,  uiXP75percent;
 
 	private UIButton uiButtonOptions;
 	private UIButton uiButtonImageTest;
 
 	private BufferedImage image;
-
-	private boolean shooting = false;
 
 	public PlayerHitbox hitbox;
 
@@ -178,24 +171,24 @@ public class Player extends Mob implements EventListener {
 		}
 
 		uiButtonImageTest = new UIButton(new Vector2i(206, 468), image, new UIActionListener() {
-			public void performAction() {
-				System.exit(0);
-			}
-		});
-		uiButtonImageTest.setButtonListener(new UIButtonListener() {
-			public void mouseEnteredButtonBounds(UIButton button) {
+				public void performAction() {
+					System.exit(0);
+				}
+			});
+		uiButtonImageTest.setButtonListener(new UIButtonListener(){
+			public void mouseEnteredButtonBounds(UIButton button){
 				button.setImage(ImageUtils.changeBrightness(image, 50));
 			}
 
-			public void mouseExitedButtonBounds(UIButton button) {
+			public void mouseExitedButtonBounds(UIButton button){
 				button.setImage(image);
 			}
 
-			public void buttonPressed(UIButton button) {
+			public void buttonPressed(UIButton button){
 				button.setImage(ImageUtils.changeBrightness(image, 75));
 			}
 
-			public void buttonReleased(UIButton button) {
+			public void buttonReleased(UIButton button){
 				button.setImage(image);
 			}
 		});
@@ -207,18 +200,12 @@ public class Player extends Mob implements EventListener {
 		return name;
 	}
 
-	public void onEvent(Event event) {
-		EventDispatcher dispatcher = new EventDispatcher(event);
-		dispatcher.dispatch(Event.Type.MOUSE_PRESSED, (Event e) -> onMousePressed((MousePressedEvent) e));
-		dispatcher.dispatch(Event.Type.MOUSE_RELEASED, (Event e) -> onMouseReleased((MouseReleasedEvent) e));
-	}
-
 	public void tick() {//public void update()
 		if (walking) animSprite.tick();
 		else animSprite.setFrame(0);
 		if (firerate > 0) firerate--;
 		double xa = 0, ya = 0;
-		double speed = 1.0;
+		double speed = 1.5;
 		if (input.UP) {
 			animSprite = up;
 			ya -= speed;
@@ -246,44 +233,25 @@ public class Player extends Mob implements EventListener {
 		uiExperienceBar.setProgress(xp / 100.0);
 	}
 
-	private void tickShooting() {
-		if (!shooting || firerate > 0) {
-			return;
-		}
-		double dx = Mouse.getX() - Game.getWindowWidth() / 2;
-		double dy = Mouse.getY() - Game.getWindowHeight() / 2;
-		double dir = Math.atan2(dy, dx);
-		shoot(x, y, dir, this);
-		firerate = PlayerFireMageProjectile.FIRE_RATE;
-	}
-
-	public boolean onMousePressed(MousePressedEvent e) {
-		if (Mouse.getX() > 660)
-			return false;
-
-		System.out.println("onMousePressed called!!!");
-
-		if (e.getButton() == MouseEvent.BUTTON1) {
-			shooting = true;
-			return true;
-		}
-		return false;
-	}
-
-	public boolean onMouseReleased(MouseReleasedEvent e) {
-		if (e.getButton() == MouseEvent.NOBUTTON) {
-			shooting = false;
-			return true;
-		}
-		return false;
-	}
-
 	private void clear() {
 		for (int i = 0; i < level.getProjectiles().size(); i++) {
 			Projectile p = level.getProjectiles().get(i);
 			if (p.isRemoved()) {
 				level.getProjectiles().remove(i);
 			}
+		}
+	}
+
+	private void tickShooting() {
+		if(Mouse.getX() > 660)
+			return;
+
+		if (Mouse.getButton() == 1 && firerate <= 0) {
+			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
+			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
+			double dir = Math.atan2(dy, dx);
+			shoot(x, y, dir, this);
+			firerate = PlayerFireMageProjectile.FIRE_RATE;
 		}
 	}
 
