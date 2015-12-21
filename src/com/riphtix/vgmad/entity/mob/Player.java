@@ -40,9 +40,11 @@ public class Player extends Mob {
 	private UIProgressBar uiHealthBar;
 	private UIProgressBar uiManaBar;
 	private UIProgressBar uiExperienceBar;
-	UIProgressMark uiHP25percent, uiHP50percent, uiHP75percent;
-	UIProgressMark uiMP25percent, uiMP50percent, uiMP75percent;
-	UIProgressMark uiXP25percent, uiXP50percent,  uiXP75percent;
+	private UIProgressBar uiLivesBar;
+	UIProgressMark uiHP25Percent, uiHP50Percent, uiHP75Percent;
+	UIProgressMark uiMP25Percent, uiMP50Percent, uiMP75Percent;
+	UIProgressMark uiXP25Percent, uiXP50Percent,  uiXP75Percent;
+	UIProgressMark uiLives25Percent, uiLives50Percent, uiLives75Percent;
 
 	private UIButton uiButtonOptions;
 	private UIButton uiButtonImageTest;
@@ -50,6 +52,8 @@ public class Player extends Mob {
 	private BufferedImage image;
 
 	public PlayerHitbox hitbox;
+
+	private int time = 0;
 
 	public Player(String name, int x, int y, Keyboard input) {
 		this.name = name;
@@ -115,29 +119,49 @@ public class Player extends Mob {
 		xpLabel.dropShadowOffset = 1;
 		panel.addComponent(xpLabel);
 
-		uiHP25percent = new UIProgressMark(new Vector2i(80, 210), new Vector2i(1, 15));
-		panel.addComponent(uiHP25percent);
-		uiHP50percent = new UIProgressMark(new Vector2i(125, 210), new Vector2i(1, 15));
-		panel.addComponent(uiHP50percent);
-		uiHP75percent = new UIProgressMark(new Vector2i(170, 210), new Vector2i(1, 15));
-		panel.addComponent(uiHP75percent);
-		uiMP25percent = new UIProgressMark(new Vector2i(80, 235), new Vector2i(1, 15));
-		panel.addComponent(uiMP25percent);
-		uiMP50percent = new UIProgressMark(new Vector2i(125, 235), new Vector2i(1, 15));
-		panel.addComponent(uiMP50percent);
-		uiMP75percent = new UIProgressMark(new Vector2i(170, 235), new Vector2i(1, 15));
-		panel.addComponent(uiMP75percent);
-		uiXP25percent = new UIProgressMark(new Vector2i(80, 260), new Vector2i(1, 15));
-		panel.addComponent(uiXP25percent);
-		uiXP50percent = new UIProgressMark(new Vector2i(125, 260), new Vector2i(1, 15));
-		panel.addComponent(uiXP50percent);
-		uiXP75percent = new UIProgressMark(new Vector2i(170, 260), new Vector2i(1, 15));
-		panel.addComponent(uiXP75percent);
+		uiLivesBar = new UIProgressBar(new Vector2i(56, 285), new Vector2i(159, 15));
+		uiLivesBar.setColor(0xff5f5f5f);
+		uiLivesBar.setForegroundColor(new Color(0xff00b000));
+		uiLivesBar.dropShadow = true;
+		uiLivesBar.dropShadowOffset = 1;
+		panel.addComponent(uiLivesBar);
+		UILabel lifeLabel = new UILabel(new Vector2i(uiLivesBar.position.x - 49, uiLivesBar.position.y + 12), "Lives:");
+		lifeLabel.setColor(0xffa0a0a0);
+		lifeLabel.setFont(new Font("Verdana", Font.BOLD, 15));
+		lifeLabel.dropShadow = true;
+		lifeLabel.dropShadowOffset = 1;
+		panel.addComponent(lifeLabel);
+
+		uiHP25Percent = new UIProgressMark(new Vector2i(80, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP25Percent);
+		uiHP50Percent = new UIProgressMark(new Vector2i(125, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP50Percent);
+		uiHP75Percent = new UIProgressMark(new Vector2i(170, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP75Percent);
+		uiMP25Percent = new UIProgressMark(new Vector2i(80, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP25Percent);
+		uiMP50Percent = new UIProgressMark(new Vector2i(125, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP50Percent);
+		uiMP75Percent = new UIProgressMark(new Vector2i(170, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP75Percent);
+		uiXP25Percent = new UIProgressMark(new Vector2i(80, 260), new Vector2i(1, 15));
+		panel.addComponent(uiXP25Percent);
+		uiXP50Percent = new UIProgressMark(new Vector2i(125, 260), new Vector2i(1, 15));
+		panel.addComponent(uiXP50Percent);
+		uiXP75Percent = new UIProgressMark(new Vector2i(170, 260), new Vector2i(1, 15));
+		panel.addComponent(uiXP75Percent);
+		uiLives25Percent = new UIProgressMark(new Vector2i(95, 285), new Vector2i(1, 15));
+		panel.addComponent(uiLives25Percent);
+		uiLives50Percent = new UIProgressMark(new Vector2i(134, 285), new Vector2i(1, 15));
+		panel.addComponent(uiLives50Percent);
+		uiLives75Percent = new UIProgressMark(new Vector2i(173, 285), new Vector2i(1, 15));
+		panel.addComponent(uiLives75Percent);
 
 		//player default attributes
 		health = 100;
 		mana = 100;
 		xp = 0;
+		lives = 100;
 
 		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24), new UIActionListener() {
 			public void performAction() {
@@ -201,6 +225,7 @@ public class Player extends Mob {
 	}
 
 	public void tick() {//public void update()
+		time++;
 		if (walking) animSprite.tick();
 		else animSprite.setFrame(0);
 		if (firerate > 0) firerate--;
@@ -228,9 +253,16 @@ public class Player extends Mob {
 		clear();
 		tickShooting();
 
+
+		if(health == 0){
+			lives -= 1;
+			health = 100;
+		}
+
 		uiHealthBar.setProgress(health / 100.0);
 		uiManaBar.setProgress(mana / 100.0);
 		uiExperienceBar.setProgress(xp / 100.0);
+		uiLivesBar.setProgress(lives / 100.0);
 	}
 
 	private void clear() {

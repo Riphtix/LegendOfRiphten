@@ -15,9 +15,10 @@ public abstract class Mob extends Entity {
 
 
 	//TODO: Damage from projectiles and npc health
-	protected int health;
-	protected int mana;
-	protected int xp;
+	public int health;
+	public int mana;
+	public int xp;
+	public int lives;
 
 	public int rightXOffset;
 	public int leftXOffset;
