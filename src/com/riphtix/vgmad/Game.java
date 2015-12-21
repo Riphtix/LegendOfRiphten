@@ -182,7 +182,7 @@ public class Game extends Canvas implements Runnable {
 
 	public static void main(String[] args) {
 		Game game = new Game();
-		game.frame.setResizable(false);
+		game.frame.setResizable(true);
 		game.frame.setTitle(Game.title);
 		game.frame.add(game);
 		game.frame.pack();

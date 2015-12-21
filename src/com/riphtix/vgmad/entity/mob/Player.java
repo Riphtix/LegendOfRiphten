@@ -52,6 +52,8 @@ public class Player extends Mob {
 	private BufferedImage image;
 
 	public PlayerHitbox hitbox;
+	public double armor = 1.0;
+	public double protectSpell = 1.0;
 
 	private int time = 0;
 
@@ -161,7 +163,7 @@ public class Player extends Mob {
 		health = 100;
 		mana = 100;
 		xp = 0;
-		lives = 100;
+		lives = 10;
 
 		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24), new UIActionListener() {
 			public void performAction() {
@@ -253,7 +255,6 @@ public class Player extends Mob {
 		clear();
 		tickShooting();
 
-
 		if(health == 0){
 			lives -= 1;
 			health = 100;
@@ -263,6 +264,23 @@ public class Player extends Mob {
 		uiManaBar.setProgress(mana / 100.0);
 		uiExperienceBar.setProgress(xp / 100.0);
 		uiLivesBar.setProgress(lives / 100.0);
+	}
+
+	public void playerDamaged(double damage) {
+
+		health -= damage * armor * protectSpell;
+		// can have a multiplier here to reduce health damage due to spells or armor
+
+		if (isDead()){
+			if (lives>0){
+				lives -=1;
+			}
+			else level.gameOver();
+		}
+	}
+
+	public boolean isDead(){
+		return (health <= 0);
 	}
 
 	private void clear() {

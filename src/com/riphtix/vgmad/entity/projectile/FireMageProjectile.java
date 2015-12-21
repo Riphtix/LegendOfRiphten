@@ -29,8 +29,8 @@ public class FireMageProjectile extends Projectile {
 
 	public void tick() {//public void update()
 		if(playerHitboxCollision(level.getClientPlayer().hitbox, this.hitbox)){
-			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
-			level.getClientPlayer().health -= damage;
+			level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
+			level.getClientPlayer().playerDamaged(damage);
 			remove();
 		}
 

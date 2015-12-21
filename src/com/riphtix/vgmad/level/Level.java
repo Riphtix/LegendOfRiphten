@@ -234,6 +234,12 @@ public class Level {
 		return solid;
 	}
 
+	// Do this if the player runs out of lives
+	public void gameOver(){
+		System.out.println("Player is dead!!!");
+		System.exit(0);
+	}
+
 	//renders all of the lists to the screen
 	public void render(int xScroll, int yScroll, Screen screen) {
 		this.screen = screen;
