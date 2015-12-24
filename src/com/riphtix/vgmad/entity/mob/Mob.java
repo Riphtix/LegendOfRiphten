@@ -14,7 +14,7 @@ public abstract class Mob extends Entity {
 	public boolean walking = false;
 
 
-	//TODO: Damage from projectiles and npc health
+	//TODO: npc health
 	public int health;
 	public int mana;
 	public int xp;

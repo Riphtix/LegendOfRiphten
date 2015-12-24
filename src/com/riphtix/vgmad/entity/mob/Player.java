@@ -10,6 +10,7 @@ import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.gfx.ui.*;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
+import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.util.ImageUtils;
 import com.riphtix.vgmad.util.Vector2i;
@@ -52,6 +53,11 @@ public class Player extends Mob {
 	private BufferedImage image;
 
 	public PlayerHitbox hitbox;
+
+	private static String deadSound = "/sounds/death.wav";
+	private static String lifeLostSound = "/sounds/lifeMinusOne.wav";
+	private static String walkSound = "/sounds/woodfootstepEdited.wav";
+
 	public double armor = 1.0;
 	public double protectSpell = 1.0;
 
@@ -228,7 +234,13 @@ public class Player extends Mob {
 
 	public void tick() {//public void update()
 		time++;
-		if (walking) animSprite.tick();
+		if (walking){
+			if(time % 20 == 0){
+				Sound.play(walkSound);
+			}
+			animSprite.tick();
+		}
+
 		else animSprite.setFrame(0);
 		if (firerate > 0) firerate--;
 		double xa = 0, ya = 0;
@@ -273,7 +285,9 @@ public class Player extends Mob {
 
 		if (isDead()){
 			if (lives>0){
-				lives -=1;
+				lives -= 1;
+				Sound.play(deadSound);
+				Sound.play(lifeLostSound);
 			}
 			else level.gameOver();
 		}

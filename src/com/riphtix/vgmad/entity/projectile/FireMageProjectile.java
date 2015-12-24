@@ -4,13 +4,17 @@ import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
 public class FireMageProjectile extends Projectile {
 
-	public static final int FIRE_RATE = 30; //Higher = slower
+	public static final int FIRE_RATE = 60; //Higher = slower
 
 	public ProjectileHitbox hitbox;
+
+	private static String playerHitSound = "/sounds/manHit.wav";
+	private static String hitSound = "/sounds/hit.wav";
 
 	public FireMageProjectile(double x, double y, double dir, Entity entity) {
 		super(x, y, dir);
@@ -31,11 +35,13 @@ public class FireMageProjectile extends Projectile {
 		if(playerHitboxCollision(level.getClientPlayer().hitbox, this.hitbox)){
 			level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 			level.getClientPlayer().playerDamaged(damage);
+			Sound.play(playerHitSound);
 			remove();
 		}
 
 		if(isCollision(x, -7, 8, y, 0, 8)){
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
+			Sound.play(hitSound);
 			remove();
 		}
 		move();

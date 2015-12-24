@@ -15,20 +15,25 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
 
-//"" is a string
-//int 1
-//double 1.0
-//float 1.0F
-//long 1L
-//boolean true/false
-//&& is if(a and b)
-//|| is if(a or b)
-//== is if(a equals b)
-//++ adds one
-//-- subtracts one
-//! is not
-//<< is bit-shifting left and a faster way to multiply
-//>> is bit-shifting right and a faster way to divide
+/**
+ * "" is a string
+ * int 1
+ * double 1.0
+ * float 1.0F
+ * long 1L
+ * boolean true/false
+ * && is if(a and b)
+ * || is if(a or b)
+ * == is if(a equals b)
+ * ++ adds one
+ * -- subtracts one
+ * ! is not
+ * << is bit-shifting left and a faster way to multiply
+ * >> is bit-shifting right and a faster way to divide
+ * @author Riphtix
+ * @since 1.0
+ */
+
 public class Game extends Canvas implements Runnable {
 	//default stuff don't touch
 	private static final long serialVersionUID = 1L;
@@ -182,7 +187,7 @@ public class Game extends Canvas implements Runnable {
 
 	public static void main(String[] args) {
 		Game game = new Game();
-		game.frame.setResizable(true);
+		game.frame.setResizable(false);
 		game.frame.setTitle(Game.title);
 		game.frame.add(game);
 		game.frame.pack();

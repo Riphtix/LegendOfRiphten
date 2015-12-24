@@ -28,6 +28,7 @@ public class SpawnLevel extends Level {
 		//add(new Chaser(25, 31));
 		//add(new AStar(37, 31));
 		add(new Shooter(20, 31));
+		//add(new Shooter(30, 31));
 	}
 
 	protected void generateLevel() {
