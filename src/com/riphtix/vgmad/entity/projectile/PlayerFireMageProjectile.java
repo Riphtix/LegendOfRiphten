@@ -16,8 +16,6 @@ public class PlayerFireMageProjectile extends Projectile {
 
 	public ProjectileHitbox hitbox;
 
-	private static String hitSound = "/sounds/hit.wav";
-
 	public PlayerFireMageProjectile(double x, double y, double dir, Entity entity) {
 		super(x, y, dir);
 		range = entity.range;
@@ -25,9 +23,10 @@ public class PlayerFireMageProjectile extends Projectile {
 		//speed = TEST_SPEED;
 		speed = NORMAL_SPEED;
 		//speed = FAST_SPEED;
-		damage = 20;
+		damage = 25;
 		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
 		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x16, angle));
+		Sound.SoundEffect.LAUNCH_FIREBALL.play();
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
@@ -38,15 +37,14 @@ public class PlayerFireMageProjectile extends Projectile {
 		int hbSpriteHeight = hitbox.sprite.getHeight();
 		Mob closest = level.getClosestMob(this, (int) x, (int) y, hbSpriteWidth, hbSpriteHeight);
 
-		//System.out.println(x + " | " + y + " | " + hbSpriteWidth + " | " + hbSpriteHeight);
-		//System.out.println(closest.hitbox);
-
 		if (closest != null) {
 			if (!(closest instanceof Player)) {
 				if(closest instanceof Shooter) {
 					Shooter closestShooter = (Shooter) closest;
 					if (mobHitboxCollision(closestShooter.hitbox, this.hitbox)) {
-						level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
+						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
+						closestShooter.shooterDamaged(damage);
+						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
 					}
 				}
@@ -55,7 +53,6 @@ public class PlayerFireMageProjectile extends Projectile {
 
 		if (isCollision(x, -7, 8, y, 0, 8)) {
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
-			Sound.play(hitSound);
 			remove();
 		}
 		move();

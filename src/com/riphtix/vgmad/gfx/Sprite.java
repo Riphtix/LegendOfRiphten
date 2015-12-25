@@ -50,7 +50,7 @@ public class Sprite {
 	public static Sprite hitbox32x32 = new Sprite(SpriteSheet.mobHitbox, 21, 32);
 	public static Sprite hitbox16x16 = new Sprite(SpriteSheet.projectileHitbox, 16, 8);
 
-	protected Sprite(SpriteSheet sheet, int width, int height) {
+	public Sprite(SpriteSheet sheet, int width, int height) {
 		SIZE = (width == height) ? width : -1; //trick
 		this.width = width;
 		this.height = height;

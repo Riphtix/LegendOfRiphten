@@ -54,13 +54,6 @@ public class Player extends Mob {
 
 	public PlayerHitbox hitbox;
 
-	private static String deadSound = "/sounds/death.wav";
-	private static String lifeLostSound = "/sounds/lifeMinusOne.wav";
-	private static String walkSound = "/sounds/woodfootstepEdited.wav";
-
-	public double armor = 1.0;
-	public double protectSpell = 1.0;
-
 	private int time = 0;
 
 	public Player(String name, int x, int y, Keyboard input) {
@@ -170,6 +163,9 @@ public class Player extends Mob {
 		mana = 100;
 		xp = 0;
 		lives = 10;
+		xpLevel = 1;
+		armor = 1.0;
+		protectSpell = 1.0;
 
 		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24), new UIActionListener() {
 			public void performAction() {
@@ -236,7 +232,7 @@ public class Player extends Mob {
 		time++;
 		if (walking){
 			if(time % 20 == 0){
-				Sound.play(walkSound);
+				Sound.SoundEffect.WALKING.play();
 			}
 			animSprite.tick();
 		}
@@ -272,6 +268,11 @@ public class Player extends Mob {
 			health = 100;
 		}
 
+		if(xp == 100){
+			xpLevel++;
+			xp = 0;
+		}
+
 		uiHealthBar.setProgress(health / 100.0);
 		uiManaBar.setProgress(mana / 100.0);
 		uiExperienceBar.setProgress(xp / 100.0);
@@ -286,8 +287,8 @@ public class Player extends Mob {
 		if (isDead()){
 			if (lives>0){
 				lives -= 1;
-				Sound.play(deadSound);
-				Sound.play(lifeLostSound);
+				Sound.SoundEffect.PLAYER_DEAD.play();
+				Sound.SoundEffect.LIFE_LOST.play();
 			}
 			else level.gameOver();
 		}

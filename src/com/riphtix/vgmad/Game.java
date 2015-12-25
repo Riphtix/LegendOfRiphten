@@ -6,6 +6,7 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
+import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.TileCoordinate;
 

@@ -19,6 +19,9 @@ public abstract class Mob extends Entity {
 	public int mana;
 	public int xp;
 	public int lives;
+	public int xpLevel;
+	public double armor;
+	public double protectSpell;
 
 	public int rightXOffset;
 	public int leftXOffset;

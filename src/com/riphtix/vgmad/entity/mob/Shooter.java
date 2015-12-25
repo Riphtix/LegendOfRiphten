@@ -8,7 +8,9 @@ import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
@@ -31,6 +33,7 @@ public class Shooter extends Mob {
 	private int firerate = 0;
 
 	public MobHitbox hitbox;
+	public MobHealthBar healthBar;
 
 	public Shooter(int x, int y) {
 		this.x = x << 4;
@@ -38,8 +41,15 @@ public class Shooter extends Mob {
 		sprite = animSprite.getSprite();
 		firerate = FireMageProjectile.FIRE_RATE;
 		hitbox = new MobHitbox(Sprite.hitbox32x32);
+		healthBar = new MobHealthBar((int) this.x - 10, (int) this.y - 20, new SpriteSheet("/ui/hpBars/100Percent.png", 20, 2));
 		range = 336;
 
+		//Shooter default attributes
+		health = 100;
+		mana = 100;
+		xpLevel = 1;
+		armor = 1.0;
+		protectSpell = 1.0;
 	}
 
 	public void tick() {
@@ -75,8 +85,25 @@ public class Shooter extends Mob {
 		} else {
 			walking = false;
 		}
-		shootClosest();
+		healthBar.remove();
+		//shootClosest();
 		//shootRandom();
+	}
+
+	public void shooterDamaged(double damage) {
+
+		health -= damage * armor * protectSpell;
+		// can have a multiplier here to reduce health damage due to spells or armor
+
+		if (isDead()){
+			Sound.SoundEffect.FEMALE_DEAD.play();
+			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
+			remove();
+		}
+	}
+
+	public boolean isDead(){
+		return (health <= 0);
 	}
 
 	private void shootRandom() {
@@ -128,5 +155,7 @@ public class Shooter extends Mob {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
 		hitbox.render((int) x - 10, (int) y - 16, screen);
+		//level.add(new MobHealthBar((int) x - 10, (int) y - 20, healthBar.sheet));
+		//healthBar.render((int) x - 10, (int) y - 20, health, screen);
 	}
 }

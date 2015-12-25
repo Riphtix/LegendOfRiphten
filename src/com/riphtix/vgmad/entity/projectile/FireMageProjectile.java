@@ -13,9 +13,6 @@ public class FireMageProjectile extends Projectile {
 
 	public ProjectileHitbox hitbox;
 
-	private static String playerHitSound = "/sounds/manHit.wav";
-	private static String hitSound = "/sounds/hit.wav";
-
 	public FireMageProjectile(double x, double y, double dir, Entity entity) {
 		super(x, y, dir);
 		range = entity.range;
@@ -26,6 +23,8 @@ public class FireMageProjectile extends Projectile {
 		damage = 20;
 		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
 		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x16, angle));
+		Sound.SoundEffect.LAUNCH_FIREBALL.play();
+
 
 		nx = speed * Math.cos(angle);
 		ny = speed * Math.sin(angle);
@@ -35,13 +34,12 @@ public class FireMageProjectile extends Projectile {
 		if(playerHitboxCollision(level.getClientPlayer().hitbox, this.hitbox)){
 			level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 			level.getClientPlayer().playerDamaged(damage);
-			Sound.play(playerHitSound);
+			Sound.SoundEffect.PLAYER_HIT.play();
 			remove();
 		}
 
 		if(isCollision(x, -7, 8, y, 0, 8)){
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level));
-			Sound.play(hitSound);
 			remove();
 		}
 		move();
