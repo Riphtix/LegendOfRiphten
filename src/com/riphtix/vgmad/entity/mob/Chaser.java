@@ -1,8 +1,12 @@
 package com.riphtix.vgmad.entity.mob;
 
+import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
+import com.riphtix.vgmad.handler.Sound;
+import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
 import java.util.List;
 
@@ -19,10 +23,20 @@ public class Chaser extends Mob {
 	private double ya = 0.0;
 	private double speed = 1.0;
 
+	public MobHitbox hitbox;
+
 	public Chaser(int x, int y) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
+		hitbox = new MobHitbox(Sprite.hitbox32x32);
+
+		//Chaser default attributes
+		health = 100;
+		mana = 100;
+		xpLevel = 1;
+		armor = 1.0;
+		protectSpell = 1.0;
 	}
 
 	private void move() {
@@ -65,9 +79,25 @@ public class Chaser extends Mob {
 
 	}
 
+	public void chaserDamaged(double damage) {
+
+		// can have a multiplier here to reduce health damage due to spells or armor
+		health -= damage * armor * protectSpell;
+
+		if (isDead()){
+			Sound.SoundEffect.FEMALE_DEAD.play();
+			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
+			remove();
+		}
+	}
+
+	public boolean isDead(){
+		return (health <= 0);
+	}
+
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) (x - 16), (int) (y - 16), sprite);
-		//hitbox.render((int) x - 10, (int) y, screen);
+		hitbox.render((int) x - 10, (int) y - 16, screen);
 	}
 }

@@ -33,7 +33,7 @@ public class Shooter extends Mob {
 	private int firerate = 0;
 
 	public MobHitbox hitbox;
-	public MobHealthBar healthBar;
+	//public MobHealthBar healthBar;
 
 	public Shooter(int x, int y) {
 		this.x = x << 4;
@@ -41,7 +41,7 @@ public class Shooter extends Mob {
 		sprite = animSprite.getSprite();
 		firerate = FireMageProjectile.FIRE_RATE;
 		hitbox = new MobHitbox(Sprite.hitbox32x32);
-		healthBar = new MobHealthBar((int) this.x - 10, (int) this.y - 20, new SpriteSheet("/ui/hpBars/100Percent.png", 20, 2));
+		//healthBar = new MobHealthBar((int) this.x - 10, (int) this.y - 20, new SpriteSheet("/ui/hpBars/100Percent.png", 20, 2));
 		range = 336;
 
 		//Shooter default attributes
@@ -85,15 +85,15 @@ public class Shooter extends Mob {
 		} else {
 			walking = false;
 		}
-		healthBar.remove();
-		//shootClosest();
+		//healthBar.remove();
+		shootClosest();
 		//shootRandom();
 	}
 
 	public void shooterDamaged(double damage) {
 
-		health -= damage * armor * protectSpell;
 		// can have a multiplier here to reduce health damage due to spells or armor
+		health -= damage * armor * protectSpell;
 
 		if (isDead()){
 			Sound.SoundEffect.FEMALE_DEAD.play();
@@ -115,7 +115,7 @@ public class Shooter extends Mob {
 		}
 
 		if (rand != null) {
-			if (!(rand instanceof Particle) && !(rand instanceof ParticleSpawner) && firerate <= 0) {
+			if (!(rand instanceof Particle) && !(rand instanceof ParticleSpawner) && rand instanceof Player && firerate <= 0) {
 				double dx = rand.getX() - x;
 				double dy = rand.getY() - y;
 				double dir = Math.atan2(dy, dx);
@@ -141,7 +141,7 @@ public class Shooter extends Mob {
 		}
 
 		if (closest != null) {
-			if (!(closest instanceof Particle) && !(closest instanceof ParticleSpawner) && firerate <= 0) {
+			if (!(closest instanceof Particle) && !(closest instanceof ParticleSpawner) && closest instanceof Player && firerate <= 0) {
 				double dx = closest.getX() - x;
 				double dy = closest.getY() - y;
 				double dir = Math.atan2(dy, dx);

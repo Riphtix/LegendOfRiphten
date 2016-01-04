@@ -1,9 +1,7 @@
 package com.riphtix.vgmad.entity.projectile;
 
 import com.riphtix.vgmad.entity.Entity;
-import com.riphtix.vgmad.entity.mob.Mob;
-import com.riphtix.vgmad.entity.mob.Player;
-import com.riphtix.vgmad.entity.mob.Shooter;
+import com.riphtix.vgmad.entity.mob.*;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
@@ -45,6 +43,30 @@ public class PlayerFireMageProjectile extends Projectile {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 						closestShooter.shooterDamaged(damage);
 						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
+						remove();
+					}
+				} else if(closest instanceof Dummy) {
+					Dummy closestDummy = (Dummy) closest;
+					if (mobHitboxCollision(closestDummy.hitbox, this.hitbox)) {
+						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
+						closestDummy.dummyDamaged(damage);
+						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
+						remove();
+					}
+				} else if(closest instanceof Chaser) {
+					Chaser closestChaser = (Chaser) closest;
+					if (mobHitboxCollision(closestChaser.hitbox, this.hitbox)) {
+						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
+						closestChaser.chaserDamaged(damage);
+						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
+						remove();
+					}
+				} else if(closest instanceof AStar) {
+					AStar closestAStar = (AStar) closest;
+					if (mobHitboxCollision(closestAStar.hitbox, this.hitbox)) {
+						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
+						closestAStar.aStarDamaged(damage);
+						//Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
 					}
 				}
