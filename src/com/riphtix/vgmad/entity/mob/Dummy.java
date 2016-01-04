@@ -64,7 +64,7 @@ public class Dummy extends Mob {
 			dir = Direction.RIGHT;
 		}
 		if (xa != 0 || ya != 0) {
-			move(xa, 8, -10, ya, 0, 14);
+			//move(xa, 8, -10, ya, 0, 14);
 			walking = true;
 		} else walking = false;
 

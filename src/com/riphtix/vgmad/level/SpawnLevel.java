@@ -27,10 +27,18 @@ public class SpawnLevel extends Level {
 			System.out.println("Could not load level file!!!");
 		}
 
-		add(new Shooter(20, 31));
-		add(new Dummy(32, 31));
-		add(new Chaser(25, 31));
-		add(new AStar(37, 31));
+		//add(new Shooter(20, 31));
+		Dummy d0 = new Dummy(32, 31);
+		Dummy d1 = new Dummy(26, 31);
+		Dummy d2 = new Dummy(38, 31);
+		add(d0);
+		System.out.println("Dummy" + getMobs().indexOf(d0) + " Called Hitbox");
+		add(d1);
+		System.out.println("Dummy" + getMobs().indexOf(d1) + " Called Hitbox");
+		add(d2);
+		System.out.println("Dummy" + getMobs().indexOf(d2) + " Called Hitbox");
+		//add(new Chaser(25, 31));
+		//add(new AStar(37, 31));
 	}
 
 	protected void generateLevel() {

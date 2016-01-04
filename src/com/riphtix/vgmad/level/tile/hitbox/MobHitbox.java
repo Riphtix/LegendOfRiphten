@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.level.tile.hitbox;
 
+import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.tile.Tile;
