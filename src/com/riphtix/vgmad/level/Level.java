@@ -156,30 +156,23 @@ public class Level {
 	}
 
 	public Mob getClosestMob(Projectile projectile, int x, int y, int width, int height) {
-		//System.out.println("projectile: " + projectile + " | x: " + x + " | y: " + y + " | width: " + width + " | height: " + height);
 		List<Entity> entities = getEntities(projectile, width, height);
 		for (int i = 0; i < mobs.size(); i++) {
-			if (/*mobs.get(i) instanceof Mob && */mobs.get(i) instanceof Player) {
+			if (mobs.get(i) instanceof Player) {
 				players.add((Player) mobs.get(i));
 				mobs.remove(mobs.get(i));
 			} else entities.add(mobs.get(i));
 		}
-		//System.out.println("entities.size(): " + entities.size());
 
 		double min = 0;
-		//System.out.println("min: " + min);
 		Entity closest = null;
 		for (int i = 0; i < entities.size(); i++) {
-			Entity e = entities.get(i);
-			if (e instanceof Player) continue;
-			//System.out.println("Entity: " + e);
-			double distance = getDistance(x, y, (int) e.getX(), (int) e.getY());
-			//System.out.println("distance: " + distance);
+			Mob m = mobs.get(i);
+			if (m instanceof Player) continue;
+			double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) m.getX(), (int) m.getY()));
 			if (i == 0 || distance < min) {
 				min = distance;
-				//System.out.println("min: " + min);
-				closest = e;
-				//System.out.println("closest: " + closest);
+				closest = m;
 			}
 		}
 		Mob closestMob = null;
@@ -189,39 +182,6 @@ public class Level {
 
 		return closestMob;
 	}
-
-	private double getDistance(int projectileX, int projectileY, int mobX, int mobY) {
-		double dx = projectileX - mobX;
-		double dy = projectileY - mobY;
-		double distance = Math.sqrt(dx * dx + dy * dy);
-		return distance == 1 ? 1 : 0.95;
-	}
-
-	/*private void shootClosest() {
-		List<Entity> entities = level.getEntities(this, 336);
-		entities.add(level.getClientPlayer());
-
-		double min = 0;
-		Entity closest = null;
-		for (int i = 0; i < entities.size(); i++) {
-			Entity e = entities.get(i);
-			double distance = Vector2i.getDistance(new Vector2i((int) x, (int) y), new Vector2i((int) e.getX(), (int) e.getY()));
-			if (i == 0 || distance < min) {
-				min = distance;
-				closest = e;
-			}
-		}
-
-		if (closest != null) {
-			if (!(closest instanceof Particle) && !(closest instanceof ParticleSpawner) && firerate <= 0) {
-				double dx = closest.getX() - x;
-				double dy = closest.getY() - y;
-				double dir = Math.atan2(dy, dx);
-				shoot(x, y, dir, this);
-				firerate = FireMageProjectile.FIRE_RATE;
-			}
-		}
-	}*/
 
 	//collision with uneven objects (width 2 height 3)
 	public boolean tileCollision(int x, int y, int width, int height, int xOffset, int yOffset) {
@@ -235,7 +195,7 @@ public class Level {
 	}
 
 	// Do this if the player runs out of lives
-	public void gameOver(){
+	public void gameOver() {
 		System.out.println("Player is dead!!!");
 		System.exit(0);
 	}

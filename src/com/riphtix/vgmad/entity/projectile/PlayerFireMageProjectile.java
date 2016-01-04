@@ -41,7 +41,6 @@ public class PlayerFireMageProjectile extends Projectile {
 					Shooter closestShooter = (Shooter) closest;
 					if (mobHitboxCollision(closestShooter.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
-						System.out.println("Shooter hit");
 						closestShooter.shooterDamaged(damage);
 						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
@@ -50,8 +49,6 @@ public class PlayerFireMageProjectile extends Projectile {
 					Dummy closestDummy = (Dummy) closest;
 					if (mobHitboxCollision(closestDummy.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
-						System.out.println("Dummy hit");
-						System.out.println(level.getMobs().indexOf(closest));
 						closestDummy.dummyDamaged(damage);
 						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
@@ -60,7 +57,6 @@ public class PlayerFireMageProjectile extends Projectile {
 					Chaser closestChaser = (Chaser) closest;
 					if (mobHitboxCollision(closestChaser.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
-						System.out.println("Chaser hit");
 						closestChaser.chaserDamaged(damage);
 						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
@@ -69,7 +65,6 @@ public class PlayerFireMageProjectile extends Projectile {
 					AStar closestAStar = (AStar) closest;
 					if (mobHitboxCollision(closestAStar.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
-						System.out.println("AStar hit");
 						closestAStar.aStarDamaged(damage);
 						//Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();

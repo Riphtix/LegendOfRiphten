@@ -25,9 +25,9 @@ public class Sound extends Thread {
 		SoundEffect(String soundFileName){
 			try{
 				//Laptop
-				URL url = new URL("file:/C:/Users/Kaito/workspace/VideoGameMarketingAndDesignFinal/res" + soundFileName);
+				//URL url = new URL("file:/C:/Users/Kaito/workspace/VideoGameMarketingAndDesignFinal/res" + soundFileName);
 				//Desktop
-				//URL url = new URL("file:/E:/Coding/Workspace/VideoGameMarketingAndDesignFinal/res" + soundFileName);
+				URL url = new URL("file:/E:/Coding/Workspace/VideoGameMarketingAndDesignFinal/res" + soundFileName);
 				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
 				clip = AudioSystem.getClip();
 				clip.open(audioInputStream);
