@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
+import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
@@ -21,6 +22,8 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Mob {
 
@@ -54,6 +57,8 @@ public class Player extends Mob {
 	private BufferedImage image;
 
 	public PlayerHitbox hitbox;
+
+	private List<Item> inventory = new ArrayList<Item>();
 
 	private int time = 0;
 

@@ -15,7 +15,7 @@ public class Sound extends Thread {
 		FEMALE_DAMAGE_9("/sounds/girlDamage9.wav"),
 		PLAYER_HIT("/sounds/manHit.wav");
 
-		public static enum Volume{
+		public enum Volume{
 			MUTE, LOW, MEDIUM, HIGH
 		}
 

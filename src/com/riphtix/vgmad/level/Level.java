@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.level;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.entity.particle.Particle;

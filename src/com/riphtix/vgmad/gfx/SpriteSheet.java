@@ -49,6 +49,9 @@ public class SpriteSheet {
 	public static SpriteSheet sorceress_left = new SpriteSheet(sorceress, 0, 1, 3, 1, 32);
 	public static SpriteSheet sorceress_right = new SpriteSheet(sorceress, 0, 2, 3, 1, 32);
 
+	//Items
+	public static SpriteSheet weapons = new SpriteSheet("/textures/items/weapons.png", 256);
+
 	//Other Entities
 	public static SpriteSheet projectiles = new SpriteSheet("/entities/projectiles/projectiles.png", 256);
 

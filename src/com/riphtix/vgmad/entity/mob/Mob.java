@@ -1,12 +1,16 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public abstract class Mob extends Entity {
 
@@ -35,6 +39,8 @@ public abstract class Mob extends Entity {
 	public Direction dir;
 
 	public MobHitbox hitbox;
+
+	public List<Item> inventory = new ArrayList<Item>();
 
 	public void move(double xa, int leftXWidth, int rightXWidth, double ya, int topYHeight, int bottomYHeight) {
 		if (xa != 0 && ya != 0) {
