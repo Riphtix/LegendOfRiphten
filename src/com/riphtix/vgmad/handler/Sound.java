@@ -2,6 +2,7 @@ package com.riphtix.vgmad.handler;
 
 import javax.sound.sampled.*;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.URL;
 
 public class Sound extends Thread {
@@ -24,10 +25,7 @@ public class Sound extends Thread {
 
 		SoundEffect(String soundFileName){
 			try{
-				//Laptop
-				//URL url = new URL("file:/C:/Users/Kaito/workspace/VideoGameMarketingAndDesignFinal/res" + soundFileName);
-				//Desktop
-				URL url = new URL("file:/E:/Coding/Workspace/VideoGameMarketingAndDesignFinal/res" + soundFileName);
+				URL url = this.getClass().getResource(soundFileName);
 				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
 				clip = AudioSystem.getClip();
 				clip.open(audioInputStream);
