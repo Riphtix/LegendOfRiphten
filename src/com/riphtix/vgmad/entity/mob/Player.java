@@ -20,6 +20,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 
 public class Player extends Mob {
 
@@ -192,7 +193,8 @@ public class Player extends Mob {
 		*/
 
 		try {
-			image = ImageIO.read(new File("res/ui/home.png"));
+			URL url = this.getClass().getResource("/ui/home.png");
+			image = ImageIO.read(url);
 			System.out.println(image.getType());
 		} catch (IOException e) {
 			e.printStackTrace();
