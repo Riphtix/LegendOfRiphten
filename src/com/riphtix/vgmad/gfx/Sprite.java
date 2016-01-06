@@ -18,6 +18,7 @@ public class Sprite {
 	private int height;
 	public int[] pixels;
 	protected SpriteSheet sheet;
+	public String path;
 
 	//Tiles
 	public static Sprite grassSprite = new Sprite(16, 0, 0, SpriteSheet.tiles);
@@ -26,10 +27,6 @@ public class Sprite {
 	public static Sprite stoneBrickSprite = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite woodenPlankSprite = new Sprite(16, 4, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
-
-	//Items
-	//Weapons
-	public static Sprite fireStaff = new Sprite(16, 0, 0, SpriteSheet.weapons);
 
 	//Entities
 	//Mobs
@@ -62,6 +59,7 @@ public class Sprite {
 		this.x = x * width;
 		this.y = y * height;
 		this.sheet = sheet;
+		this.path = sheet.getPath();
 		load();
 	}
 
@@ -73,6 +71,7 @@ public class Sprite {
 		this.x = x * size;
 		this.y = y * size;
 		this.sheet = sheet;
+		this.path = sheet.getPath();
 		load();
 	}
 

@@ -3,6 +3,7 @@ package com.riphtix.vgmad.entity.items;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.level.Level;
 
 import java.awt.*;
@@ -13,7 +14,7 @@ public class Item {
 
 	private String name;
 	private int itemID;
-	private Sprite sprite;
+	public SpriteSheet sheet;
 	private int rarity;
 
 	public List<Item> items = new ArrayList<Item>();
@@ -30,15 +31,15 @@ public class Item {
 	 * 5 legendary
 	 */
 
-	public Item fireStaff;
+	public static Item fireStaff;
 
-	public Item(String name, int itemID, int rarity, Sprite sprite){
+	public Item(String name, int itemID, int rarity, SpriteSheet sheet){
 		this.name = name;
 		this.itemID = itemID;
 		this.rarity = rarity;
-		this.sprite = sprite;
+		this.sheet = sheet;
 
-		fireStaff = new Weapon("Fire Staff", 0, 0, Sprite.fireStaff, Weapon.WeaponType.RANGED, Weapon.DamageType.DAMAGE_OVER_TIME);
+		fireStaff = new Weapon("Fire Staff", 0, 0, SpriteSheet.fireStaff, Weapon.WeaponType.RANGED, Weapon.DamageType.DAMAGE_OVER_TIME);
 		addItem(fireStaff);
 	}
 

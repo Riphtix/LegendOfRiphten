@@ -16,6 +16,12 @@ public class UIProgressMark extends UIComponent{
 		color = new Color(0xff000000);
 	}
 
+	public UIProgressMark(Vector2i position, Vector2i size, int color){
+		super(position);
+		this.size = size;
+		this.color = new Color(color);
+	}
+
 	public void render(Graphics g){
 		g.setColor(color);
 		g.fillRect(position.x + offset.x, position.y + offset.y, size.x, size.y);

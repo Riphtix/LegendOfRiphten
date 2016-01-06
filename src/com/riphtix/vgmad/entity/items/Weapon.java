@@ -1,6 +1,6 @@
 package com.riphtix.vgmad.entity.items;
 
-import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.gfx.SpriteSheet;
 
 public class Weapon extends Item {
 
@@ -15,8 +15,8 @@ public class Weapon extends Item {
 	public WeaponType weaponType = WeaponType.NO_WEAPON;
 	public DamageType damageType = DamageType.BASIC;
 
-	public Weapon(String name, int itemID, int rarity, Sprite sprite, WeaponType weaponType, DamageType damageType) {
-		super(name, itemID, rarity, sprite);
+	public Weapon(String name, int itemID, int rarity, SpriteSheet sheet, WeaponType weaponType, DamageType damageType) {
+		super(name, itemID, rarity, sheet);
 		this.weaponType = weaponType;
 		this.damageType = damageType;
 	}

@@ -1,6 +1,5 @@
 package com.riphtix.vgmad.entity;
 
-import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.Level;
@@ -8,8 +7,6 @@ import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
 public class Entity {
@@ -20,7 +17,6 @@ public class Entity {
 	protected final Random random = new Random();
 	public int range;
 	public MobHitbox hitbox;
-	private List<Item> items = new ArrayList<Item>();
 
 	public Entity() {
 

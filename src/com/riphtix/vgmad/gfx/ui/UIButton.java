@@ -58,6 +58,10 @@ public class UIButton extends UIComponent {
 		this.image = image;
 	}
 
+	public Image getImage(){
+		return image;
+	}
+
 	public void setButtonListener(UIButtonListener buttonListener) {
 		this.buttonListener = buttonListener;
 	}
