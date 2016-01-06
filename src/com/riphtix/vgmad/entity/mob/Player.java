@@ -1,8 +1,6 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
-import com.riphtix.vgmad.entity.items.Item;
-import com.riphtix.vgmad.entity.items.Weapon;
 import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
@@ -10,6 +8,7 @@ import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.gfx.ui.*;
+import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.handler.Sound;
@@ -18,13 +17,11 @@ import com.riphtix.vgmad.util.ImageUtils;
 import com.riphtix.vgmad.util.Vector2i;
 
 import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Player extends Mob {
 
@@ -71,11 +68,11 @@ public class Player extends Mob {
 		hitbox = new PlayerHitbox(Sprite.hitbox32x32);
 		range = 336;
 
-		inventory.add(Item.fireStaff);
-		//System.out.println("Just added the item: " + Item.fireStaff.getName());
+		/*inventory.add(Item.fireStaff);
+		System.out.println("Just added the item: " + Item.fireStaff.getName());
 		System.out.println("inventory.size(): " + inventory.size());
 		System.out.println("inventory.get(0): " + inventory.get(0));
-
+*/
 		rightXOffset = 8;
 		leftXOffset = -10;
 		topYOffset = 0;
@@ -179,7 +176,21 @@ public class Player extends Mob {
 
 		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24), new UIActionListener() {
 			public void performAction() {
-				System.out.println("action performed");
+				JFrame frame = new JFrame("Controls");
+
+				JPanel jPanel = new JPanel();
+				jPanel.setLayout(new FlowLayout());
+
+				JLabel jLabel = new JLabel("<html>> W - Move up<br>> A - Move left<br>> S - Move down<br>> D - Move right<br>> Left click - Shoot</html>");
+
+				jPanel.add(jLabel);
+
+				frame.add(jPanel);
+				frame.setResizable(false);
+				frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+				frame.pack();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);
 			}
 		});
 		uiButtonOptions.setButtonListener(new UIButtonListener() {
@@ -189,7 +200,7 @@ public class Player extends Mob {
 				button.ignoreNextPress();
 			}
 		});
-		uiButtonOptions.setText("Settings");
+		uiButtonOptions.setText("Controls");
 		uiButtonOptions.setFont(new Font("Verdana", Font.BOLD, 15));
 		uiButtonOptions.setDropShadow(true, 1);
 		uiButtonOptions.dropShadow = true;

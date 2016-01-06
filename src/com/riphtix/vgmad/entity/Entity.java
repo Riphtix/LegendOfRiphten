@@ -83,6 +83,20 @@ public class Entity {
 		return solid;
 	}
 
+	protected boolean isCollisionWithBuff(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset){
+		boolean buff = false;
+		int xt0 = hitboxX(xa, leftXOffset);
+		int xt1 = hitboxX(xa, rightXOffset);
+		int yt0 = hitboxY(ya, topYOffset);
+		int yt1 = hitboxY(ya, bottomYOffset);
+		for (int c = 0; c < 4; c++) {
+			if (level.getTile(xt0, yt0).hasBuff() || level.getTile(xt1, yt1).hasBuff() || level.getTile(xt0, yt1).hasBuff() || level.getTile(xt1, yt0).hasBuff()) {
+				buff = true;
+			}
+		}
+		return buff;
+	}
+
 	protected int hitboxX(double xa, int width) {
 		int hor = 0;
 		for (int c = 0; c < 4; c++) {

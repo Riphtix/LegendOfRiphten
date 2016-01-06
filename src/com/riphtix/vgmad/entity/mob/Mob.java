@@ -7,6 +7,7 @@ import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.level.tile.Tile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
 import java.util.ArrayList;
@@ -59,11 +60,43 @@ public abstract class Mob extends Entity {
 			if (Math.abs(xa) > 1) {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += abs(xa);
+					if (isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								level.getClientPlayer().armor *= Tile.getBuff();
+								timer--;
+							}
+						}
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								PlayerFireMageProjectile.damage *= Tile.getBuff();
+								timer--;
+							}
+						}
+					}
 				}
 				xa -= abs(xa);
 			} else {
-				if (!isCollision(abs(xa),leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += xa;
+					if (isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								level.getClientPlayer().armor *= Tile.getBuff();
+								timer--;
+							}
+						}
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								PlayerFireMageProjectile.damage *= Tile.getBuff();
+								timer--;
+							}
+						}
+					}
 				}
 				xa = 0;
 			}
@@ -72,11 +105,43 @@ public abstract class Mob extends Entity {
 			if (Math.abs(ya) > 1) {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += abs(ya);
+					if (isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								level.getClientPlayer().armor *= Tile.getBuff();
+								timer--;
+							}
+						}
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								PlayerFireMageProjectile.damage *= Tile.getBuff();
+								timer--;
+							}
+						}
+					}
 				}
 				ya -= abs(ya);
 			} else {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += ya;
+					if (isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								level.getClientPlayer().armor *= Tile.getBuff();
+								timer--;
+							}
+						}
+						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
+							int timer = Tile.getTimer();
+							while (timer > 0) {
+								PlayerFireMageProjectile.damage *= Tile.getBuff();
+								timer--;
+							}
+						}
+					}
 				}
 				ya = 0;
 			}
@@ -98,7 +163,7 @@ public abstract class Mob extends Entity {
 		if (entity instanceof Shooter) {
 			p = new FireMageProjectile(x, y, dir, entity);
 		}
-		if (entity instanceof Player){
+		if (entity instanceof Player) {
 			p = new PlayerFireMageProjectile(x, y, dir, entity);
 		}
 		level.add(p);

@@ -12,6 +12,8 @@ public class Tile {
 	public static Tile stoneTile = new StoneTile(Sprite.stoneSprite);
 	public static Tile stoneBrickTile = new StoneBrickTile(Sprite.stoneBrickSprite);
 	public static Tile woodenPlankTile = new WoodenPlankTile(Sprite.woodenPlankSprite);
+	public static Tile tempArmorBuffTile = new TempArmorBuffTile(Sprite.tempArmorBuffSprite);
+	public static Tile tempDamageBuffTile = new TempDamageBuffTile(Sprite.tempDamageBuffSprite);
 
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 
@@ -20,6 +22,8 @@ public class Tile {
 	public static final int colorStone = 0xff808080;
 	public static final int colorStoneBrick = 0xff404040;
 	public static final int colorWoodenPlank = 0xffd3783b;
+	public static final int colorTempArmorBuff = 0xffff0000;
+	public static final int colorTempDamageBuff = 0xffaa0000;
 
 	public Tile(Sprite sprite) {
 		this.sprite = sprite;
@@ -31,5 +35,17 @@ public class Tile {
 
 	public boolean isSolid() {//public boolean solid()
 		return false;
+	}
+
+	public boolean hasBuff() {
+		return false;
+	}
+
+	public double getBuff() {
+		return 1.0;
+	}
+
+	public int getTimer(){
+		return 0;
 	}
 }

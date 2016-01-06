@@ -396,6 +396,8 @@ public class Level {
 		if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
 		if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
 		if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
+		if (tiles[x + y * width] == Tile.colorTempArmorBuff) return Tile.tempArmorBuffTile;
+		if (tiles[x + y * width] == Tile.colorTempDamageBuff) return Tile.tempDamageBuffTile;
 		return Tile.voidTile;
 	}
 }
