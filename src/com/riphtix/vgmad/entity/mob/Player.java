@@ -19,9 +19,11 @@ import com.riphtix.vgmad.util.Vector2i;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Mob {
 
@@ -46,9 +48,8 @@ public class Player extends Mob {
 	private UIProgressBar uiLivesBar;
 	UIProgressMark uiHP25Percent, uiHP50Percent, uiHP75Percent;
 	UIProgressMark uiMP25Percent, uiMP50Percent, uiMP75Percent;
-	UIProgressMark uiXP25Percent, uiXP50Percent, uiXP75Percent;
+	UIProgressMark uiXP25Percent, uiXP50Percent,  uiXP75Percent;
 	UIProgressMark uiLives25Percent, uiLives50Percent, uiLives75Percent;
-	private UIInventory uiInventory;
 
 	private UIButton uiButtonOptions;
 	private UIButton uiButtonImageTest;
@@ -56,6 +57,8 @@ public class Player extends Mob {
 	private BufferedImage image;
 
 	public PlayerHitbox hitbox;
+
+	private List<Item> inventory = new ArrayList<Item>();
 
 	private int time = 0;
 
@@ -161,13 +164,6 @@ public class Player extends Mob {
 		uiLives75Percent = new UIProgressMark(new Vector2i(173, 285), new Vector2i(1, 15));
 		panel.addComponent(uiLives75Percent);
 
-		inventory.add(Item.fireStaff);
-
-		//Inventory
-		uiInventory = new UIInventory(new Vector2i(35, 315), new Vector2i(136, 68), this);
-		panel.addComponent(uiInventory);
-
-
 		//player default attributes
 		health = 100;
 		mana = 100;
@@ -204,36 +200,35 @@ public class Player extends Mob {
 		try {
 			URL url = this.getClass().getResource("/ui/home.png");
 			image = ImageIO.read(url);
+			System.out.println(image.getType());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
 		uiButtonImageTest = new UIButton(new Vector2i(206, 468), image, new UIActionListener() {
-			public void performAction() {
-				System.exit(0);
-			}
-		});
-
-		uiButtonImageTest.setButtonListener(new UIButtonListener() {
-			public void mouseEnteredButtonBounds(UIButton button) {
+				public void performAction() {
+					System.exit(0);
+				}
+			});
+		uiButtonImageTest.setButtonListener(new UIButtonListener(){
+			public void mouseEnteredButtonBounds(UIButton button){
 				button.setImage(ImageUtils.changeBrightness(image, 50));
 			}
 
-			public void mouseExitedButtonBounds(UIButton button) {
+			public void mouseExitedButtonBounds(UIButton button){
 				button.setImage(image);
 			}
 
-			public void buttonPressed(UIButton button) {
+			public void buttonPressed(UIButton button){
 				button.setImage(ImageUtils.changeBrightness(image, 75));
 			}
 
-			public void buttonReleased(UIButton button) {
+			public void buttonReleased(UIButton button){
 				button.setImage(image);
 			}
 		});
 		uiButtonImageTest.dropShadow = true;
 		panel.addComponent(uiButtonImageTest);
-
 	}
 
 	public String getName() {
@@ -242,12 +237,14 @@ public class Player extends Mob {
 
 	public void tick() {//public void update()
 		time++;
-		if (walking) {
-			if (time % 20 == 0) {
+		if (walking){
+			if(time % 20 == 0){
 				Sound.SoundEffect.WALKING.play();
 			}
 			animSprite.tick();
-		} else animSprite.setFrame(0);
+		}
+
+		else animSprite.setFrame(0);
 		if (firerate > 0) firerate--;
 		double xa = 0, ya = 0;
 		double speed = 1.5;
@@ -273,12 +270,12 @@ public class Player extends Mob {
 		clear();
 		tickShooting();
 
-		if (health == 0) {
+		if(health == 0){
 			lives -= 1;
 			health = 100;
 		}
 
-		if (xp == 100) {
+		if(xp == 100){
 			xpLevel++;
 			xp = 0;
 		}
@@ -294,16 +291,17 @@ public class Player extends Mob {
 		health -= damage * armor * protectSpell;
 		// can have a multiplier here to reduce health damage due to spells or armor
 
-		if (isDead()) {
-			if (lives > 0) {
+		if (isDead()){
+			if (lives>0){
 				lives -= 1;
 				Sound.SoundEffect.PLAYER_DEAD.play();
 				Sound.SoundEffect.LIFE_LOST.play();
-			} else level.gameOver();
+			}
+			else level.gameOver();
 		}
 	}
 
-	public boolean isDead() {
+	public boolean isDead(){
 		return (health <= 0);
 	}
 
@@ -317,7 +315,7 @@ public class Player extends Mob {
 	}
 
 	private void tickShooting() {
-		if (Mouse.getX() > 660)
+		if(Mouse.getX() > 660)
 			return;
 
 		if (Mouse.getButton() == 1 && firerate <= 0) {

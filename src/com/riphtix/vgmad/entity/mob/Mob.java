@@ -40,7 +40,7 @@ public abstract class Mob extends Entity {
 
 	public MobHitbox hitbox;
 
-	public List<Item> inventory = new ArrayList<Item>(8);
+	public List<Item> inventory = new ArrayList<Item>();
 
 	public void move(double xa, int leftXWidth, int rightXWidth, double ya, int topYHeight, int bottomYHeight) {
 		if (xa != 0 && ya != 0) {
