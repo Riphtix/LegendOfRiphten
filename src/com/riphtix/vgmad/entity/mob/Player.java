@@ -2,6 +2,7 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.items.Item;
+import com.riphtix.vgmad.entity.items.Weapon;
 import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
@@ -58,8 +59,6 @@ public class Player extends Mob {
 
 	public PlayerHitbox hitbox;
 
-	private List<Item> inventory = new ArrayList<Item>();
-
 	private int time = 0;
 
 	public Player(String name, int x, int y, Keyboard input) {
@@ -71,6 +70,11 @@ public class Player extends Mob {
 		firerate = PlayerFireMageProjectile.FIRE_RATE;
 		hitbox = new PlayerHitbox(Sprite.hitbox32x32);
 		range = 336;
+
+		inventory.add(Item.fireStaff);
+		//System.out.println("Just added the item: " + Item.fireStaff.getName());
+		System.out.println("inventory.size(): " + inventory.size());
+		System.out.println("inventory.get(0): " + inventory.get(0));
 
 		rightXOffset = 8;
 		leftXOffset = -10;

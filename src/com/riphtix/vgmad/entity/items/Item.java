@@ -1,8 +1,7 @@
 package com.riphtix.vgmad.entity.items;
 
 import com.riphtix.vgmad.entity.mob.Mob;
-import com.riphtix.vgmad.gfx.Screen;
-import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.level.Level;
 
 import java.awt.*;
@@ -13,10 +12,11 @@ public class Item {
 
 	private String name;
 	private int itemID;
-	private Sprite sprite;
+	public SpriteSheet sheet;
 	private int rarity;
+	private String path;
 
-	public List<Item> items = new ArrayList<Item>();
+	public static List<Item> items = new ArrayList<Item>();
 
 	protected Level level;
 
@@ -30,20 +30,31 @@ public class Item {
 	 * 5 legendary
 	 */
 
-	public Item fireStaff;
+	public static Weapon fireStaff;
 
-	public Item(String name, int itemID, int rarity, Sprite sprite){
+	public Item(){
+		fireStaff = new Weapon("Fire Staff", 1, 0, SpriteSheet.fireStaff, Weapon.WeaponType.RANGED, Weapon.DamageType.DAMAGE_OVER_TIME);
+	}
+
+	public Item(String name, int itemID, int rarity, String path){
 		this.name = name;
 		this.itemID = itemID;
 		this.rarity = rarity;
-		this.sprite = sprite;
+		this.path = path;
 
-		fireStaff = new Weapon("Fire Staff", 0, 0, Sprite.fireStaff, Weapon.WeaponType.RANGED, Weapon.DamageType.DAMAGE_OVER_TIME);
 		addItem(fireStaff);
 	}
 
-	private void addItem(Item item){
-		items.add(item.itemID, item);
+	public String getPath(){
+		return path;
+	}
+
+	public String getName(){
+		return name;
+	}
+
+	public static void addItem(Item item){
+		items.add(item);
 	}
 
 	public List<Item> getInventory(Mob mob){

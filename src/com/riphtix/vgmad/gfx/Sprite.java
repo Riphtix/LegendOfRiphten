@@ -27,10 +27,6 @@ public class Sprite {
 	public static Sprite woodenPlankSprite = new Sprite(16, 4, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
-	//Items
-	//Weapons
-	public static Sprite fireStaff = new Sprite(16, 0, 0, SpriteSheet.weapons);
-
 	//Entities
 	//Mobs
 	public static Sprite maleElfDefault = new Sprite(32, 0, 0, SpriteSheet.maleElf_down);
