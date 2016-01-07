@@ -62,18 +62,17 @@ public abstract class Mob extends Entity {
 		while (xa != 0) {
 			if (Math.abs(xa) > 1) {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
-					this.x += abs(xa);
-				}
-				if(isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)){
+					isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight);
+					armor = 1.0;
 					this.x += abs(xa);
 				}
 				xa -= abs(xa);
 			} else {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+					isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight);
+					armor = 1.0;
 					this.x += xa;
-				}
-				if(isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)){
-					this.x += abs(xa);
+
 				}
 				xa = 0;
 			}
@@ -81,18 +80,16 @@ public abstract class Mob extends Entity {
 		while (ya != 0) {
 			if (Math.abs(ya) > 1) {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+					isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight);
+					armor = 1.0;
 					this.y += abs(ya);
-				}
-				if(isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)){
-					this.x += abs(xa);
 				}
 				ya -= abs(ya);
 			} else {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+					isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight);
+					armor = 1.0;
 					this.y += ya;
-				}
-				if(isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)){
-					this.x += abs(xa);
 				}
 				ya = 0;
 			}

@@ -10,6 +10,7 @@ import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -17,6 +18,7 @@ import java.util.Random;
 public class Entity {
 	protected double x, y;
 	protected Sprite sprite;
+	protected int time;
 	private boolean removed = false;
 	protected Level level;
 	protected final Random random = new Random();
@@ -85,7 +87,7 @@ public class Entity {
 		return solid;
 	}
 
-	protected boolean isCollisionWithBuff(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset){
+	protected boolean isCollisionWithBuff(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {
 		boolean buff = false;
 		int xt0 = hitboxX(xa, leftXOffset);
 		int xt1 = hitboxX(xa, rightXOffset);
@@ -93,42 +95,38 @@ public class Entity {
 		int yt1 = hitboxY(ya, bottomYOffset);
 		for (int c = 0; c < 4; c++) {
 			if (level.getTile(xt0, yt0).hasBuff() || level.getTile(xt1, yt1).hasBuff() || level.getTile(xt0, yt1).hasBuff() || level.getTile(xt1, yt0).hasBuff()) {
-				System.out.println("Collision with buff tile!!!");
 				buff = true;
-				if(level.getTile(xt0, yt0) == Tile.tempArmorBuffTile){
-					int timer = TempArmorBuffTile.getTimer();
-					double tempArmor = level.getClientPlayer().armor;
-					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
-					while (timer > 0) {
+
+				long startTime = System.currentTimeMillis();
+
+				if (level.getTile(xt0, yt0) == Tile.tempArmorBuffTile) {
+
+					System.out.println("Starting Armor Stat: " + level.getClientPlayer().armor);
+
+					double newArmor = TempArmorBuffTile.getBuff();
+
+					System.out.println("New Armor Stat: " + newArmor);
+
+					boolean buffed = false;
+
+					while (!buffed) {
+
+						//if(System.currentTimeMillis() - startTime < Duration.ofSeconds(TempArmorBuffTile.getDuration()).toMillis()) {
+
 						level.getClientPlayer().armor = newArmor;
-						timer--;
-					}
-				}
-				if(level.getTile(xt1, yt1) == Tile.tempArmorBuffTile){
-					int timer = TempArmorBuffTile.getTimer();
-					double tempArmor = level.getClientPlayer().armor;
-					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
-					while (timer > 0) {
-						level.getClientPlayer().armor = newArmor;
-						timer--;
-					}
-				}
-				if(level.getTile(xt0, yt1) == Tile.tempArmorBuffTile){
-					int timer = TempArmorBuffTile.getTimer();
-					double tempArmor = level.getClientPlayer().armor;
-					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
-					while (timer > 0) {
-						level.getClientPlayer().armor = newArmor;
-						timer--;
-					}
-				}
-				if(level.getTile(xt1, yt0) == Tile.tempArmorBuffTile){
-					int timer = TempArmorBuffTile.getTimer();
-					double tempArmor = level.getClientPlayer().armor;
-					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
-					while (timer > 0) {
-						level.getClientPlayer().armor = newArmor;
-						timer--;
+
+						System.out.println("End Armor Stat: " + level.getClientPlayer().armor);
+
+						//}
+
+
+						buffed = true;
+
+					} if (buffed && System.currentTimeMillis() - startTime > Duration.ofSeconds(TempArmorBuffTile.getDuration()).toMillis()) {
+
+						level.getClientPlayer().armor = 1.0;
+
+						System.out.println("Armor Stat After Timer: " + level.getClientPlayer().armor);
 					}
 				}
 			}
