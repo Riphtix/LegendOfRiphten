@@ -4,6 +4,8 @@ import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.Level;
+import com.riphtix.vgmad.level.tile.TempArmorBuffTile;
+import com.riphtix.vgmad.level.tile.Tile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
@@ -91,7 +93,44 @@ public class Entity {
 		int yt1 = hitboxY(ya, bottomYOffset);
 		for (int c = 0; c < 4; c++) {
 			if (level.getTile(xt0, yt0).hasBuff() || level.getTile(xt1, yt1).hasBuff() || level.getTile(xt0, yt1).hasBuff() || level.getTile(xt1, yt0).hasBuff()) {
+				System.out.println("Collision with buff tile!!!");
 				buff = true;
+				if(level.getTile(xt0, yt0) == Tile.tempArmorBuffTile){
+					int timer = TempArmorBuffTile.getTimer();
+					double tempArmor = level.getClientPlayer().armor;
+					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
+					while (timer > 0) {
+						level.getClientPlayer().armor = newArmor;
+						timer--;
+					}
+				}
+				if(level.getTile(xt1, yt1) == Tile.tempArmorBuffTile){
+					int timer = TempArmorBuffTile.getTimer();
+					double tempArmor = level.getClientPlayer().armor;
+					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
+					while (timer > 0) {
+						level.getClientPlayer().armor = newArmor;
+						timer--;
+					}
+				}
+				if(level.getTile(xt0, yt1) == Tile.tempArmorBuffTile){
+					int timer = TempArmorBuffTile.getTimer();
+					double tempArmor = level.getClientPlayer().armor;
+					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
+					while (timer > 0) {
+						level.getClientPlayer().armor = newArmor;
+						timer--;
+					}
+				}
+				if(level.getTile(xt1, yt0) == Tile.tempArmorBuffTile){
+					int timer = TempArmorBuffTile.getTimer();
+					double tempArmor = level.getClientPlayer().armor;
+					double newArmor = tempArmor * TempArmorBuffTile.getBuff();
+					while (timer > 0) {
+						level.getClientPlayer().armor = newArmor;
+						timer--;
+					}
+				}
 			}
 		}
 		return buff;

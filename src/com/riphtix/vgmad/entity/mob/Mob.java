@@ -7,6 +7,9 @@ import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.level.TileCoordinate;
+import com.riphtix.vgmad.level.tile.TempArmorBuffTile;
+import com.riphtix.vgmad.level.tile.TempDamageBuffTile;
 import com.riphtix.vgmad.level.tile.Tile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
@@ -60,43 +63,17 @@ public abstract class Mob extends Entity {
 			if (Math.abs(xa) > 1) {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += abs(xa);
-					if (isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								level.getClientPlayer().armor *= Tile.getBuff();
-								timer--;
-							}
-						}
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								PlayerFireMageProjectile.damage *= Tile.getBuff();
-								timer--;
-							}
-						}
-					}
+				}
+				if(isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)){
+					this.x += abs(xa);
 				}
 				xa -= abs(xa);
 			} else {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += xa;
-					if (isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								level.getClientPlayer().armor *= Tile.getBuff();
-								timer--;
-							}
-						}
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								PlayerFireMageProjectile.damage *= Tile.getBuff();
-								timer--;
-							}
-						}
-					}
+				}
+				if(isCollisionWithBuff(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)){
+					this.x += abs(xa);
 				}
 				xa = 0;
 			}
@@ -105,43 +82,17 @@ public abstract class Mob extends Entity {
 			if (Math.abs(ya) > 1) {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += abs(ya);
-					if (isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								level.getClientPlayer().armor *= Tile.getBuff();
-								timer--;
-							}
-						}
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								PlayerFireMageProjectile.damage *= Tile.getBuff();
-								timer--;
-							}
-						}
-					}
+				}
+				if(isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)){
+					this.x += abs(xa);
 				}
 				ya -= abs(ya);
 			} else {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += ya;
-					if (isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempArmorBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								level.getClientPlayer().armor *= Tile.getBuff();
-								timer--;
-							}
-						}
-						if (level.getTile((int) xa << 4, (int) ya << 4) == Tile.tempDamageBuffTile) {
-							int timer = Tile.getTimer();
-							while (timer > 0) {
-								PlayerFireMageProjectile.damage *= Tile.getBuff();
-								timer--;
-							}
-						}
-					}
+				}
+				if(isCollisionWithBuff(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)){
+					this.x += abs(xa);
 				}
 				ya = 0;
 			}

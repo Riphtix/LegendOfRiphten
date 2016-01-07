@@ -40,12 +40,4 @@ public class Tile {
 	public boolean hasBuff() {
 		return false;
 	}
-
-	public double getBuff() {
-		return 1.0;
-	}
-
-	public int getTimer(){
-		return 0;
-	}
 }

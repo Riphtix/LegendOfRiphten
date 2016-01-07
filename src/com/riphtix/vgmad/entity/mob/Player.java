@@ -279,6 +279,7 @@ public class Player extends Mob {
 		}
 		if (xa != 0 || ya != 0) {
 			move(xa, rightXOffset, leftXOffset, ya, topYOffset, bottomYOffset);
+			System.out.println("armor: " + armor);
 			walking = true;
 		} else walking = false;
 

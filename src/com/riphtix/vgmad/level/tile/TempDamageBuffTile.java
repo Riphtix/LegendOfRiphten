@@ -5,8 +5,8 @@ import com.riphtix.vgmad.gfx.Sprite;
 
 public class TempDamageBuffTile extends Tile {
 
-	private double damageMultiplier = 2.0;
-	private int time = 300;
+	private static double damageMultiplier = 2.0;
+	private static int time = 300;
 
 	public TempDamageBuffTile(Sprite sprite) {
 		super(sprite);
@@ -16,11 +16,11 @@ public class TempDamageBuffTile extends Tile {
 		return true;
 	}
 
-	public double getBuff(){
+	public static double getBuff(){
 		return damageMultiplier;
 	}
 
-	public int getTimer(){
+	public static int getTimer(){
 		return time;
 	}
 
