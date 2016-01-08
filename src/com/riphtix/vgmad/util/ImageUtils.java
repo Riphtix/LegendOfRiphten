@@ -4,7 +4,7 @@ import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.awt.image.DataBufferInt;
 
-import static com.riphtix.vgmad.util.MathUtils.*;
+import static com.riphtix.vgmad.util.MathUtils.clamp;
 
 public class ImageUtils {
 
