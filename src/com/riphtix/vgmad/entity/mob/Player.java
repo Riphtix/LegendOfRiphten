@@ -12,6 +12,7 @@ import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.handler.Sound;
+import com.riphtix.vgmad.level.tile.TempArmorBuffTile;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.util.ImageUtils;
 import com.riphtix.vgmad.util.Vector2i;
@@ -172,6 +173,7 @@ public class Player extends Mob {
 		lives = 10;
 		xpLevel = 1;
 		armor = 1.0;
+		baseArmor = 1.0;
 		protectSpell = 1.0;
 
 		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24), new UIActionListener() {
@@ -280,7 +282,6 @@ public class Player extends Mob {
 		}
 		if (xa != 0 || ya != 0) {
 			move(xa, rightXOffset, leftXOffset, ya, topYOffset, bottomYOffset);
-			//System.out.println("armor: " + armor);
 			walking = true;
 		} else walking = false;
 

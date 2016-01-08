@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.level.tile;
 
+import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 
@@ -40,4 +41,9 @@ public class Tile {
 	public boolean hasBuff() {
 		return false;
 	}
+
+	public static void onUpdate(Mob mob){
+
+	}
+
 }

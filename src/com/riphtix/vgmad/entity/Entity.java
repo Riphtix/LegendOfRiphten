@@ -87,7 +87,7 @@ public class Entity {
 		return solid;
 	}
 
-	protected boolean isCollisionWithBuff(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {
+	protected boolean buffCheck(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {
 		boolean buff = false;
 		int xt0 = hitboxX(xa, leftXOffset);
 		int xt1 = hitboxX(xa, rightXOffset);
@@ -96,39 +96,6 @@ public class Entity {
 		for (int c = 0; c < 4; c++) {
 			if (level.getTile(xt0, yt0).hasBuff() || level.getTile(xt1, yt1).hasBuff() || level.getTile(xt0, yt1).hasBuff() || level.getTile(xt1, yt0).hasBuff()) {
 				buff = true;
-
-				long startTime = System.currentTimeMillis();
-
-				if (level.getTile(xt0, yt0) == Tile.tempArmorBuffTile) {
-
-					System.out.println("Starting Armor Stat: " + level.getClientPlayer().armor);
-
-					double newArmor = TempArmorBuffTile.getBuff();
-
-					System.out.println("New Armor Stat: " + newArmor);
-
-					boolean buffed = false;
-
-					while (!buffed) {
-
-						//if(System.currentTimeMillis() - startTime < Duration.ofSeconds(TempArmorBuffTile.getDuration()).toMillis()) {
-
-						level.getClientPlayer().armor = newArmor;
-
-						System.out.println("End Armor Stat: " + level.getClientPlayer().armor);
-
-						//}
-
-
-						buffed = true;
-
-					} if (buffed && System.currentTimeMillis() - startTime > Duration.ofSeconds(TempArmorBuffTile.getDuration()).toMillis()) {
-
-						level.getClientPlayer().armor = 1.0;
-
-						System.out.println("Armor Stat After Timer: " + level.getClientPlayer().armor);
-					}
-				}
 			}
 		}
 		return buff;
