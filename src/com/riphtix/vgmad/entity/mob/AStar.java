@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.entity.mob;
 
+import com.riphtix.vgmad.entity.exp.Experience;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -28,16 +29,16 @@ public class AStar extends Mob{
 
 	public MobHitbox hitbox;
 
-	public AStar(int x, int y) {
+	public AStar(int x, int y, int level) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
-		hitbox = new MobHitbox(Sprite.hitbox32x32);
+		hitbox = new MobHitbox(Sprite.hitbox21x32);
 
 		//Shooter default attributes
 		health = 100;
 		mana = 100;
-		xpLevel = 1;
+		xpLevel = level;
 		armor = 1.0;
 		protectSpell = 1.0;
 	}
@@ -95,6 +96,7 @@ public class AStar extends Mob{
 
 		if (isDead()){
 			Sound.SoundEffect.FEMALE_DEAD.play();
+			level.getClientPlayer().xp += Experience.getXPGivenByMobAtLevel(this.xpLevel);
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
 			remove();
 		}

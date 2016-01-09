@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.exp.Experience;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
@@ -10,7 +11,6 @@ import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
-import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
@@ -35,19 +35,19 @@ public class Shooter extends Mob {
 	public MobHitbox hitbox;
 	//public MobHealthBar healthBar;
 
-	public Shooter(int x, int y) {
+	public Shooter(int x, int y, int level) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
 		firerate = FireMageProjectile.FIRE_RATE;
-		hitbox = new MobHitbox(Sprite.hitbox32x32);
+		hitbox = new MobHitbox(Sprite.hitbox21x32);
 		//healthBar = new MobHealthBar((int) this.x - 10, (int) this.y - 20, new SpriteSheet("/ui/hpBars/100Percent.png", 20, 2));
 		range = 336;
 
 		//Shooter default attributes
 		health = 100;
 		mana = 100;
-		xpLevel = 1;
+		xpLevel = level;
 		armor = 1.0;
 		protectSpell = 1.0;
 	}
@@ -97,6 +97,7 @@ public class Shooter extends Mob {
 
 		if (isDead()){
 			Sound.SoundEffect.FEMALE_DEAD.play();
+			level.getClientPlayer().xp += Experience.getXPGivenByMobAtLevel(this.xpLevel);
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
 			remove();
 		}

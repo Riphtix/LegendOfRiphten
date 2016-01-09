@@ -1,6 +1,12 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.Game;
+import com.riphtix.vgmad.entity.exp.Experience;
+import com.riphtix.vgmad.entity.items.Inventory;
+import com.riphtix.vgmad.entity.items.Item;
+import com.riphtix.vgmad.entity.items.armor.Armor;
+import com.riphtix.vgmad.entity.items.basic.ResourceItem;
+import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
@@ -12,7 +18,6 @@ import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.handler.Sound;
-import com.riphtix.vgmad.level.tile.TempArmorBuffTile;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.util.ImageUtils;
 import com.riphtix.vgmad.util.Vector2i;
@@ -23,6 +28,7 @@ import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 
 public class Player extends Mob {
 
@@ -44,11 +50,9 @@ public class Player extends Mob {
 	private UIProgressBar uiHealthBar;
 	private UIProgressBar uiManaBar;
 	private UIProgressBar uiExperienceBar;
-	private UIProgressBar uiLivesBar;
 	UIProgressMark uiHP25Percent, uiHP50Percent, uiHP75Percent;
 	UIProgressMark uiMP25Percent, uiMP50Percent, uiMP75Percent;
-	UIProgressMark uiXP25Percent, uiXP50Percent,  uiXP75Percent;
-	UIProgressMark uiLives25Percent, uiLives50Percent, uiLives75Percent;
+	UIProgressMark uiXP25Percent, uiXP50Percent, uiXP75Percent;
 
 	private UIButton uiButtonOptions;
 	private UIButton uiButtonImageTest;
@@ -66,7 +70,8 @@ public class Player extends Mob {
 		this.input = input;
 		sprite = animSprite.getSprite();
 		firerate = PlayerFireMageProjectile.FIRE_RATE;
-		hitbox = new PlayerHitbox(Sprite.hitbox32x32);
+		hitbox = new PlayerHitbox(Sprite.hitbox21x32);
+		inventory = new Inventory();
 		range = 336;
 
 		/*inventory.add(Item.fireStaff);
@@ -128,19 +133,6 @@ public class Player extends Mob {
 		xpLabel.dropShadowOffset = 1;
 		panel.addComponent(xpLabel);
 
-		uiLivesBar = new UIProgressBar(new Vector2i(56, 285), new Vector2i(159, 15));
-		uiLivesBar.setColor(0xff5f5f5f);
-		uiLivesBar.setForegroundColor(new Color(0xff00b000));
-		uiLivesBar.dropShadow = true;
-		uiLivesBar.dropShadowOffset = 1;
-		panel.addComponent(uiLivesBar);
-		UILabel lifeLabel = new UILabel(new Vector2i(uiLivesBar.position.x - 49, uiLivesBar.position.y + 12), "Lives:");
-		lifeLabel.setColor(0xffa0a0a0);
-		lifeLabel.setFont(new Font("Verdana", Font.BOLD, 15));
-		lifeLabel.dropShadow = true;
-		lifeLabel.dropShadowOffset = 1;
-		panel.addComponent(lifeLabel);
-
 		uiHP25Percent = new UIProgressMark(new Vector2i(80, 210), new Vector2i(1, 15));
 		panel.addComponent(uiHP25Percent);
 		uiHP50Percent = new UIProgressMark(new Vector2i(125, 210), new Vector2i(1, 15));
@@ -159,16 +151,12 @@ public class Player extends Mob {
 		panel.addComponent(uiXP50Percent);
 		uiXP75Percent = new UIProgressMark(new Vector2i(170, 260), new Vector2i(1, 15));
 		panel.addComponent(uiXP75Percent);
-		uiLives25Percent = new UIProgressMark(new Vector2i(95, 285), new Vector2i(1, 15));
-		panel.addComponent(uiLives25Percent);
-		uiLives50Percent = new UIProgressMark(new Vector2i(134, 285), new Vector2i(1, 15));
-		panel.addComponent(uiLives50Percent);
-		uiLives75Percent = new UIProgressMark(new Vector2i(173, 285), new Vector2i(1, 15));
-		panel.addComponent(uiLives75Percent);
 
 		//player default attributes
 		health = 100;
+		maxHealth = 100;
 		mana = 100;
+		maxMana = 100;
 		xp = 0;
 		lives = 10;
 		xpLevel = 1;
@@ -223,24 +211,24 @@ public class Player extends Mob {
 		}
 
 		uiButtonImageTest = new UIButton(new Vector2i(206, 468), image, new UIActionListener() {
-				public void performAction() {
-					System.exit(0);
-				}
-			});
-		uiButtonImageTest.setButtonListener(new UIButtonListener(){
-			public void mouseEnteredButtonBounds(UIButton button){
+			public void performAction() {
+				System.exit(0);
+			}
+		});
+		uiButtonImageTest.setButtonListener(new UIButtonListener() {
+			public void mouseEnteredButtonBounds(UIButton button) {
 				button.setImage(ImageUtils.changeBrightness(image, 50));
 			}
 
-			public void mouseExitedButtonBounds(UIButton button){
+			public void mouseExitedButtonBounds(UIButton button) {
 				button.setImage(image);
 			}
 
-			public void buttonPressed(UIButton button){
+			public void buttonPressed(UIButton button) {
 				button.setImage(ImageUtils.changeBrightness(image, 75));
 			}
 
-			public void buttonReleased(UIButton button){
+			public void buttonReleased(UIButton button) {
 				button.setImage(image);
 			}
 		});
@@ -254,18 +242,55 @@ public class Player extends Mob {
 
 	public void tick() {//public void update()
 		time++;
-		System.out.println(armor);
-		if (walking){
-			if(time % 20 == 0){
-				Sound.SoundEffect.WALKING.play();
+		if (walking) {
+			if (time % 20 == 0) {
+				Random random = new Random();
+				int randomInt = random.nextInt(3) + 1;
+				if (randomInt == 1) {
+					Sound.SoundEffect.FOOTSTEP_1.volume = Sound.SoundEffect.Volume.MEDIUM;
+					Sound.SoundEffect.FOOTSTEP_1.play();
+				} else if (randomInt == 2) {
+					Sound.SoundEffect.FOOTSTEP_2.volume = Sound.SoundEffect.Volume.MEDIUM;
+					Sound.SoundEffect.FOOTSTEP_2.play();
+				} else if (randomInt == 3) {
+					Sound.SoundEffect.FOOTSTEP_3.volume = Sound.SoundEffect.Volume.MEDIUM;
+					Sound.SoundEffect.FOOTSTEP_3.play();
+				}
 			}
 			animSprite.tick();
-		}
-
-		else animSprite.setFrame(0);
+		} else animSprite.setFrame(0);
 		if (firerate > 0) firerate--;
 		double xa = 0, ya = 0;
 		double speed = 1.5;
+
+		int hbSpriteWidth = hitbox.sprite.getWidth();
+		int hbSpriteHeight = hitbox.sprite.getHeight();
+		Item closest = level.getClosestItem(this, (int) x, (int) y, hbSpriteWidth, hbSpriteHeight);
+
+		if (closest != null) {
+			if (closest instanceof ResourceItem) {
+				ResourceItem closestItem = (ResourceItem) closest;
+				if (itemCollision(closestItem.hitbox, this.hitbox)) {
+					inventory.add(closest);
+					closest.remove();
+					Sound.SoundEffect.COLLECT_ITEM_POP.play();
+				}
+			} else if (closest instanceof Weapon) {
+				Weapon closestItem = (Weapon) closest;
+				if (itemCollision(closestItem.hitbox, this.hitbox)) {
+					inventory.add(closest);
+					closest.remove();
+					Sound.SoundEffect.COLLECT_ITEM_POP.play();
+				}
+			} else if (closest instanceof Armor) {
+				Armor closestItem = (Armor) closest;
+				if (itemCollision(closestItem.hitbox, this.hitbox)) {
+					inventory.add(closest);
+					closest.remove();
+					Sound.SoundEffect.COLLECT_ITEM_POP.play();
+				}
+			}
+		}
 		if (input.UP) {
 			animSprite = up;
 			ya -= speed;
@@ -288,20 +313,27 @@ public class Player extends Mob {
 		clear();
 		tickShooting();
 
-		if(health == 0){
-			lives -= 1;
+		if (health <= 0) {
 			health = 100;
 		}
 
-		if(xp == 100){
-			xpLevel++;
-			xp = 0;
+		if (health < maxHealth - .1) {
+			health += .1;
 		}
 
-		uiHealthBar.setProgress(health / 100.0);
-		uiManaBar.setProgress(mana / 100.0);
-		uiExperienceBar.setProgress(xp / 100.0);
-		uiLivesBar.setProgress(lives / 100.0);
+		if (mana < maxMana) {
+			//mana += .25;
+			mana++;
+		}
+
+		if (xp >= Experience.getXPToNextLevel()) {
+			xp -= Experience.getXPToNextLevel();
+			xpLevel++;
+		}
+
+		uiHealthBar.setProgress(health / maxHealth);
+		uiManaBar.setProgress(mana / maxMana);
+		uiExperienceBar.setProgress(xp / Experience.getXPToNextLevel());
 	}
 
 	public void playerDamaged(double damage) {
@@ -309,17 +341,16 @@ public class Player extends Mob {
 		health -= damage * armor * protectSpell;
 		// can have a multiplier here to reduce health damage due to spells or armor
 
-		if (isDead()){
-			if (lives>0){
+		if (isDead()) {
+			if (lives > 0) {
 				lives -= 1;
 				Sound.SoundEffect.PLAYER_DEAD.play();
 				Sound.SoundEffect.LIFE_LOST.play();
-			}
-			else level.gameOver();
+			} else level.gameOver();
 		}
 	}
 
-	public boolean isDead(){
+	public boolean isDead() {
 		return (health <= 0);
 	}
 
@@ -333,14 +364,17 @@ public class Player extends Mob {
 	}
 
 	private void tickShooting() {
-		if(Mouse.getX() > 660)
+		if (Mouse.getX() > 660)
 			return;
 
 		if (Mouse.getButton() == 1 && firerate <= 0) {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
-			shoot(x, y, dir, this);
+			if (mana >= PlayerFireMageProjectile.cost) {
+				shoot(x, y, dir, this);
+				mana -= PlayerFireMageProjectile.cost;
+			}
 			firerate = PlayerFireMageProjectile.FIRE_RATE;
 		}
 	}

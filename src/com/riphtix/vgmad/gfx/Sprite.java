@@ -25,9 +25,11 @@ public class Sprite {
 	public static Sprite stoneSprite = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite stoneBrickSprite = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite woodenPlankSprite = new Sprite(16, 4, 0, SpriteSheet.tiles);
-	public static Sprite tempArmorBuffSprite = new Sprite(16, 5, 0, SpriteSheet.tiles);
-	public static Sprite tempDamageBuffSprite = new Sprite(16, 6, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
+
+	//Items
+	//Objects
+	public static Sprite ironSprite = new Sprite(16, 0, 0, SpriteSheet.items);
 
 	//Entities
 	//Mobs
@@ -48,9 +50,10 @@ public class Sprite {
 	//Debug
 	public static Sprite aimBox = new Sprite(16, 0, 0, SpriteSheet.debug);
 
-	//PlayerHitbox
-	public static Sprite hitbox32x32 = new Sprite(SpriteSheet.mobHitbox, 21, 32);
-	public static Sprite hitbox16x16 = new Sprite(SpriteSheet.projectileHitbox, 16, 8);
+	//Hitbox
+	public static Sprite hitbox21x32 = new Sprite(SpriteSheet.mobHitbox, 21, 32);
+	public static Sprite hitbox16x16 = new Sprite(SpriteSheet.projectileHitbox,16, 16);
+	public static Sprite hitbox16x8 = new Sprite(SpriteSheet.projectileHitbox, 16, 8);
 
 	public Sprite(SpriteSheet sheet, int width, int height) {
 		SIZE = (width == height) ? width : -1; //trick

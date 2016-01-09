@@ -1,13 +1,12 @@
 package com.riphtix.vgmad;
 
+import com.riphtix.vgmad.entity.exp.Experience;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.mob.Player;
-import com.riphtix.vgmad.gfx.Font;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
-import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.TileCoordinate;
 
@@ -57,10 +56,9 @@ public class Game extends Canvas implements Runnable {
 	public static Graphics g;
 	//Custom Made
 	private Screen screen;
-	private Font font;
 	private Keyboard key;
-	private Level level;
-	private Player player;
+	private Level spawnLevel;
+	protected Player player;
 
 	private static UIManager uiManager;
 
@@ -81,11 +79,12 @@ public class Game extends Canvas implements Runnable {
 		uiManager = new UIManager();
 		frame = new JFrame();
 		key = new Keyboard();
-		level = Level.spawn;
+		Item.initItems();
+		spawnLevel = Level.spawn;
 		TileCoordinate playerSpawn = new TileCoordinate(32, 28);
 		player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
-		level.add(player);
-		font = new Font();
+		spawnLevel.add(player);
+		Experience.init(spawnLevel);
 
 		Mouse mouse = new Mouse();
 		addKeyListener(key);
@@ -142,7 +141,7 @@ public class Game extends Canvas implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println(ticks + " tps, " + frames + " fps");
-				frame.setTitle(title + " | " + ticks + " tps | " + frames + " fps");
+				frame.setTitle(title + " | " + ticks + " tps | " + frames + " fps | armor: " + player.armor + " | level: " + player.xpLevel + " | xp: " + player.xp + "/" + Experience.getXPToNextLevel() + " | Lives left: " + player.lives + " | health: " + player.health + "/" + player.maxHealth);
 				ticks = 0;
 				frames = 0;
 			}
@@ -151,7 +150,7 @@ public class Game extends Canvas implements Runnable {
 
 	public void tick() {//public void update()
 		key.tick();
-		level.tick();
+		spawnLevel.tick();
 		uiManager.tick();
 	}
 
@@ -166,7 +165,7 @@ public class Game extends Canvas implements Runnable {
 		screen.clear();
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
-		level.render((int) xScroll, (int) yScroll, screen);
+		spawnLevel.render((int) xScroll, (int) yScroll, screen);
 		//font.render(0, 0, -2, 0xff000000, "I have won!!!", screen);
 
 		for (int i = 0; i < pixels.length; i++) {

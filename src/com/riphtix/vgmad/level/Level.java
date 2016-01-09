@@ -2,13 +2,13 @@ package com.riphtix.vgmad.level;
 
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.items.Item;
-import com.riphtix.vgmad.entity.items.Weapon;
+import com.riphtix.vgmad.entity.items.armor.Armor;
+import com.riphtix.vgmad.entity.items.basic.ResourceItem;
+import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.entity.particle.Particle;
-import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
-import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
@@ -35,6 +35,12 @@ public class Level {
 	private List<Player> players = new ArrayList<Player>();
 	private List<Mob> mobs = new ArrayList<Mob>();
 
+	//lists of items for rendering and tracking
+	private List<Item> items = new ArrayList<>();
+	private List<ResourceItem> resourceItems = new ArrayList<ResourceItem>();
+	private List<Weapon> weapons = new ArrayList<>();
+	private List<Armor> armorPieces = new ArrayList<>();
+
 	private int time = 0;
 
 	//used to compare 2 nodes for mob ai navigation
@@ -47,7 +53,7 @@ public class Level {
 	};
 
 	//creates a new level
-	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png");
+	public static Level spawn = new SpawnLevel("/levels/testLevel.png");
 
 	//Level Constructor
 	public Level(int width, int height) {
@@ -76,21 +82,43 @@ public class Level {
 	//updates the entities
 	public void tick() {//public void update()
 		time++;
+
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).tick();
 		}
+
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).tick();
 		}
+
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).tick();
 		}
+
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).tick();
 		}
+
 		for (int i = 0; i < mobs.size(); i++) {
 			mobs.get(i).tick();
 		}
+
+		for (int i = 0; i < items.size(); i++){
+			items.get(i).tick();
+		}
+
+		for(int i = 0; i < resourceItems.size(); i++){
+			resourceItems.get(i).tick();
+		}
+
+		for (int i = 0; i < weapons.size(); i++){
+			weapons.get(i).tick();
+		}
+
+		for(int i = 0; i < armorPieces.size(); i++){
+			armorPieces.get(i).tick();
+		}
+
 		remove();
 	}
 
@@ -113,6 +141,22 @@ public class Level {
 
 		for (int i = 0; i < mobs.size(); i++) {
 			if (mobs.get(i).isRemoved()) mobs.remove(i);
+		}
+
+		for (int i = 0; i < items.size(); i++){
+			if (items.get(i).isRemoved()) items.remove(i);
+		}
+
+		for (int i = 0; i < resourceItems.size(); i++){
+			if (resourceItems.get(i).isRemoved()) resourceItems.remove(i);
+		}
+
+		for (int i = 0; i < weapons.size(); i++){
+			if (weapons.get(i).isRemoved()) weapons.remove(i);
+		}
+
+		for (int i = 0; i < armorPieces.size(); i++){
+			if (armorPieces.get(i).isRemoved()) armorPieces.remove(i);
 		}
 	}
 
@@ -185,6 +229,54 @@ public class Level {
 		return closestMob;
 	}
 
+	public Item getClosestItem(Player player, int x, int y, int width, int height) {
+		List<Item> items = getItems(player, width, height);
+		for (int i = 0; i < resourceItems.size(); i++) {
+			items.add(resourceItems.get(i));
+		}
+		for (int i = 0; i < weapons.size(); i++) {
+			items.add(weapons.get(i));
+		}
+		for (int i = 0; i < armorPieces.size(); i++) {
+			items.add(armorPieces.get(i));
+		}
+
+		double min = 0;
+		Item closest = null;
+		for (int i = 0; i < items.size(); i++) {
+			if(items.get(i) instanceof ResourceItem) {
+				Item resourceItem = resourceItems.get(i);
+				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) resourceItem.getX(), (int) resourceItem.getY()));
+				if (i == 0 || distance < min) {
+					min = distance;
+					closest = resourceItem;
+				}
+			}
+			if(items.get(i) instanceof Weapon) {
+				Item weapon = weapons.get(i);
+				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) weapon.getX(), (int) weapon.getY()));
+				if (i == 0 || distance < min) {
+					min = distance;
+					closest = weapon;
+				}
+			}
+			if(items.get(i) instanceof Armor) {
+				Item armor = armorPieces.get(i);
+				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) armor.getX(), (int) armor.getY()));
+				if (i == 0 || distance < min) {
+					min = distance;
+					closest = armor;
+				}
+			}
+		}
+		Item closestItem = null;
+		if (closest != null) {
+			closestItem = closest;
+		}
+
+		return closestItem;
+	}
+
 	//collision with uneven objects (width 2 height 3)
 	public boolean tileCollision(int x, int y, int width, int height, int xOffset, int yOffset) {
 		boolean solid = false;
@@ -217,18 +309,38 @@ public class Level {
 			}
 		}
 
+		for (int i = 0; i < items.size(); i++) {
+			items.get(i).render(screen);
+		}
+
+		for(int i = 0; i < resourceItems.size(); i++){
+			resourceItems.get(i).render(screen);
+		}
+
+		for (int i = 0; i < weapons.size(); i++) {
+			weapons.get(i).render(screen);
+		}
+
+		for (int i = 0; i < armorPieces.size(); i++) {
+			armorPieces.get(i).render(screen);
+		}
+
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}
+
 		for (int i = 0; i < projectiles.size(); i++) {
 			projectiles.get(i).render(screen);
 		}
+
 		for (int i = 0; i < particles.size(); i++) {
 			particles.get(i).render(screen);
 		}
+
 		for (int i = 0; i < players.size(); i++) {
 			players.get(i).render(screen);
 		}
+
 		for (int i = 0; i < mobs.size(); i++) {
 			mobs.get(i).render(screen);
 		}
@@ -248,6 +360,24 @@ public class Level {
 			players.add((Player) e);
 		} else {
 			entities.add(e);
+		}
+	}
+
+	public void addItem(Item item, int x, int y) {
+		item.init(this);
+
+		if(item instanceof ResourceItem){
+			resourceItems.add((ResourceItem) item);
+			item.setXY(x, y);
+		}else if(item instanceof Weapon){
+			weapons.add((Weapon) item);
+			item.setXY(x, y);
+		} else if(item instanceof Armor){
+			armorPieces.add((Armor) item);
+			item.setXY(x, y);
+		} else {
+			items.add(item);
+			item.setXY(x, y);
 		}
 	}
 
@@ -357,6 +487,23 @@ public class Level {
 		return result;
 	}
 
+	public List<Item> getItems(Entity e, int width, int height) {
+		List<Item> result = new ArrayList<Item>();
+		int ex = (int) e.getX() - 2;
+		int ey = (int) e.getY() - 2;
+		for (int i = 0; i < items.size(); i++) {
+			Item item = items.get(i);
+			if (items.equals(e)) continue;
+			int x = (int) item.getX();
+			int y = (int) item.getY();
+			int dx = Math.abs(x - ex);
+			int dy = Math.abs(y - ey);
+			double distance = Math.sqrt((dx * dx) + (dy * dy));
+			if (distance <= width || distance <= height) result.add(item);
+		}
+		return result;
+	}
+
 	public List<Player> getPlayers(Entity e, int radius) {
 		List<Player> result = new ArrayList<Player>();
 		int ex = (int) e.getX();
@@ -396,8 +543,6 @@ public class Level {
 		if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
 		if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
 		if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
-		if (tiles[x + y * width] == Tile.colorTempArmorBuff) return Tile.tempArmorBuffTile;
-		if (tiles[x + y * width] == Tile.colorTempDamageBuff) return Tile.tempDamageBuffTile;
 		return Tile.voidTile;
 	}
 }

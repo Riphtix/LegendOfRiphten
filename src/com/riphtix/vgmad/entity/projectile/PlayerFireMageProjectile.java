@@ -21,9 +21,10 @@ public class PlayerFireMageProjectile extends Projectile {
 		//speed = TEST_SPEED;
 		speed = NORMAL_SPEED;
 		//speed = FAST_SPEED;
-		damage = 25;
+		damage = 100;
+		cost = 10;
 		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
-		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x16, angle));
+		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x8, angle));
 		Sound.SoundEffect.LAUNCH_FIREBALL.play();
 
 		nx = speed * Math.cos(angle);

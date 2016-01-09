@@ -50,7 +50,9 @@ public class SpriteSheet {
 	public static SpriteSheet sorceress_right = new SpriteSheet(sorceress, 0, 2, 3, 1, 32);
 
 	//Items
-	public static SpriteSheet fireStaff = new SpriteSheet("/textures/items/weapons/fireStaff.png", 32);
+	public static SpriteSheet items = new SpriteSheet("/textures/items/items.png", 256);
+	public static SpriteSheet weapons = new SpriteSheet("/textures/items/weapons.png", 256);
+	public static SpriteSheet armor = new SpriteSheet("/textures/items/armor.png", 256);
 
 	//Other Entities
 	public static SpriteSheet projectiles = new SpriteSheet("/entities/projectiles/projectiles.png", 256);

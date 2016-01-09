@@ -13,8 +13,6 @@ public class Tile {
 	public static Tile stoneTile = new StoneTile(Sprite.stoneSprite);
 	public static Tile stoneBrickTile = new StoneBrickTile(Sprite.stoneBrickSprite);
 	public static Tile woodenPlankTile = new WoodenPlankTile(Sprite.woodenPlankSprite);
-	public static Tile tempArmorBuffTile = new TempArmorBuffTile(Sprite.tempArmorBuffSprite);
-	public static Tile tempDamageBuffTile = new TempDamageBuffTile(Sprite.tempDamageBuffSprite);
 
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 
@@ -40,10 +38,6 @@ public class Tile {
 
 	public boolean hasBuff() {
 		return false;
-	}
-
-	public static void onUpdate(Mob mob){
-
 	}
 
 }

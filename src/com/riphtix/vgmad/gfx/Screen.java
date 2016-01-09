@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.gfx;
 
+import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.level.tile.Tile;
 
@@ -149,6 +150,27 @@ public class Screen {
 				if (ya < 0) ya = 0;
 				int col = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 				if(col != 0xffff00ff && col != 0xff7f007f){
+					pixels[xa + ya * width] = col;
+				}
+			}
+		}
+	}
+
+	//draws an item to the map
+	public void renderItem(int xp, int yp, Item item) {
+		xp -= xOffset;
+		yp -= yOffset;
+
+		//sets the color for every x and y value
+		for (int y = 0; y < item.sprite.SIZE; y++) {
+			int ya = y + yp;
+			for (int x = 0; x < item.sprite.SIZE; x++) {
+				int xa = x + xp;
+				if (xa < -item.sprite.SIZE || xa >= width || ya < -item.sprite.SIZE || ya >= height) break;
+				if (xa < 0) xa = 0;
+				if (ya < 0) ya = 0;
+				int col = item.sprite.pixels[x + y * item.sprite.SIZE];
+				if (col != 0xffff00ff && col != 0xff7f007f) {
 					pixels[xa + ya * width] = col;
 				}
 			}

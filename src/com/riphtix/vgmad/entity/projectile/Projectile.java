@@ -2,12 +2,7 @@ package com.riphtix.vgmad.entity.projectile;
 
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.level.tile.Tile;
-import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
-import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
-
-import java.awt.*;
 
 public abstract class Projectile extends Entity {
 
@@ -18,6 +13,7 @@ public abstract class Projectile extends Entity {
 	protected double nx, ny;
 	protected double distance;
 	protected double speed, range;
+	public static double cost;
 	public static double damage;
 	public final double DIRECTION_TEST_SPEED = 0;
 	public final double TEST_SPEED = 1;
@@ -31,7 +27,7 @@ public abstract class Projectile extends Entity {
 		angle = dir;
 		this.x = x;
 		this.y = y;
-		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x16, angle));
+		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x8, angle));
 	}
 
 	public Sprite getSprite() {
