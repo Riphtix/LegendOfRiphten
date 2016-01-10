@@ -35,7 +35,7 @@ public class Chaser extends Mob {
 		//Chaser default attributes
 		health = 100;
 		mana = 100;
-		xpLevel = level;
+		rank = level;
 		armor = 1.0;
 		protectSpell = 1.0;
 	}
@@ -87,7 +87,8 @@ public class Chaser extends Mob {
 
 		if (isDead()){
 			Sound.SoundEffect.FEMALE_DEAD.play();
-			level.getClientPlayer().xp += Experience.getXPGivenByMobAtLevel(this.xpLevel);
+			level.getClientPlayer().xp += Experience.calculateXPFromMob(this);
+			level.getClientPlayer().totalXP += Experience.calculateXPFromMob(this);
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
 			remove();
 		}

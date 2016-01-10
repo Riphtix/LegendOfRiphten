@@ -14,6 +14,7 @@ public class Item {
 	public Sprite sprite;
 	protected int rarity;
 	protected boolean removed = false;
+	protected double armor;
 	public ItemHitbox hitbox;
 
 	protected double x, y;
@@ -21,6 +22,7 @@ public class Item {
 	HashMap<String, Item> items = new HashMap<String, Item>();
 
 	public static Item iron;
+	public static Item key;
 
 	private Level level;
 
@@ -47,6 +49,7 @@ public class Item {
 
 	public static void initItems(){
 		iron = new ResourceItem("Iron", 1, Sprite.ironSprite);
+		key = new ResourceItem("Key", 1, Sprite.keySprite);
 	}
 
 	public void init(Level level){
@@ -84,10 +87,14 @@ public class Item {
 	}
 	
 	public double getX() {
-		return x;
+		return this.x;
 	}
 	
 	public double getY() {
-		return y;
+		return this.y;
+	}
+
+	public double getArmor(){
+		return this.armor;
 	}
 }

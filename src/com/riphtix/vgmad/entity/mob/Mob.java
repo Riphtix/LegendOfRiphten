@@ -8,6 +8,7 @@ import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.level.tile.IronGateTile;
 import com.riphtix.vgmad.level.tile.Tile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
@@ -26,8 +27,9 @@ public abstract class Mob extends Entity {
 	public double mana;
 	public double maxMana;
 	public int xp;
+	public int totalXP;
+	public int rank;
 	public int lives;
-	public int xpLevel;
 	public double armor;
 	public double baseArmor;
 	public double protectSpell;
@@ -65,29 +67,76 @@ public abstract class Mob extends Entity {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += abs(xa);
 				}
+				if (isLockedDoorwayCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+					System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
+					if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
+						level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
+						level.getClientPlayer().inventory.remove(Item.key);
+						System.out.println(inventory.size());
+					} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
+						System.out.println("no key needed!!!");
+					} else {
+						System.out.println("key needed!!!");
+					}
+				}
 				xa -= abs(xa);
-			} else {
-				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
-					this.x += xa;
-
+				} else {
+					if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+						this.x += xa;
+					}
+					if (isLockedDoorwayCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+						System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
+						if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
+							level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
+							level.getClientPlayer().inventory.remove(Item.key);
+							System.out.println(inventory.size());
+						} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
+							System.out.println("no key needed!!!");
+						} else {
+							System.out.println("key needed!!!");
+						}
+					}
+					xa = 0;
 				}
-				xa = 0;
+			}
+			while (ya != 0) {
+				if (Math.abs(ya) > 1) {
+					if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+						this.y += abs(ya);
+					}
+					if (isLockedDoorwayCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+						System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
+						if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
+							level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
+							level.getClientPlayer().inventory.remove(Item.key);
+							System.out.println(inventory.size());
+						} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
+							System.out.println("no key needed!!!");
+						} else {
+							System.out.println("key needed!!!");
+						}
+					}
+					ya -= abs(ya);
+				} else {
+					if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+						this.y += ya;
+					}
+					if (isLockedDoorwayCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+						System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
+						if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
+							level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
+							level.getClientPlayer().inventory.remove(Item.key);
+							System.out.println(inventory.size());
+						} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
+							System.out.println("no key needed!!!");
+						} else {
+							System.out.println("key needed!!!");
+						}
+					}
+					ya = 0;
+				}
 			}
 		}
-		while (ya != 0) {
-			if (Math.abs(ya) > 1) {
-				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-					this.y += abs(ya);
-				}
-				ya -= abs(ya);
-			} else {
-				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-					this.y += ya;
-				}
-				ya = 0;
-			}
-		}
-	}
 
 	private int abs(double value) {
 		if (value < 0) return -1;

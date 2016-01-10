@@ -11,6 +11,7 @@ import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
@@ -33,7 +34,10 @@ public class Shooter extends Mob {
 	private int firerate = 0;
 
 	public MobHitbox hitbox;
-	//public MobHealthBar healthBar;
+	public MobHealthBar healthBar0;
+	public MobHealthBar healthBar25;
+	public MobHealthBar healthBar50;
+	public MobHealthBar healthBar75;
 
 	public Shooter(int x, int y, int level) {
 		this.x = x << 4;
@@ -41,15 +45,18 @@ public class Shooter extends Mob {
 		sprite = animSprite.getSprite();
 		firerate = FireMageProjectile.FIRE_RATE;
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
-		//healthBar = new MobHealthBar((int) this.x - 10, (int) this.y - 20, new SpriteSheet("/ui/hpBars/100Percent.png", 20, 2));
+		healthBar0 = new MobHealthBar((int) this.x - 10, (int) this.y - 20, Sprite.healthBar0);
+		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
+		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
+		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
 		range = 336;
 
 		//Shooter default attributes
 		health = 100;
 		mana = 100;
-		xpLevel = level;
-		armor = 1.0;
-		protectSpell = 1.0;
+		rank = level;
+		armor = 0.0;
+		protectSpell = 0.0;
 	}
 
 	public void tick() {
@@ -85,7 +92,41 @@ public class Shooter extends Mob {
 		} else {
 			walking = false;
 		}
-		//healthBar.remove();
+
+		healthBar0.setXY(this.x - 10, this.y - 20);
+		healthBar25.setXY(this.x - 5, this.y - 20);
+		healthBar50.setXY(this.x, this.y - 20);
+		healthBar75.setXY(this.x + 5, this.y - 20);
+		if (health / maxHealth >= .75) {
+			level.add(healthBar75);
+		}
+		if (health / maxHealth >= .5) {
+			level.add(healthBar50);
+			if(health / maxHealth < .75){
+				healthBar75.remove();
+			}
+		}
+		if (health / maxHealth >= .25) {
+			level.add(healthBar25);
+			if(health / maxHealth < .5){
+				healthBar50.remove();
+				healthBar75.remove();
+			}
+		}
+		if (health / maxHealth > 0) {
+			level.add(healthBar0);
+			if(health / maxHealth < .25){
+				healthBar25.remove();
+				healthBar50.remove();
+				healthBar75.remove();
+			}
+		}
+		if (health / maxHealth <= 0){
+			healthBar0.remove();
+			healthBar25.remove();
+			healthBar50.remove();
+			healthBar75.remove();
+		}
 		shootClosest();
 		//shootRandom();
 	}
@@ -93,17 +134,22 @@ public class Shooter extends Mob {
 	public void shooterDamaged(double damage) {
 
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= damage * armor * protectSpell;
+		health -= (damage - (damage * armor) - (damage * protectSpell));
 
-		if (isDead()){
+		if (isDead()) {
 			Sound.SoundEffect.FEMALE_DEAD.play();
-			level.getClientPlayer().xp += Experience.getXPGivenByMobAtLevel(this.xpLevel);
+			level.getClientPlayer().xp += Experience.calculateXPFromMob(this);
+			level.getClientPlayer().totalXP += Experience.calculateXPFromMob(this);
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
 			remove();
+			healthBar0.remove();
+			healthBar25.remove();
+			healthBar50.remove();
+			healthBar75.remove();
 		}
 	}
 
-	public boolean isDead(){
+	public boolean isDead() {
 		return (health <= 0);
 	}
 
@@ -156,7 +202,5 @@ public class Shooter extends Mob {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
 		hitbox.render((int) x - 10, (int) y - 16, screen);
-		//level.add(new MobHealthBar((int) x - 10, (int) y - 20, healthBar.sheet));
-		//healthBar.render((int) x - 10, (int) y - 20, health, screen);
 	}
 }

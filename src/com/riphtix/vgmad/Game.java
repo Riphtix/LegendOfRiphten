@@ -3,6 +3,7 @@ package com.riphtix.vgmad;
 import com.riphtix.vgmad.entity.exp.Experience;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.mob.Player;
+import com.riphtix.vgmad.entity.mob.Shooter;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
@@ -15,6 +16,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * "" is a string
@@ -58,7 +60,7 @@ public class Game extends Canvas implements Runnable {
 	private Screen screen;
 	private Keyboard key;
 	private Level spawnLevel;
-	protected Player player;
+	private Player player;
 
 	private static UIManager uiManager;
 
@@ -84,7 +86,6 @@ public class Game extends Canvas implements Runnable {
 		TileCoordinate playerSpawn = new TileCoordinate(32, 28);
 		player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
 		spawnLevel.add(player);
-		Experience.init(spawnLevel);
 
 		Mouse mouse = new Mouse();
 		addKeyListener(key);
@@ -141,7 +142,7 @@ public class Game extends Canvas implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println(ticks + " tps, " + frames + " fps");
-				frame.setTitle(title + " | " + ticks + " tps | " + frames + " fps | armor: " + player.armor + " | level: " + player.xpLevel + " | xp: " + player.xp + "/" + Experience.getXPToNextLevel() + " | Lives left: " + player.lives + " | health: " + player.health + "/" + player.maxHealth);
+				frame.setTitle(title + " | " + ticks + " tps | " + frames + " fps | Lives left: " + player.lives);
 				ticks = 0;
 				frames = 0;
 			}

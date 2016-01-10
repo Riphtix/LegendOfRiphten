@@ -47,6 +47,14 @@ public class Player extends Mob {
 	private int firerate = 0;
 
 	private UIManager ui;
+	private UIPanel panel;
+	private UILabel nameLabel;
+	private UILabel lvlLabel;
+	private UILabel lvlRankLabel;
+	private UILabel xpCounterLabel;
+	private UILabel hpCounterLabel;
+	private UILabel mpCounterLabel;
+	private UILabel armorStatLabel;
 	private UIProgressBar uiHealthBar;
 	private UIProgressBar uiManaBar;
 	private UIProgressBar uiExperienceBar;
@@ -74,25 +82,34 @@ public class Player extends Mob {
 		inventory = new Inventory();
 		range = 336;
 
-		/*inventory.add(Item.fireStaff);
-		System.out.println("Just added the item: " + Item.fireStaff.getName());
-		System.out.println("inventory.size(): " + inventory.size());
-		System.out.println("inventory.get(0): " + inventory.get(0));
-*/
 		rightXOffset = 8;
 		leftXOffset = -10;
 		topYOffset = 0;
 		bottomYOffset = 14;
 
 		ui = Game.getUIManager();
-		UIPanel panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 * 3)).setColor(0xff505050);
+		panel = (UIPanel) new UIPanel(new Vector2i((300 - 80) * 3, 0), new Vector2i(80 * 3, 300 * 3)).setColor(0xff505050);
 		ui.addPanel(panel);
 
-		UILabel nameLabel = new UILabel(new Vector2i(40, 200), name);
+		nameLabel = new UILabel(new Vector2i(40, 200), name);
 		nameLabel.setColor(0xffa0a0a0);
 		nameLabel.setFont(new Font("Verdana", Font.PLAIN, 24));
 		nameLabel.dropShadow = true;
 		panel.addComponent(nameLabel);
+
+		lvlLabel = new UILabel(new Vector2i(105, 200), "LVL:");
+		lvlLabel.setColor(0xffa0a0a0);
+		lvlLabel.setFont(new Font("Verdana", Font.PLAIN, 10));
+		lvlLabel.dropShadow = true;
+		lvlLabel.dropShadowOffset = 1;
+		panel.addComponent(lvlLabel);
+
+		lvlRankLabel = new UILabel(new Vector2i(130, 200), "" + rank);
+		lvlRankLabel.setColor(0xffa0a0a0);
+		lvlRankLabel.setFont(new Font("Verdana", Font.PLAIN, 13));
+		lvlRankLabel.dropShadow = true;
+		lvlRankLabel.dropShadowOffset = 1;
+		panel.addComponent(lvlRankLabel);
 
 		uiHealthBar = new UIProgressBar(new Vector2i(35, 210), new Vector2i(180, 15));
 		uiHealthBar.setColor(0xff5f5f5f);
@@ -106,6 +123,18 @@ public class Player extends Mob {
 		hpLabel.dropShadow = true;
 		hpLabel.dropShadowOffset = 1;
 		panel.addComponent(hpLabel);
+		uiHP25Percent = new UIProgressMark(new Vector2i(80, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP25Percent);
+		uiHP50Percent = new UIProgressMark(new Vector2i(125, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP50Percent);
+		uiHP75Percent = new UIProgressMark(new Vector2i(170, 210), new Vector2i(1, 15));
+		panel.addComponent(uiHP75Percent);
+		hpCounterLabel = new UILabel(new Vector2i(uiHealthBar.position.x, uiHealthBar.position.y + 10), (int) health + "/" + (int) maxHealth);
+		hpCounterLabel.setColor(0xffa0a0a0);
+		hpCounterLabel.setFont(new Font("Verdana", Font.PLAIN, 10));
+		hpCounterLabel.dropShadow = true;
+		hpCounterLabel.dropShadowOffset = 1;
+		panel.addComponent(hpCounterLabel);
 
 		uiManaBar = new UIProgressBar(new Vector2i(35, 235), new Vector2i(180, 15));
 		uiManaBar.setColor(0xff5f5f5f);
@@ -119,6 +148,18 @@ public class Player extends Mob {
 		mpLabel.dropShadow = true;
 		mpLabel.dropShadowOffset = 1;
 		panel.addComponent(mpLabel);
+		uiMP25Percent = new UIProgressMark(new Vector2i(80, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP25Percent);
+		uiMP50Percent = new UIProgressMark(new Vector2i(125, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP50Percent);
+		uiMP75Percent = new UIProgressMark(new Vector2i(170, 235), new Vector2i(1, 15));
+		panel.addComponent(uiMP75Percent);
+		mpCounterLabel = new UILabel(new Vector2i(uiManaBar.position.x, uiManaBar.position.y + 10), (int) mana + "/" + (int) maxMana);
+		mpCounterLabel.setColor(0xffa0a0a0);
+		mpCounterLabel.setFont(new Font("Verdana", Font.PLAIN, 10));
+		mpCounterLabel.dropShadow = true;
+		mpCounterLabel.dropShadowOffset = 1;
+		panel.addComponent(mpCounterLabel);
 
 		uiExperienceBar = new UIProgressBar(new Vector2i(35, 260), new Vector2i(180, 15));
 		uiExperienceBar.setColor(0xff5f5f5f);
@@ -132,39 +173,39 @@ public class Player extends Mob {
 		xpLabel.dropShadow = true;
 		xpLabel.dropShadowOffset = 1;
 		panel.addComponent(xpLabel);
-
-		uiHP25Percent = new UIProgressMark(new Vector2i(80, 210), new Vector2i(1, 15));
-		panel.addComponent(uiHP25Percent);
-		uiHP50Percent = new UIProgressMark(new Vector2i(125, 210), new Vector2i(1, 15));
-		panel.addComponent(uiHP50Percent);
-		uiHP75Percent = new UIProgressMark(new Vector2i(170, 210), new Vector2i(1, 15));
-		panel.addComponent(uiHP75Percent);
-		uiMP25Percent = new UIProgressMark(new Vector2i(80, 235), new Vector2i(1, 15));
-		panel.addComponent(uiMP25Percent);
-		uiMP50Percent = new UIProgressMark(new Vector2i(125, 235), new Vector2i(1, 15));
-		panel.addComponent(uiMP50Percent);
-		uiMP75Percent = new UIProgressMark(new Vector2i(170, 235), new Vector2i(1, 15));
-		panel.addComponent(uiMP75Percent);
 		uiXP25Percent = new UIProgressMark(new Vector2i(80, 260), new Vector2i(1, 15));
 		panel.addComponent(uiXP25Percent);
 		uiXP50Percent = new UIProgressMark(new Vector2i(125, 260), new Vector2i(1, 15));
 		panel.addComponent(uiXP50Percent);
 		uiXP75Percent = new UIProgressMark(new Vector2i(170, 260), new Vector2i(1, 15));
 		panel.addComponent(uiXP75Percent);
+		xpCounterLabel = new UILabel(new Vector2i(uiExperienceBar.position.x, uiExperienceBar.position.y + 10), xp + "/" + (int) Experience.getXPToNextLevel());
+		xpCounterLabel.setColor(0xffa0a0a0);
+		xpCounterLabel.setFont(new Font("Verdana", Font.PLAIN, 10));
+		xpCounterLabel.dropShadow = true;
+		xpCounterLabel.dropShadowOffset = 1;
+		panel.addComponent(xpCounterLabel);
+
+		armorStatLabel = new UILabel(new Vector2i(35, 290), "Armor: " + armor);
+		armorStatLabel.setColor(0xffa0a0a0);
+		armorStatLabel.setFont(new Font("Verdana", Font.PLAIN, 10));
+		armorStatLabel.dropShadow = true;
+		armorStatLabel.dropShadowOffset = 1;
+		panel.addComponent(armorStatLabel);
 
 		//player default attributes
-		health = 100;
 		maxHealth = 100;
-		mana = 100;
+		health = maxHealth;
 		maxMana = 100;
+		mana = maxMana;
 		xp = 0;
 		lives = 10;
-		xpLevel = 1;
-		armor = 1.0;
-		baseArmor = 1.0;
-		protectSpell = 1.0;
+		rank = 1;
+		armor = 0.0;
+		baseArmor = 0.0;
+		protectSpell = 0.0;
 
-		uiButtonOptions = new UIButton(new Vector2i(139, 178), new Vector2i(75, 24), new UIActionListener() {
+		uiButtonOptions = new UIButton(new Vector2i(144, 178), new Vector2i(75, 24), new UIActionListener() {
 			public void performAction() {
 				JFrame frame = new JFrame("Controls");
 
@@ -240,6 +281,10 @@ public class Player extends Mob {
 		return name;
 	}
 
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public void tick() {//public void update()
 		time++;
 		if (walking) {
@@ -291,6 +336,7 @@ public class Player extends Mob {
 				}
 			}
 		}
+		System.out.println(inventory.size());
 		if (input.UP) {
 			animSprite = up;
 			ya -= speed;
@@ -317,8 +363,12 @@ public class Player extends Mob {
 			health = 100;
 		}
 
-		if (health < maxHealth - .1) {
-			health += .1;
+		if (health < maxHealth) {
+			//health += .1;
+			health++;
+		}
+		if (health >= maxHealth - .25 && health <= maxHealth) {
+			health = maxHealth;
 		}
 
 		if (mana < maxMana) {
@@ -326,10 +376,22 @@ public class Player extends Mob {
 			mana++;
 		}
 
+		Experience.init(level);
+
 		if (xp >= Experience.getXPToNextLevel()) {
 			xp -= Experience.getXPToNextLevel();
-			xpLevel++;
+			rank++;
+			armor = Experience.calculateArmor();
+			maxHealth = Experience.calculateHealth();
 		}
+
+
+
+		lvlRankLabel.setText("" + rank);
+		hpCounterLabel.setText((int) health + "/" + (int) maxHealth);
+		mpCounterLabel.setText((int) mana + "/" + (int) maxMana);
+		xpCounterLabel.setText(xp + "/" + (int) Experience.getXPToNextLevel());
+		armorStatLabel.setText("Armor: " + armor);
 
 		uiHealthBar.setProgress(health / maxHealth);
 		uiManaBar.setProgress(mana / maxMana);
@@ -338,7 +400,7 @@ public class Player extends Mob {
 
 	public void playerDamaged(double damage) {
 
-		health -= damage * armor * protectSpell;
+		health -= (damage - (damage * armor) - (damage * protectSpell));
 		// can have a multiplier here to reduce health damage due to spells or armor
 
 		if (isDead()) {
@@ -371,10 +433,11 @@ public class Player extends Mob {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
-			if (mana >= PlayerFireMageProjectile.cost) {
+			if (mana - PlayerFireMageProjectile.cost >= 0) {
 				shoot(x, y, dir, this);
 				mana -= PlayerFireMageProjectile.cost;
 			}
+
 			firerate = PlayerFireMageProjectile.FIRE_RATE;
 		}
 	}

@@ -25,11 +25,15 @@ public class Sprite {
 	public static Sprite stoneSprite = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite stoneBrickSprite = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite woodenPlankSprite = new Sprite(16, 4, 0, SpriteSheet.tiles);
+	public static Sprite lockedGateSprite = new Sprite(16, 5, 0, SpriteSheet.tiles);
+	public static Sprite unlockedGateSprite = new Sprite(16, 6, 0, SpriteSheet.tiles);
+	public static Sprite ironBarsSprite = new Sprite(16, 7, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
 	//Items
 	//Objects
 	public static Sprite ironSprite = new Sprite(16, 0, 0, SpriteSheet.items);
+	public static Sprite keySprite = new Sprite(16, 1, 0, SpriteSheet.items);
 
 	//Entities
 	//Mobs
@@ -46,6 +50,12 @@ public class Sprite {
 
 	//Particle
 	public static Sprite defaultParticle = new Sprite(3, 0xffaaaaaa);
+
+	//Health Bars
+	public static Sprite healthBar0 = new Sprite(5, 1, 0xff00c700);
+	public static Sprite healthBar25 = new Sprite(5, 1, 0xff00c700);
+	public static Sprite healthBar50 = new Sprite(5, 1, 0xff00c700);
+	public static Sprite healthBar75 = new Sprite(5, 1, 0xff00c700);
 
 	//Debug
 	public static Sprite aimBox = new Sprite(16, 0, 0, SpriteSheet.debug);

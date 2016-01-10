@@ -10,11 +10,12 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class SpawnLevel extends Level {
 
-	public SpawnLevel(String path) {
-		super(path);
+	public SpawnLevel(String path, int mapRank) {
+		super(path, mapRank);
 	}
 
 	protected void loadLevel(String path) {
@@ -29,143 +30,46 @@ public class SpawnLevel extends Level {
 			System.out.println("Could not load level file!!!");
 		}
 
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
-		add(new Dummy(32, 31, 1));
+		int bottomRank = 0;
+		if (mapRank - 2 > 0) {
+			bottomRank = mapRank - 2;
+		}
+		int topRank = mapRank + 2;
 
-		addItem(Item.iron, 25, 25);
+		/*add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(32, 32, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));*/
+
+		//ThreadLocalRandom.current().nextInt(bottomRank, topRank)
+
+		addItem(Item.key, 25, 25);
 	}
 
 	protected void generateLevel() {

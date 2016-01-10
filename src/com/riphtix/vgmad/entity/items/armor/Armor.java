@@ -4,7 +4,7 @@ import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.gfx.Sprite;
 
 public class Armor extends Item {
-	
+
 	/**
 	 * rarity is a number ranging from 0 - 5
 	 * 0 starter
@@ -18,7 +18,9 @@ public class Armor extends Item {
 	 * @param rarity
 	 * @param sprite
 	 */
-	public Armor(String name, int rarity, Sprite sprite) {
+
+	public Armor(String name, int rarity, Sprite sprite, double armor) {
 		super(name, rarity, sprite);
+		this.armor = armor;
 	}
 }

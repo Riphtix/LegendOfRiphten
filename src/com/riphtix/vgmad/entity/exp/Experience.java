@@ -1,47 +1,68 @@
 package com.riphtix.vgmad.entity.exp;
 
 import com.riphtix.vgmad.Game;
+import com.riphtix.vgmad.entity.items.armor.Armor;
+import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.level.Level;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Experience extends Game {
 
-	private static int currentLevel;
-	private static double xpToNextLevel;
+	private static int currentRank;
+	private static double currentArmor;
+	private static double xpToNextRank;
+	private static Level currentLevel;
 
 	public static List<Integer> xpGivenByMobs = new ArrayList<Integer>();
+	public static List<Long> armorAtLevel = new ArrayList<>();
 
-	public Experience(){
+	public Experience() {
 
 	}
 
-	public static void init(Level level){
-		currentLevel = level.getClientPlayer().xpLevel;
+	public static void init(Level level) {
+		currentLevel = level;
+		currentRank = level.getClientPlayer().rank;
+		currentArmor = level.getClientPlayer().armor;
 
-		if(currentLevel <= 10) {
-			xpToNextLevel = (40 * (currentLevel * currentLevel)) + (120 * currentLevel);
-			level.getClientPlayer().armor += currentLevel * 4;
-		}
-		if(currentLevel > 10 && currentLevel <= 30) {
-			xpToNextLevel = (-.4 * (currentLevel * currentLevel * currentLevel) + (40.4 * (currentLevel * currentLevel) + (132 * currentLevel)));
-		}
-		if(currentLevel > 30 && currentLevel < 60) {
-			xpToNextLevel = ((65 * (currentLevel * currentLevel)) - (165 * currentLevel) - 6750) * .82;
+		if (currentRank <= 10) {
+			xpToNextRank = (30 * (currentRank * currentRank)) + (120 * currentRank);
 		}
 
-		for(int i = 0; i < 60; i++){
-			xpGivenByMobs.add(i, (int)(7 * currentLevel + (currentLevel * (.05 * xpToNextLevel))));
+		if (currentRank > 10 && currentRank <= 30) {
+			xpToNextRank = (-.3 * (currentRank * currentRank * currentRank) + (30.3 * (currentRank * currentRank) + (132 * currentRank)));
+		}
+
+		if (currentRank > 30 && currentRank < 60) {
+			xpToNextRank = ((21 * (currentRank * currentRank)) - (165 * currentRank) - 2250) * .82;
 		}
 	}
 
-	public static double getXPToNextLevel(){
-		return xpToNextLevel;
+	public static double getXPToNextLevel() {
+		return xpToNextRank;
 	}
 
-	public static int getXPGivenByMobAtLevel(int level){
-		return xpGivenByMobs.get(level - 1);
+	public static double calculateXPFromMob(Mob mob){
+		return (23 * currentRank + (currentRank * (.05 * mob.rank)));
 	}
 
+	public static double calculateArmor(){
+		double armor = currentArmor + (1.5 * currentRank);
+
+		for(int i = 0; i < currentLevel.getClientPlayer().inventory.size(); i++){
+			if(currentLevel.getClientPlayer().inventory.get(i).get(0) instanceof Armor){
+				armor += currentLevel.getClientPlayer().inventory.get(i).get(0).getArmor();
+			}
+		}
+
+		return armor;
+	}
+
+	public static double calculateHealth() {
+		return currentLevel.getClientPlayer().maxHealth + (ThreadLocalRandom.current().nextInt(5, 10) * currentRank);
+	}
 }

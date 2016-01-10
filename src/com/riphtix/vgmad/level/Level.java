@@ -7,18 +7,21 @@ import com.riphtix.vgmad.entity.items.basic.ResourceItem;
 import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
+import com.riphtix.vgmad.entity.mob.Shooter;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
+import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class Level {
 
@@ -26,6 +29,7 @@ public class Level {
 	protected int width, height;
 	protected int[] tilesInt, tiles;
 	private static Screen screen;
+	public static int mapRank;
 	public Keyboard key;
 
 	//lists of entities for rendering and tracking
@@ -34,6 +38,7 @@ public class Level {
 	private List<Particle> particles = new ArrayList<Particle>();
 	private List<Player> players = new ArrayList<Player>();
 	private List<Mob> mobs = new ArrayList<Mob>();
+	private List<MobHealthBar> healthBars = new ArrayList<MobHealthBar>();
 
 	//lists of items for rendering and tracking
 	private List<Item> items = new ArrayList<>();
@@ -53,19 +58,21 @@ public class Level {
 	};
 
 	//creates a new level
-	public static Level spawn = new SpawnLevel("/levels/testLevel.png");
+	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png", 1);
 
 	//Level Constructor
-	public Level(int width, int height) {
+	public Level(int width, int height, int mapRank) {
 		this.width = width;
 		this.height = height;
 		tilesInt = new int[width * height];
+		this.mapRank = mapRank;
 		generateLevel();
 	}
 
 	//Level Constructor
-	public Level(String path) {
+	public Level(String path, int mapRank) {
 		loadLevel(path);
+		this.mapRank = mapRank;
 		generateLevel();
 	}
 
@@ -103,20 +110,24 @@ public class Level {
 			mobs.get(i).tick();
 		}
 
-		for (int i = 0; i < items.size(); i++){
+		for (int i = 0; i < items.size(); i++) {
 			items.get(i).tick();
 		}
 
-		for(int i = 0; i < resourceItems.size(); i++){
+		for (int i = 0; i < resourceItems.size(); i++) {
 			resourceItems.get(i).tick();
 		}
 
-		for (int i = 0; i < weapons.size(); i++){
+		for (int i = 0; i < weapons.size(); i++) {
 			weapons.get(i).tick();
 		}
 
-		for(int i = 0; i < armorPieces.size(); i++){
+		for (int i = 0; i < armorPieces.size(); i++) {
 			armorPieces.get(i).tick();
+		}
+
+		for (int i = 0; i < healthBars.size(); i++) {
+			healthBars.get(i).tick();
 		}
 
 		remove();
@@ -143,20 +154,24 @@ public class Level {
 			if (mobs.get(i).isRemoved()) mobs.remove(i);
 		}
 
-		for (int i = 0; i < items.size(); i++){
+		for (int i = 0; i < items.size(); i++) {
 			if (items.get(i).isRemoved()) items.remove(i);
 		}
 
-		for (int i = 0; i < resourceItems.size(); i++){
+		for (int i = 0; i < resourceItems.size(); i++) {
 			if (resourceItems.get(i).isRemoved()) resourceItems.remove(i);
 		}
 
-		for (int i = 0; i < weapons.size(); i++){
+		for (int i = 0; i < weapons.size(); i++) {
 			if (weapons.get(i).isRemoved()) weapons.remove(i);
 		}
 
-		for (int i = 0; i < armorPieces.size(); i++){
+		for (int i = 0; i < armorPieces.size(); i++) {
 			if (armorPieces.get(i).isRemoved()) armorPieces.remove(i);
+		}
+
+		for (int i = 0; i < healthBars.size(); i++) {
+			if (healthBars.get(i).isRemoved()) healthBars.remove(i);
 		}
 	}
 
@@ -244,7 +259,7 @@ public class Level {
 		double min = 0;
 		Item closest = null;
 		for (int i = 0; i < items.size(); i++) {
-			if(items.get(i) instanceof ResourceItem) {
+			if (items.get(i) instanceof ResourceItem) {
 				Item resourceItem = resourceItems.get(i);
 				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) resourceItem.getX(), (int) resourceItem.getY()));
 				if (i == 0 || distance < min) {
@@ -252,7 +267,7 @@ public class Level {
 					closest = resourceItem;
 				}
 			}
-			if(items.get(i) instanceof Weapon) {
+			if (items.get(i) instanceof Weapon) {
 				Item weapon = weapons.get(i);
 				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) weapon.getX(), (int) weapon.getY()));
 				if (i == 0 || distance < min) {
@@ -260,7 +275,7 @@ public class Level {
 					closest = weapon;
 				}
 			}
-			if(items.get(i) instanceof Armor) {
+			if (items.get(i) instanceof Armor) {
 				Item armor = armorPieces.get(i);
 				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) armor.getX(), (int) armor.getY()));
 				if (i == 0 || distance < min) {
@@ -275,6 +290,10 @@ public class Level {
 		}
 
 		return closestItem;
+	}
+
+	public static int getMapRank() {
+		return mapRank;
 	}
 
 	//collision with uneven objects (width 2 height 3)
@@ -313,7 +332,7 @@ public class Level {
 			items.get(i).render(screen);
 		}
 
-		for(int i = 0; i < resourceItems.size(); i++){
+		for (int i = 0; i < resourceItems.size(); i++) {
 			resourceItems.get(i).render(screen);
 		}
 
@@ -344,7 +363,10 @@ public class Level {
 		for (int i = 0; i < mobs.size(); i++) {
 			mobs.get(i).render(screen);
 		}
-		//screen.renderSprite(Mouse.getX() + 56, Mouse.getY() + 128 * 2, Sprite.aimBox);
+
+		for (int i = 0; i < healthBars.size(); i++) {
+			healthBars.get(i).render(screen);
+		}
 	}
 
 	//adds an entity to its respective list
@@ -358,6 +380,8 @@ public class Level {
 			mobs.add((Mob) e);
 		} else if (e instanceof Player) {
 			players.add((Player) e);
+		} else if (e instanceof MobHealthBar) {
+			healthBars.add((MobHealthBar) e);
 		} else {
 			entities.add(e);
 		}
@@ -366,13 +390,13 @@ public class Level {
 	public void addItem(Item item, int x, int y) {
 		item.init(this);
 
-		if(item instanceof ResourceItem){
+		if (item instanceof ResourceItem) {
 			resourceItems.add((ResourceItem) item);
 			item.setXY(x, y);
-		}else if(item instanceof Weapon){
+		} else if (item instanceof Weapon) {
 			weapons.add((Weapon) item);
 			item.setXY(x, y);
-		} else if(item instanceof Armor){
+		} else if (item instanceof Armor) {
 			armorPieces.add((Armor) item);
 			item.setXY(x, y);
 		} else {
@@ -543,6 +567,17 @@ public class Level {
 		if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
 		if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
 		if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
+		if (tiles[x + y * width] == Tile.colorIronGateLocked) {
+			if (Tile.ironGateLockedTile.isLocked()) {
+				return Tile.ironGateLockedTile;
+			} else return Tile.ironGateUnlockedTile;
+		}
+		if (tiles[x + y * width] == Tile.colorIronBars) return Tile.ironBarTile;
 		return Tile.voidTile;
+	}
+
+	public void setTile(int x, int y, int tileColor) {
+		tiles[x + y * width] = tileColor;
+		getTile(x, y);
 	}
 }

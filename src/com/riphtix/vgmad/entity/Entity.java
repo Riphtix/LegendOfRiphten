@@ -18,7 +18,7 @@ public class Entity {
 	protected Sprite sprite;
 	protected int time;
 	private boolean removed = false;
-	protected Level level;
+	protected static Level level;
 	protected final Random random = new Random();
 	public int range;
 	public MobHitbox hitbox;
@@ -80,14 +80,46 @@ public class Entity {
 		boolean solid = false;
 		int xt0 = hitboxX(xa, leftXOffset);
 		int xt1 = hitboxX(xa, rightXOffset);
+		int xt2 = hitboxX(xa, 0);
 		int yt0 = hitboxY(ya, topYOffset);
 		int yt1 = hitboxY(ya, bottomYOffset);
+		int yt2 = hitboxY(ya, 0);
 		for (int c = 0; c < 4; c++) {
-			if (level.getTile(xt0, yt0).isSolid() || level.getTile(xt1, yt1).isSolid() || level.getTile(xt0, yt1).isSolid() || level.getTile(xt1, yt0).isSolid()) {
+			if (level.getTile(xt0, yt0).isSolid()
+					|| level.getTile(xt0, yt1).isSolid()
+					|| level.getTile(xt0, yt2).isSolid()
+					|| level.getTile(xt1, yt0).isSolid()
+					|| level.getTile(xt1, yt1).isSolid()
+					|| level.getTile(xt1, yt2).isSolid()
+					|| level.getTile(xt2, yt0).isSolid()
+					|| level.getTile(xt2, yt1).isSolid()) {
 				solid = true;
 			}
 		}
 		return solid;
+	}
+
+	protected boolean isLockedDoorwayCollision(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {
+		boolean collided = false;
+		int xt0 = hitboxX(xa, leftXOffset);
+		int xt1 = hitboxX(xa, rightXOffset);
+		int xt2 = hitboxX(xa, 0);
+		int yt0 = hitboxY(ya, topYOffset);
+		int yt1 = hitboxY(ya, bottomYOffset);
+		int yt2 = hitboxY(ya, 0);
+		for (int c = 0; c < 4; c++) {
+			if ((level.getTile(xt0, yt0).isDoorway() && level.getTile(xt0, yt0).locked)
+					|| (level.getTile(xt0, yt1).isDoorway() && level.getTile(xt0, yt1).locked)
+					|| (level.getTile(xt0, yt2).isDoorway() && level.getTile(xt0, yt2).locked)
+					|| (level.getTile(xt1, yt0).isDoorway() && level.getTile(xt1, yt0).locked)
+					|| (level.getTile(xt1, yt1).isDoorway() && level.getTile(xt1, yt1).locked)
+					|| (level.getTile(xt1, yt2).isDoorway() && level.getTile(xt1, yt2).locked)
+					|| (level.getTile(xt2, yt0).isDoorway() && level.getTile(xt2, yt0).locked)
+					|| (level.getTile(xt2, yt1).isDoorway() && level.getTile(xt2, yt1).locked)) {
+				collided = true;
+			}
+		}
+		return collided;
 	}
 
 	protected boolean buffCheck(double xa, int leftXOffset, int rightXOffset, double ya, int topYOffset, int bottomYOffset) {

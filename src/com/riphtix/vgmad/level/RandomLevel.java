@@ -1,13 +1,14 @@
 package com.riphtix.vgmad.level;
 
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 public class RandomLevel extends Level {
 
 	private static final Random random = new Random();
 
 	public RandomLevel(int width, int height) {
-		super(width, height);
+		super(width, height, ThreadLocalRandom.current().nextInt(1, 60));
 	}
 
 	protected void generateLevel() {

@@ -8,6 +8,7 @@ import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 
 public class Dummy extends Mob {
 
@@ -23,19 +24,29 @@ public class Dummy extends Mob {
 	private int ya = 0;
 
 	public MobHitbox hitbox;
+	public MobHealthBar healthBar0;
+	public MobHealthBar healthBar25;
+	public MobHealthBar healthBar50;
+	public MobHealthBar healthBar75;
 
-	public Dummy(int x, int y, int level) {
+	public Dummy(int x, int y, int rank) {
 		this.x = x << 4;
 		this.y = y << 4;
 		sprite = animSprite.getSprite();
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
+		healthBar0 = new MobHealthBar((int) this.x - 10, (int) this.y - 20, Sprite.healthBar0);
+		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
+		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
+		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
 
 		//Dummy default attributes
-		health = 100;
-		mana = 100;
-		xpLevel = level;
-		armor = 1.0;
-		protectSpell = 1.0;
+		maxHealth = 100;
+		health = maxHealth;
+		maxMana = 100;
+		mana = maxMana;
+		this.rank = rank;
+		armor = 0.0;
+		protectSpell = 0.0;
 	}
 
 	public void tick() {//public void update()
@@ -69,22 +80,62 @@ public class Dummy extends Mob {
 			walking = true;
 		} else walking = false;
 
+		healthBar0.setXY(this.x - 10, this.y - 20);
+		healthBar25.setXY(this.x - 5, this.y - 20);
+		healthBar50.setXY(this.x, this.y - 20);
+		healthBar75.setXY(this.x + 5, this.y - 20);
+		if (health / maxHealth >= .75) {
+			level.add(healthBar75);
+		}
+		if (health / maxHealth >= .5) {
+			level.add(healthBar50);
+			if(health / maxHealth < .75){
+				healthBar75.remove();
+			}
+		}
+		if (health / maxHealth >= .25) {
+			level.add(healthBar25);
+			if(health / maxHealth < .5){
+				healthBar50.remove();
+				healthBar75.remove();
+			}
+		}
+		if (health / maxHealth > 0) {
+			level.add(healthBar0);
+			if(health / maxHealth < .25){
+				healthBar25.remove();
+				healthBar50.remove();
+				healthBar75.remove();
+			}
+		}
+		if (health / maxHealth <= 0){
+			healthBar0.remove();
+			healthBar25.remove();
+			healthBar50.remove();
+			healthBar75.remove();
+		}
+
 	}
 
 	public void dummyDamaged(double damage) {
 
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= damage * armor * protectSpell;
+		health -= (damage - (damage * armor) - (damage * protectSpell));
 
-		if (isDead()){
+		if (isDead()) {
 			Sound.SoundEffect.FEMALE_DEAD.play();
-			level.getClientPlayer().xp += Experience.getXPGivenByMobAtLevel(this.xpLevel);
+			level.getClientPlayer().xp += Experience.calculateXPFromMob(this);
+			level.getClientPlayer().totalXP += Experience.calculateXPFromMob(this);
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
 			remove();
+			healthBar0.remove();
+			healthBar25.remove();
+			healthBar50.remove();
+			healthBar75.remove();
 		}
 	}
 
-	public boolean isDead(){
+	public boolean isDead() {
 		return (health <= 0);
 	}
 
