@@ -336,7 +336,7 @@ public class Player extends Mob {
 				}
 			}
 		}
-		System.out.println(inventory.size());
+
 		if (input.UP) {
 			animSprite = up;
 			ya -= speed;

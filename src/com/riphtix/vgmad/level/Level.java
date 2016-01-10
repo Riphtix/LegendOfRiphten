@@ -28,7 +28,7 @@ public class Level {
 	//Variables
 	protected int width, height;
 	protected int[] tilesInt, tiles;
-	private static Screen screen;
+	public static Screen screen;
 	public static int mapRank;
 	public Keyboard key;
 
@@ -567,11 +567,8 @@ public class Level {
 		if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
 		if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
 		if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
-		if (tiles[x + y * width] == Tile.colorIronGateLocked) {
-			if (Tile.ironGateLockedTile.isLocked()) {
-				return Tile.ironGateLockedTile;
-			} else return Tile.ironGateUnlockedTile;
-		}
+		if (tiles[x + y * width] == Tile.colorIronGateLocked) return Tile.ironGateLockedTile;
+		if (tiles[x + y * width] == Tile.colorIronGateUnlocked) return Tile.ironGateUnlockedTile;
 		if (tiles[x + y * width] == Tile.colorIronBars) return Tile.ironBarTile;
 		return Tile.voidTile;
 	}

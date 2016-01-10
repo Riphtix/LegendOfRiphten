@@ -15,8 +15,8 @@ public class Tile {
 	public static Tile stoneTile = new StoneTile(Sprite.stoneSprite);
 	public static Tile stoneBrickTile = new StoneBrickTile(Sprite.stoneBrickSprite);
 	public static Tile woodenPlankTile = new WoodenPlankTile(Sprite.woodenPlankSprite);
-	public static Tile ironGateLockedTile = new IronGateTile(Sprite.lockedGateSprite, true);
-	public static Tile ironGateUnlockedTile = new IronGateTile(Sprite.unlockedGateSprite, false);
+	public static Tile ironGateLockedTile = new GateTile(Sprite.lockedGateSprite, true);
+	public static Tile ironGateUnlockedTile = new GateTile(Sprite.unlockedGateSprite, false);
 	public static Tile ironBarTile = new IronBarTile(Sprite.ironBarsSprite);
 
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);

@@ -8,12 +8,8 @@ import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.level.tile.IronGateTile;
-import com.riphtix.vgmad.level.tile.Tile;
+import com.riphtix.vgmad.level.tile.GateTile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public abstract class Mob extends Entity {
 
@@ -67,76 +63,92 @@ public abstract class Mob extends Entity {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += abs(xa);
 				}
-				if (isLockedDoorwayCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
-					System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
-					if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
-						level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
+				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
+					if (inventory.contains(Item.key)) {
+						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
+						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
 						level.getClientPlayer().inventory.remove(Item.key);
+						System.out.print("Key Used");
 						System.out.println(inventory.size());
-					} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
-						System.out.println("no key needed!!!");
 					} else {
-						System.out.println("key needed!!!");
+						System.out.println("Sorry... you need a key");
 					}
+				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println("unlocked");
 				}
+
 				xa -= abs(xa);
-				} else {
-					if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
-						this.x += xa;
-					}
-					if (isLockedDoorwayCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
-						System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
-						if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
-							level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
-							level.getClientPlayer().inventory.remove(Item.key);
-							System.out.println(inventory.size());
-						} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
-							System.out.println("no key needed!!!");
-						} else {
-							System.out.println("key needed!!!");
-						}
-					}
-					xa = 0;
+			} else {
+				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
+					this.x += xa;
 				}
-			}
-			while (ya != 0) {
-				if (Math.abs(ya) > 1) {
-					if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-						this.y += abs(ya);
+				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
+					if (inventory.contains(Item.key)) {
+						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
+						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
+						level.getClientPlayer().inventory.remove(Item.key);
+						System.out.print("Key Used");
+						System.out.println(inventory.size());
+					} else {
+						System.out.println("Sorry... you need a key");
 					}
-					if (isLockedDoorwayCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-						System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
-						if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
-							level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
-							level.getClientPlayer().inventory.remove(Item.key);
-							System.out.println(inventory.size());
-						} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
-							System.out.println("no key needed!!!");
-						} else {
-							System.out.println("key needed!!!");
-						}
-					}
-					ya -= abs(ya);
-				} else {
-					if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-						this.y += ya;
-					}
-					if (isLockedDoorwayCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
-						System.out.println(level.getTile((int) xa << 4, (int) ya << 4).isLocked());
-						if (level.getTile((int) xa << 4, (int) ya << 4).isLocked() && inventory.contains("Key")) {
-							level.getTile((int) xa << 4, (int) ya << 4).setLocked(false);
-							level.getClientPlayer().inventory.remove(Item.key);
-							System.out.println(inventory.size());
-						} else if (!level.getTile((int) xa << 4, (int) ya << 4).isLocked()) {
-							System.out.println("no key needed!!!");
-						} else {
-							System.out.println("key needed!!!");
-						}
-					}
-					ya = 0;
+				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println("unlocked");
 				}
+
+				xa = 0;
 			}
 		}
+
+		while (ya != 0)
+
+		{
+			if (Math.abs(ya) > 1) {
+				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+					this.y += abs(ya);
+				}
+				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
+					if (inventory.contains(Item.key)) {
+						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
+						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
+						level.getClientPlayer().inventory.remove(Item.key);
+						System.out.print("Key Used");
+						System.out.println(inventory.size());
+					} else {
+						System.out.println("Sorry... you need a key");
+					}
+				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println("unlocked");
+				}
+
+				ya -= abs(ya);
+			} else {
+				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
+					this.y += ya;
+				}
+				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
+					if (inventory.contains(Item.key)) {
+						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
+						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
+						level.getClientPlayer().inventory.remove(Item.key);
+						System.out.print("Key Used");
+						System.out.println(inventory.size());
+					} else {
+						System.out.println("Sorry... you need a key");
+					}
+				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+					System.out.println("unlocked");
+				}
+
+				ya = 0;
+			}
+		}
+
+	}
 
 	private int abs(double value) {
 		if (value < 0) return -1;

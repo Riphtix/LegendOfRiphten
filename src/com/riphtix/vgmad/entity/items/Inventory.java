@@ -28,9 +28,9 @@ public class Inventory {
 		return inventory.size();
 	}
 
-	public boolean contains(String name){
+	public boolean contains(Item item){
 		boolean contains = false;
-		if(inventory.containsKey(name)){
+		if(inventory.containsKey(item.name)){
 			contains = true;
 		}
 		return contains;

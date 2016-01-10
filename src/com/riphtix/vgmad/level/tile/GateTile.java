@@ -3,11 +3,14 @@ package com.riphtix.vgmad.level.tile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 
-public class IronGateTile extends Tile {
+public class GateTile extends Tile {
 
-	public IronGateTile(Sprite sprite, boolean locked) {
+	public GateTile(Sprite sprite, boolean locked) {
 		super(sprite);
 		this.locked = locked;
+		if (!isLocked()){
+			this.sprite = Sprite.unlockedGateSprite;
+		}
 	}
 
 	public void render(int x, int y, Screen screen) {
