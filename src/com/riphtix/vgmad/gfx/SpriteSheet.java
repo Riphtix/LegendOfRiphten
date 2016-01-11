@@ -15,6 +15,8 @@ public class SpriteSheet {
 
 	//Tiles
 	public static SpriteSheet tiles = new SpriteSheet("/textures/tiles.png", 256);
+	public static SpriteSheet lava = new SpriteSheet(tiles, 0, 14, 16, 1, 16);
+	public static SpriteSheet water = new SpriteSheet(tiles, 0, 15, 16, 1, 16);
 
 	//Mobs
 	public static SpriteSheet mobs = new SpriteSheet("/entities/mobs/mobs.png", 1024);
@@ -48,6 +50,12 @@ public class SpriteSheet {
 	public static SpriteSheet sorceress_up = new SpriteSheet(sorceress, 0, 3, 3, 1, 32);
 	public static SpriteSheet sorceress_left = new SpriteSheet(sorceress, 0, 1, 3, 1, 32);
 	public static SpriteSheet sorceress_right = new SpriteSheet(sorceress, 0, 2, 3, 1, 32);
+
+	public static SpriteSheet genie = new SpriteSheet("/entities/mobs/ai/genie.png", 96, 128);
+	public static SpriteSheet genie_down = new SpriteSheet(genie, 0, 0, 3, 1, 32);
+	public static SpriteSheet genie_up = new SpriteSheet(genie, 0, 3, 3, 1, 32);
+	public static SpriteSheet genie_left = new SpriteSheet(genie, 0, 1, 3, 1, 32);
+	public static SpriteSheet genie_right = new SpriteSheet(genie, 0, 2, 3, 1, 32);
 
 	//Items
 	public static SpriteSheet items = new SpriteSheet("/textures/items/items.png", 256);

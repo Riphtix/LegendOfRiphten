@@ -28,6 +28,8 @@ public class Sprite {
 	public static Sprite lockedGateSprite = new Sprite(16, 5, 0, SpriteSheet.tiles);
 	public static Sprite unlockedGateSprite = new Sprite(16, 6, 0, SpriteSheet.tiles);
 	public static Sprite ironBarsSprite = new Sprite(16, 7, 0, SpriteSheet.tiles);
+	public static Sprite volcanicFloorSprite = new Sprite(16, 8, 0, SpriteSheet.tiles);
+	public static Sprite volcanicBrickWallSprite = new Sprite(16, 9, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
 	//Items

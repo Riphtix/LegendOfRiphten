@@ -1,13 +1,15 @@
 package com.riphtix.vgmad.entity.mob;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.items.Item;
+import com.riphtix.vgmad.entity.projectile.SorceressProjectile;
 import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
-import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.tile.GateTile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
 
@@ -27,7 +29,6 @@ public abstract class Mob extends Entity {
 	public int rank;
 	public int lives;
 	public double armor;
-	public double baseArmor;
 	public double protectSpell;
 
 	public int rightXOffset;
@@ -64,18 +65,17 @@ public abstract class Mob extends Entity {
 					this.x += abs(xa);
 				}
 				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
-					if (inventory.contains(Item.key)) {
-						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
-						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
+					if (level.getClientPlayer().inventory.contains(Item.key)) {
+						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
 						System.out.print("Key Used");
-						System.out.println(inventory.size());
 					} else {
 						System.out.println("Sorry... you need a key");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println("unlocked");
+					if (level == Level.floor1) {
+						Game.setLevel(Level.floor2);
+					}
 				}
 
 				xa -= abs(xa);
@@ -84,18 +84,17 @@ public abstract class Mob extends Entity {
 					this.x += xa;
 				}
 				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
-					if (inventory.contains(Item.key)) {
-						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
-						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
+					if (level.getClientPlayer().inventory.contains(Item.key)) {
+						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
 						System.out.print("Key Used");
-						System.out.println(inventory.size());
 					} else {
 						System.out.println("Sorry... you need a key");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println("unlocked");
+					if (level == Level.floor1) {
+						Game.setLevel(Level.floor2);
+					}
 				}
 
 				xa = 0;
@@ -110,18 +109,17 @@ public abstract class Mob extends Entity {
 					this.y += abs(ya);
 				}
 				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
-					if (inventory.contains(Item.key)) {
-						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
-						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
+					if (level.getClientPlayer().inventory.contains(Item.key)) {
+						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
 						System.out.print("Key Used");
-						System.out.println(inventory.size());
 					} else {
 						System.out.println("Sorry... you need a key");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println("unlocked");
+					if (level == Level.floor1) {
+						Game.setLevel(Level.floor2);
+					}
 				}
 
 				ya -= abs(ya);
@@ -130,18 +128,17 @@ public abstract class Mob extends Entity {
 					this.y += ya;
 				}
 				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println(((int) x >> 4) + " " + ((int) y >> 4));
-					if (inventory.contains(Item.key)) {
-						level.getTile((int) x >> 4, (int) y >> 4).setLocked(false);
-						level.getTile((int) x >> 4, (int) y >> 4).sprite = Sprite.unlockedGateSprite;
+					if (level.getClientPlayer().inventory.contains(Item.key)) {
+						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
 						System.out.print("Key Used");
-						System.out.println(inventory.size());
 					} else {
 						System.out.println("Sorry... you need a key");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					System.out.println("unlocked");
+					if(level == Level.floor1){
+						Game.setLevel(Level.floor2);
+					}
 				}
 
 				ya = 0;
@@ -162,10 +159,10 @@ public abstract class Mob extends Entity {
 	protected void shoot(double x, double y, double dir, Entity entity) {
 		Projectile p = null;
 		if (entity instanceof Shooter) {
-			p = new FireMageProjectile(x, y, dir, entity);
+			p = new SorceressProjectile(x, y, dir, entity);
 		}
 		if (entity instanceof Player) {
-			p = new PlayerFireMageProjectile(x, y, dir, entity);
+			p = new FireMageProjectile(x, y, dir, entity);
 		}
 		level.add(p);
 	}

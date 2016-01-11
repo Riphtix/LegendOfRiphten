@@ -15,7 +15,7 @@ public class Sound extends Thread {
 		FOOTSTEP_2("/sounds/footstep2.wav"),
 		FOOTSTEP_3("/sounds/footstep3.wav"),
 		FEMALE_DAMAGE_9("/sounds/girlDamage9.wav"),
-		PLAYER_HIT("/sounds/manHit.wav"),
+		MALE_HIT("/sounds/manHit.wav"),
 		COLLECT_ITEM_POP("/sounds/itemPop.wav");
 
 		public enum Volume{

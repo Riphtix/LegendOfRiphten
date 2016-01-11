@@ -7,10 +7,10 @@ import com.riphtix.vgmad.entity.items.basic.ResourceItem;
 import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
-import com.riphtix.vgmad.entity.mob.Shooter;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
@@ -21,7 +21,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class Level {
 
@@ -57,8 +56,9 @@ public class Level {
 		}
 	};
 
-	//creates a new level
-	public static Level spawn = new SpawnLevel("/levels/spawnLevel.png", 1);
+	//creates new levels
+	public static Level floor1 = new Floor1Level("/levels/floor1Level.png", 1);
+	public static Level floor2 = new Floor2Level("/levels/floor2Level.png", 4);
 
 	//Level Constructor
 	public Level(int width, int height, int mapRank) {
@@ -570,11 +570,18 @@ public class Level {
 		if (tiles[x + y * width] == Tile.colorIronGateLocked) return Tile.ironGateLockedTile;
 		if (tiles[x + y * width] == Tile.colorIronGateUnlocked) return Tile.ironGateUnlockedTile;
 		if (tiles[x + y * width] == Tile.colorIronBars) return Tile.ironBarTile;
+		if (tiles[x + y * width] == Tile.colorLava) return Tile.lavaTile;
+		if (tiles[x + y * width] == Tile.colorVolcanicFloor) return Tile.volcanicFloorTile;
+		if (tiles[x + y * width] == Tile.colorVolcanicBrickWall) return Tile.volcanicBrickWallTile;
 		return Tile.voidTile;
 	}
 
-	public void setTile(int x, int y, int tileColor) {
-		tiles[x + y * width] = tileColor;
-		getTile(x, y);
+	public void changeTileProperties(int x, int y, boolean locked) {
+		for (int i = 0; i < 60; i++) {
+			if (i == 59) {
+				getTile(x, y).setLocked(locked);
+			}
+		}
+		getTile(x, y).sprite = Sprite.unlockedGateSprite;
 	}
 }

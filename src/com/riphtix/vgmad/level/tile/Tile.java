@@ -18,7 +18,9 @@ public class Tile {
 	public static Tile ironGateLockedTile = new GateTile(Sprite.lockedGateSprite, true);
 	public static Tile ironGateUnlockedTile = new GateTile(Sprite.unlockedGateSprite, false);
 	public static Tile ironBarTile = new IronBarTile(Sprite.ironBarsSprite);
-
+	public static Tile volcanicFloorTile = new VolcanicFloorTile(Sprite.volcanicFloorSprite);
+	public static Tile lavaTile = new LavaTile();
+	public static Tile volcanicBrickWallTile = new VolcanicBrickWallTile(Sprite.volcanicBrickWallSprite);
 	public static Tile voidTile = new VoidTile(Sprite.voidSprite);
 
 	public static final int colorGrass = 0xff267f00;
@@ -29,6 +31,9 @@ public class Tile {
 	public static final int colorIronGateLocked = 0xffa8a8a8;
 	public static final int colorIronGateUnlocked = 0xff636363;
 	public static final int colorIronBars = 0xff8c8c8c;
+	public static final int colorVolcanicFloor = 0xff020202;
+	public static final int colorLava = 0xffff6a00;
+	public static final int colorVolcanicBrickWall = 0xff333333;
 
 	public Tile(Sprite sprite) {
 		this.sprite = sprite;

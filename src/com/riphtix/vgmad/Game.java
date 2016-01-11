@@ -1,9 +1,7 @@
 package com.riphtix.vgmad;
 
-import com.riphtix.vgmad.entity.exp.Experience;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.mob.Player;
-import com.riphtix.vgmad.entity.mob.Shooter;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
@@ -16,7 +14,6 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
-import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * "" is a string
@@ -57,10 +54,10 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	public static Graphics g;
 	//Custom Made
-	private Screen screen;
-	private Keyboard key;
-	private Level spawnLevel;
-	private Player player;
+	private static Screen screen;
+	private static Keyboard key;
+	private static Level level;
+	private static Player player;
 
 	private static UIManager uiManager;
 
@@ -82,15 +79,42 @@ public class Game extends Canvas implements Runnable {
 		frame = new JFrame();
 		key = new Keyboard();
 		Item.initItems();
-		spawnLevel = Level.spawn;
-		TileCoordinate playerSpawn = new TileCoordinate(32, 28);
-		player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
-		spawnLevel.add(player);
+		setLevel(Level.floor1);
 
 		Mouse mouse = new Mouse();
 		addKeyListener(key);
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
+	}
+
+	private static void initPlayer(){
+		if(level == Level.floor1) {
+			TileCoordinate playerSpawn = new TileCoordinate(32, 28);
+			player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
+			level.add(player);
+		} else if(level != Level.floor1 && level == Level.floor2){
+			TileCoordinate playerSpawn = new TileCoordinate(32, 28);
+			Player oldPlayer = player;
+			if(player != null) {
+				Player newPlayer = new Player(oldPlayer.getName(), playerSpawn.x(), playerSpawn.y(), key);
+				player = newPlayer;
+				for(int i = 0; i < oldPlayer.inventory.size(); i++){
+					for(int j = 0; j < oldPlayer.inventory.get(i).size(); j++) {
+						player.inventory.add(oldPlayer.inventory.get(i).get(j));
+					}
+				}
+				player.maxHealth = oldPlayer.maxHealth;
+				player.health = oldPlayer.health;
+				player.maxMana = oldPlayer.maxMana;
+				player.mana = oldPlayer.mana;
+				player.xp = oldPlayer.xp;
+				player.lives = oldPlayer.lives;
+				player.rank = oldPlayer.rank;
+				player.armor = oldPlayer.armor;
+				player.protectSpell = oldPlayer.protectSpell;
+			} else player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
+			level.add(player);
+		}
 	}
 
 	public static int getWindowWidth() {
@@ -149,9 +173,15 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	public static void setLevel(Level newLevel){
+		screen.clear();
+		level = newLevel;
+		initPlayer();
+	}
+
 	public void tick() {//public void update()
 		key.tick();
-		spawnLevel.tick();
+		level.tick();
 		uiManager.tick();
 	}
 
@@ -166,7 +196,7 @@ public class Game extends Canvas implements Runnable {
 		screen.clear();
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
-		spawnLevel.render((int) xScroll, (int) yScroll, screen);
+		level.render((int) xScroll, (int) yScroll, screen);
 		//font.render(0, 0, -2, 0xff000000, "I have won!!!", screen);
 
 		for (int i = 0; i < pixels.length; i++) {

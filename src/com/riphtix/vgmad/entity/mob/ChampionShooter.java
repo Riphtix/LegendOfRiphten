@@ -2,6 +2,7 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.exp.Experience;
+import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.SorceressProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
@@ -16,18 +17,21 @@ import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
 
-public class Shooter extends Mob {
+public class ChampionShooter extends Mob{
 
-	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.sorceress_down, 32, 32, 3);
-	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.sorceress_up, 32, 32, 3);
-	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.sorceress_left, 32, 32, 3);
-	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.sorceress_right, 32, 32, 3);
+	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.genie_down, 32, 32, 3);
+	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.genie_up, 32, 32, 3);
+	private AnimatedSprite left = new AnimatedSprite(SpriteSheet.genie_left, 32, 32, 3);
+	private AnimatedSprite right = new AnimatedSprite(SpriteSheet.genie_right, 32, 32, 3);
 
-	private AnimatedSprite animSprite = down;
+	private AnimatedSprite animSprite = this.down;
 
 	private int time = 0;
 	private int xa = 0;
 	private int ya = 0;
+
+	private double x;
+	private double y;
 
 	private Entity rand = null;
 
@@ -39,9 +43,12 @@ public class Shooter extends Mob {
 	public MobHealthBar healthBar50;
 	public MobHealthBar healthBar75;
 
-	public Shooter(int x, int y, int level) {
+	public Inventory inventory;
+	
+	public ChampionShooter(int x, int y, int rank) {
 		this.x = x << 4;
 		this.y = y << 4;
+		this.rank = rank;
 		sprite = animSprite.getSprite();
 		firerate = SorceressProjectile.FIRE_RATE;
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
@@ -49,28 +56,20 @@ public class Shooter extends Mob {
 		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
 		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
 		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
-		range = 200;
+		range = 336;
+		inventory = new Inventory();
 
 		//Shooter default attributes
-		health = 100;
+		health = 350;
 		mana = 100;
-		rank = level;
+		this.rank = rank;
 		armor = 0.0;
 		protectSpell = 0.0;
 	}
 
-	public void tick() {
-		time++; //time % 60 == 0 is 1 second
-		if (time % (random.nextInt(50) + 30) == 0) {
-			xa = random.nextInt(3) - 1;
-			ya = random.nextInt(3) - 1;
-			if (random.nextInt(4) == 0) {
-				xa = 0;
-				ya = 0;
-			}
-		}
-		if (walking) animSprite.tick();
-		else animSprite.setFrame(0);
+	public void tick(){
+		time++;
+		animSprite.tick();
 		if (firerate > 0) firerate--;
 		if (ya < 0) {
 			animSprite = up;
@@ -127,7 +126,7 @@ public class Shooter extends Mob {
 			healthBar50.remove();
 			healthBar75.remove();
 		}
-		shootClosest();
+		//shootClosest();
 		//shootRandom();
 	}
 
@@ -209,6 +208,6 @@ public class Shooter extends Mob {
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
-		hitbox.render((int) x - 10, (int) y - 16, screen);
+		hitbox.render(((int) x - 10) << 4, (int) y - 16, screen);
 	}
 }

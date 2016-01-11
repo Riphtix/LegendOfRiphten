@@ -7,7 +7,7 @@ import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.items.armor.Armor;
 import com.riphtix.vgmad.entity.items.basic.ResourceItem;
 import com.riphtix.vgmad.entity.items.weapons.Weapon;
-import com.riphtix.vgmad.entity.projectile.PlayerFireMageProjectile;
+import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -77,7 +77,7 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = animSprite.getSprite();
-		firerate = PlayerFireMageProjectile.FIRE_RATE;
+		firerate = FireMageProjectile.FIRE_RATE;
 		hitbox = new PlayerHitbox(Sprite.hitbox21x32);
 		inventory = new Inventory();
 		range = 336;
@@ -202,7 +202,6 @@ public class Player extends Mob {
 		lives = 10;
 		rank = 1;
 		armor = 0.0;
-		baseArmor = 0.0;
 		protectSpell = 0.0;
 
 		uiButtonOptions = new UIButton(new Vector2i(144, 178), new Vector2i(75, 24), new UIActionListener() {
@@ -364,16 +363,14 @@ public class Player extends Mob {
 		}
 
 		if (health < maxHealth) {
-			//health += .1;
-			health++;
+			health += .1;
 		}
 		if (health >= maxHealth - .25 && health <= maxHealth) {
 			health = maxHealth;
 		}
 
 		if (mana < maxMana) {
-			//mana += .25;
-			mana++;
+			mana += .25;
 		}
 
 		Experience.init(level);
@@ -399,8 +396,11 @@ public class Player extends Mob {
 	}
 
 	public void playerDamaged(double damage) {
-
-		health -= (damage - (damage * armor) - (damage * protectSpell));
+		double armorModifier = armor;
+		if (armorModifier > 1){
+			armorModifier /= 100;
+		}
+		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
 		// can have a multiplier here to reduce health damage due to spells or armor
 
 		if (isDead()) {
@@ -433,12 +433,12 @@ public class Player extends Mob {
 			double dx = Mouse.getX() - Game.getWindowWidth() / 2;
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
-			if (mana - PlayerFireMageProjectile.cost >= 0) {
+			if (mana - FireMageProjectile.cost >= 0) {
 				shoot(x, y, dir, this);
-				mana -= PlayerFireMageProjectile.cost;
+				mana -= FireMageProjectile.cost;
 			}
 
-			firerate = PlayerFireMageProjectile.FIRE_RATE;
+			firerate = FireMageProjectile.FIRE_RATE;
 		}
 	}
 
