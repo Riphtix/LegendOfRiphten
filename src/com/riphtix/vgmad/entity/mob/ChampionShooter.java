@@ -52,12 +52,12 @@ public class ChampionShooter extends Mob{
 		sprite = animSprite.getSprite();
 		firerate = SorceressProjectile.FIRE_RATE;
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
+		inventory = new Inventory();
 		healthBar0 = new MobHealthBar((int) this.x - 10, (int) this.y - 20, Sprite.healthBar0);
 		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
 		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
 		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
 		range = 336;
-		inventory = new Inventory();
 
 		//Shooter default attributes
 		health = 350;
@@ -92,10 +92,6 @@ public class ChampionShooter extends Mob{
 			walking = false;
 		}
 
-		healthBar0.setXY(this.x - 10, this.y - 20);
-		healthBar25.setXY(this.x - 5, this.y - 20);
-		healthBar50.setXY(this.x, this.y - 20);
-		healthBar75.setXY(this.x + 5, this.y - 20);
 		if (health / maxHealth >= .75) {
 			level.add(healthBar75);
 		}
@@ -126,7 +122,11 @@ public class ChampionShooter extends Mob{
 			healthBar50.remove();
 			healthBar75.remove();
 		}
-		//shootClosest();
+		healthBar0.setXY(this.x - 10, this.y - 20);
+		healthBar25.setXY(this.x - 5, this.y - 20);
+		healthBar50.setXY(this.x, this.y - 20);
+		healthBar75.setXY(this.x + 5, this.y - 20);
+		shootClosest();
 		//shootRandom();
 	}
 
@@ -140,7 +140,7 @@ public class ChampionShooter extends Mob{
 			System.out.println(level.getClientPlayer().totalXP);
 			level.getClientPlayer().xp += Experience.calculateXPFromMob(this);
 			level.getClientPlayer().totalXP += Experience.calculateXPFromMob(this);
-			if(inventory != null && inventory.size() != 0){
+			if(inventory != null && inventory.size() > 0){
 				for(int i = 0; i < inventory.size(); i++){
 					for(int j = 0; j < inventory.get(i).size(); j++){
 						level.addItem(inventory.get(i).get(j), (int) x >> 4, (int) y >> 4);
@@ -208,6 +208,6 @@ public class ChampionShooter extends Mob{
 	public void render(Screen screen) {
 		sprite = animSprite.getSprite();
 		screen.renderMob((int) x - 16, (int) y - 16, sprite);
-		hitbox.render(((int) x - 10) << 4, (int) y - 16, screen);
+		hitbox.render((int) x - 10, (int) y - 16, screen);
 	}
 }

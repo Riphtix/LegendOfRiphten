@@ -33,15 +33,23 @@ public class Floor1Level extends Level {
 		}
 		int topRank = mapRank + 2;
 
-		ChampionShooter keyHolder = new ChampionShooter(17, 17, ThreadLocalRandom.current().nextInt(bottomRank, topRank));
-		System.out.println(keyHolder.inventory);
+		ChampionShooter keyHolder = new ChampionShooter(47, 48, ThreadLocalRandom.current().nextInt(bottomRank, topRank));
 		keyHolder.inventory.add(Item.key);
 
 		add(keyHolder);
+		add(new Shooter(49, 15, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(13, 16, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(16, 21, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(23, 16, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(30, 38, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(23, 37, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(24, 48, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(46, 42, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(47, 34, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(44, 21, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(44, 33, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
 
 		//ThreadLocalRandom.current().nextInt(bottomRank, topRank)
-
-		addItem(Item.key, 25, 25);
 	}
 
 	protected void generateLevel() {

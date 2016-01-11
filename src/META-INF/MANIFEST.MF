@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
 Main-Class: com.riphtix.vgmad.Game
+SplashScreen-Image: splashes/titleScreen.png
 

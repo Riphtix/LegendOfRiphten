@@ -380,6 +380,7 @@ public class Player extends Mob {
 			rank++;
 			armor = Experience.calculateArmor();
 			maxHealth = Experience.calculateHealth();
+			maxMana = Experience.calculateMana();
 		}
 
 

@@ -9,11 +9,14 @@ import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.TileCoordinate;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.IOException;
 
 /**
  * "" is a string
@@ -30,6 +33,7 @@ import java.awt.image.DataBufferInt;
  * ! is not
  * << is bit-shifting left and a faster way to multiply
  * >> is bit-shifting right and a faster way to divide
+ *
  * @author Riphtix
  * @since 1.0
  */
@@ -78,6 +82,7 @@ public class Game extends Canvas implements Runnable {
 		uiManager = new UIManager();
 		frame = new JFrame();
 		key = new Keyboard();
+
 		Item.initItems();
 		setLevel(Level.floor1);
 
@@ -87,19 +92,19 @@ public class Game extends Canvas implements Runnable {
 		addMouseMotionListener(mouse);
 	}
 
-	private static void initPlayer(){
-		if(level == Level.floor1) {
+	private static void initPlayer() {
+		if (level == Level.floor1) {
 			TileCoordinate playerSpawn = new TileCoordinate(32, 28);
 			player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
 			level.add(player);
-		} else if(level != Level.floor1 && level == Level.floor2){
+		} else if (level != Level.floor1 && level == Level.floor2) {
 			TileCoordinate playerSpawn = new TileCoordinate(32, 28);
 			Player oldPlayer = player;
-			if(player != null) {
+			if (player != null) {
 				Player newPlayer = new Player(oldPlayer.getName(), playerSpawn.x(), playerSpawn.y(), key);
 				player = newPlayer;
-				for(int i = 0; i < oldPlayer.inventory.size(); i++){
-					for(int j = 0; j < oldPlayer.inventory.get(i).size(); j++) {
+				for (int i = 0; i < oldPlayer.inventory.size(); i++) {
+					for (int j = 0; j < oldPlayer.inventory.get(i).size(); j++) {
 						player.inventory.add(oldPlayer.inventory.get(i).get(j));
 					}
 				}
@@ -173,7 +178,7 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
-	public static void setLevel(Level newLevel){
+	public static void setLevel(Level newLevel) {
 		screen.clear();
 		level = newLevel;
 		initPlayer();
@@ -197,6 +202,7 @@ public class Game extends Canvas implements Runnable {
 		double xScroll = player.getX() - screen.width / 2;
 		double yScroll = player.getY() - screen.height / 2;
 		level.render((int) xScroll, (int) yScroll, screen);
+
 		//font.render(0, 0, -2, 0xff000000, "I have won!!!", screen);
 
 		for (int i = 0; i < pixels.length; i++) {
@@ -208,6 +214,9 @@ public class Game extends Canvas implements Runnable {
 		g.fillRect(0, 0, getWidth(), getHeight());
 		g.drawImage(image, 0, 0, WIDTH * SCALE, HEIGHT * SCALE, null);
 		uiManager.render(g);
+		if (SplashScreen.getSplashScreen() != null) {
+			SplashScreen.getSplashScreen().close();
+		}
 		//g.setColor(new Color(0xffff0000));
 		//g.drawRect(getWindowWidth() / 2 - 33, getWindowHeight() / 2, 60, 48);
 		//g.fillRect(Mouse.getX() - 24, Mouse.getY() - 24, 16 * 3, 16 * 3);

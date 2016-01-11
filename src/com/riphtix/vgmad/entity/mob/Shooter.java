@@ -38,6 +38,10 @@ public class Shooter extends Mob {
 	public MobHealthBar healthBar25;
 	public MobHealthBar healthBar50;
 	public MobHealthBar healthBar75;
+	boolean health75 = false;
+	boolean health50 = false;
+	boolean health25 = false;
+	boolean health0 = false;
 
 	public Shooter(int x, int y, int level) {
 		this.x = x << 4;
@@ -52,8 +56,10 @@ public class Shooter extends Mob {
 		range = 200;
 
 		//Shooter default attributes
-		health = 100;
-		mana = 100;
+		maxHealth = 100;
+		health = maxHealth;
+		maxMana = 100;
+		mana = maxMana;
 		rank = level;
 		armor = 0.0;
 		protectSpell = 0.0;
@@ -61,7 +67,7 @@ public class Shooter extends Mob {
 
 	public void tick() {
 		time++; //time % 60 == 0 is 1 second
-		if (time % (random.nextInt(50) + 30) == 0) {
+		if (time % (random.nextInt(60) + 30) == 0) {
 			xa = random.nextInt(3) - 1;
 			ya = random.nextInt(3) - 1;
 			if (random.nextInt(4) == 0) {
@@ -92,40 +98,44 @@ public class Shooter extends Mob {
 		} else {
 			walking = false;
 		}
-
 		healthBar0.setXY(this.x - 10, this.y - 20);
 		healthBar25.setXY(this.x - 5, this.y - 20);
 		healthBar50.setXY(this.x, this.y - 20);
 		healthBar75.setXY(this.x + 5, this.y - 20);
-		if (health / maxHealth >= .75) {
-			level.add(healthBar75);
-		}
-		if (health / maxHealth >= .5) {
-			level.add(healthBar50);
-			if(health / maxHealth < .75){
-				healthBar75.remove();
-			}
-		}
-		if (health / maxHealth >= .25) {
-			level.add(healthBar25);
-			if(health / maxHealth < .5){
-				healthBar50.remove();
-				healthBar75.remove();
-			}
-		}
-		if (health / maxHealth > 0) {
+		if(health / maxHealth > 0 && !health0){
 			level.add(healthBar0);
-			if(health / maxHealth < .25){
-				healthBar25.remove();
-				healthBar50.remove();
-				healthBar75.remove();
+			if(health / maxHealth > .25 && !health25){
+				level.add(healthBar25);
+				if(health / maxHealth > .5 && !health50){
+					level.add(healthBar50);
+					if(health / maxHealth > .75 && !health75){
+						level.add(healthBar75);
+						health75 = true;
+					}
+					health50 = true;
+				}
+				health25 = true;
 			}
+			health0 = true;
 		}
-		if (health / maxHealth <= 0){
-			healthBar0.remove();
-			healthBar25.remove();
-			healthBar50.remove();
-			healthBar75.remove();
+
+		if(health / maxHealth <= .75){
+			if(health75) {
+				healthBar75.remove();
+				health75 = false;
+			}
+			if(health / maxHealth <= .5){
+				if(health50) {
+					healthBar50.remove();
+					health50 = false;
+				}
+				if(health / maxHealth <= .25){
+					if(health25) {
+						healthBar25.remove();
+						health25 = false;
+					}
+				}
+			}
 		}
 		shootClosest();
 		//shootRandom();

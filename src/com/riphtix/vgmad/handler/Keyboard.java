@@ -12,6 +12,7 @@ public class Keyboard implements KeyListener {
 	public boolean LEFT;
 	public boolean RIGHT;
 	public boolean F5;
+	public boolean SPACE;
 
 	public void tick() {//public void update()
 		//all of the keys that are used as controls are handled here
@@ -20,6 +21,7 @@ public class Keyboard implements KeyListener {
 		DOWN = keys[KeyEvent.VK_DOWN] || keys[KeyEvent.VK_S];
 		RIGHT = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
 		F5 = keys[KeyEvent.VK_F5];
+		SPACE = keys[KeyEvent.VK_SPACE];
 	}
 
 	public void keyPressed(KeyEvent e) {

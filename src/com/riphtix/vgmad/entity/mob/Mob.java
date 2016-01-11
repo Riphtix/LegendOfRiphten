@@ -161,6 +161,9 @@ public abstract class Mob extends Entity {
 		if (entity instanceof Shooter) {
 			p = new SorceressProjectile(x, y, dir, entity);
 		}
+		if(entity instanceof ChampionShooter) {
+			p = new SorceressProjectile(x, y, dir, entity);
+		}
 		if (entity instanceof Player) {
 			p = new FireMageProjectile(x, y, dir, entity);
 		}

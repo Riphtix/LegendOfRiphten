@@ -1,5 +1,6 @@
 package com.riphtix.vgmad.level;
 
+import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.items.armor.Armor;
@@ -11,6 +12,7 @@ import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
@@ -60,6 +62,8 @@ public class Level {
 	public static Level floor1 = new Floor1Level("/levels/floor1Level.png", 1);
 	public static Level floor2 = new Floor2Level("/levels/floor2Level.png", 4);
 
+	protected static String path;
+
 	//Level Constructor
 	public Level(int width, int height, int mapRank) {
 		this.width = width;
@@ -72,6 +76,7 @@ public class Level {
 	//Level Constructor
 	public Level(String path, int mapRank) {
 		loadLevel(path);
+		this.path = path;
 		this.mapRank = mapRank;
 		generateLevel();
 	}
@@ -562,17 +567,18 @@ public class Level {
 
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
-		if (tiles[x + y * width] == Tile.colorGrass) return Tile.grassTile;
-		if (tiles[x + y * width] == Tile.colorDirt) return Tile.dirtTile;
-		if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
-		if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
-		if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
-		if (tiles[x + y * width] == Tile.colorIronGateLocked) return Tile.ironGateLockedTile;
-		if (tiles[x + y * width] == Tile.colorIronGateUnlocked) return Tile.ironGateUnlockedTile;
-		if (tiles[x + y * width] == Tile.colorIronBars) return Tile.ironBarTile;
-		if (tiles[x + y * width] == Tile.colorLava) return Tile.lavaTile;
-		if (tiles[x + y * width] == Tile.colorVolcanicFloor) return Tile.volcanicFloorTile;
-		if (tiles[x + y * width] == Tile.colorVolcanicBrickWall) return Tile.volcanicBrickWallTile;
+			if (tiles[x + y * width] == Tile.colorGrass) return Tile.grassTile;
+			if (tiles[x + y * width] == Tile.colorDirt) return Tile.dirtTile;
+			if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
+			if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
+			if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
+			if (tiles[x + y * width] == Tile.colorIronGateLocked) return Tile.ironGateLockedTile;
+			if (tiles[x + y * width] == Tile.colorIronGateUnlocked) return Tile.ironGateUnlockedTile;
+			if (tiles[x + y * width] == Tile.colorIronBars) return Tile.ironBarTile;
+			if (tiles[x + y * width] == Tile.colorLava) return Tile.lavaTile;
+			if (tiles[x + y * width] == Tile.colorVolcanicFloor) return Tile.volcanicFloorTile;
+			if (tiles[x + y * width] == Tile.colorVolcanicBrickWall) return Tile.volcanicBrickWallTile;
+
 		return Tile.voidTile;
 	}
 

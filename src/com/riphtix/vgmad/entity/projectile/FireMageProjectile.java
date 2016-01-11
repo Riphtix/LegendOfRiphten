@@ -21,7 +21,7 @@ public class FireMageProjectile extends Projectile {
 		//speed = TEST_SPEED;
 		speed = NORMAL_SPEED;
 		//speed = FAST_SPEED;
-		damage = 100;
+		damage = 25;
 		cost = 10;
 		sprite = Sprite.rotate(Sprite.fireBoltSprite, angle);
 		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x8, angle));

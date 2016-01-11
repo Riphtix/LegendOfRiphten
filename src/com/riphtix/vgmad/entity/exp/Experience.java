@@ -51,7 +51,7 @@ public class Experience extends Game {
 	}
 
 	public static double calculateArmor(){
-		double armor = currentArmor + (1.5 * currentRank);
+		double armor = currentArmor + (1.25 * currentRank);
 
 		for(int i = 0; i < currentLevel.getClientPlayer().inventory.size(); i++){
 			if(currentLevel.getClientPlayer().inventory.get(i).get(0) instanceof Armor){
@@ -63,6 +63,10 @@ public class Experience extends Game {
 	}
 
 	public static double calculateHealth() {
+		return currentLevel.getClientPlayer().maxHealth + (ThreadLocalRandom.current().nextInt(5, 10) * currentRank);
+	}
+
+	public static double calculateMana() {
 		return currentLevel.getClientPlayer().maxHealth + (ThreadLocalRandom.current().nextInt(5, 10) * currentRank);
 	}
 }
