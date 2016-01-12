@@ -50,6 +50,15 @@ public class Player extends Mob {
 	public UIPanel panel;
 	public UILabel helpLabel;
 	public UILabel help1Label;
+	public UILabel slot1Label;
+	public UILabel slot2Label;
+	public UILabel slot3Label;
+	public UILabel slot4Label;
+	public UILabel slot5Label;
+	public UILabel slot6Label;
+	public UILabel slot7Label;
+	public UILabel slot8Label;
+	public UILabel slot9Label;
 	private UILabel nameLabel;
 	private UILabel lvlLabel;
 	private UILabel lvlRankLabel;
@@ -99,7 +108,7 @@ public class Player extends Mob {
 		nameLabel.dropShadow = true;
 		panel.addComponent(nameLabel);
 
-		lvlLabel = new UILabel(new Vector2i(105, 200), "LVL:");
+		lvlLabel = new UILabel(new Vector2i(nameLabel.position.x + 65, nameLabel.position.y), "LVL:");
 		lvlLabel.setColor(0xffa0a0a0);
 		lvlLabel.setFont(new Font("Verdana", Font.PLAIN, 10));
 		lvlLabel.dropShadow = true;
@@ -113,7 +122,7 @@ public class Player extends Mob {
 		lvlRankLabel.dropShadowOffset = 1;
 		panel.addComponent(lvlRankLabel);
 
-		uiHealthBar = new UIProgressBar(new Vector2i(35, 210), new Vector2i(180, 15));
+		uiHealthBar = new UIProgressBar(new Vector2i(nameLabel.position.x - 5, nameLabel.position.y + 10), new Vector2i(180, 15));
 		uiHealthBar.setColor(0xff5f5f5f);
 		uiHealthBar.setForegroundColor(new Color(0xffc70000));
 		uiHealthBar.dropShadow = true;
@@ -125,11 +134,11 @@ public class Player extends Mob {
 		hpLabel.dropShadow = true;
 		hpLabel.dropShadowOffset = 1;
 		panel.addComponent(hpLabel);
-		uiHP25Percent = new UIProgressMark(new Vector2i(80, 210), new Vector2i(1, 15));
+		uiHP25Percent = new UIProgressMark(new Vector2i(uiHealthBar.position.x + 45, uiHealthBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiHP25Percent);
-		uiHP50Percent = new UIProgressMark(new Vector2i(125, 210), new Vector2i(1, 15));
+		uiHP50Percent = new UIProgressMark(new Vector2i(uiHealthBar.position.x + 90, uiHealthBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiHP50Percent);
-		uiHP75Percent = new UIProgressMark(new Vector2i(170, 210), new Vector2i(1, 15));
+		uiHP75Percent = new UIProgressMark(new Vector2i(uiHealthBar.position.x + 135, uiHealthBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiHP75Percent);
 		hpCounterLabel = new UILabel(new Vector2i(uiHealthBar.position.x, uiHealthBar.position.y + 10), (int) health + "/" + (int) maxHealth);
 		hpCounterLabel.setColor(0xffa0a0a0);
@@ -138,7 +147,7 @@ public class Player extends Mob {
 		hpCounterLabel.dropShadowOffset = 1;
 		panel.addComponent(hpCounterLabel);
 
-		uiManaBar = new UIProgressBar(new Vector2i(35, 235), new Vector2i(180, 15));
+		uiManaBar = new UIProgressBar(new Vector2i(uiHealthBar.position.x, uiHealthBar.position.y + 25), new Vector2i(180, 15));
 		uiManaBar.setColor(0xff5f5f5f);
 		uiManaBar.setForegroundColor(new Color(0xff009696));
 		uiManaBar.dropShadow = true;
@@ -150,11 +159,11 @@ public class Player extends Mob {
 		mpLabel.dropShadow = true;
 		mpLabel.dropShadowOffset = 1;
 		panel.addComponent(mpLabel);
-		uiMP25Percent = new UIProgressMark(new Vector2i(80, 235), new Vector2i(1, 15));
+		uiMP25Percent = new UIProgressMark(new Vector2i(uiManaBar.position.x + 45, uiManaBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiMP25Percent);
-		uiMP50Percent = new UIProgressMark(new Vector2i(125, 235), new Vector2i(1, 15));
+		uiMP50Percent = new UIProgressMark(new Vector2i(uiManaBar.position.x + 90, uiManaBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiMP50Percent);
-		uiMP75Percent = new UIProgressMark(new Vector2i(170, 235), new Vector2i(1, 15));
+		uiMP75Percent = new UIProgressMark(new Vector2i(uiManaBar.position.x + 135, uiManaBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiMP75Percent);
 		mpCounterLabel = new UILabel(new Vector2i(uiManaBar.position.x, uiManaBar.position.y + 10), (int) mana + "/" + (int) maxMana);
 		mpCounterLabel.setColor(0xffa0a0a0);
@@ -163,7 +172,7 @@ public class Player extends Mob {
 		mpCounterLabel.dropShadowOffset = 1;
 		panel.addComponent(mpCounterLabel);
 
-		uiExperienceBar = new UIProgressBar(new Vector2i(35, 260), new Vector2i(180, 15));
+		uiExperienceBar = new UIProgressBar(new Vector2i(uiManaBar.position.x, uiManaBar.position.y + 25), new Vector2i(180, 15));
 		uiExperienceBar.setColor(0xff5f5f5f);
 		uiExperienceBar.setForegroundColor(new Color(0xffff7700));
 		uiExperienceBar.dropShadow = true;
@@ -175,11 +184,11 @@ public class Player extends Mob {
 		xpLabel.dropShadow = true;
 		xpLabel.dropShadowOffset = 1;
 		panel.addComponent(xpLabel);
-		uiXP25Percent = new UIProgressMark(new Vector2i(80, 260), new Vector2i(1, 15));
+		uiXP25Percent = new UIProgressMark(new Vector2i(uiExperienceBar.position.x + 45, uiExperienceBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiXP25Percent);
-		uiXP50Percent = new UIProgressMark(new Vector2i(125, 260), new Vector2i(1, 15));
+		uiXP50Percent = new UIProgressMark(new Vector2i(uiExperienceBar.position.x + 90, uiExperienceBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiXP50Percent);
-		uiXP75Percent = new UIProgressMark(new Vector2i(170, 260), new Vector2i(1, 15));
+		uiXP75Percent = new UIProgressMark(new Vector2i(uiExperienceBar.position.x + 135, uiExperienceBar.position.y), new Vector2i(1, 15));
 		panel.addComponent(uiXP75Percent);
 		xpCounterLabel = new UILabel(new Vector2i(uiExperienceBar.position.x, uiExperienceBar.position.y + 10), xp + "/" + (int) Experience.getXPToNextLevel());
 		xpCounterLabel.setColor(0xffa0a0a0);
@@ -188,14 +197,80 @@ public class Player extends Mob {
 		xpCounterLabel.dropShadowOffset = 1;
 		panel.addComponent(xpCounterLabel);
 
-		armorStatLabel = new UILabel(new Vector2i(35, 290), "Armor: " + armor);
+		//Stat display
+		armorStatLabel = new UILabel(new Vector2i(uiExperienceBar.position.x, uiExperienceBar.position.y + 30), "Armor: " + armor);
 		armorStatLabel.setColor(0xffa0a0a0);
 		armorStatLabel.setFont(new Font("Verdana", Font.PLAIN, 10));
 		armorStatLabel.dropShadow = true;
 		armorStatLabel.dropShadowOffset = 1;
 		panel.addComponent(armorStatLabel);
 
-		helpLabel = new UILabel(new Vector2i(7, 480), "");
+		//Inventory display
+		slot1Label = new UILabel(new Vector2i(armorStatLabel.position.x - 15, armorStatLabel.position.y + 30), "");
+		slot1Label.setColor(0xffa0a0a0);
+		slot1Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot1Label.dropShadow = true;
+		slot1Label.dropShadowOffset = 1;
+		panel.addComponent(slot1Label);
+
+		slot2Label = new UILabel(new Vector2i(slot1Label.position.x + 60, slot1Label.position.y), "|");
+		slot2Label.setColor(0xffa0a0a0);
+		slot2Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot2Label.dropShadow = true;
+		slot2Label.dropShadowOffset = 1;
+		panel.addComponent(slot2Label);
+
+		slot3Label = new UILabel(new Vector2i(slot2Label.position.x + 70, slot2Label.position.y), "|");
+		slot3Label.setColor(0xffa0a0a0);
+		slot3Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot3Label.dropShadow = true;
+		slot3Label.dropShadowOffset = 1;
+		panel.addComponent(slot3Label);
+
+		slot4Label = new UILabel(new Vector2i(slot1Label.position.x, slot1Label.position.y + 15), "");
+		slot4Label.setColor(0xffa0a0a0);
+		slot4Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot4Label.dropShadow = true;
+		slot4Label.dropShadowOffset = 1;
+		panel.addComponent(slot4Label);
+
+		slot5Label = new UILabel(new Vector2i(slot4Label.position.x + 60, slot4Label.position.y), "|");
+		slot5Label.setColor(0xffa0a0a0);
+		slot5Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot5Label.dropShadow = true;
+		slot5Label.dropShadowOffset = 1;
+		panel.addComponent(slot5Label);
+
+		slot6Label = new UILabel(new Vector2i(slot5Label.position.x + 70, slot5Label.position.y), "|");
+		slot6Label.setColor(0xffa0a0a0);
+		slot6Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot6Label.dropShadow = true;
+		slot6Label.dropShadowOffset = 1;
+		panel.addComponent(slot6Label);
+
+		slot7Label = new UILabel(new Vector2i(slot4Label.position.x, slot4Label.position.y + 15), "");
+		slot7Label.setColor(0xffa0a0a0);
+		slot7Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot7Label.dropShadow = true;
+		slot7Label.dropShadowOffset = 1;
+		panel.addComponent(slot7Label);
+
+		slot8Label = new UILabel(new Vector2i(slot7Label.position.x + 60, slot7Label.position.y), "|");
+		slot8Label.setColor(0xffa0a0a0);
+		slot8Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot8Label.dropShadow = true;
+		slot8Label.dropShadowOffset = 1;
+		panel.addComponent(slot8Label);
+
+		slot9Label = new UILabel(new Vector2i(slot8Label.position.x + 70, slot8Label.position.y), "|");
+
+		slot9Label.setColor(0xffa0a0a0);
+		slot9Label.setFont(new Font("Verdana", Font.PLAIN, 10));
+		slot9Label.dropShadow = true;
+		slot9Label.dropShadowOffset = 1;
+		panel.addComponent(slot9Label);
+
+		helpLabel = new UILabel(new Vector2i(7, Game.getWindowHeight() - 24), "");
 		helpLabel.setColor(0xffa0a0a0);
 		helpLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
 		helpLabel.dropShadow = true;
@@ -208,9 +283,6 @@ public class Player extends Mob {
 		help1Label.dropShadow = true;
 		help1Label.dropShadowOffset = 1;
 		panel.addComponent(help1Label);
-
-		//Inventory display
-		//TODO: Create a visual inventory using UILabels
 
 		//player default attributes
 		maxHealth = 100;
@@ -351,6 +423,46 @@ public class Player extends Mob {
 					inventory.add(closest);
 					closest.remove();
 					Sound.SoundEffect.COLLECT_ITEM_POP.play();
+				}
+			}
+		}
+
+		if(inventory.size() > 0){
+			for(int i = 0; i < 9; i++){
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				}
+
+				if(i == 0){
+					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
 				}
 			}
 		}
