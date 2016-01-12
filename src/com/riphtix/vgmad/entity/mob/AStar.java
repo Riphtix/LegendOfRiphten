@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.exp.Experience;
+import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -9,6 +10,7 @@ import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Sound;
 import com.riphtix.vgmad.level.Node;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
@@ -28,19 +30,37 @@ public class AStar extends Mob{
 	private int time = 0;
 
 	public MobHitbox hitbox;
+	public MobHealthBar healthBar0;
+	public MobHealthBar healthBar25;
+	public MobHealthBar healthBar50;
+	public MobHealthBar healthBar75;
+	boolean health75 = false;
+	boolean health50 = false;
+	boolean health25 = false;
+	boolean health0 = false;
 
-	public AStar(int x, int y, int level) {
+	public Inventory inventory;
+
+	public AStar(int x, int y, int rank, Classification classification) {
 		this.x = x << 4;
 		this.y = y << 4;
+		this.rank = rank;
+		this.classification = classification;
 		sprite = animSprite.getSprite();
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
+		inventory = new Inventory();
+		healthBar0 = new MobHealthBar((int) this.x - 10, (int) this.y - 20, Sprite.healthBar0);
+		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
+		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
+		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
 
 		//Shooter default attributes
-		health = 100;
-		mana = 100;
-		rank = level;
-		armor = 1.0;
-		protectSpell = 1.0;
+		maxHealth = Experience.calculateMobHealth(this, 100);
+		health = maxHealth;
+		maxMana = Experience.calculateMobMana(this, 100);
+		mana = maxMana;
+		armor = Experience.calculateMobArmor(this, 0);
+		protectSpell = 0.0;
 	}
 
 	private void move() {
@@ -87,12 +107,54 @@ public class AStar extends Mob{
 			animSprite = right;
 			dir = Mob.Direction.RIGHT;
 		}
+		healthBar0.setXY(this.x - 10, this.y - 20);
+		healthBar25.setXY(this.x - 5, this.y - 20);
+		healthBar50.setXY(this.x, this.y - 20);
+		healthBar75.setXY(this.x + 5, this.y - 20);
+		if(health / maxHealth > 0 && !health0){
+			level.add(healthBar0);
+			if(health / maxHealth > .25 && !health25){
+				level.add(healthBar25);
+				if(health / maxHealth > .5 && !health50){
+					level.add(healthBar50);
+					if(health / maxHealth > .75 && !health75){
+						level.add(healthBar75);
+						health75 = true;
+					}
+					health50 = true;
+				}
+				health25 = true;
+			}
+			health0 = true;
+		}
+
+		if(health / maxHealth <= .75){
+			if(health75) {
+				healthBar75.remove();
+				health75 = false;
+			}
+			if(health / maxHealth <= .5){
+				if(health50) {
+					healthBar50.remove();
+					health50 = false;
+				}
+				if(health / maxHealth <= .25){
+					if(health25) {
+						healthBar25.remove();
+						health25 = false;
+					}
+				}
+			}
+		}
 	}
 
 	public void aStarDamaged(double damage) {
-
+		double armorModifier = armor;
+		if (armorModifier > 1){
+			armorModifier /= 100;
+		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= damage * armor * protectSpell;
+		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
 
 		if (isDead()){
 			Sound.SoundEffect.FEMALE_DEAD.play();

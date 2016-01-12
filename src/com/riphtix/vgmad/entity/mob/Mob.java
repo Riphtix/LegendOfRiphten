@@ -9,17 +9,20 @@ import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
+import com.riphtix.vgmad.gfx.ui.UILabel;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.tile.GateTile;
 import com.riphtix.vgmad.level.tile.hitbox.MobHitbox;
+import com.riphtix.vgmad.util.Vector2i;
+
+import javax.swing.*;
+import java.awt.*;
 
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
 	public boolean walking = false;
 
-
-	//TODO: npc health
 	public double health;
 	public double maxHealth;
 	public double mana;
@@ -35,6 +38,12 @@ public abstract class Mob extends Entity {
 	public int leftXOffset;
 	public int topYOffset;
 	public int bottomYOffset;
+
+	public enum Classification {
+		BASIC, CHAMPION, LORD, BOSS
+	}
+
+	public Classification classification;
 
 	public enum Direction {
 		UP, DOWN, LEFT, RIGHT
@@ -68,9 +77,11 @@ public abstract class Mob extends Entity {
 					if (level.getClientPlayer().inventory.contains(Item.key)) {
 						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
-						System.out.print("Key Used");
+						level.getClientPlayer().helpLabel.setText("Key Used");
+						level.getClientPlayer().help1Label.setText("");
 					} else {
-						System.out.println("Sorry... you need a key");
+						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 					if (level == Level.floor1) {
@@ -87,9 +98,11 @@ public abstract class Mob extends Entity {
 					if (level.getClientPlayer().inventory.contains(Item.key)) {
 						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
-						System.out.print("Key Used");
+						level.getClientPlayer().helpLabel.setText("Key Used");
+						level.getClientPlayer().help1Label.setText("");
 					} else {
-						System.out.println("Sorry... you need a key");
+						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 					if (level == Level.floor1) {
@@ -112,9 +125,11 @@ public abstract class Mob extends Entity {
 					if (level.getClientPlayer().inventory.contains(Item.key)) {
 						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
-						System.out.print("Key Used");
+						level.getClientPlayer().helpLabel.setText("Key Used");
+						level.getClientPlayer().help1Label.setText("");
 					} else {
-						System.out.println("Sorry... you need a key");
+						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 					if (level == Level.floor1) {
@@ -131,9 +146,11 @@ public abstract class Mob extends Entity {
 					if (level.getClientPlayer().inventory.contains(Item.key)) {
 						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
 						level.getClientPlayer().inventory.remove(Item.key);
-						System.out.print("Key Used");
+						level.getClientPlayer().helpLabel.setText("Key Used");
+						level.getClientPlayer().help1Label.setText("");
 					} else {
-						System.out.println("Sorry... you need a key");
+						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
 					}
 				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 					if(level == Level.floor1){

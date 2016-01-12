@@ -2,6 +2,7 @@ package com.riphtix.vgmad.level;
 
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.mob.ChampionShooter;
+import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Shooter;
 
 import javax.imageio.ImageIO;
@@ -33,21 +34,21 @@ public class Floor1Level extends Level {
 		}
 		int topRank = mapRank + 2;
 
-		ChampionShooter keyHolder = new ChampionShooter(47, 48, ThreadLocalRandom.current().nextInt(bottomRank, topRank));
+		ChampionShooter keyHolder = new ChampionShooter(47, 48, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 2, Mob.Classification.CHAMPION);
 		keyHolder.inventory.add(Item.key);
 
 		add(keyHolder);
-		add(new Shooter(49, 15, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(13, 16, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(16, 21, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(23, 16, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(30, 38, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(23, 37, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(24, 48, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(46, 42, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(47, 34, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(44, 21, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
-		add(new Shooter(44, 33, ThreadLocalRandom.current().nextInt(bottomRank, topRank)));
+		add(new Shooter(49, 15, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(13, 16, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(16, 21, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(23, 16, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(30, 38, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(23, 37, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(24, 48, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(46, 42, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(47, 34, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(44, 21, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
+		add(new Shooter(44, 33, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
 
 		//ThreadLocalRandom.current().nextInt(bottomRank, topRank)
 	}

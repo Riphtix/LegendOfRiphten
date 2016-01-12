@@ -17,10 +17,6 @@ public class GateTile extends Tile {
 		screen.renderTile(x << 4, y << 4, this);
 	}
 
-	public void tick(){
-		render(x, y, screen);
-	}
-
 	public boolean isDoorway(){
 		return true;
 	}

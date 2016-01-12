@@ -3,11 +3,13 @@ package com.riphtix.vgmad;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.mob.Player;
 import com.riphtix.vgmad.gfx.Screen;
+import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.gfx.ui.UIManager;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.handler.Mouse;
 import com.riphtix.vgmad.level.Level;
 import com.riphtix.vgmad.level.TileCoordinate;
+import com.riphtix.vgmad.level.tile.Tile;
 
 import javax.imageio.ImageIO;
 import javax.swing.*;
@@ -98,7 +100,9 @@ public class Game extends Canvas implements Runnable {
 			player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
 			level.add(player);
 		} else if (level != Level.floor1 && level == Level.floor2) {
-			TileCoordinate playerSpawn = new TileCoordinate(32, 28);
+			Tile.ironGateLockedTile.setLocked(true);
+			Tile.ironGateLockedTile.sprite = Sprite.lockedGateSprite;
+			TileCoordinate playerSpawn = new TileCoordinate(32, 51);
 			Player oldPlayer = player;
 			if (player != null) {
 				Player newPlayer = new Player(oldPlayer.getName(), playerSpawn.x(), playerSpawn.y(), key);

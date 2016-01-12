@@ -15,8 +15,6 @@ public class SpriteSheet {
 
 	//Tiles
 	public static SpriteSheet tiles = new SpriteSheet("/textures/tiles.png", 256);
-	public static SpriteSheet lava = new SpriteSheet(tiles, 0, 14, 16, 1, 16);
-	public static SpriteSheet water = new SpriteSheet(tiles, 0, 15, 16, 1, 16);
 
 	//Mobs
 	public static SpriteSheet mobs = new SpriteSheet("/entities/mobs/mobs.png", 1024);

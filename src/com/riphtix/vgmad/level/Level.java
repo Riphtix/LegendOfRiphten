@@ -1,6 +1,5 @@
 package com.riphtix.vgmad.level;
 
-import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.items.armor.Armor;
@@ -12,7 +11,6 @@ import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.Projectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.gfx.SpriteSheet;
 import com.riphtix.vgmad.handler.Keyboard;
 import com.riphtix.vgmad.level.tile.hitbox.PlayerHitbox;
 import com.riphtix.vgmad.level.tile.Tile;
@@ -60,7 +58,7 @@ public class Level {
 
 	//creates new levels
 	public static Level floor1 = new Floor1Level("/levels/floor1Level.png", 1);
-	public static Level floor2 = new Floor2Level("/levels/floor2Level.png", 4);
+	public static Level floor2 = new Floor2Level("/levels/floor2Level.png", 3);
 
 	protected static String path;
 
@@ -133,6 +131,12 @@ public class Level {
 
 		for (int i = 0; i < healthBars.size(); i++) {
 			healthBars.get(i).tick();
+		}
+
+		for (int y = 0; y < height; y++){
+			for(int x = 0; x < width; x++){
+				getTile(x, y).tick();
+			}
 		}
 
 		remove();
@@ -230,8 +234,9 @@ public class Level {
 			} else entities.add(mobs.get(i));
 		}
 
+
 		double min = 0;
-		Entity closest = null;
+		Mob closest = null;
 		for (int i = 0; i < entities.size(); i++) {
 			Mob m = mobs.get(i);
 			if (m instanceof Player) continue;
@@ -241,9 +246,10 @@ public class Level {
 				closest = m;
 			}
 		}
+
 		Mob closestMob = null;
 		if (closest != null) {
-			closestMob = (Mob) closest;
+			closestMob = closest;
 		}
 
 		return closestMob;
@@ -567,18 +573,18 @@ public class Level {
 
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height) return Tile.voidTile;
-			if (tiles[x + y * width] == Tile.colorGrass) return Tile.grassTile;
-			if (tiles[x + y * width] == Tile.colorDirt) return Tile.dirtTile;
-			if (tiles[x + y * width] == Tile.colorStone) return Tile.stoneTile;
-			if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
-			if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
-			if (tiles[x + y * width] == Tile.colorIronGateLocked) return Tile.ironGateLockedTile;
-			if (tiles[x + y * width] == Tile.colorIronGateUnlocked) return Tile.ironGateUnlockedTile;
-			if (tiles[x + y * width] == Tile.colorIronBars) return Tile.ironBarTile;
-			if (tiles[x + y * width] == Tile.colorLava) return Tile.lavaTile;
-			if (tiles[x + y * width] == Tile.colorVolcanicFloor) return Tile.volcanicFloorTile;
-			if (tiles[x + y * width] == Tile.colorVolcanicBrickWall) return Tile.volcanicBrickWallTile;
-
+		if (tiles[x + y * width] == Tile.colorGrass) return Tile.grassTile;
+		if (tiles[x + y * width] == Tile.colorDirt) return Tile.dirtTile;
+		if (tiles[x + y * width] == Tile.colorStoneWall) return Tile.stoneWallTile;
+		if (tiles[x + y * width] == Tile.colorStoneBrick) return Tile.stoneBrickTile;
+		if (tiles[x + y * width] == Tile.colorWoodenPlank) return Tile.woodenPlankTile;
+		if (tiles[x + y * width] == Tile.colorIronGateLocked) return Tile.ironGateLockedTile;
+		if (tiles[x + y * width] == Tile.colorIronGateUnlocked) return Tile.ironGateUnlockedTile;
+		if (tiles[x + y * width] == Tile.colorIronBars) return Tile.ironBarTile;
+		if (tiles[x + y * width] == Tile.colorLava) return Tile.lavaTile;
+		if (tiles[x + y * width] == Tile.colorVolcanicFloor) return Tile.volcanicFloorTile;
+		if (tiles[x + y * width] == Tile.colorVolcanicBrickWall) return Tile.volcanicBrickWallTile;
+		if (tiles[x + y * width] == Tile.colorStoneFloor) return Tile.stoneFloorTile;
 		return Tile.voidTile;
 	}
 

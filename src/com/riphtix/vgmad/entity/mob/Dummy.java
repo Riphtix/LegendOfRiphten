@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.exp.Experience;
+import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -28,24 +29,32 @@ public class Dummy extends Mob {
 	public MobHealthBar healthBar25;
 	public MobHealthBar healthBar50;
 	public MobHealthBar healthBar75;
+	boolean health75 = false;
+	boolean health50 = false;
+	boolean health25 = false;
+	boolean health0 = false;
 
-	public Dummy(int x, int y, int rank) {
+	public Inventory inventory;
+
+	public Dummy(int x, int y, int rank, Classification classification) {
 		this.x = x << 4;
 		this.y = y << 4;
+		this.rank = rank;
+		this.classification = classification;
 		sprite = animSprite.getSprite();
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
+		inventory = new Inventory();
 		healthBar0 = new MobHealthBar((int) this.x - 10, (int) this.y - 20, Sprite.healthBar0);
 		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
 		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
 		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
 
 		//Dummy default attributes
-		maxHealth = 100;
+		maxHealth = Experience.calculateMobHealth(this, 100);
 		health = maxHealth;
-		maxMana = 100;
+		maxMana = Experience.calculateMobMana(this, 100);
 		mana = maxMana;
-		this.rank = rank;
-		armor = 0.0;
+		armor = Experience.calculateMobArmor(this, 0);
 		protectSpell = 0.0;
 	}
 
@@ -78,54 +87,70 @@ public class Dummy extends Mob {
 		if (xa != 0 || ya != 0) {
 			move(xa, 8, -10, ya, 0, 14);
 			walking = true;
-		} else walking = false;
-
+		} else {
+			walking = false;
+		}
 		healthBar0.setXY(this.x - 10, this.y - 20);
 		healthBar25.setXY(this.x - 5, this.y - 20);
 		healthBar50.setXY(this.x, this.y - 20);
 		healthBar75.setXY(this.x + 5, this.y - 20);
-		if (health / maxHealth >= .75) {
-			level.add(healthBar75);
-		}
-		if (health / maxHealth >= .5) {
-			level.add(healthBar50);
-			if(health / maxHealth < .75){
-				healthBar75.remove();
-			}
-		}
-		if (health / maxHealth >= .25) {
-			level.add(healthBar25);
-			if(health / maxHealth < .5){
-				healthBar50.remove();
-				healthBar75.remove();
-			}
-		}
-		if (health / maxHealth > 0) {
+		if(health / maxHealth > 0 && !health0){
 			level.add(healthBar0);
-			if(health / maxHealth < .25){
-				healthBar25.remove();
-				healthBar50.remove();
-				healthBar75.remove();
+			if(health / maxHealth > .25 && !health25){
+				level.add(healthBar25);
+				if(health / maxHealth > .5 && !health50){
+					level.add(healthBar50);
+					if(health / maxHealth > .75 && !health75){
+						level.add(healthBar75);
+						health75 = true;
+					}
+					health50 = true;
+				}
+				health25 = true;
 			}
-		}
-		if (health / maxHealth <= 0){
-			healthBar0.remove();
-			healthBar25.remove();
-			healthBar50.remove();
-			healthBar75.remove();
+			health0 = true;
 		}
 
+		if(health / maxHealth <= .75){
+			if(health75) {
+				healthBar75.remove();
+				health75 = false;
+			}
+			if(health / maxHealth <= .5){
+				if(health50) {
+					healthBar50.remove();
+					health50 = false;
+				}
+				if(health / maxHealth <= .25){
+					if(health25) {
+						healthBar25.remove();
+						health25 = false;
+					}
+				}
+			}
+		}
 	}
 
 	public void dummyDamaged(double damage) {
-
+		double armorModifier = armor;
+		if (armorModifier > 1){
+			armorModifier /= 100;
+		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= (damage - (damage * armor) - (damage * protectSpell));
+		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
 
 		if (isDead()) {
 			Sound.SoundEffect.FEMALE_DEAD.play();
+			System.out.println(level.getClientPlayer().totalXP);
 			level.getClientPlayer().xp += Experience.calculateXPFromMob(this);
 			level.getClientPlayer().totalXP += Experience.calculateXPFromMob(this);
+			if(inventory != null && inventory.size() != 0){
+				for(int i = 0; i < inventory.size(); i++){
+					for(int j = 0; j < inventory.get(i).size(); j++){
+						level.addItem(inventory.get(i).get(j), (int) x >> 4, (int) y >> 4);
+					}
+				}
+			}
 			level.add(new ParticleSpawner((int) x, (int) y, 44, 50, level, 0xffc40000));
 			remove();
 			healthBar0.remove();

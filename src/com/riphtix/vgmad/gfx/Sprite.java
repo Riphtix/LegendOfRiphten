@@ -22,7 +22,7 @@ public class Sprite {
 	//Tiles
 	public static Sprite grassSprite = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite dirtSprite = new Sprite(16, 1, 0, SpriteSheet.tiles);
-	public static Sprite stoneSprite = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite stoneWallSprite = new Sprite(16, 2, 0, SpriteSheet.tiles);
 	public static Sprite stoneBrickSprite = new Sprite(16, 3, 0, SpriteSheet.tiles);
 	public static Sprite woodenPlankSprite = new Sprite(16, 4, 0, SpriteSheet.tiles);
 	public static Sprite lockedGateSprite = new Sprite(16, 5, 0, SpriteSheet.tiles);
@@ -30,6 +30,9 @@ public class Sprite {
 	public static Sprite ironBarsSprite = new Sprite(16, 7, 0, SpriteSheet.tiles);
 	public static Sprite volcanicFloorSprite = new Sprite(16, 8, 0, SpriteSheet.tiles);
 	public static Sprite volcanicBrickWallSprite = new Sprite(16, 9, 0, SpriteSheet.tiles);
+	public static Sprite lavaSprite = new Sprite(16, 10, 0, SpriteSheet.tiles);
+	public static Sprite waterSprite = new Sprite(16, 11, 0, SpriteSheet.tiles);
+	public static Sprite stoneFloorSprite = new Sprite(16, 12, 0, SpriteSheet.tiles);
 	public static Sprite voidSprite = new Sprite(16, 0x000000);
 
 	//Items

@@ -17,7 +17,7 @@ import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
 
-public class ChampionShooter extends Mob{
+public class ChampionShooter extends Mob {
 
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.genie_down, 32, 32, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.genie_up, 32, 32, 3);
@@ -30,9 +30,6 @@ public class ChampionShooter extends Mob{
 	private int xa = 0;
 	private int ya = 0;
 
-	private double x;
-	private double y;
-
 	private Entity rand = null;
 
 	private int firerate = 0;
@@ -42,13 +39,18 @@ public class ChampionShooter extends Mob{
 	public MobHealthBar healthBar25;
 	public MobHealthBar healthBar50;
 	public MobHealthBar healthBar75;
+	boolean health75 = false;
+	boolean health50 = false;
+	boolean health25 = false;
+	boolean health0 = false;
 
 	public Inventory inventory;
 	
-	public ChampionShooter(int x, int y, int rank) {
+	public ChampionShooter(int x, int y, int rank, Classification classification) {
 		this.x = x << 4;
 		this.y = y << 4;
 		this.rank = rank;
+		this.classification = classification;
 		sprite = animSprite.getSprite();
 		firerate = SorceressProjectile.FIRE_RATE;
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
@@ -57,17 +59,18 @@ public class ChampionShooter extends Mob{
 		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
 		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
 		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
-		range = 336;
+		range = 100;
 
 		//Shooter default attributes
-		health = 350;
-		mana = 100;
-		this.rank = rank;
-		armor = 0.0;
+		maxHealth = Experience.calculateMobHealth(this, 350);
+		health = maxHealth;
+		maxMana = Experience.calculateMobMana(this, 100);
+		mana = maxMana;
+		armor = Experience.calculateMobArmor(this, 0);
 		protectSpell = 0.0;
 	}
 
-	public void tick(){
+	public void tick() {
 		time++;
 		animSprite.tick();
 		if (firerate > 0) firerate--;
@@ -91,58 +94,68 @@ public class ChampionShooter extends Mob{
 		} else {
 			walking = false;
 		}
-
-		if (health / maxHealth >= .75) {
-			level.add(healthBar75);
-		}
-		if (health / maxHealth >= .5) {
-			level.add(healthBar50);
-			if(health / maxHealth < .75){
-				healthBar75.remove();
-			}
-		}
-		if (health / maxHealth >= .25) {
-			level.add(healthBar25);
-			if(health / maxHealth < .5){
-				healthBar50.remove();
-				healthBar75.remove();
-			}
-		}
-		if (health / maxHealth > 0) {
-			level.add(healthBar0);
-			if(health / maxHealth < .25){
-				healthBar25.remove();
-				healthBar50.remove();
-				healthBar75.remove();
-			}
-		}
-		if (health / maxHealth <= 0){
-			healthBar0.remove();
-			healthBar25.remove();
-			healthBar50.remove();
-			healthBar75.remove();
-		}
 		healthBar0.setXY(this.x - 10, this.y - 20);
 		healthBar25.setXY(this.x - 5, this.y - 20);
 		healthBar50.setXY(this.x, this.y - 20);
 		healthBar75.setXY(this.x + 5, this.y - 20);
-		shootClosest();
-		//shootRandom();
+		if (health / maxHealth > 0 && !health0) {
+			level.add(healthBar0);
+			if (health / maxHealth > .25 && !health25) {
+				level.add(healthBar25);
+				if (health / maxHealth > .5 && !health50) {
+					level.add(healthBar50);
+					if (health / maxHealth > .75 && !health75) {
+						level.add(healthBar75);
+						health75 = true;
+					}
+					health50 = true;
+				}
+				health25 = true;
+			}
+			health0 = true;
+		}
+
+		if (health / maxHealth <= .75) {
+			if (health75) {
+				healthBar75.remove();
+				health75 = false;
+			}
+			if (health / maxHealth <= .5) {
+				if (health50) {
+					healthBar50.remove();
+					health50 = false;
+				}
+				if (health / maxHealth <= .25) {
+					if (health25) {
+						healthBar25.remove();
+						health25 = false;
+					}
+				}
+			}
+		}
+
+		if (Vector2i.getDistance(new Vector2i((int) this.getX(), (int) this.getY()), new Vector2i((int) level.getClientPlayer().getX(), (int) level.getClientPlayer().getY())) <= range) {
+			shootClosest();
+			//shootRandom();
+		}
 	}
 
-	public void shooterDamaged(double damage) {
-
+	public void championShooterDamaged(double damage) {
+		double armorModifier = armor;
+		if (armorModifier > 1) {
+			armorModifier /= 100;
+		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= (damage - (damage * armor) - (damage * protectSpell));
+		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
 
 		if (isDead()) {
 			Sound.SoundEffect.FEMALE_DEAD.play();
 			System.out.println(level.getClientPlayer().totalXP);
 			level.getClientPlayer().xp += Experience.calculateXPFromMob(this);
 			level.getClientPlayer().totalXP += Experience.calculateXPFromMob(this);
-			if(inventory != null && inventory.size() > 0){
-				for(int i = 0; i < inventory.size(); i++){
-					for(int j = 0; j < inventory.get(i).size(); j++){
+			if (inventory != null && inventory.size() > 0) {
+				for (int i = 0; i < inventory.size(); i++) {
+					for (int j = 0; j < inventory.get(i).size(); j++) {
 						level.addItem(inventory.get(i).get(j), (int) x >> 4, (int) y >> 4);
 					}
 				}

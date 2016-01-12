@@ -46,15 +46,25 @@ public class Experience extends Game {
 		return xpToNextRank;
 	}
 
-	public static double calculateXPFromMob(Mob mob){
-		return (23 * currentRank + (currentRank * (.05 * mob.rank)));
+	public static double calculateXPFromMob(Mob mob) {
+		double xpFromMob = 0;
+		if(mob.classification == Mob.Classification.BASIC){
+			xpFromMob = (23 * currentRank + (currentRank * (.05 * mob.rank)));
+		} else if(mob.classification == Mob.Classification.CHAMPION){
+			xpFromMob = (46 * currentRank + (currentRank * (.05 * mob.rank)));
+		}else if(mob.classification == Mob.Classification.LORD){
+			xpFromMob = (92 * currentRank + (currentRank * (.05 * mob.rank)));
+		}else if(mob.classification == Mob.Classification.BOSS){
+			xpFromMob = (184 * currentRank + (currentRank * (.05 * mob.rank)));
+		}
+		return xpFromMob;
 	}
 
-	public static double calculateArmor(){
+	public static double calculateArmor() {
 		double armor = currentArmor + (1.25 * currentRank);
 
-		for(int i = 0; i < currentLevel.getClientPlayer().inventory.size(); i++){
-			if(currentLevel.getClientPlayer().inventory.get(i).get(0) instanceof Armor){
+		for (int i = 0; i < currentLevel.getClientPlayer().inventory.size(); i++) {
+			if (currentLevel.getClientPlayer().inventory.get(i).get(0) instanceof Armor) {
 				armor += currentLevel.getClientPlayer().inventory.get(i).get(0).getArmor();
 			}
 		}
@@ -67,6 +77,28 @@ public class Experience extends Game {
 	}
 
 	public static double calculateMana() {
-		return currentLevel.getClientPlayer().maxHealth + (ThreadLocalRandom.current().nextInt(5, 10) * currentRank);
+		return currentLevel.getClientPlayer().maxMana + (ThreadLocalRandom.current().nextInt(5, 15) * currentRank);
+	}
+
+	public static double calculateMobArmor(Mob mob, double startingStat) {
+		double armor = startingStat + (1.05 * mob.rank);
+
+		if(mob.inventory != null) {
+			for (int i = 0; i < mob.inventory.size(); i++) {
+				if (mob.inventory.get(i).get(0) instanceof Armor) {
+					armor += mob.inventory.get(i).get(0).getArmor();
+				}
+			}
+		}
+
+		return armor;
+	}
+
+	public static double calculateMobHealth(Mob mob, double startingStat) {
+		return startingStat + (ThreadLocalRandom.current().nextInt(5, 15) * mob.rank);
+	}
+
+	public static double calculateMobMana(Mob mob, double startingStat) {
+		return startingStat + (ThreadLocalRandom.current().nextInt(5, 20) * mob.rank);
 	}
 }

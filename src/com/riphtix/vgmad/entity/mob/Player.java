@@ -47,7 +47,9 @@ public class Player extends Mob {
 	private int firerate = 0;
 
 	private UIManager ui;
-	private UIPanel panel;
+	public UIPanel panel;
+	public UILabel helpLabel;
+	public UILabel help1Label;
 	private UILabel nameLabel;
 	private UILabel lvlLabel;
 	private UILabel lvlRankLabel;
@@ -192,6 +194,23 @@ public class Player extends Mob {
 		armorStatLabel.dropShadow = true;
 		armorStatLabel.dropShadowOffset = 1;
 		panel.addComponent(armorStatLabel);
+
+		helpLabel = new UILabel(new Vector2i(7, 480), "");
+		helpLabel.setColor(0xffa0a0a0);
+		helpLabel.setFont(new Font("Verdana", Font.PLAIN, 15));
+		helpLabel.dropShadow = true;
+		helpLabel.dropShadowOffset = 1;
+		panel.addComponent(helpLabel);
+
+		help1Label = new UILabel(new Vector2i(helpLabel.position.x, helpLabel.position.y + 15), "");
+		help1Label.setColor(0xffa0a0a0);
+		help1Label.setFont(new Font("Verdana", Font.PLAIN, 15));
+		help1Label.dropShadow = true;
+		help1Label.dropShadowOffset = 1;
+		panel.addComponent(help1Label);
+
+		//Inventory display
+		//TODO: Create a visual inventory using UILabels
 
 		//player default attributes
 		maxHealth = 100;
@@ -378,9 +397,9 @@ public class Player extends Mob {
 		if (xp >= Experience.getXPToNextLevel()) {
 			xp -= Experience.getXPToNextLevel();
 			rank++;
-			armor = Experience.calculateArmor();
 			maxHealth = Experience.calculateHealth();
 			maxMana = Experience.calculateMana();
+			armor = Experience.calculateArmor();
 		}
 
 
@@ -401,8 +420,8 @@ public class Player extends Mob {
 		if (armorModifier > 1){
 			armorModifier /= 100;
 		}
-		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
 		// can have a multiplier here to reduce health damage due to spells or armor
+		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
 
 		if (isDead()) {
 			if (lives > 0) {

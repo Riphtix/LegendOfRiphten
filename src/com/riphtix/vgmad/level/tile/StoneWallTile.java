@@ -1,13 +1,11 @@
 package com.riphtix.vgmad.level.tile;
 
-import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
-import com.riphtix.vgmad.gfx.SpriteSheet;
 
-public class LavaTile extends Tile {
+public class StoneWallTile extends Tile {
 
-	public LavaTile(Sprite sprite) {
+	public StoneWallTile(Sprite sprite) {
 		super(sprite);
 	}
 

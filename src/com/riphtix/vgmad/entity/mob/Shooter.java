@@ -2,6 +2,7 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.exp.Experience;
+import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.SorceressProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
@@ -43,12 +44,17 @@ public class Shooter extends Mob {
 	boolean health25 = false;
 	boolean health0 = false;
 
-	public Shooter(int x, int y, int level) {
+	public Inventory inventory;
+
+	public Shooter(int x, int y, int rank, Classification classification) {
 		this.x = x << 4;
 		this.y = y << 4;
+		this.rank = rank;
+		this.classification = classification;
 		sprite = animSprite.getSprite();
 		firerate = SorceressProjectile.FIRE_RATE;
 		hitbox = new MobHitbox(Sprite.hitbox21x32);
+		inventory = new Inventory();
 		healthBar0 = new MobHealthBar((int) this.x - 10, (int) this.y - 20, Sprite.healthBar0);
 		healthBar25 = new MobHealthBar((int) this.x - 5, (int) this.y - 20, Sprite.healthBar25);
 		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
@@ -56,12 +62,11 @@ public class Shooter extends Mob {
 		range = 200;
 
 		//Shooter default attributes
-		maxHealth = 100;
+		maxHealth = Experience.calculateMobHealth(this, 100);
 		health = maxHealth;
-		maxMana = 100;
+		maxMana = Experience.calculateMobMana(this, 100);
 		mana = maxMana;
-		rank = level;
-		armor = 0.0;
+		armor = Experience.calculateMobArmor(this, 0);
 		protectSpell = 0.0;
 	}
 
@@ -102,13 +107,13 @@ public class Shooter extends Mob {
 		healthBar25.setXY(this.x - 5, this.y - 20);
 		healthBar50.setXY(this.x, this.y - 20);
 		healthBar75.setXY(this.x + 5, this.y - 20);
-		if(health / maxHealth > 0 && !health0){
+		if (health / maxHealth > 0 && !health0) {
 			level.add(healthBar0);
-			if(health / maxHealth > .25 && !health25){
+			if (health / maxHealth > .25 && !health25) {
 				level.add(healthBar25);
-				if(health / maxHealth > .5 && !health50){
+				if (health / maxHealth > .5 && !health50) {
 					level.add(healthBar50);
-					if(health / maxHealth > .75 && !health75){
+					if (health / maxHealth > .75 && !health75) {
 						level.add(healthBar75);
 						health75 = true;
 					}
@@ -119,41 +124,47 @@ public class Shooter extends Mob {
 			health0 = true;
 		}
 
-		if(health / maxHealth <= .75){
-			if(health75) {
+		if (health / maxHealth <= .75) {
+			if (health75) {
 				healthBar75.remove();
 				health75 = false;
 			}
-			if(health / maxHealth <= .5){
-				if(health50) {
+			if (health / maxHealth <= .5) {
+				if (health50) {
 					healthBar50.remove();
 					health50 = false;
 				}
-				if(health / maxHealth <= .25){
-					if(health25) {
+				if (health / maxHealth <= .25) {
+					if (health25) {
 						healthBar25.remove();
 						health25 = false;
 					}
 				}
 			}
 		}
-		shootClosest();
-		//shootRandom();
+
+		if (Vector2i.getDistance(new Vector2i((int) this.getX(), (int) this.getY()), new Vector2i((int) level.getClientPlayer().getX(), (int) level.getClientPlayer().getY())) <= range) {
+			shootClosest();
+			//shootRandom();
+		}
 	}
 
 	public void shooterDamaged(double damage) {
-
+		double armorModifier = armor;
+		if (armorModifier > 1) {
+			armorModifier /= 100;
+		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= (damage - (damage * armor) - (damage * protectSpell));
+		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
 
 		if (isDead()) {
 			Sound.SoundEffect.FEMALE_DEAD.play();
 			System.out.println(level.getClientPlayer().totalXP);
 			level.getClientPlayer().xp += Experience.calculateXPFromMob(this);
 			level.getClientPlayer().totalXP += Experience.calculateXPFromMob(this);
-			if(inventory != null && inventory.size() != 0){
-				for(int i = 0; i < inventory.size(); i++){
-					for(int j = 0; j < inventory.get(i).size(); j++){
+			if (inventory != null && inventory.size() != 0) {
+				for (int i = 0; i < inventory.size(); i++) {
+					for (int j = 0; j < inventory.get(i).size(); j++) {
 						level.addItem(inventory.get(i).get(j), (int) x >> 4, (int) y >> 4);
 					}
 				}

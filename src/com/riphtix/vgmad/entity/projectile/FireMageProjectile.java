@@ -73,8 +73,9 @@ public class FireMageProjectile extends Projectile {
 				} else if (closest instanceof ChampionShooter) {
 					ChampionShooter closestChampionShooter = (ChampionShooter) closest;
 					if(mobHitboxCollision(closestChampionShooter.hitbox, this.hitbox)){
+						System.out.println("hit champion hitbox");
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
-						closestChampionShooter.shooterDamaged(damage);
+						closestChampionShooter.championShooterDamaged(damage);
 						Sound.SoundEffect.MALE_HIT.play();
 						remove();
 					}
