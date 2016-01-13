@@ -1,6 +1,8 @@
 package com.riphtix.vgmad.entity.projectile;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.items.weapons.Weapon;
+import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
@@ -13,9 +15,9 @@ public class SorceressProjectile extends Projectile {
 
 	public ProjectileHitbox hitbox;
 
-	public SorceressProjectile(double x, double y, double dir, Entity entity) {
-		super(x, y, dir);
-		range = entity.range;
+	public SorceressProjectile(double x, double y, double dir, Weapon weapon) {
+		super(x, y, dir, ProjectileType.FIRE);
+		range = weapon.getRange();
 		//speed = DIRECTION_TEST_SPEED;
 		//speed = TEST_SPEED;
 		speed = 2;
@@ -34,6 +36,7 @@ public class SorceressProjectile extends Projectile {
 		if(playerHitboxCollision(level.getClientPlayer().hitbox, this.hitbox)){
 			level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 			level.getClientPlayer().playerDamaged(damage);
+			//level.getClientPlayer().effect = Mob.StatusEffect.FIRE;
 			Sound.SoundEffect.MALE_HIT.play();
 			remove();
 		}

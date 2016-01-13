@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.entity.projectile;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.mob.*;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.Screen;
@@ -14,9 +15,9 @@ public class FireMageProjectile extends Projectile {
 
 	public ProjectileHitbox hitbox;
 
-	public FireMageProjectile(double x, double y, double dir, Entity entity) {
-		super(x, y, dir);
-		range = entity.range;
+	public FireMageProjectile(double x, double y, double dir, Weapon weapon) {
+		super(x, y, dir, ProjectileType.FIRE);
+		range = weapon.getRange();
 		//speed = DIRECTION_TEST_SPEED;
 		//speed = TEST_SPEED;
 		speed = NORMAL_SPEED;
@@ -43,6 +44,7 @@ public class FireMageProjectile extends Projectile {
 					if (mobHitboxCollision(closestShooter.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 						closestShooter.shooterDamaged(damage);
+						//closestShooter.effect = Mob.StatusEffect.FIRE;
 						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
 					}
@@ -51,6 +53,7 @@ public class FireMageProjectile extends Projectile {
 					if (mobHitboxCollision(closestDummy.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 						closestDummy.dummyDamaged(damage);
+						//closestDummy.effect = Mob.StatusEffect.FIRE;
 						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
 					}
@@ -59,6 +62,7 @@ public class FireMageProjectile extends Projectile {
 					if (mobHitboxCollision(closestChaser.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 						closestChaser.chaserDamaged(damage);
+						//closestChaser.effect = Mob.StatusEffect.FIRE;
 						Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
 					}
@@ -67,15 +71,16 @@ public class FireMageProjectile extends Projectile {
 					if (mobHitboxCollision(closestAStar.hitbox, this.hitbox)) {
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 						closestAStar.aStarDamaged(damage);
+//						closestAStar.effect = Mob.StatusEffect.FIRE;
 						//Sound.SoundEffect.FEMALE_DAMAGE_9.play();
 						remove();
 					}
 				} else if (closest instanceof ChampionShooter) {
 					ChampionShooter closestChampionShooter = (ChampionShooter) closest;
 					if(mobHitboxCollision(closestChampionShooter.hitbox, this.hitbox)){
-						System.out.println("hit champion hitbox");
 						level.add(new ParticleSpawner((int) x, (int) y, 22, 30, level, 0xffc40000));
 						closestChampionShooter.championShooterDamaged(damage);
+//						closestChampionShooter.effect = Mob.StatusEffect.FIRE;
 						Sound.SoundEffect.MALE_HIT.play();
 						remove();
 					}

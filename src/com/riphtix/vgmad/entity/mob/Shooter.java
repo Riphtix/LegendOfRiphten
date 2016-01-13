@@ -3,6 +3,7 @@ package com.riphtix.vgmad.entity.mob;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.exp.Experience;
 import com.riphtix.vgmad.entity.items.Inventory;
+import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.particle.Particle;
 import com.riphtix.vgmad.entity.projectile.SorceressProjectile;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
@@ -16,6 +17,7 @@ import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
+import java.util.Random;
 
 public class Shooter extends Mob {
 
@@ -60,6 +62,12 @@ public class Shooter extends Mob {
 		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
 		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
 		range = 200;
+		weapon = starterFireStaff;
+		weapon.setRange(range);
+		inventory.add(weapon);
+		if(new Random().nextInt(4) == 1){
+			inventory.add(starterChestPlate);
+		}
 
 		//Shooter default attributes
 		maxHealth = Experience.calculateMobHealth(this, 100);
@@ -103,6 +111,14 @@ public class Shooter extends Mob {
 		} else {
 			walking = false;
 		}
+
+		if (Vector2i.getDistance(new Vector2i((int) this.getX(), (int) this.getY()), new Vector2i((int) level.getClientPlayer().getX(), (int) level.getClientPlayer().getY())) <= range) {
+			shootClosest();
+			//shootRandom();
+		}
+
+		//getStatusEffects();
+
 		healthBar0.setXY(this.x - 10, this.y - 20);
 		healthBar25.setXY(this.x - 5, this.y - 20);
 		healthBar50.setXY(this.x, this.y - 20);
@@ -142,20 +158,13 @@ public class Shooter extends Mob {
 				}
 			}
 		}
-
-		if (Vector2i.getDistance(new Vector2i((int) this.getX(), (int) this.getY()), new Vector2i((int) level.getClientPlayer().getX(), (int) level.getClientPlayer().getY())) <= range) {
-			shootClosest();
-			//shootRandom();
-		}
 	}
 
 	public void shooterDamaged(double damage) {
-		double armorModifier = armor;
-		if (armorModifier > 1) {
-			armorModifier /= 100;
-		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
+		if(armor > 0 & protectSpell > 0) {
+			health -= (damage - (damage / armor) - (damage / protectSpell));
+		} else health -= damage;
 
 		if (isDead()) {
 			Sound.SoundEffect.FEMALE_DEAD.play();
@@ -165,7 +174,9 @@ public class Shooter extends Mob {
 			if (inventory != null && inventory.size() != 0) {
 				for (int i = 0; i < inventory.size(); i++) {
 					for (int j = 0; j < inventory.get(i).size(); j++) {
-						level.addItem(inventory.get(i).get(j), (int) x >> 4, (int) y >> 4);
+						int randomSpotX = new Random().nextInt(2);
+						int randomSpotY = new Random().nextInt(2);
+						level.addItem(inventory.get(i).get(j), ((int) x >> 4) + randomSpotX, ((int) y >> 4) + randomSpotY);
 					}
 				}
 			}
@@ -195,8 +206,10 @@ public class Shooter extends Mob {
 				double dx = rand.getX() - x;
 				double dy = rand.getY() - y;
 				double dir = Math.atan2(dy, dx);
-				shoot(x, y, dir, this);
-				firerate = SorceressProjectile.FIRE_RATE;
+				if(inventory.contains(starterFireStaff)) {
+					shoot(x, y, dir, this);
+					firerate = SorceressProjectile.FIRE_RATE;
+				}
 			}
 		}
 	}
@@ -221,8 +234,10 @@ public class Shooter extends Mob {
 				double dx = closest.getX() - x;
 				double dy = closest.getY() - y;
 				double dir = Math.atan2(dy, dx);
-				shoot(x, y, dir, this);
-				firerate = SorceressProjectile.FIRE_RATE;
+				if(inventory.contains(starterFireStaff)) {
+					shoot(x, y, dir, this);
+					firerate = SorceressProjectile.FIRE_RATE;
+				}
 			}
 		}
 	}

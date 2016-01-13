@@ -90,6 +90,9 @@ public class Dummy extends Mob {
 		} else {
 			walking = false;
 		}
+
+		//getStatusEffects();
+
 		healthBar0.setXY(this.x - 10, this.y - 20);
 		healthBar25.setXY(this.x - 5, this.y - 20);
 		healthBar50.setXY(this.x, this.y - 20);
@@ -132,12 +135,10 @@ public class Dummy extends Mob {
 	}
 
 	public void dummyDamaged(double damage) {
-		double armorModifier = armor;
-		if (armorModifier > 1){
-			armorModifier /= 100;
-		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
+		if(armor > 0 & protectSpell > 0) {
+			health -= (damage - (damage / armor) - (damage / protectSpell));
+		} else health -= damage;
 
 		if (isDead()) {
 			Sound.SoundEffect.FEMALE_DEAD.play();

@@ -1,10 +1,15 @@
 package com.riphtix.vgmad.entity.projectile;
 
 import com.riphtix.vgmad.entity.Entity;
+import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.tile.hitbox.ProjectileHitbox;
 
 public abstract class Projectile extends Entity {
+
+	public enum ProjectileType{
+		FIRE, STUN, POISON, SLOW
+	}
 
 	protected final double xOrigin, yOrigin;
 	protected double angle;
@@ -20,13 +25,23 @@ public abstract class Projectile extends Entity {
 	public final double NORMAL_SPEED = 4;
 	public final double FAST_SPEED = 8;
 	public ProjectileHitbox hitbox;
+	public ProjectileType projectileType;
 
-	public Projectile(double x, double y, double dir) {
+	/**
+	 *
+	 * @param x
+	 * @param y
+	 * @param dir
+	 * @param projectileType
+	 */
+
+	public Projectile(double x, double y, double dir, ProjectileType projectileType) {
 		xOrigin = x;
 		yOrigin = y;
 		angle = dir;
 		this.x = x;
 		this.y = y;
+		this.projectileType = projectileType;
 		hitbox = new ProjectileHitbox(Sprite.rotate(Sprite.hitbox16x8, angle));
 	}
 

@@ -1,6 +1,7 @@
 package com.riphtix.vgmad.entity;
 
 import com.riphtix.vgmad.entity.items.Item;
+import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.Level;
@@ -22,6 +23,7 @@ public class Entity {
 	protected final Random random = new Random();
 	public int range;
 	public MobHitbox hitbox;
+	public Weapon weapon;
 
 	private List<Item> items = new ArrayList<Item>();
 

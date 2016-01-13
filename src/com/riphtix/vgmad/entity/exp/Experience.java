@@ -68,7 +68,6 @@ public class Experience extends Game {
 				armor += currentLevel.getClientPlayer().inventory.get(i).get(0).getArmor();
 			}
 		}
-
 		return armor;
 	}
 
@@ -90,7 +89,6 @@ public class Experience extends Game {
 				}
 			}
 		}
-
 		return armor;
 	}
 

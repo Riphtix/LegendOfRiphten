@@ -1,6 +1,11 @@
 package com.riphtix.vgmad.entity.items;
 
+import com.riphtix.vgmad.entity.items.armor.Armor;
+import com.riphtix.vgmad.entity.items.armor.BodyArmor;
 import com.riphtix.vgmad.entity.items.basic.ResourceItem;
+import com.riphtix.vgmad.entity.items.weapons.RangedWeapon;
+import com.riphtix.vgmad.entity.items.weapons.Weapon;
+import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.gfx.Screen;
 import com.riphtix.vgmad.gfx.Sprite;
 import com.riphtix.vgmad.level.Level;
@@ -21,11 +26,41 @@ public class Item {
 
 	HashMap<String, Item> items = new HashMap<String, Item>();
 
-	public static Item iron;
-	public static Item key;
+	//ResourceItems
+	public Item iron;
+	public Item key;
+
+	//Weapons
+	public Weapon starterFireStaff;
+	public Weapon commonFireStaff;
+
+	//Armor
+	public Armor starterChestPlate;
+	public Armor starterLeggings;
+	public Armor starterHelmet;
+	public Armor commonChestPlate;
+	public Armor commonLeggings;
+	public Armor commonHelmet;
 
 	private Level level;
 
+	public Item(){
+		//Resource Items
+		iron = new ResourceItem("Iron", 1, Sprite.ironSprite);
+		key = new ResourceItem("Key", 1, Sprite.keySprite);
+
+		//Weapons
+		starterFireStaff = new RangedWeapon("FireStaffS", 0, Sprite.fireStaffSprite, 200, 25, Weapon.DamageType.DAMAGE_OVER_TIME);
+		commonFireStaff = new RangedWeapon("FireStaffC", 1, Sprite.fireStaffSprite, 200, 30, Weapon.DamageType.DAMAGE_OVER_TIME);
+
+		//Armor
+		starterChestPlate = new BodyArmor("ChestS", 0, Sprite.chestPlateSprite, .75, Armor.ArmorType.BODY);
+		starterLeggings = new BodyArmor("LegsS", 0, Sprite.leggingsSprite, .6, Armor.ArmorType.LEGS);
+		starterHelmet = new BodyArmor("HelmetS", 0, Sprite.helmetSprite, .55, Armor.ArmorType.HEAD);
+		commonChestPlate = new BodyArmor("ChestC", 1, Sprite.chestPlateSprite, .8, Armor.ArmorType.BODY);
+		commonLeggings = new BodyArmor("LegsC", 1, Sprite.leggingsSprite, .65, Armor.ArmorType.LEGS);
+		commonHelmet = new BodyArmor("HelmetC", 1, Sprite.helmetSprite, .6, Armor.ArmorType.HEAD);
+	}
 
 	/**
 	 * rarity is a number ranging from 0 - 5
@@ -45,11 +80,6 @@ public class Item {
 		this.name = name;
 		this.rarity = rarity;
 		this.sprite = sprite;
-	}
-
-	public static void initItems(){
-		iron = new ResourceItem("Iron", 1, Sprite.ironSprite);
-		key = new ResourceItem("Key", 1, Sprite.keySprite);
 	}
 
 	public void init(Level level){

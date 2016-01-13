@@ -4,6 +4,8 @@ import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.items.Item;
+import com.riphtix.vgmad.entity.items.armor.Armor;
+import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.projectile.SorceressProjectile;
 import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
@@ -17,6 +19,7 @@ import com.riphtix.vgmad.util.Vector2i;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Random;
 
 public abstract class Mob extends Entity {
 
@@ -39,11 +42,38 @@ public abstract class Mob extends Entity {
 	public int topYOffset;
 	public int bottomYOffset;
 
+	//Resource Items
+	protected Item iron = new Item().iron;
+	protected Item key = new Item().key;
+	//Weapons
+	protected Weapon starterFireStaff = new Item().starterFireStaff;
+	protected Weapon commonFireStaff = new Item().commonFireStaff;
+	//Armor
+	protected Armor starterChestPlate = new Item().starterChestPlate;
+	protected Armor starterLeggings = new Item().starterLeggings;
+	protected Armor starterHelmet = new Item().starterHelmet;
+	protected Armor commonChestPlate = new Item().commonChestPlate;
+	protected Armor commonLeggings = new Item().commonLeggings;
+	protected Armor commonHelmet = new Item().commonHelmet;
+
 	public enum Classification {
 		BASIC, CHAMPION, LORD, BOSS
 	}
 
 	public Classification classification;
+
+	/*public enum StatusEffect{
+		NORMAL, FIRE, STUN, POISON, SLOW;
+
+		public double fireDamage = new Random().nextInt(5) + 5;
+		public int fireDamageDuration = 540;
+		public double stunDuration = 180;
+		public double poisonDamage = new Random().nextInt(4) + 3;
+		public int poisonDamageDuration = 540;
+		public double slowDuration = 120;
+	}*/
+
+	//public StatusEffect effect = StatusEffect.NORMAL;
 
 	public enum Direction {
 		UP, DOWN, LEFT, RIGHT
@@ -54,6 +84,45 @@ public abstract class Mob extends Entity {
 	public MobHitbox hitbox;
 
 	public Inventory inventory;
+
+	/*public void getStatusEffects(){
+		int timer = 0;
+		if(effect == StatusEffect.NORMAL){
+			timer = 0;
+		}
+		if(effect == StatusEffect.FIRE){
+			while(timer < effect.fireDamageDuration) {
+				if (time % 60 == 0) {
+					health -= effect.fireDamage;
+				}
+				timer++;
+			}
+			effect = StatusEffect.NORMAL;
+		}
+		if(effect == StatusEffect.STUN){
+			while(timer < effect.stunDuration){
+				level.getClientPlayer().xa = 0;
+				level.getClientPlayer().ya = 0;
+				timer++;
+			}
+			effect = StatusEffect.NORMAL;
+		}
+		if(effect == StatusEffect.POISON){
+			while(timer < effect.poisonDamageDuration){
+				if(time % 60 == 0){
+					health -= effect.poisonDamage;
+				}
+				timer++;
+			}
+			effect = StatusEffect.NORMAL;
+		}
+		if(effect == StatusEffect.SLOW){
+			while(timer < effect.slowDuration){
+				level.getClientPlayer().xa *= .5;
+				level.getClientPlayer().ya *= .5;
+			}
+		}
+	}*/
 
 	public void move(double xa, int leftXWidth, int rightXWidth, double ya, int topYHeight, int bottomYHeight) {
 		if (xa != 0 && ya != 0) {
@@ -73,19 +142,21 @@ public abstract class Mob extends Entity {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += abs(xa);
 				}
-				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if (level.getClientPlayer().inventory.contains(Item.key)) {
-						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
-						level.getClientPlayer().inventory.remove(Item.key);
-						level.getClientPlayer().helpLabel.setText("Key Used");
-						level.getClientPlayer().help1Label.setText("");
-					} else {
-						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
-						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
-					}
-				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if (level == Level.floor1) {
-						Game.setLevel(Level.floor2);
+				if (this instanceof Player) {
+					if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level.getClientPlayer().inventory.contains(key)) {
+							level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
+							level.getClientPlayer().inventory.remove(key);
+							level.getClientPlayer().helpLabel.setText("Key Used");
+							level.getClientPlayer().help1Label.setText("");
+						} else {
+							level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+							level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
+						}
+					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level == Level.floor1) {
+							Game.setLevel(Level.floor2);
+						}
 					}
 				}
 
@@ -94,19 +165,21 @@ public abstract class Mob extends Entity {
 				if (!isCollision(abs(xa), leftXWidth, rightXWidth, ya, topYHeight, bottomYHeight)) {
 					this.x += xa;
 				}
-				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if (level.getClientPlayer().inventory.contains(Item.key)) {
-						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
-						level.getClientPlayer().inventory.remove(Item.key);
-						level.getClientPlayer().helpLabel.setText("Key Used");
-						level.getClientPlayer().help1Label.setText("");
-					} else {
-						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
-						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
-					}
-				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if (level == Level.floor1) {
-						Game.setLevel(Level.floor2);
+				if (this instanceof Player) {
+					if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level.getClientPlayer().inventory.contains(key)) {
+							level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
+							level.getClientPlayer().inventory.remove(key);
+							level.getClientPlayer().helpLabel.setText("Key Used");
+							level.getClientPlayer().help1Label.setText("");
+						} else {
+							level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+							level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
+						}
+					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level == Level.floor1) {
+							Game.setLevel(Level.floor2);
+						}
 					}
 				}
 
@@ -121,19 +194,21 @@ public abstract class Mob extends Entity {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += abs(ya);
 				}
-				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if (level.getClientPlayer().inventory.contains(Item.key)) {
-						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
-						level.getClientPlayer().inventory.remove(Item.key);
-						level.getClientPlayer().helpLabel.setText("Key Used");
-						level.getClientPlayer().help1Label.setText("");
-					} else {
-						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
-						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
-					}
-				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if (level == Level.floor1) {
-						Game.setLevel(Level.floor2);
+				if (this instanceof Player) {
+					if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level.getClientPlayer().inventory.contains(key)) {
+							level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
+							level.getClientPlayer().inventory.remove(key);
+							level.getClientPlayer().helpLabel.setText("Key Used");
+							level.getClientPlayer().help1Label.setText("");
+						} else {
+							level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+							level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
+						}
+					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level == Level.floor1) {
+							Game.setLevel(Level.floor2);
+						}
 					}
 				}
 
@@ -142,19 +217,21 @@ public abstract class Mob extends Entity {
 				if (!isCollision(xa, leftXWidth, rightXWidth, abs(ya), topYHeight, bottomYHeight)) {
 					this.y += ya;
 				}
-				if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if (level.getClientPlayer().inventory.contains(Item.key)) {
-						level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
-						level.getClientPlayer().inventory.remove(Item.key);
-						level.getClientPlayer().helpLabel.setText("Key Used");
-						level.getClientPlayer().help1Label.setText("");
-					} else {
-						level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
-						level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
-					}
-				} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
-					if(level == Level.floor1){
-						Game.setLevel(Level.floor2);
+				if (this instanceof Player) {
+					if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level.getClientPlayer().inventory.contains(key)) {
+							level.changeTileProperties((int) x >> 4, (int) y >> 4, false);
+							level.getClientPlayer().inventory.remove(key);
+							level.getClientPlayer().helpLabel.setText("Key Used");
+							level.getClientPlayer().help1Label.setText("");
+						} else {
+							level.getClientPlayer().helpLabel.setText("Sorry... you need a key!");
+							level.getClientPlayer().help1Label.setText("Some Genies drop keys!!!");
+						}
+					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
+						if (level == Level.floor1) {
+							Game.setLevel(Level.floor2);
+						}
 					}
 				}
 
@@ -176,13 +253,13 @@ public abstract class Mob extends Entity {
 	protected void shoot(double x, double y, double dir, Entity entity) {
 		Projectile p = null;
 		if (entity instanceof Shooter) {
-			p = new SorceressProjectile(x, y, dir, entity);
+			p = new SorceressProjectile(x, y, dir, entity.weapon);
 		}
-		if(entity instanceof ChampionShooter) {
-			p = new SorceressProjectile(x, y, dir, entity);
+		if (entity instanceof ChampionShooter) {
+			p = new SorceressProjectile(x, y, dir, entity.weapon);
 		}
 		if (entity instanceof Player) {
-			p = new FireMageProjectile(x, y, dir, entity);
+			p = new FireMageProjectile(x, y, dir, entity.weapon);
 		}
 		level.add(p);
 	}

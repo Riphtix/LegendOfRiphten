@@ -4,6 +4,7 @@ import com.riphtix.vgmad.entity.Entity;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.items.armor.Armor;
 import com.riphtix.vgmad.entity.items.basic.ResourceItem;
+import com.riphtix.vgmad.entity.items.weapons.RangedWeapon;
 import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.mob.Mob;
 import com.riphtix.vgmad.entity.mob.Player;
@@ -29,6 +30,7 @@ public class Level {
 	protected int[] tilesInt, tiles;
 	public static Screen screen;
 	public static int mapRank;
+	protected Item item = new Item();
 	public Keyboard key;
 
 	//lists of entities for rendering and tracking
@@ -133,8 +135,8 @@ public class Level {
 			healthBars.get(i).tick();
 		}
 
-		for (int y = 0; y < height; y++){
-			for(int x = 0; x < width; x++){
+		for (int y = 0; y < height; y++) {
+			for (int x = 0; x < width; x++) {
 				getTile(x, y).tick();
 			}
 		}
@@ -270,30 +272,13 @@ public class Level {
 		double min = 0;
 		Item closest = null;
 		for (int i = 0; i < items.size(); i++) {
-			if (items.get(i) instanceof ResourceItem) {
-				Item resourceItem = resourceItems.get(i);
-				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) resourceItem.getX(), (int) resourceItem.getY()));
-				if (i == 0 || distance < min) {
-					min = distance;
-					closest = resourceItem;
-				}
+			Item item = items.get(i);
+			double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) item.getX(), (int) item.getY()));
+			if (i == 0 || distance < min) {
+				min = distance;
+				closest = item;
 			}
-			if (items.get(i) instanceof Weapon) {
-				Item weapon = weapons.get(i);
-				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) weapon.getX(), (int) weapon.getY()));
-				if (i == 0 || distance < min) {
-					min = distance;
-					closest = weapon;
-				}
-			}
-			if (items.get(i) instanceof Armor) {
-				Item armor = armorPieces.get(i);
-				double distance = Vector2i.getDistance(new Vector2i(x, y), new Vector2i((int) armor.getX(), (int) armor.getY()));
-				if (i == 0 || distance < min) {
-					min = distance;
-					closest = armor;
-				}
-			}
+
 		}
 		Item closestItem = null;
 		if (closest != null) {
@@ -400,7 +385,6 @@ public class Level {
 
 	public void addItem(Item item, int x, int y) {
 		item.init(this);
-
 		if (item instanceof ResourceItem) {
 			resourceItems.add((ResourceItem) item);
 			item.setXY(x, y);

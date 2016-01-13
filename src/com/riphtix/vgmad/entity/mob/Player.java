@@ -6,6 +6,7 @@ import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.items.armor.Armor;
 import com.riphtix.vgmad.entity.items.basic.ResourceItem;
+import com.riphtix.vgmad.entity.items.weapons.RangedWeapon;
 import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
@@ -35,7 +36,7 @@ public class Player extends Mob {
 	private String name;
 	private Keyboard input;
 	private Sprite sprite;
-	private boolean walking;
+	public boolean walking;
 
 	private AnimatedSprite down = new AnimatedSprite(SpriteSheet.maleElf_down, 32, 32, 3);
 	private AnimatedSprite up = new AnimatedSprite(SpriteSheet.maleElf_up, 32, 32, 3);
@@ -45,20 +46,15 @@ public class Player extends Mob {
 	private AnimatedSprite animSprite = down;
 
 	private int firerate = 0;
+	public double xa, ya;
 
 	private UIManager ui;
 	public UIPanel panel;
 	public UILabel helpLabel;
 	public UILabel help1Label;
-	public UILabel slot1Label;
-	public UILabel slot2Label;
-	public UILabel slot3Label;
-	public UILabel slot4Label;
-	public UILabel slot5Label;
-	public UILabel slot6Label;
-	public UILabel slot7Label;
-	public UILabel slot8Label;
-	public UILabel slot9Label;
+	public UILabel slot1Label, slot2Label, slot3Label;
+	public UILabel slot4Label, slot5Label, slot6Label;
+	public UILabel slot7Label, slot8Label, slot9Label;
 	private UILabel nameLabel;
 	private UILabel lvlLabel;
 	private UILabel lvlRankLabel;
@@ -206,14 +202,14 @@ public class Player extends Mob {
 		panel.addComponent(armorStatLabel);
 
 		//Inventory display
-		slot1Label = new UILabel(new Vector2i(armorStatLabel.position.x - 15, armorStatLabel.position.y + 30), "");
+		slot1Label = new UILabel(new Vector2i(armorStatLabel.position.x - 25, armorStatLabel.position.y + 30), "");
 		slot1Label.setColor(0xffa0a0a0);
 		slot1Label.setFont(new Font("Verdana", Font.PLAIN, 10));
 		slot1Label.dropShadow = true;
 		slot1Label.dropShadowOffset = 1;
 		panel.addComponent(slot1Label);
 
-		slot2Label = new UILabel(new Vector2i(slot1Label.position.x + 60, slot1Label.position.y), "|");
+		slot2Label = new UILabel(new Vector2i(slot1Label.position.x + 70, slot1Label.position.y), "|");
 		slot2Label.setColor(0xffa0a0a0);
 		slot2Label.setFont(new Font("Verdana", Font.PLAIN, 10));
 		slot2Label.dropShadow = true;
@@ -234,7 +230,7 @@ public class Player extends Mob {
 		slot4Label.dropShadowOffset = 1;
 		panel.addComponent(slot4Label);
 
-		slot5Label = new UILabel(new Vector2i(slot4Label.position.x + 60, slot4Label.position.y), "|");
+		slot5Label = new UILabel(new Vector2i(slot4Label.position.x + 70, slot4Label.position.y), "|");
 		slot5Label.setColor(0xffa0a0a0);
 		slot5Label.setFont(new Font("Verdana", Font.PLAIN, 10));
 		slot5Label.dropShadow = true;
@@ -255,7 +251,7 @@ public class Player extends Mob {
 		slot7Label.dropShadowOffset = 1;
 		panel.addComponent(slot7Label);
 
-		slot8Label = new UILabel(new Vector2i(slot7Label.position.x + 60, slot7Label.position.y), "|");
+		slot8Label = new UILabel(new Vector2i(slot7Label.position.x + 70, slot7Label.position.y), "|");
 		slot8Label.setColor(0xffa0a0a0);
 		slot8Label.setFont(new Font("Verdana", Font.PLAIN, 10));
 		slot8Label.dropShadow = true;
@@ -377,6 +373,8 @@ public class Player extends Mob {
 
 	public void tick() {//public void update()
 		time++;
+		xa = 0;
+		ya = 0;
 		if (walking) {
 			if (time % 20 == 0) {
 				Random random = new Random();
@@ -395,8 +393,8 @@ public class Player extends Mob {
 			animSprite.tick();
 		} else animSprite.setFrame(0);
 		if (firerate > 0) firerate--;
-		double xa = 0, ya = 0;
 		double speed = 1.5;
+
 
 		int hbSpriteWidth = hitbox.sprite.getWidth();
 		int hbSpriteHeight = hitbox.sprite.getHeight();
@@ -410,12 +408,19 @@ public class Player extends Mob {
 					closest.remove();
 					Sound.SoundEffect.COLLECT_ITEM_POP.play();
 				}
-			} else if (closest instanceof Weapon) {
+			} else if (closest instanceof Weapon && !inventory.contains(closest)) {
 				Weapon closestItem = (Weapon) closest;
-				if (itemCollision(closestItem.hitbox, this.hitbox)) {
-					inventory.add(closest);
-					closest.remove();
-					Sound.SoundEffect.COLLECT_ITEM_POP.play();
+				if (closestItem instanceof RangedWeapon) {
+					RangedWeapon closestWeapon = (RangedWeapon) closestItem;
+					if (itemCollision(closestWeapon.hitbox, this.hitbox)) {
+						for (int i = 0; i < inventory.size(); i++) {
+							inventory.remove(inventory.get(i));
+						}
+						inventory.add(closest);
+						weapon = (RangedWeapon) closest;
+						closest.remove();
+						Sound.SoundEffect.COLLECT_ITEM_POP.play();
+					}
 				}
 			} else if (closest instanceof Armor) {
 				Armor closestItem = (Armor) closest;
@@ -427,42 +432,42 @@ public class Player extends Mob {
 			}
 		}
 
-		if(inventory.size() > 0){
-			for(int i = 0; i < 9; i++){
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+		if (inventory.size() > 0) {
+			for (int i = 0; i < inventory.size() && i < 9; i++) {
+				if (i == 0) {
+					slot1Label.setText(inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 1) {
+					slot2Label.setText("| " + inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 2) {
+					slot3Label.setText("| " + inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 3) {
+					slot4Label.setText(inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 4) {
+					slot5Label.setText("| " + inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 5) {
+					slot6Label.setText("| " + inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 6) {
+					slot7Label.setText(inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 7) {
+					slot8Label.setText("| " + inventory.get(i).get(0).getName() + ": " + inventory.get(i).size());
 				}
 
-				if(i == 0){
-					slot1Label.setText(inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
+				if (i == 8) {
+					slot9Label.setText("| " + inventory.get(i).get(0).getName() + " " + inventory.get(i).size());
 				}
 			}
 		}
@@ -488,6 +493,7 @@ public class Player extends Mob {
 
 		clear();
 		tickShooting();
+		//getStatusEffects();
 
 		if (health <= 0) {
 			health = 100;
@@ -515,7 +521,6 @@ public class Player extends Mob {
 		}
 
 
-
 		lvlRankLabel.setText("" + rank);
 		hpCounterLabel.setText((int) health + "/" + (int) maxHealth);
 		mpCounterLabel.setText((int) mana + "/" + (int) maxMana);
@@ -528,12 +533,10 @@ public class Player extends Mob {
 	}
 
 	public void playerDamaged(double damage) {
-		double armorModifier = armor;
-		if (armorModifier > 1){
-			armorModifier /= 100;
-		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
+		if (armor > 0 & protectSpell > 0) {
+			health -= (damage - (damage / armor) - (damage / protectSpell));
+		} else health -= damage;
 
 		if (isDead()) {
 			if (lives > 0) {
@@ -566,8 +569,10 @@ public class Player extends Mob {
 			double dy = Mouse.getY() - Game.getWindowHeight() / 2;
 			double dir = Math.atan2(dy, dx);
 			if (mana - FireMageProjectile.cost >= 0) {
-				shoot(x, y, dir, this);
-				mana -= FireMageProjectile.cost;
+				if (inventory.contains(starterFireStaff) || inventory.contains(commonFireStaff)) {
+					shoot(x, y, dir, this);
+					mana -= FireMageProjectile.cost;
+				}
 			}
 
 			firerate = FireMageProjectile.FIRE_RATE;

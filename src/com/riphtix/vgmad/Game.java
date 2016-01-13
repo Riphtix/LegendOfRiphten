@@ -64,6 +64,7 @@ public class Game extends Canvas implements Runnable {
 	private static Keyboard key;
 	private static Level level;
 	private static Player player;
+	public Item item;
 
 	private static UIManager uiManager;
 
@@ -84,8 +85,7 @@ public class Game extends Canvas implements Runnable {
 		uiManager = new UIManager();
 		frame = new JFrame();
 		key = new Keyboard();
-
-		Item.initItems();
+		item = new Item();
 		setLevel(Level.floor1);
 
 		Mouse mouse = new Mouse();
@@ -107,11 +107,11 @@ public class Game extends Canvas implements Runnable {
 			if (player != null) {
 				Player newPlayer = new Player(oldPlayer.getName(), playerSpawn.x(), playerSpawn.y(), key);
 				player = newPlayer;
-				for (int i = 0; i < oldPlayer.inventory.size(); i++) {
+				/*for (int i = 0; i < oldPlayer.inventory.size(); i++) {
 					for (int j = 0; j < oldPlayer.inventory.get(i).size(); j++) {
 						player.inventory.add(oldPlayer.inventory.get(i).get(j));
 					}
-				}
+				}*/
 				player.maxHealth = oldPlayer.maxHealth;
 				player.health = oldPlayer.health;
 				player.maxMana = oldPlayer.maxMana;
@@ -188,6 +188,10 @@ public class Game extends Canvas implements Runnable {
 		initPlayer();
 	}
 
+	public static Level getLevel(){
+		return level;
+	}
+
 	public void tick() {//public void update()
 		key.tick();
 		level.tick();
@@ -236,6 +240,7 @@ public class Game extends Canvas implements Runnable {
 		game.frame.setTitle(Game.title);
 		game.frame.add(game);
 		game.frame.pack();
+		game.frame.setAutoRequestFocus(true);
 		game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		game.frame.setLocationRelativeTo(null);
 		game.frame.setVisible(true);

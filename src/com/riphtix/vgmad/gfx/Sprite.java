@@ -40,6 +40,14 @@ public class Sprite {
 	public static Sprite ironSprite = new Sprite(16, 0, 0, SpriteSheet.items);
 	public static Sprite keySprite = new Sprite(16, 1, 0, SpriteSheet.items);
 
+	//Weapons
+	public static Sprite fireStaffSprite = new Sprite(16, 0, 0, SpriteSheet.weapons);
+
+	//Armor
+	public static Sprite chestPlateSprite = new Sprite(16, 0, 0, SpriteSheet.armor);
+	public static Sprite leggingsSprite = new Sprite(16, 1, 0, SpriteSheet.armor);
+	public static Sprite helmetSprite = new Sprite(16, 2, 0, SpriteSheet.armor);
+
 	//Entities
 	//Mobs
 	public static Sprite maleElfDefault = new Sprite(32, 0, 0, SpriteSheet.maleElf_down);

@@ -34,8 +34,10 @@ public class Floor1Level extends Level {
 		}
 		int topRank = mapRank + 2;
 
+		//ThreadLocalRandom.current().nextInt(bottomRank, topRank)
+
 		ChampionShooter keyHolder = new ChampionShooter(47, 48, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 2, Mob.Classification.CHAMPION);
-		keyHolder.inventory.add(Item.key);
+		//keyHolder.inventory.add(item.key);
 
 		add(keyHolder);
 		add(new Shooter(49, 15, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
@@ -50,7 +52,11 @@ public class Floor1Level extends Level {
 		add(new Shooter(44, 21, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
 		add(new Shooter(44, 33, ThreadLocalRandom.current().nextInt(bottomRank, topRank) + 1, Mob.Classification.BASIC));
 
-		//ThreadLocalRandom.current().nextInt(bottomRank, topRank)
+		addItem(item.starterFireStaff, 33, 28);
+		addItem(item.starterChestPlate, 38, 40);
+		addItem(item.starterLeggings, 24, 40);
+		addItem(item.starterHelmet, 30, 27);
+		addItem(item.key, 30, 28);
 	}
 
 	protected void generateLevel() {

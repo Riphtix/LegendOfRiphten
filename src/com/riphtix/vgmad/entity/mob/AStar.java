@@ -2,6 +2,7 @@ package com.riphtix.vgmad.entity.mob;
 
 import com.riphtix.vgmad.entity.exp.Experience;
 import com.riphtix.vgmad.entity.items.Inventory;
+import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.spawner.ParticleSpawner;
 import com.riphtix.vgmad.gfx.AnimatedSprite;
 import com.riphtix.vgmad.gfx.Screen;
@@ -14,6 +15,7 @@ import com.riphtix.vgmad.level.tile.hpBar.MobHealthBar;
 import com.riphtix.vgmad.util.Vector2i;
 
 import java.util.List;
+import java.util.Random;
 
 public class AStar extends Mob{
 
@@ -107,6 +109,9 @@ public class AStar extends Mob{
 			animSprite = right;
 			dir = Mob.Direction.RIGHT;
 		}
+
+		//getStatusEffects();
+
 		healthBar0.setXY(this.x - 10, this.y - 20);
 		healthBar25.setXY(this.x - 5, this.y - 20);
 		healthBar50.setXY(this.x, this.y - 20);
@@ -149,12 +154,10 @@ public class AStar extends Mob{
 	}
 
 	public void aStarDamaged(double damage) {
-		double armorModifier = armor;
-		if (armorModifier > 1){
-			armorModifier /= 100;
-		}
 		// can have a multiplier here to reduce health damage due to spells or armor
-		health -= (damage - (damage * armorModifier) - (damage * protectSpell));
+		if(armor > 0 & protectSpell > 0) {
+			health -= (damage - (damage / armor) - (damage / protectSpell));
+		} else health -= damage;
 
 		if (isDead()){
 			Sound.SoundEffect.FEMALE_DEAD.play();
