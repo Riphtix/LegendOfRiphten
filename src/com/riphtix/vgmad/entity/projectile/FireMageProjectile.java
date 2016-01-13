@@ -84,6 +84,14 @@ public class FireMageProjectile extends Projectile {
 						Sound.SoundEffect.MALE_HIT.play();
 						remove();
 					}
+				} else if (closest instanceof Boss){
+					Boss closestBoss = (Boss) closest;
+					if(mobHitboxCollision(closestBoss.hitbox, this.hitbox)){
+						level.add(new ParticleSpawner((int) x, (int) y, 100, 50, level, 0xffc40000));
+						closestBoss.bossDamaged(damage);
+						Sound.SoundEffect.BEAST_HIT.play();
+						remove();
+					}
 				}
 			}
 		}

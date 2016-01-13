@@ -6,6 +6,7 @@ import com.riphtix.vgmad.entity.items.Inventory;
 import com.riphtix.vgmad.entity.items.Item;
 import com.riphtix.vgmad.entity.items.armor.Armor;
 import com.riphtix.vgmad.entity.items.weapons.Weapon;
+import com.riphtix.vgmad.entity.projectile.DragonProjectile;
 import com.riphtix.vgmad.entity.projectile.SorceressProjectile;
 import com.riphtix.vgmad.entity.projectile.FireMageProjectile;
 import com.riphtix.vgmad.entity.projectile.Projectile;
@@ -45,6 +46,7 @@ public abstract class Mob extends Entity {
 	//Resource Items
 	protected Item iron = new Item().iron;
 	protected Item key = new Item().key;
+	protected Item dragonHeart = new Item().dragonHeart;
 	//Weapons
 	protected Weapon starterFireStaff = new Item().starterFireStaff;
 	protected Weapon commonFireStaff = new Item().commonFireStaff;
@@ -156,6 +158,8 @@ public abstract class Mob extends Entity {
 					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 						if (level == Level.floor1) {
 							Game.setLevel(Level.floor2);
+						} else if(level != Level.floor1 && level == Level.floor2){
+							Game.setLevel(Level.floor3);
 						}
 					}
 				}
@@ -179,6 +183,8 @@ public abstract class Mob extends Entity {
 					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 						if (level == Level.floor1) {
 							Game.setLevel(Level.floor2);
+						} else if(level != Level.floor1 && level == Level.floor2){
+							Game.setLevel(Level.floor3);
 						}
 					}
 				}
@@ -208,6 +214,8 @@ public abstract class Mob extends Entity {
 					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 						if (level == Level.floor1) {
 							Game.setLevel(Level.floor2);
+						} else if(level != Level.floor1 && level == Level.floor2){
+							Game.setLevel(Level.floor3);
 						}
 					}
 				}
@@ -231,6 +239,8 @@ public abstract class Mob extends Entity {
 					} else if (level.getTile((int) x >> 4, (int) y >> 4) instanceof GateTile && !level.getTile((int) x >> 4, (int) y >> 4).isLocked()) {
 						if (level == Level.floor1) {
 							Game.setLevel(Level.floor2);
+						} else if(level != Level.floor1 && level == Level.floor2){
+							Game.setLevel(Level.floor3);
 						}
 					}
 				}
@@ -260,6 +270,9 @@ public abstract class Mob extends Entity {
 		}
 		if (entity instanceof Player) {
 			p = new FireMageProjectile(x, y, dir, entity.weapon);
+		}
+		if (entity instanceof Boss){
+			p = new DragonProjectile(x, y, dir, ((Boss) entity).dragonHeart);
 		}
 		level.add(p);
 	}

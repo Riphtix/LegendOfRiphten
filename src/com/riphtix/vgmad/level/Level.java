@@ -61,6 +61,7 @@ public class Level {
 	//creates new levels
 	public static Level floor1 = new Floor1Level("/levels/floor1Level.png", 1);
 	public static Level floor2 = new Floor2Level("/levels/floor2Level.png", 3);
+	public static Level floor3 = new Floor3Level("/levels/floor3Level.png", 5);
 
 	protected static String path;
 

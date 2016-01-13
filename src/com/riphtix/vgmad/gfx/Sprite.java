@@ -39,6 +39,7 @@ public class Sprite {
 	//Objects
 	public static Sprite ironSprite = new Sprite(16, 0, 0, SpriteSheet.items);
 	public static Sprite keySprite = new Sprite(16, 1, 0, SpriteSheet.items);
+	public static Sprite dragonHeart = new Sprite(16, 2, 0, SpriteSheet.items);
 
 	//Weapons
 	public static Sprite fireStaffSprite = new Sprite(16, 0, 0, SpriteSheet.weapons);
@@ -58,6 +59,7 @@ public class Sprite {
 
 	//Projectile
 	public static Sprite fireBoltSprite = new Sprite(16, 0, 0, SpriteSheet.projectiles);
+	public static Sprite dragonBlastSprite = new Sprite(32, 0, 1, SpriteSheet.projectiles);
 	public static Sprite arrowSprite = new Sprite(16, 1, 0, SpriteSheet.projectiles);
 	public static Sprite cannonBallSprite = new Sprite(16, 2, 0, SpriteSheet.projectiles);
 
@@ -77,6 +79,8 @@ public class Sprite {
 	public static Sprite hitbox21x32 = new Sprite(SpriteSheet.mobHitbox, 21, 32);
 	public static Sprite hitbox16x16 = new Sprite(SpriteSheet.projectileHitbox,16, 16);
 	public static Sprite hitbox16x8 = new Sprite(SpriteSheet.projectileHitbox, 16, 8);
+	public static Sprite hitbox68x61 = new Sprite(SpriteSheet.bossHitbox, 68, 61);
+
 
 	public Sprite(SpriteSheet sheet, int width, int height) {
 		SIZE = (width == height) ? width : -1; //trick

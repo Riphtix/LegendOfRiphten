@@ -26,13 +26,21 @@ public class Item {
 
 	HashMap<String, Item> items = new HashMap<String, Item>();
 
+	public enum ItemType{
+		WEAPON, ARMOR, BASIC
+	}
+
+	public ItemType itemType;
+
 	//ResourceItems
 	public Item iron;
 	public Item key;
+	public Item dragonHeart;
 
 	//Weapons
 	public Weapon starterFireStaff;
 	public Weapon commonFireStaff;
+	public Weapon uncommonFireStaff;
 
 	//Armor
 	public Armor starterChestPlate;
@@ -41,6 +49,9 @@ public class Item {
 	public Armor commonChestPlate;
 	public Armor commonLeggings;
 	public Armor commonHelmet;
+	public Armor uncommonChestPlate;
+	public Armor uncommonLeggings;
+	public Armor uncommonHelmet;
 
 	private Level level;
 
@@ -48,10 +59,12 @@ public class Item {
 		//Resource Items
 		iron = new ResourceItem("Iron", 1, Sprite.ironSprite);
 		key = new ResourceItem("Key", 1, Sprite.keySprite);
+		dragonHeart = new ResourceItem("DragonHeart", 5, Sprite.dragonHeart);
 
 		//Weapons
 		starterFireStaff = new RangedWeapon("FireStaffS", 0, Sprite.fireStaffSprite, 200, 25, Weapon.DamageType.DAMAGE_OVER_TIME);
 		commonFireStaff = new RangedWeapon("FireStaffC", 1, Sprite.fireStaffSprite, 200, 30, Weapon.DamageType.DAMAGE_OVER_TIME);
+		uncommonFireStaff = new RangedWeapon("FireStaffU", 2, Sprite.fireStaffSprite, 200, 40, Weapon.DamageType.DAMAGE_OVER_TIME);
 
 		//Armor
 		starterChestPlate = new BodyArmor("ChestS", 0, Sprite.chestPlateSprite, .75, Armor.ArmorType.BODY);
@@ -60,6 +73,9 @@ public class Item {
 		commonChestPlate = new BodyArmor("ChestC", 1, Sprite.chestPlateSprite, .8, Armor.ArmorType.BODY);
 		commonLeggings = new BodyArmor("LegsC", 1, Sprite.leggingsSprite, .65, Armor.ArmorType.LEGS);
 		commonHelmet = new BodyArmor("HelmetC", 1, Sprite.helmetSprite, .6, Armor.ArmorType.HEAD);
+		uncommonChestPlate = new BodyArmor("ChestU", 2, Sprite.chestPlateSprite, 1, Armor.ArmorType.BODY);
+		uncommonLeggings = new BodyArmor("LegsU", 2, Sprite.leggingsSprite, .7, Armor.ArmorType.LEGS);
+		uncommonHelmet = new BodyArmor("HelmetU", 2, Sprite.helmetSprite, .65, Armor.ArmorType.HEAD);
 	}
 
 	/**

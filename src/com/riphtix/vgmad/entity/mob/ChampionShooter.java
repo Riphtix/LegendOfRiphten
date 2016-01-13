@@ -61,7 +61,6 @@ public class ChampionShooter extends Mob {
 		healthBar50 = new MobHealthBar((int) this.x, (int) this.y - 20, Sprite.healthBar50);
 		healthBar75 = new MobHealthBar((int) this.x + 5, (int) this.y - 20, Sprite.healthBar75);
 		range = 100;
-		System.out.println(starterFireStaff);
 		weapon = starterFireStaff;
 		weapon.setRange(range);
 		inventory.add(weapon);

@@ -55,6 +55,12 @@ public class SpriteSheet {
 	public static SpriteSheet genie_left = new SpriteSheet(genie, 0, 1, 3, 1, 32);
 	public static SpriteSheet genie_right = new SpriteSheet(genie, 0, 2, 3, 1, 32);
 
+	public static SpriteSheet dragon = new SpriteSheet("/entities/mobs/ai/dragon.png", 384);
+	public static SpriteSheet dragon_down = new SpriteSheet(dragon, 0, 0, 4, 1, 96);
+	public static SpriteSheet dragon_up = new SpriteSheet(dragon, 0, 3, 4, 1, 96);
+	public static SpriteSheet dragon_left = new SpriteSheet(dragon, 0, 1, 4, 1, 96);
+	public static SpriteSheet dragon_right = new SpriteSheet(dragon, 0, 2, 4, 1, 96);
+
 	//Items
 	public static SpriteSheet items = new SpriteSheet("/textures/items/items.png", 256);
 	public static SpriteSheet weapons = new SpriteSheet("/textures/items/weapons.png", 256);
@@ -69,6 +75,7 @@ public class SpriteSheet {
 	//Hitbox
 	public static SpriteSheet mobHitbox = new SpriteSheet("/textures/mobHitbox.png", 32);
 	public static SpriteSheet projectileHitbox = new SpriteSheet("/textures/projectileHitbox.png", 16);
+	public static SpriteSheet bossHitbox = new SpriteSheet("/textures/bossHitbox.png", 68, 61);
 
 	private Sprite[] sprites;
 

@@ -36,6 +36,7 @@ public class Weapon extends Item {
 
 	public Weapon(String name, int rarity, Sprite sprite, double damage, DamageType damageType) {
 		super(name, rarity, sprite);
+		this.itemType = ItemType.WEAPON;
 		this.damageType = damageType;
 		this.damage = damage;
 		hitbox = new ItemHitbox(Sprite.hitbox16x16);

@@ -22,6 +22,7 @@ public class ResourceItem extends Item {
 	 */
 	public ResourceItem(String name, int rarity, Sprite sprite) {
 		super(name, rarity, sprite);
+		this.itemType = ItemType.BASIC;
 		hitbox = new ItemHitbox(Sprite.hitbox16x16);
 		addItem(this);
 	}

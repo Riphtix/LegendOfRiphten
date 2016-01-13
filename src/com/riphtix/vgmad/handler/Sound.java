@@ -16,7 +16,9 @@ public class Sound extends Thread {
 		FOOTSTEP_3("/sounds/footstep3.wav"),
 		FEMALE_DAMAGE_9("/sounds/girlDamage9.wav"),
 		MALE_HIT("/sounds/manHit.wav"),
-		COLLECT_ITEM_POP("/sounds/itemPop.wav");
+		COLLECT_ITEM_POP("/sounds/itemPop.wav"),
+		DRAGON_ROAR("/sounds/dragon.wav"),
+		BEAST_HIT("/sounds/beastPain.wav");
 
 		public enum Volume{
 			MUTE, LOW, MEDIUM, HIGH
@@ -37,6 +39,7 @@ public class Sound extends Thread {
 			} catch (IOException e) {
 				e.printStackTrace();
 			} catch (UnsupportedAudioFileException e) {
+				System.err.println(soundFileName);
 				e.printStackTrace();
 			}
 		}

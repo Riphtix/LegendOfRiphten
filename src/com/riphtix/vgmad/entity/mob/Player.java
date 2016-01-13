@@ -408,7 +408,7 @@ public class Player extends Mob {
 					closest.remove();
 					Sound.SoundEffect.COLLECT_ITEM_POP.play();
 				}
-			} else if (closest instanceof Weapon && !inventory.contains(closest)) {
+			} else if (closest instanceof Weapon && !inventory.contains(closest) && !inventory.containsType(Item.ItemType.WEAPON)) {
 				Weapon closestItem = (Weapon) closest;
 				if (closestItem instanceof RangedWeapon) {
 					RangedWeapon closestWeapon = (RangedWeapon) closestItem;

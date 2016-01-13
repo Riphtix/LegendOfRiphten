@@ -36,6 +36,7 @@ public class Armor extends Item {
 		super(name, rarity, sprite);
 		this.armor = armor;
 		this.armorType = armorType;
+		this.itemType = ItemType.ARMOR;
 		hitbox = new ItemHitbox(Sprite.hitbox16x16);
 
 		if(this.armorType == ArmorType.HEAD){

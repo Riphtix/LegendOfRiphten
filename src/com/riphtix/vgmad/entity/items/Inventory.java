@@ -3,7 +3,6 @@ package com.riphtix.vgmad.entity.items;
 import com.riphtix.vgmad.Game;
 import com.riphtix.vgmad.entity.items.weapons.Weapon;
 import com.riphtix.vgmad.level.Level;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -52,6 +51,16 @@ public class Inventory {
 		boolean contains = false;
 		if (inventory.containsKey(item.name)) {
 			contains = true;
+		}
+		return contains;
+	}
+
+	public boolean containsType(Item.ItemType itemType){
+		boolean contains = false;
+		for(int i = 0; i < inventory.size(); i++){
+			if(get(i).get(0).itemType == itemType){
+				contains = true;
+			}
 		}
 		return contains;
 	}

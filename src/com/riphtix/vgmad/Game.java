@@ -100,6 +100,7 @@ public class Game extends Canvas implements Runnable {
 			player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
 			level.add(player);
 		} else if (level != Level.floor1 && level == Level.floor2) {
+			player.remove();
 			Tile.ironGateLockedTile.setLocked(true);
 			Tile.ironGateLockedTile.sprite = Sprite.lockedGateSprite;
 			TileCoordinate playerSpawn = new TileCoordinate(32, 51);
@@ -123,6 +124,32 @@ public class Game extends Canvas implements Runnable {
 				player.protectSpell = oldPlayer.protectSpell;
 			} else player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
 			level.add(player);
+		} else if(level != Level.floor1 && level != Level.floor2 && level == Level.floor3){
+			player.remove();
+			Tile.ironGateLockedTile.setLocked(true);
+			Tile.ironGateLockedTile.sprite = Sprite.lockedGateSprite;
+			TileCoordinate playerSpawn = new TileCoordinate(32, 57);
+			Player oldPlayer = player;
+			if (player != null) {
+				Player newPlayer = new Player(oldPlayer.getName(), playerSpawn.x(), playerSpawn.y(), key);
+				player = newPlayer;
+				/*for (int i = 0; i < oldPlayer.inventory.size(); i++) {
+					for (int j = 0; j < oldPlayer.inventory.get(i).size(); j++) {
+						player.inventory.add(oldPlayer.inventory.get(i).get(j));
+					}
+				}*/
+				player.maxHealth = oldPlayer.maxHealth;
+				player.health = oldPlayer.health;
+				player.maxMana = oldPlayer.maxMana;
+				player.mana = oldPlayer.mana;
+				player.xp = oldPlayer.xp;
+				player.lives = oldPlayer.lives;
+				player.rank = oldPlayer.rank;
+				player.armor = oldPlayer.armor;
+				player.protectSpell = oldPlayer.protectSpell;
+			} else player = new Player("Nova", playerSpawn.x(), playerSpawn.y(), key);
+			level.add(player);
+
 		}
 	}
 
