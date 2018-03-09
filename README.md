@@ -1,4 +1,4 @@
-# VideoGameMarketingAndDesignFinal
+# Legend of Riphten
 Chase Rivera - 2015 - Junior year of highschool
 VGMaDF
 My final for Video Game Marketing a Design.
